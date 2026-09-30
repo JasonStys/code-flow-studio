@@ -31,7 +31,7 @@ def create_model_api(directory: Path, token: str) -> FastAPI:
 
         model_config = ConfigDict(extra="ignore")
         messages: list[dict[str, str]] = Field(min_length=1, max_length=20)
-        max_tokens: int = Field(default=128, ge=1, le=512)
+        max_tokens: int = Field(default=128, ge=1, le=8192)
 
     @app.post("/v1/chat/completions")
     def complete(request: Completion, authorization: str = Header(default="")):
@@ -42,7 +42,7 @@ def create_model_api(directory: Path, token: str) -> FastAPI:
         if len(text) > 96000:
             raise HTTPException(413, "Context too large")
         context = model.config.max_position_embeddings
-        budget = min(request.max_tokens, context // 2)
+        budget = min(request.max_tokens, context // 2, 512)
         batch = tokenizer(text, return_tensors="pt", truncation=True, max_length=context - budget)
         batch.pop("token_type_ids", None)
         with torch.no_grad():

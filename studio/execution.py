@@ -66,7 +66,7 @@ def container_arguments(input_directory: Path, name: str) -> list[str]:
         "--user=65534:65534",
         "--tmpfs=/tmp:rw,nosuid,size=256m,mode=1777",
         "--mount",
-        f"type=bind,source={input_directory.resolve()},target=/input,readonly",
+        f"type=bind,source={(input_directory / 'job.json').resolve()},target=/input/job.json,readonly",
         "--env",
         "HOME=/tmp",
         "--env",

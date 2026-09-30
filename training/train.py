@@ -70,7 +70,10 @@ def train(config: dict, data: Path, output: Path) -> dict:
             ),
         )
         tokenizer = PreTrainedTokenizerFast(
-            tokenizer_object=tokenizer_backend, unk_token="[UNK]", pad_token="[PAD]", eos_token="[EOS]"  # noqa: S106 -- vocabulary symbols, not credentials
+            tokenizer_object=tokenizer_backend,
+            unk_token="[UNK]",
+            pad_token="[PAD]",
+            eos_token="[EOS]",  # noqa: S106 -- vocabulary symbols, not credentials
         )
         model = GPT2LMHeadModel(
             GPT2Config(

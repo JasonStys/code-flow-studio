@@ -34,7 +34,10 @@ def main() -> None:
         token = os.environ.get("STUDIO_TOKEN") or secrets.token_urlsafe(32)
         if not os.environ.get("STUDIO_TOKEN"):
             print(f"Open locally: http://127.0.0.1:{args.port}/#token={token}", flush=True)
-        uvicorn.run(create_app(args.data, token, args.ui, args.config), host="127.0.0.1", port=args.port)
+        application = create_app(args.data, token, args.ui, args.config)
+        server = uvicorn.Server(uvicorn.Config(application, host="127.0.0.1", port=args.port))
+        application.state.shutdown = lambda: setattr(server, "should_exit", True)
+        server.run()
     else:
         if not args.project:
             parser.error("--project required for analyze")

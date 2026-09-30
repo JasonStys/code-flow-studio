@@ -70,9 +70,12 @@ jobs:
       - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
       - run: pip install -e '.[training]'
       - run: python -m training.train --config examples/training.json --data examples/training.jsonl --output artifacts/model
+      - run: python -m scripts.training_checks
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: training-smoke-evidence
-          path: artifacts/model/training-report.json
+          path: |
+            artifacts/model/training-report.json
+            artifacts/model/api-smoke.json
 

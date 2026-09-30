@@ -87,6 +87,15 @@ def create_app(
         """Return only readiness of the app, not execution or secret metadata."""
         return {"status": "ready", "version": "0.1.0"}
 
+    @app.post("/api/shutdown")
+    def shutdown():
+        """Allow only the authenticated launcher to stop its own bundled service gracefully."""
+        callback = getattr(app.state, "shutdown", None)
+        if callback is None:
+            raise HTTPException(409, "Shutdown is not configured for this app instance")
+        callback()
+        return {"status": "stopping"}
+
     @app.get("/api/status")
     async def status():
         """Show independent controller, worker and configured AI readiness."""
