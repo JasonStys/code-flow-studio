@@ -1,9 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: docs@L3
- * functions: port()@L23; launch()@L34
- * variables: { app, BrowserWindow, dialog, Menu, session }@L12; { spawn }@L13; { randomBytes }@L14; { join }@L15; net@L16; fs@L17; service@L18; serviceOrigin@L19; serviceToken@L20; closing@L21; server@L25; selected@L29; selected@L36; token@L37; resources@L39; executable@L42; ui@L49; config@L52; log@L54; exited@L79; origin@L86; ready@L88; attempt@L89; response@L91; window@L108; stopped@L157
+ * functions: port()@L22; launch()@L33
+ * variables: { app, BrowserWindow, dialog, Menu, session }@L11; { spawn }@L12; { randomBytes }@L13; { join }@L14; net@L15; fs@L16; service@L17; serviceOrigin@L18; serviceToken@L19; closing@L20; server@L24; selected@L28; selected@L35; token@L36; resources@L38; executable@L41; ui@L48; config@L51; log@L53; exited@L78; origin@L85; ready@L87; attempt@L88; response@L90; window@L107; stopped@L156
  * </code-map> */
 
 /** Bundled native launcher. Symbols/variables: docs/code-index.md.

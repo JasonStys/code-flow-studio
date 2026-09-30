@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: strip_map(text)@L25; symbols(text, python)@L32; header(rows, python)@L66; render(path)@L81; main()@L95
-# variables: ROOT@L21; DIRECTORIES@L22; rows@L34; tree@L36; node@L37; kind@L39; name@L40; name@L42; argument@L46; line@L56; value@L56; match@L57; match@L59; match@L61; grouped@L68; kind@L68; kind@L69; line@L69; name@L69; descriptions@L71; descriptions@L75; kind@L75; values@L75; value@L77; value@L78; original@L83; python@L84; revised@L85; _@L86; rows@L87; candidate@L88; revised@L91; parser@L97; args@L99; paths@L100; directory@L103; path@L104; index@L109; stale@L115; path@L116; rows@L117; updated@L117; index@L122; index@L128; kind@L129; line@L129; name@L129; expected@L132; output@L133
-# parameters: text@L25; python@L32; text@L32; row@L63; python@L66; rows@L66; path@L81
+# functions: strip_map(text)@L25; symbols(text, python)@L32; header(rows, python)@L68; render(path)@L87; main()@L101
+# variables: ROOT@L21; DIRECTORIES@L22; rows@L34; tree@L36; node@L37; kind@L39; name@L40; name@L42; argument@L46; line@L56; value@L56; match@L59; match@L61; match@L63; grouped@L70; kind@L70; kind@L71; line@L71; name@L71; descriptions@L73; descriptions@L77; kind@L79; values@L79; value@L83; value@L84; original@L89; python@L90; revised@L91; _@L92; rows@L93; candidate@L94; revised@L97; parser@L103; args@L105; paths@L106; directory@L109; path@L110; index@L116; stale@L122; path@L123; rows@L124; updated@L124; index@L129; index@L135; kind@L136; line@L136; name@L136; expected@L139; output@L140
+# parameters: text@L25; python@L32; text@L32; row@L65; python@L68; rows@L68; path@L87; path@L114
 # </code-map>
 
 """Mechanically refresh exact source function/class/variable locations and docs index.
@@ -54,6 +54,8 @@ def symbols(text: str, python: bool) -> list[tuple[str, str, int]]:
                 rows.add(("parameter", node.arg, node.lineno))
     else:
         for line, value in enumerate(text.splitlines(), 1):
+            if value.lstrip().startswith(("//", "/*", "*")):
+                continue
             for match in re.finditer(r"\b(?:async\s+)?function\s+(\w+)\s*\(([^)]*)\)", value):
                 rows.add(("function", match[1] + "(" + match[2] + ")", line))
             for match in re.finditer(r"\b(?:const|let|var)\s+(\w+|\[[^]]+\]|\{[^}]+\})", value):
@@ -72,7 +74,11 @@ def header(rows: list[tuple[str, str, int]], python: bool) -> str:
         "Generated definition map; @L is the exact declaration line.",
         "Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.",
     ]
-    descriptions += [kind + "s: " + "; ".join(values) for kind, values in grouped.items() if values]
+    descriptions += [
+        ("classes" if kind == "class" else kind + "s") + ": " + "; ".join(values)
+        for kind, values in grouped.items()
+        if values
+    ]
     if python:
         return "# <code-map>\n" + "\n".join("# " + value for value in descriptions) + "\n# </code-map>\n\n"
     return "/* <code-map>\n" + "\n".join(" * " + value for value in descriptions) + "\n * </code-map> */\n\n"
@@ -104,7 +110,8 @@ def main() -> None:
             for path in (ROOT / directory).glob("*")
             if path.suffix in {".py", ".ts", ".tsx", ".cjs"}
         ]
-        + list(ROOT.glob("*config.ts"))
+        + list(ROOT.glob("*config.ts")),
+        key=lambda path: path.relative_to(ROOT).as_posix(),
     )
     index = [
         "# Code symbol index",

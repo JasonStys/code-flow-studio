@@ -6,35 +6,34 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
-| variable | `{ app, BrowserWindow, dialog, Menu, session }` | 12 |
-| variable | `{ spawn }` | 13 |
-| variable | `{ randomBytes }` | 14 |
-| variable | `{ join }` | 15 |
-| variable | `net` | 16 |
-| variable | `fs` | 17 |
-| variable | `service` | 18 |
-| variable | `serviceOrigin` | 19 |
-| variable | `serviceToken` | 20 |
-| variable | `closing` | 21 |
-| function | `port()` | 23 |
-| variable | `server` | 25 |
-| variable | `selected` | 29 |
-| function | `launch()` | 34 |
-| variable | `selected` | 36 |
-| variable | `token` | 37 |
-| variable | `resources` | 39 |
-| variable | `executable` | 42 |
-| variable | `ui` | 49 |
-| variable | `config` | 52 |
-| variable | `log` | 54 |
-| variable | `exited` | 79 |
-| variable | `origin` | 86 |
-| variable | `ready` | 88 |
-| variable | `attempt` | 89 |
-| variable | `response` | 91 |
-| variable | `window` | 108 |
-| variable | `stopped` | 157 |
+| variable | `{ app, BrowserWindow, dialog, Menu, session }` | 11 |
+| variable | `{ spawn }` | 12 |
+| variable | `{ randomBytes }` | 13 |
+| variable | `{ join }` | 14 |
+| variable | `net` | 15 |
+| variable | `fs` | 16 |
+| variable | `service` | 17 |
+| variable | `serviceOrigin` | 18 |
+| variable | `serviceToken` | 19 |
+| variable | `closing` | 20 |
+| function | `port()` | 22 |
+| variable | `server` | 24 |
+| variable | `selected` | 28 |
+| function | `launch()` | 33 |
+| variable | `selected` | 35 |
+| variable | `token` | 36 |
+| variable | `resources` | 38 |
+| variable | `executable` | 41 |
+| variable | `ui` | 48 |
+| variable | `config` | 51 |
+| variable | `log` | 53 |
+| variable | `exited` | 78 |
+| variable | `origin` | 85 |
+| variable | `ready` | 87 |
+| variable | `attempt` | 88 |
+| variable | `response` | 90 |
+| variable | `window` | 107 |
+| variable | `stopped` | 156 |
 
 ## examples/projects.py
 
@@ -51,13 +50,11 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
 
 ## playwright.desktop.config.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
 
 ## runner/worker.py
 
@@ -74,92 +71,97 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `errors` | 38 |
 | variable | `output` | 38 |
 | variable | `child` | 40 |
-| variable | `expired` | 45 |
-| variable | `expired` | 49 |
-| variable | `code` | 50 |
-| variable | `size` | 54 |
-| function | `adapter(language, entry)` | 68 |
-| parameter | `entry` | 68 |
-| parameter | `language` | 68 |
-| variable | `plans` | 70 |
-| function | `seeds(project)` | 103 |
-| parameter | `project` | 103 |
-| variable | `rng` | 105 |
-| variable | `case` | 106 |
-| variable | `corpus` | 106 |
-| variable | `boundaries` | 107 |
-| variable | `dictionary` | 108 |
-| variable | `enabled` | 109 |
-| variable | `method` | 111 |
-| variable | `rows` | 114 |
-| variable | `index` | 115 |
-| variable | `method` | 118 |
-| variable | `value` | 120 |
-| variable | `_` | 122 |
+| variable | `expired` | 47 |
+| variable | `expired` | 51 |
+| variable | `code` | 52 |
+| variable | `size` | 56 |
+| function | `adapter(language, entry)` | 70 |
+| parameter | `entry` | 70 |
+| parameter | `language` | 70 |
+| variable | `plans` | 72 |
+| function | `seeds(project)` | 105 |
+| parameter | `project` | 105 |
+| variable | `rng` | 107 |
+| variable | `case` | 108 |
+| variable | `corpus` | 108 |
+| variable | `boundaries` | 109 |
+| variable | `dictionary` | 110 |
+| variable | `enabled` | 111 |
+| variable | `method` | 113 |
+| variable | `rows` | 116 |
+| variable | `index` | 117 |
+| variable | `method` | 120 |
 | variable | `value` | 122 |
+| variable | `_` | 124 |
 | variable | `value` | 124 |
-| variable | `value` | 131 |
-| variable | `data` | 133 |
-| variable | `position` | 134 |
-| variable | `strategy` | 135 |
-| variable | `value` | 146 |
-| function | `coverage(command, project)` | 151 |
-| parameter | `command` | 151 |
-| parameter | `project` | 151 |
-| variable | `case` | 158 |
-| variable | `measured` | 174 |
-| variable | `data` | 177 |
-| variable | `entry` | 178 |
-| function | `mutants(command, project)` | 186 |
-| parameter | `command` | 186 |
-| parameter | `project` | 186 |
-| variable | `path` | 195 |
-| variable | `original` | 196 |
-| variable | `tree` | 197 |
-| variable | `node` | 198 |
-| variable | `sites` | 198 |
-| variable | `outcomes` | 199 |
-| variable | `index` | 201 |
-| variable | `candidate` | 202 |
-| variable | `node` | 203 |
-| variable | `target` | 203 |
-| variable | `compile_check` | 211 |
-| variable | `killed` | 215 |
-| variable | `case` | 216 |
-| variable | `result` | 217 |
-| variable | `killed` | 218 |
-| variable | `item` | 225 |
-| variable | `valid` | 225 |
-| variable | `item` | 229 |
-| function | `instrumented_fuzz(project)` | 234 |
-| parameter | `project` | 234 |
-| variable | `engine` | 236 |
-| variable | `harness` | 237 |
-| variable | `result` | 244 |
-| variable | `build` | 248 |
-| variable | `argv` | 261 |
-| variable | `build` | 263 |
-| variable | `argv` | 266 |
-| variable | `result` | 269 |
-| function | `main()` | 280 |
-| variable | `project` | 282 |
-| variable | `file` | 284 |
-| variable | `build` | 301 |
-| variable | `command` | 301 |
-| variable | `compilation` | 302 |
-| variable | `report` | 303 |
-| variable | `times` | 319 |
-| variable | `case` | 320 |
-| variable | `result` | 321 |
-| variable | `passed` | 322 |
-| variable | `_` | 330 |
-| variable | `benchmark` | 331 |
-| variable | `findings` | 354 |
-| variable | `corpus` | 355 |
-| variable | `method` | 356 |
-| variable | `value` | 356 |
-| variable | `result` | 357 |
-| variable | `method` | 383 |
+| variable | `value` | 126 |
+| variable | `value` | 133 |
+| variable | `data` | 135 |
+| variable | `position` | 136 |
+| variable | `strategy` | 137 |
+| variable | `value` | 148 |
+| function | `coverage(command, project)` | 153 |
+| parameter | `command` | 153 |
+| parameter | `project` | 153 |
+| variable | `case` | 160 |
+| variable | `measured` | 176 |
+| variable | `data` | 179 |
+| variable | `entry` | 180 |
+| function | `mutants(command, project)` | 188 |
+| parameter | `command` | 188 |
+| parameter | `project` | 188 |
+| variable | `path` | 197 |
+| variable | `original` | 198 |
+| variable | `tree` | 199 |
+| variable | `node` | 200 |
+| variable | `sites` | 200 |
+| variable | `outcomes` | 201 |
+| variable | `index` | 203 |
+| variable | `candidate` | 204 |
+| variable | `node` | 205 |
+| variable | `target` | 205 |
+| variable | `compile_check` | 213 |
+| variable | `killed` | 217 |
+| variable | `inconclusive` | 218 |
+| variable | `case` | 219 |
+| variable | `result` | 220 |
+| variable | `inconclusive` | 221 |
+| variable | `killed` | 222 |
+| variable | `result` | 227 |
+| variable | `inconclusive` | 228 |
+| variable | `killed` | 229 |
+| variable | `item` | 238 |
+| variable | `valid` | 238 |
+| variable | `item` | 243 |
+| function | `instrumented_fuzz(project)` | 248 |
+| parameter | `project` | 248 |
+| variable | `engine` | 250 |
+| variable | `harness` | 251 |
+| variable | `result` | 258 |
+| variable | `build` | 262 |
+| variable | `argv` | 275 |
+| variable | `build` | 277 |
+| variable | `argv` | 280 |
+| variable | `result` | 283 |
+| function | `main()` | 294 |
+| variable | `project` | 296 |
+| variable | `file` | 298 |
+| variable | `build` | 315 |
+| variable | `command` | 315 |
+| variable | `compilation` | 316 |
+| variable | `report` | 317 |
+| variable | `times` | 333 |
+| variable | `case` | 334 |
+| variable | `result` | 335 |
+| variable | `passed` | 336 |
+| variable | `_` | 344 |
+| variable | `benchmark` | 345 |
+| variable | `findings` | 378 |
+| variable | `corpus` | 379 |
+| variable | `method` | 380 |
+| variable | `value` | 380 |
+| variable | `result` | 381 |
+| variable | `method` | 407 |
 
 ## scripts/code_index.py
 
@@ -181,51 +183,52 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `argument` | 46 |
 | variable | `line` | 56 |
 | variable | `value` | 56 |
-| variable | `match` | 57 |
 | variable | `match` | 59 |
 | variable | `match` | 61 |
-| parameter | `row` | 63 |
-| function | `header(rows, python)` | 66 |
-| parameter | `python` | 66 |
-| parameter | `rows` | 66 |
-| variable | `grouped` | 68 |
-| variable | `kind` | 68 |
-| variable | `kind` | 69 |
-| variable | `line` | 69 |
-| variable | `name` | 69 |
-| variable | `descriptions` | 71 |
-| variable | `descriptions` | 75 |
-| variable | `kind` | 75 |
-| variable | `values` | 75 |
-| variable | `value` | 77 |
-| variable | `value` | 78 |
-| function | `render(path)` | 81 |
-| parameter | `path` | 81 |
-| variable | `original` | 83 |
-| variable | `python` | 84 |
-| variable | `revised` | 85 |
-| variable | `_` | 86 |
-| variable | `rows` | 87 |
-| variable | `candidate` | 88 |
+| variable | `match` | 63 |
+| parameter | `row` | 65 |
+| function | `header(rows, python)` | 68 |
+| parameter | `python` | 68 |
+| parameter | `rows` | 68 |
+| variable | `grouped` | 70 |
+| variable | `kind` | 70 |
+| variable | `kind` | 71 |
+| variable | `line` | 71 |
+| variable | `name` | 71 |
+| variable | `descriptions` | 73 |
+| variable | `descriptions` | 77 |
+| variable | `kind` | 79 |
+| variable | `values` | 79 |
+| variable | `value` | 83 |
+| variable | `value` | 84 |
+| function | `render(path)` | 87 |
+| parameter | `path` | 87 |
+| variable | `original` | 89 |
+| variable | `python` | 90 |
 | variable | `revised` | 91 |
-| function | `main()` | 95 |
-| variable | `parser` | 97 |
-| variable | `args` | 99 |
-| variable | `paths` | 100 |
-| variable | `directory` | 103 |
-| variable | `path` | 104 |
-| variable | `index` | 109 |
-| variable | `stale` | 115 |
-| variable | `path` | 116 |
-| variable | `rows` | 117 |
-| variable | `updated` | 117 |
-| variable | `index` | 122 |
-| variable | `index` | 128 |
-| variable | `kind` | 129 |
-| variable | `line` | 129 |
-| variable | `name` | 129 |
-| variable | `expected` | 132 |
-| variable | `output` | 133 |
+| variable | `_` | 92 |
+| variable | `rows` | 93 |
+| variable | `candidate` | 94 |
+| variable | `revised` | 97 |
+| function | `main()` | 101 |
+| variable | `parser` | 103 |
+| variable | `args` | 105 |
+| variable | `paths` | 106 |
+| variable | `directory` | 109 |
+| variable | `path` | 110 |
+| parameter | `path` | 114 |
+| variable | `index` | 116 |
+| variable | `stale` | 122 |
+| variable | `path` | 123 |
+| variable | `rows` | 124 |
+| variable | `updated` | 124 |
+| variable | `index` | 129 |
+| variable | `index` | 135 |
+| variable | `kind` | 136 |
+| variable | `line` | 136 |
+| variable | `name` | 136 |
+| variable | `expected` | 139 |
+| variable | `output` | 140 |
 
 ## scripts/frozen_entry.py
 
@@ -269,19 +272,25 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `main()` | 23 |
-| variable | `reports` | 25 |
-| variable | `language` | 26 |
-| variable | `result` | 27 |
-| variable | `python` | 31 |
-| variable | `bad` | 45 |
-| variable | `invalid` | 49 |
-| variable | `attack` | 53 |
-| variable | `code` | 59 |
-| variable | `name` | 59 |
-| variable | `target` | 60 |
-| variable | `cpp` | 64 |
-| variable | `path` | 81 |
+| class | `Evidence` | 25 |
+| function | `__setitem__(self, key, value)` | 28 |
+| parameter | `key` | 28 |
+| parameter | `self` | 28 |
+| parameter | `value` | 28 |
+| variable | `path` | 31 |
+| variable | `temporary` | 33 |
+| function | `main()` | 38 |
+| variable | `reports` | 40 |
+| variable | `language` | 41 |
+| variable | `result` | 42 |
+| variable | `python` | 46 |
+| variable | `bad` | 60 |
+| variable | `invalid` | 64 |
+| variable | `attack` | 68 |
+| variable | `code` | 74 |
+| variable | `name` | 74 |
+| variable | `target` | 75 |
+| variable | `cpp` | 79 |
 
 ## studio/__init__.py
 
@@ -650,9 +659,8 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
-| variable | `app` | 15 |
-| variable | `page` | 20 |
+| variable | `app` | 14 |
+| variable | `page` | 19 |
 
 ## tests/test_api.py
 
@@ -802,10 +810,8 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
-| type | `and` | 23 |
-| variable | `errors` | 24 |
-| variable | `download` | 75 |
+| variable | `errors` | 23 |
+| variable | `download` | 74 |
 
 ## training/__init__.py
 
@@ -922,86 +928,81 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `parser` | 159 |
 | variable | `args` | 163 |
 
-## ui/api.ts
-
-| Kind | Declaration | Line |
-|---|---|---|
-| type | `docs` | 3 |
-| variable | `fragment` | 10 |
-| variable | `supplied` | 11 |
-| variable | `response` | 23 |
-| variable | `error` | 32 |
-| function | `download(run: string, format: "zip" / "html" / "json")` | 42 |
-| variable | `response` | 44 |
-| variable | `url` | 50 |
-| variable | `link` | 51 |
-
 ## ui/App.tsx
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
-| variable | `languages` | 25 |
-| variable | `cloneDemo` | 39 |
-| function | `App()` | 41 |
-| variable | `[project, setProject]` | 43 |
-| variable | `[revision, setRevision]` | 44 |
-| variable | `[historyRows, setHistory]` | 45 |
-| variable | `[run, setRun]` | 46 |
-| variable | `[status, setStatus]` | 47 |
-| variable | `[capabilities, setCapabilities]` | 48 |
-| variable | `[tab, setTab]` | 49 |
-| variable | `[fileName, setFileName]` | 50 |
-| variable | `[error, setError]` | 51 |
-| variable | `[busy, setBusy]` | 52 |
-| variable | `[prompt, setPrompt]` | 53 |
-| variable | `[consent, setConsent]` | 54 |
-| variable | `[live, setLive]` | 55 |
-| variable | `[proposal, setProposal]` | 56 |
-| variable | `[caseText, setCaseText]` | 57 |
-| variable | `[comparison, setComparison]` | 60 |
-| variable | `[baseline, setBaseline]` | 61 |
-| variable | `generation` | 62 |
-| variable | `selected` | 63 |
-| function | `refresh()` | 66 |
-| variable | `timer` | 79 |
-| variable | `requestGeneration` | 94 |
-| variable | `result` | 97 |
-| variable | `timer` | 113 |
-| function | `saveAndRun()` | 122 |
-| variable | `cases` | 127 |
-| variable | `payload` | 128 |
-| variable | `saved` | 129 |
-| variable | `job` | 136 |
-| function | `openRevision(id: string)` | 155 |
-| variable | `saved` | 158 |
-| function | `upload(files: FileList / null)` | 170 |
-| variable | `additions` | 174 |
-| variable | `bytes` | 178 |
-| function | `acceptProposal()` | 211 |
-| variable | `updates` | 214 |
-| variable | `files` | 215 |
-| variable | `checks` | 230 |
-| variable | `metrics` | 231 |
+| variable | `languages` | 24 |
+| variable | `cloneDemo` | 38 |
+| function | `App()` | 40 |
+| variable | `[project, setProject]` | 42 |
+| variable | `[revision, setRevision]` | 43 |
+| variable | `[historyRows, setHistory]` | 44 |
+| variable | `[run, setRun]` | 45 |
+| variable | `[status, setStatus]` | 46 |
+| variable | `[capabilities, setCapabilities]` | 47 |
+| variable | `[tab, setTab]` | 48 |
+| variable | `[fileName, setFileName]` | 49 |
+| variable | `[error, setError]` | 50 |
+| variable | `[busy, setBusy]` | 51 |
+| variable | `[prompt, setPrompt]` | 52 |
+| variable | `[consent, setConsent]` | 53 |
+| variable | `[live, setLive]` | 54 |
+| variable | `[proposal, setProposal]` | 55 |
+| variable | `[caseText, setCaseText]` | 56 |
+| variable | `[comparison, setComparison]` | 59 |
+| variable | `[baseline, setBaseline]` | 60 |
+| variable | `generation` | 61 |
+| variable | `selected` | 62 |
+| function | `refresh()` | 65 |
+| variable | `timer` | 78 |
+| variable | `requestGeneration` | 93 |
+| variable | `result` | 96 |
+| variable | `timer` | 112 |
+| function | `saveAndRun()` | 121 |
+| variable | `cases` | 126 |
+| variable | `payload` | 127 |
+| variable | `saved` | 128 |
+| variable | `job` | 135 |
+| function | `openRevision(id: string)` | 154 |
+| variable | `saved` | 157 |
+| function | `upload(files: FileList / null)` | 169 |
+| variable | `additions` | 173 |
+| variable | `bytes` | 177 |
+| function | `acceptProposal()` | 210 |
+| variable | `updates` | 213 |
+| variable | `files` | 214 |
+| variable | `checks` | 229 |
+| variable | `metrics` | 230 |
+
+## ui/api.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `fragment` | 9 |
+| variable | `supplied` | 10 |
+| variable | `response` | 22 |
+| variable | `error` | 31 |
+| function | `download(run: string, format: "zip" / "html" / "json")` | 41 |
+| variable | `response` | 43 |
+| variable | `url` | 49 |
+| variable | `link` | 50 |
 
 ## ui/demo.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
-| variable | `demo` | 11 |
+| variable | `demo` | 10 |
 
 ## ui/main.tsx
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
 
 ## ui/types.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |
 | type | `SourceFile` | 8 |
 | type | `Case` | 13 |
 | type | `Priorities` | 19 |
@@ -1015,4 +1016,3 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `docs` | 3 |

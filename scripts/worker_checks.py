@@ -1,8 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: main()@L23
-# variables: reports@L25; language@L26; result@L27; python@L31; bad@L45; invalid@L49; attack@L53; code@L59; name@L59; target@L60; cpp@L64; path@L81
+# classes: Evidence@L25
+# functions: __setitem__(self, key, value)@L28; main()@L38
+# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; attack@L68; code@L74; name@L74; target@L75; cpp@L79
+# parameters: key@L28; self@L28; value@L28
 # </code-map>
 
 """Real compiler, generated-test, fuzz and adversarial-container integration checks.
@@ -20,9 +22,22 @@ from studio.execution import run
 from studio.models import LANGUAGES, Project
 
 
+class Evidence(dict):
+    """Persist each completed scenario before assertions so failed CI retains diagnostics."""
+
+    def __setitem__(self, key, value):
+        """Record a bounded worker result and atomically replace this job's evidence file."""
+        super().__setitem__(key, value)
+        path = Path("artifacts/worker-evidence.json")
+        path.parent.mkdir(exist_ok=True)
+        temporary = path.with_suffix(".tmp")
+        temporary.write_text(json.dumps(self, indent=2), encoding="utf-8")
+        temporary.replace(path)
+
+
 async def main():
     """Exercise each adapter and verify failures, output limits, isolation and instrumentation."""
-    reports = {}
+    reports = Evidence()
     for language in LANGUAGES:
         result = await run(fixture(language))
         reports[language] = result
@@ -78,9 +93,27 @@ async def main():
     )
     reports["aflplusplus"] = await run(Project.model_validate(cpp))
     assert reports["aflplusplus"]["fuzz"]["status"] == "completed", reports["aflplusplus"]
-    path = Path("artifacts/worker-evidence.json")
-    path.parent.mkdir(exist_ok=True)
-    path.write_text(json.dumps(reports, indent=2), encoding="utf-8")
+    python.update(
+        {
+            "fuzz_engine": "atheris",
+            "fuzz_harness": "import sys,atheris\n@atheris.instrument_func\ndef test_input(data):\n if data and data[0] == 120:\n  return len(data)\natheris.Setup(sys.argv,test_input)\natheris.Fuzz()\n",
+        }
+    )
+    reports["atheris"] = await run(Project.model_validate(python))
+    assert reports["atheris"]["fuzz"]["status"] == "completed", reports["atheris"]
+    python.update(
+        {"tests": "def test_reject():\n assert False\n", "fuzz_engine": "blackbox", "fuzz_cases": 0}
+    )
+    reports["failed-generated-test"] = await run(Project.model_validate(python))
+    assert reports["failed-generated-test"]["generated_tests"]["exit_code"] != 0
+    assert reports["failed-generated-test"]["mutation"]["status"] == "blocked"
+    python.update({"tests": "", "mutation": False, "fuzz_cases": 5, "fuzz_methods": ["mutation"]})
+    python["files"][0]["content"] = (
+        "import sys\ndata=sys.stdin.buffer.read()\nif data == b'2': print(4)\nelif any(value > 127 for value in data): raise SystemExit(-11)\n"
+    )
+    reports["binary-mutation"] = await run(Project.model_validate(python))
+    assert reports["binary-mutation"]["fuzz"]["executed"] == 5
+    # Seeds are raw bytes, not replacement-decoded text; an empty findings list is valid.
     print(f"Validated {len(reports)} real isolated worker scenarios")
 
 

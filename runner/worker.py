@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: execute(argv, stdin, timeout)@L32; adapter(language, entry)@L68; seeds(project)@L103; coverage(command, project)@L151; mutants(command, project)@L186; instrumented_fuzz(project)@L234; main()@L280
-# variables: DEADLINE@L28; WORK@L29; remaining@L34; started@L37; errors@L38; output@L38; child@L40; expired@L45; expired@L49; code@L50; size@L54; plans@L70; rng@L105; case@L106; corpus@L106; boundaries@L107; dictionary@L108; enabled@L109; method@L111; rows@L114; index@L115; method@L118; value@L120; _@L122; value@L122; value@L124; value@L131; data@L133; position@L134; strategy@L135; value@L146; case@L158; measured@L174; data@L177; entry@L178; path@L195; original@L196; tree@L197; node@L198; sites@L198; outcomes@L199; index@L201; candidate@L202; node@L203; target@L203; compile_check@L211; killed@L215; case@L216; result@L217; killed@L218; item@L225; valid@L225; item@L229; engine@L236; harness@L237; result@L244; build@L248; argv@L261; build@L263; argv@L266; result@L269; project@L282; file@L284; build@L301; command@L301; compilation@L302; report@L303; times@L319; case@L320; result@L321; passed@L322; _@L330; benchmark@L331; findings@L354; corpus@L355; method@L356; value@L356; result@L357; method@L383
-# parameters: argv@L32; stdin@L32; timeout@L32; entry@L68; language@L68; project@L103; command@L151; project@L151; command@L186; project@L186; project@L234
+# functions: execute(argv, stdin, timeout)@L32; adapter(language, entry)@L70; seeds(project)@L105; coverage(command, project)@L153; mutants(command, project)@L188; instrumented_fuzz(project)@L248; main()@L294
+# variables: DEADLINE@L28; WORK@L29; remaining@L34; started@L37; errors@L38; output@L38; child@L40; expired@L47; expired@L51; code@L52; size@L56; plans@L72; rng@L107; case@L108; corpus@L108; boundaries@L109; dictionary@L110; enabled@L111; method@L113; rows@L116; index@L117; method@L120; value@L122; _@L124; value@L124; value@L126; value@L133; data@L135; position@L136; strategy@L137; value@L148; case@L160; measured@L176; data@L179; entry@L180; path@L197; original@L198; tree@L199; node@L200; sites@L200; outcomes@L201; index@L203; candidate@L204; node@L205; target@L205; compile_check@L213; killed@L217; inconclusive@L218; case@L219; result@L220; inconclusive@L221; killed@L222; result@L227; inconclusive@L228; killed@L229; item@L238; valid@L238; item@L243; engine@L250; harness@L251; result@L258; build@L262; argv@L275; build@L277; argv@L280; result@L283; project@L296; file@L298; build@L315; command@L315; compilation@L316; report@L317; times@L333; case@L334; result@L335; passed@L336; _@L344; benchmark@L345; findings@L378; corpus@L379; method@L380; value@L380; result@L381; method@L407
+# parameters: argv@L32; stdin@L32; timeout@L32; entry@L70; language@L70; project@L105; command@L153; project@L153; command@L188; project@L188; project@L248
 # </code-map>
 
 """Container-only compiler/test/fuzz worker. Never import this module on the host.
@@ -29,7 +29,7 @@ DEADLINE = time.monotonic() + 150
 WORK = Path("/tmp/project")  # noqa: S108 -- private, fresh, per-job container tmpfs; never host /tmp
 
 
-def execute(argv: list[str], stdin: str = "", timeout: float = 3) -> dict:
+def execute(argv: list[str], stdin: str | bytes = "", timeout: float = 3) -> dict:
     """Execute argv without a shell; retain a bounded tail and real elapsed wall time."""
     remaining = DEADLINE - time.monotonic()
     if remaining <= 0:
@@ -41,7 +41,9 @@ def execute(argv: list[str], stdin: str = "", timeout: float = 3) -> dict:
                 argv, cwd=WORK, stdin=subprocess.PIPE, stdout=output, stderr=errors, start_new_session=True
             )
             try:
-                child.communicate(stdin.encode(), timeout=min(timeout, remaining))
+                child.communicate(
+                    stdin.encode() if isinstance(stdin, str) else stdin, timeout=min(timeout, remaining)
+                )
                 expired = False
             except subprocess.TimeoutExpired:
                 os.killpg(child.pid, 9)
@@ -100,7 +102,7 @@ def adapter(language: str, entry: str) -> tuple[list[str] | None, list[str]]:
     return plans[language]
 
 
-def seeds(project: dict) -> list[tuple[str, str]]:
+def seeds(project: dict) -> list[tuple[str, bytes]]:
     """Produce reproducible bounded generation, mutation, CSV/SQL grammar and dictionary inputs."""
     rng = random.Random(project["seed"])  # noqa: S311 -- reproducible fuzzing, never a credential
     corpus = [case["stdin"] for case in project["cases"]] or ["", "0\n", "hello\n"]
@@ -143,8 +145,8 @@ def seeds(project: dict) -> list[tuple[str, str]]:
                 data[position:position] = bytes([rng.randrange(256)])
             else:
                 data.extend(rng.choice(corpus).encode()[:128])
-            value = data[:8192].decode(errors="replace")
-        rows.append((method, value))
+            value = bytes(data[:8192])
+        rows.append((method, value.encode() if isinstance(value, str) else value))
     return rows
 
 
@@ -184,7 +186,7 @@ def coverage(command: list[str], project: dict) -> dict:
 
 
 def mutants(command: list[str], project: dict) -> dict:
-    """Bounded Python operator mutation; only valid, compilable mutants enter the denominator."""
+    """Bounded Python mutation; exclude invalid/timeouts and retain approved case/test oracles."""
     if not project["mutation"]:
         return {"status": "not-selected"}
     if project["language"] != "python" or not project["cases"]:
@@ -213,19 +215,31 @@ def mutants(command: list[str], project: dict) -> dict:
                 outcomes.append({"index": index, "status": "invalid"})
                 continue
             killed = False
+            inconclusive = False
             for case in project["cases"]:
                 result = execute(command, case["stdin"])
+                inconclusive |= result["timeout"] or result["exit_code"] is None
                 killed |= (
                     result["stdout"].strip() != case["stdout"].strip()
                     or result["exit_code"] != case["exit_code"]
                 )
-            outcomes.append({"index": index, "status": "killed" if killed else "survived"})
+            if project["tests"] and not inconclusive:
+                result = execute(["python", "-m", "pytest", "-q", "test_generated.py"], timeout=15)
+                inconclusive |= result["timeout"] or result["exit_code"] is None
+                killed |= result["exit_code"] != 0
+            outcomes.append(
+                {
+                    "index": index,
+                    "status": "inconclusive" if inconclusive else "killed" if killed else "survived",
+                }
+            )
     finally:
         path.write_text(original)
-    valid = [item for item in outcomes if item["status"] != "invalid"]
+    valid = [item for item in outcomes if item["status"] in {"killed", "survived"}]
     return {
         "status": "measured",
         "mutants": outcomes,
+        "evaluated": len(valid),
         "score": sum(item["status"] == "killed" for item in valid) / len(valid) if valid else None,
         "caveat": "At most 8 operator mutants; survivors may be equivalent. Not an exhaustive mutation proof.",
     }
@@ -329,8 +343,18 @@ def main() -> None:
             if passed:
                 for _ in range(project["benchmark_repeats"]):
                     benchmark = execute(command, case["stdin"])
-                    if benchmark["exit_code"] == case["exit_code"] and not benchmark["timeout"]:
+                    if (
+                        benchmark["exit_code"] == case["exit_code"]
+                        and not benchmark["timeout"]
+                        and not benchmark["output_truncated"]
+                        and benchmark["stdout"].strip() == case["stdout"].strip()
+                    ):
                         times.append(benchmark["ms"])
+                    else:
+                        report["checks"]["failed"] += 1
+                        report["checks"]["cases"].append(
+                            {"name": case["name"] + " benchmark-repeat", "passed": False, **benchmark}
+                        )
         if project["tests"]:
             (WORK / "test_generated.py").write_text(project["tests"])
             report["generated_tests"] = execute(
@@ -347,7 +371,7 @@ def main() -> None:
         report["coverage"] = coverage(command, project)
         report["mutation"] = (
             mutants(command, project)
-            if report["checks"]["failed"] == 0
+            if report["checks"]["failed"] == 0 and report["generated_tests"].get("exit_code", 0) == 0
             else {"status": "blocked", "reason": "Baseline failures invalidate mutation"}
         )
         if project["fuzz_engine"] == "blackbox":
@@ -363,8 +387,8 @@ def main() -> None:
                     findings.append(
                         {
                             "method": method,
-                            "input_base64": base64.b64encode(value.encode()).decode(),
-                            "sha256": hashlib.sha256(value.encode()).hexdigest(),
+                            "input_base64": base64.b64encode(value).decode(),
+                            "sha256": hashlib.sha256(value).hexdigest(),
                             "process": result,
                         }
                     )

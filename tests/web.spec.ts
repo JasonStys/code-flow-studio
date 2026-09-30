@@ -1,8 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: docs@L3; and@L23
- * variables: errors@L24; download@L75
+ * variables: errors@L23; download@L74
  * </code-map> */
 
 /** Real browser flows; controller success does not substitute for isolated worker evidence.

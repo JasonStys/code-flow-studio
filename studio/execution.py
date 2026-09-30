@@ -72,7 +72,7 @@ def container_arguments(input_directory: Path, name: str) -> list[str]:
         "--memory-swap=1g",
         "--cpus=2",
         "--user=65534:65534",
-        "--tmpfs=/tmp:rw,nosuid,size=256m,mode=1777",
+        "--tmpfs=/tmp:rw,exec,nosuid,nodev,size=256m,mode=1777",
         "--mount",
         f"type=bind,source={(input_directory / 'job.json').resolve()},target=/input/job.json,readonly",
         "--env",

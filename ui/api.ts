@@ -1,9 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: docs@L3
- * functions: download(run: string, format: "zip" | "html" | "json")@L42
- * variables: fragment@L10; supplied@L11; response@L23; error@L32; response@L44; url@L50; link@L51
+ * functions: download(run: string, format: "zip" | "html" | "json")@L41
+ * variables: fragment@L9; supplied@L10; response@L22; error@L31; response@L43; url@L49; link@L50
  * </code-map> */
 
 /** Authenticated, same-origin client; no provider keys in the renderer. Symbols: docs/code-index.md. */

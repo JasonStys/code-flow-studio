@@ -1,8 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: docs@L3
- * variables: demo@L11
+ * variables: demo@L10
  * </code-map> */
 
 /** Independent synthetic demo with approved oracles. No capstone code copied. Symbols: docs/code-index.md. */

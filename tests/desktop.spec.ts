@@ -1,8 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: docs@L3
- * variables: app@L15; page@L20
+ * variables: app@L14; page@L19
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.

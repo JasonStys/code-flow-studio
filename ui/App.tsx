@@ -1,9 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: docs@L3
- * functions: App()@L41; refresh()@L66; saveAndRun()@L122; openRevision(id: string)@L155; upload(files: FileList | null)@L170; acceptProposal()@L211
- * variables: languages@L25; cloneDemo@L39; [project, setProject]@L43; [revision, setRevision]@L44; [historyRows, setHistory]@L45; [run, setRun]@L46; [status, setStatus]@L47; [capabilities, setCapabilities]@L48; [tab, setTab]@L49; [fileName, setFileName]@L50; [error, setError]@L51; [busy, setBusy]@L52; [prompt, setPrompt]@L53; [consent, setConsent]@L54; [live, setLive]@L55; [proposal, setProposal]@L56; [caseText, setCaseText]@L57; [comparison, setComparison]@L60; [baseline, setBaseline]@L61; generation@L62; selected@L63; timer@L79; requestGeneration@L94; result@L97; timer@L113; cases@L127; payload@L128; saved@L129; job@L136; saved@L158; additions@L174; bytes@L178; updates@L214; files@L215; checks@L230; metrics@L231
+ * functions: App()@L40; refresh()@L65; saveAndRun()@L121; openRevision(id: string)@L154; upload(files: FileList | null)@L169; acceptProposal()@L210
+ * variables: languages@L24; cloneDemo@L38; [project, setProject]@L42; [revision, setRevision]@L43; [historyRows, setHistory]@L44; [run, setRun]@L45; [status, setStatus]@L46; [capabilities, setCapabilities]@L47; [tab, setTab]@L48; [fileName, setFileName]@L49; [error, setError]@L50; [busy, setBusy]@L51; [prompt, setPrompt]@L52; [consent, setConsent]@L53; [live, setLive]@L54; [proposal, setProposal]@L55; [caseText, setCaseText]@L56; [comparison, setComparison]@L59; [baseline, setBaseline]@L60; generation@L61; selected@L62; timer@L78; requestGeneration@L93; result@L96; timer@L112; cases@L126; payload@L127; saved@L128; job@L135; saved@L157; additions@L173; bytes@L177; updates@L213; files@L214; checks@L229; metrics@L230
  * </code-map> */
 
 /** Evidence-first editor, runner and history UI. Symbols/variables: docs/code-index.md.
