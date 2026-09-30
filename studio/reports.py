@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: html_report(run)@L21; bundle(run, revision)@L31
+# variables: evidence@L23; buffer@L33; archive@L34; file@L38
+# parameters: run@L21; revision@L31; run@L31
+# </code-map>
+
 """Portable machine-readable and escaped HTML evidence reports.
 
 Symbol and variable locations: docs/code-index.md. All logs/source are plain

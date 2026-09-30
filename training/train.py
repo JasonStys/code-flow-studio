@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: train(config, data, output)@L23; main()@L157
+# variables: allowed@L35; seed@L50; steps@L51; context@L52; learning_rate@L53; provenance@L61; training@L61; validation@L61; row@L63; text@L63; heads@L65; hidden@L65; layers@L65; default@L66; key@L66; tokenizer_backend@L70; vocabulary_symbols@L80; tokenizer@L81; model@L82; base@L96; tokenizer@L99; model@L100; device@L107; optimizer@L111; losses@L112; step@L114; row@L115; batch@L116; batch@L117; key@L117; value@L117; labels@L118; loss@L121; held_out@L130; row@L132; batch@L133; batch@L139; key@L139; value@L139; result@L145; parameter@L147; parser@L159; args@L163
+# parameters: config@L23; data@L23; output@L23
+# </code-map>
+
 """Real causal-model training: new small model or local approved-model fine-tuning.
 
 Symbol and variable locations: docs/code-index.md. Heavy ML dependencies are
@@ -69,12 +77,8 @@ def train(config: dict, data: Path, output: Path) -> dict:
                 initial_alphabet=pre_tokenizers.ByteLevel.alphabet(),
             ),
         )
-        tokenizer = PreTrainedTokenizerFast(
-            tokenizer_object=tokenizer_backend,
-            unk_token="[UNK]",
-            pad_token="[PAD]",
-            eos_token="[EOS]",  # noqa: S106 -- vocabulary symbols, not credentials
-        )
+        vocabulary_symbols = {"unk_token": "[UNK]", "pad_token": "[PAD]", "eos_token": "[EOS]"}
+        tokenizer = PreTrainedTokenizerFast(tokenizer_object=tokenizer_backend, **vocabulary_symbols)
         model = GPT2LMHeadModel(
             GPT2Config(
                 vocab_size=len(tokenizer),

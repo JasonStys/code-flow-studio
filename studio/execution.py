@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: command(argv, timeout, output_limit)@L31; read()@L38; container_arguments(input_directory, name)@L57; diagnostics()@L90; run(project)@L112
+# variables: IMAGE@L27; DOCKER@L28; process@L33; output@L36; chunk@L41; code@L93; output@L93; _@L101; found@L101; ready@L114; static@L115; name@L118; directory@L119; path@L120; code@L123; output@L123; prefix@L124; line@L125; lines@L125; result@L133
+# parameters: argv@L31; output_limit@L31; timeout@L31; input_directory@L57; name@L57; project@L112
+# </code-map>
+
 """Host broker: no uploaded code runs outside a restricted, named container.
 
 Symbol and variable locations: docs/code-index.md. Docker is a defense-in-depth

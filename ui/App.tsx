@@ -1,3 +1,11 @@
+/* <code-map>
+ * Generated definition map; @L is the exact declaration line.
+ * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+ * types: docs@L3
+ * functions: App()@L41; refresh()@L66; saveAndRun()@L122; openRevision(id: string)@L155; upload(files: FileList | null)@L170; acceptProposal()@L211
+ * variables: languages@L25; cloneDemo@L39; [project, setProject]@L43; [revision, setRevision]@L44; [historyRows, setHistory]@L45; [run, setRun]@L46; [status, setStatus]@L47; [capabilities, setCapabilities]@L48; [tab, setTab]@L49; [fileName, setFileName]@L50; [error, setError]@L51; [busy, setBusy]@L52; [prompt, setPrompt]@L53; [consent, setConsent]@L54; [live, setLive]@L55; [proposal, setProposal]@L56; [caseText, setCaseText]@L57; [comparison, setComparison]@L60; [baseline, setBaseline]@L61; generation@L62; selected@L63; timer@L79; requestGeneration@L94; result@L97; timer@L113; cases@L127; payload@L128; saved@L129; job@L136; saved@L158; additions@L174; bytes@L178; updates@L214; files@L215; checks@L230; metrics@L231
+ * </code-map> */
+
 /** Evidence-first editor, runner and history UI. Symbols/variables: docs/code-index.md.
  * Sources are inert editor text. Proposals require approval; no silent oracle edits.
  */
@@ -57,14 +65,11 @@ export default function App() {
 
   async function refresh() {
     /** Refresh non-secret metadata and durable revision history. */
-    const [health, rows, catalog] = await Promise.all([
-      api<any>("status"),
-      api<Revision[]>("revisions"),
-      api<Capability[]>("catalog"),
+    await Promise.all([
+      api<any>("status").then(setStatus),
+      api<Revision[]>("revisions").then(setHistory),
+      api<Capability[]>("catalog").then(setCapabilities),
     ]);
-    setStatus(health);
-    setHistory(rows);
-    setCapabilities(catalog);
   }
   useEffect(() => {
     refresh().catch((reason) => setError(reason.message));
@@ -295,7 +300,7 @@ export default function App() {
           </div>
         </header>
         {error && (
-          <div className="alert" role="alert">
+          <div className="alert" role="alert" aria-label="Workspace error">
             {error}
             <button aria-label="Dismiss error" onClick={() => setError("")}>
               ×

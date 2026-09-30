@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: test_fixed_container_flags(tmp_path)@L19; test_command_limit()@L28; test_command_timeout()@L34; test_no_host_fallback(project, monkeypatch)@L40; unavailable()@L43
+# variables: args@L21; value@L24; value@L25; result@L47
+# parameters: tmp_path@L19; monkeypatch@L40; project@L40
+# </code-map>
+
 """Container boundary and bounded subprocess tests. Symbols: docs/code-index.md."""
 
 import asyncio

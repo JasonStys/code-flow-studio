@@ -1,3 +1,10 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: main()@L25
+# variables: output@L27; manifest@L29; project@L30; evidence@L31; config@L38; router@L40; tests@L41; payload@L42; tested@L44; generated@L45; improved@L46; replacements@L47; item@L49; row@L49; candidate@L51
+# </code-map>
+
 """Push-triggered generation, test validation and candidate evaluation.
 
 Symbol and variable locations: docs/code-index.md. API access is optional and

@@ -1,3 +1,12 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# classs: Providers@L37
+# functions: __init__(self, path)@L40; public(self)@L56; request(self, request)@L68
+# variables: SYSTEM@L25; provider@L45; url@L46; row@L65; identifier@L72; provider@L73; row@L73; key@L76; source@L79; row@L81; user@L82; headers@L85; kind@L86; headers@L88; body@L89; body@L98; client@L107; response@L108; data@L110; chunk@L111; message@L115; text@L117; block@L118; text@L121; text@L123; text@L125; proposal@L126
+# parameters: path@L40; self@L40; self@L56; request@L68; self@L68
+# </code-map>
+
 """Server-only task routing for OpenAI-compatible, Anthropic and Ollama APIs.
 
 Symbol and variable locations: docs/code-index.md. Endpoint configuration is

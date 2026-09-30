@@ -1,3 +1,10 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: main()@L20
+# variables: key@L22; app@L23; client@L24; body@L25; response@L30; result@L33
+# </code-map>
+
 """Actual trained-model API smoke, explicitly not a code-quality benchmark.
 Symbol and variable locations: docs/code-index.md.
 """

@@ -1,3 +1,10 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: catalog()@L69
+# variables: TEST_NAMES@L14; HUMAN@L64; EXTERNAL@L65; AUTOMATED@L66; rows@L71; name@L72; number@L72; mode@L73; requirement@L82
+# </code-map>
+
 """Explicit capability catalog from the supplied 48-category test reference.
 
 Symbol and variable locations: docs/code-index.md. Categories are not pass results.

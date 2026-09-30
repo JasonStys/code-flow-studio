@@ -1,3 +1,10 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: main()@L23
+# variables: reports@L25; language@L26; result@L27; python@L31; bad@L45; invalid@L49; attack@L53; code@L59; name@L59; target@L60; cpp@L64; path@L81
+# </code-map>
+
 """Real compiler, generated-test, fuzz and adversarial-container integration checks.
 
 Symbol and variable locations: docs/code-index.md. Requires the trusted worker

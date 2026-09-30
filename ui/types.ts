@@ -1,3 +1,9 @@
+/* <code-map>
+ * Generated definition map; @L is the exact declaration line.
+ * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+ * types: docs@L3; SourceFile@L8; Case@L13; Priorities@L19; Project@L26; Revision@L43; Run@L50; Capability@L56; AIResult@L62
+ * </code-map> */
+
 /** Shared renderer contracts. Server validation is authoritative. Symbols: docs/code-index.md. */
 export interface SourceFile {
   name: string;

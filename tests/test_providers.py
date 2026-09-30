@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: test_provider_protocols(tmp_path, project, monkeypatch, kind)@L24; handler(request)@L49; test_provider_endpoint_validation(tmp_path, url)@L84
+# variables: path@L26; proposal@L44; captured@L47; body@L51; real_client@L60; router@L64; result@L65; path@L86
+# parameters: kind@L24; monkeypatch@L24; project@L24; tmp_path@L24; request@L49; kwargs@L62; tmp_path@L84; url@L84
+# </code-map>
+
 """Mocked protocol contracts, consent and response validation; not live AI quality tests.
 Symbol and variable locations: docs/code-index.md.
 """

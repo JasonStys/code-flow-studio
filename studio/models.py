@@ -1,3 +1,12 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# classs: Contract@L64; SourceFile@L70; TestCase@L107; Priorities@L116; Project@L136; AIRequest@L187; Proposal@L196
+# functions: safe_name(cls, value)@L79; bytes(self)@L95; nonzero(self)@L126; coherent(self)@L156
+# variables: LANGUAGES@L24; Language@L38; FUZZ_METHODS@L52; model_config@L67; name@L73; content@L74; encoding@L75; stem@L81; i@L89; i@L90; name@L110; stdin@L111; stdout@L112; exit_code@L113; runtime@L119; memory@L120; readability@L121; footprint@L122; scrutiny@L123; title@L139; language@L140; entry@L141; files@L142; cases@L143; requirements@L144; tests@L145; fuzz_methods@L146; fuzz_cases@L147; seed@L148; benchmark_repeats@L149; mutation@L150; fuzz_engine@L151; fuzz_harness@L152; priorities@L153; file@L158; names@L158; file@L159; reserved@L161; file@L176; file@L178; method@L180; task@L190; project@L191; prompt@L192; consent@L193; explanation@L199; files@L200; tests@L201; suggestions@L202
+# parameters: cls@L79; value@L79; self@L95; self@L126; self@L156
+# </code-map>
+
 """Validated API and execution contracts; inputs never become host commands.
 
 Classes, functions, and module variables are indexed in docs/code-index.md.
@@ -149,6 +158,21 @@ class Project(Contract):
         names = [file.name.casefold() for file in self.files]
         if len(set(names)) != len(names) or self.entry not in [file.name for file in self.files]:
             raise ValueError("Unique files and an existing entry are required")
+        reserved = {
+            "test_generated.py",
+            "sql_driver.py",
+            "fuzz_harness.py",
+            "fuzz_harness.cpp",
+            "app.csproj",
+            "nuget.config",
+            "target",
+            "coverage.json",
+            "compiled",
+            "corpus",
+            "afl-results",
+        }
+        if reserved.intersection(names):
+            raise ValueError("Filename is reserved for isolated worker artifacts")
         if next(file for file in self.files if file.name == self.entry).encoding != "text":
             raise ValueError("Entry must be text source")
         if sum(len(file.bytes()) for file in self.files) > 1048576:

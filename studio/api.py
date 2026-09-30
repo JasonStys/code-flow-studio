@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: create_app(data_directory, token, ui_directory, config)@L34; lifespan(app)@L47; guard(request, call_next)@L65; health()@L94; shutdown()@L99; status()@L108; capabilities()@L117; history()@L122; save(project, parent)@L127; revision(identifier)@L135; work(identifier, project)@L142; start(identifier)@L158; get_run(identifier)@L173; report(identifier, format)@L181; compare_runs(baseline, candidate)@L201; ai(request)@L216
+# variables: store@L40; providers@L41; active@L42; semaphore@L43; ai_semaphore@L44; task@L50; app@L54; host@L67; origin@L68; permitted@L69; body@L78; chunk@L79; response@L84; callback@L101; result@L147; project@L163; job@L166; task@L167; result@L184; source@L185; new@L204; old@L204; new_revision@L205; old_revision@L205
+# parameters: config@L35; data_directory@L35; token@L35; ui_directory@L35; app@L47; call_next@L65; request@L65; parent@L127; project@L127; identifier@L135; identifier@L142; project@L142; identifier@L158; identifier@L173; format@L181; identifier@L181; baseline@L201; candidate@L201; request@L216
+# </code-map>
+
 """Loopback-first authenticated API for web and native clients.
 
 Symbol and variable locations: docs/code-index.md. Bounded jobs, constant-time

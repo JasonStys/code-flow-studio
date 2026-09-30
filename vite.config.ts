@@ -1,3 +1,9 @@
+/* <code-map>
+ * Generated definition map; @L is the exact declaration line.
+ * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+ * types: docs@L3
+ * </code-map> */
+
 /** Offline renderer build; all editor workers are local. Symbols: docs/code-index.md. */
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";

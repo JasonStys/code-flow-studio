@@ -1,3 +1,11 @@
+/* <code-map>
+ * Generated definition map; @L is the exact declaration line.
+ * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+ * types: docs@L3
+ * functions: port()@L23; launch()@L34
+ * variables: { app, BrowserWindow, dialog, Menu, session }@L12; { spawn }@L13; { randomBytes }@L14; { join }@L15; net@L16; fs@L17; service@L18; serviceOrigin@L19; serviceToken@L20; closing@L21; server@L25; selected@L29; selected@L36; token@L37; resources@L39; executable@L42; ui@L49; config@L52; log@L54; exited@L79; origin@L86; ready@L88; attempt@L89; response@L91; window@L108; stopped@L157
+ * </code-map> */
+
 /** Bundled native launcher. Symbols/variables: docs/code-index.md.
  * No node integration, remote navigation, privileged preload, or uploaded-code execution.
  */

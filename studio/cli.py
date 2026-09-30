@@ -1,3 +1,10 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: main()@L29
+# variables: parser@L31; args@L39; token@L41; application@L44; server@L45; project@L51; result@L52; failed@L65; failed@L70
+# </code-map>
+
 """Shared CLI entry point for web launch and secret-free push analysis.
 
 Symbol and variable locations: docs/code-index.md. Compiler execution always

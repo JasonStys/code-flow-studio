@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: test_unsafe_names(name)@L45; test_safe_flat_names(suffix)@L52; test_project_invalid(project, changes)@L71; test_invalid_binary(project)@L77; test_zero_weights()@L85; test_history_retains_oracles(tmp_path, project)@L91; test_history_restart(tmp_path, project)@L110; test_reports_escaped(project)@L121; test_static_no_execution(project, tmp_path)@L131; test_comparison_gates()@L140; test_catalog_no_fake_passes()@L165; test_training_split()@L174; test_training_bad_data(tmp_path, rows)@L192
+# variables: payload@L79; store@L93; payload@L94; initial@L96; candidate@L97; change@L102; store@L112; revision@L113; run@L114; restarted@L115; run@L123; report@L124; archive@L126; sentinel@L133; payload@L134; result@L136; valid@L142; candidate@L150; changes@L152; rows@L167; row@L168; row@L171; result@L176; train@L176; validation@L176; row@L177; path@L194; row@L195
+# parameters: name@L45; suffix@L52; changes@L71; project@L71; project@L77; project@L91; tmp_path@L91; project@L110; tmp_path@L110; project@L121; project@L131; tmp_path@L131; rows@L192; tmp_path@L192
+# </code-map>
+
 """Input boundary, history and comparison invariants. Symbols: docs/code-index.md."""
 
 import io

@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: execute(argv, stdin, timeout)@L32; adapter(language, entry)@L68; seeds(project)@L103; coverage(command, project)@L151; mutants(command, project)@L186; instrumented_fuzz(project)@L234; main()@L280
+# variables: DEADLINE@L28; WORK@L29; remaining@L34; started@L37; errors@L38; output@L38; child@L40; expired@L45; expired@L49; code@L50; size@L54; plans@L70; rng@L105; case@L106; corpus@L106; boundaries@L107; dictionary@L108; enabled@L109; method@L111; rows@L114; index@L115; method@L118; value@L120; _@L122; value@L122; value@L124; value@L131; data@L133; position@L134; strategy@L135; value@L146; case@L158; measured@L174; data@L177; entry@L178; path@L195; original@L196; tree@L197; node@L198; sites@L198; outcomes@L199; index@L201; candidate@L202; node@L203; target@L203; compile_check@L211; killed@L215; case@L216; result@L217; killed@L218; item@L225; valid@L225; item@L229; engine@L236; harness@L237; result@L244; build@L248; argv@L261; build@L263; argv@L266; result@L269; project@L282; file@L284; build@L301; command@L301; compilation@L302; report@L303; times@L319; case@L320; result@L321; passed@L322; _@L330; benchmark@L331; findings@L354; corpus@L355; method@L356; value@L356; result@L357; method@L383
+# parameters: argv@L32; stdin@L32; timeout@L32; entry@L68; language@L68; project@L103; command@L151; project@L151; command@L186; project@L186; project@L234
+# </code-map>
+
 """Container-only compiler/test/fuzz worker. Never import this module on the host.
 
 Symbol and variable locations: docs/code-index.md. Projects are untrusted; a

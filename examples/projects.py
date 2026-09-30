@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: fixture(language)@L66
+# variables: PROGRAMS@L17; code@L68; name@L68; stdin@L69
+# parameters: language@L66
+# </code-map>
+
 """Independent compiler-contract fixtures for every built-in language adapter.
 
 Symbol and variable locations: docs/code-index.md. These small programs validate

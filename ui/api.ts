@@ -1,3 +1,11 @@
+/* <code-map>
+ * Generated definition map; @L is the exact declaration line.
+ * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+ * types: docs@L3
+ * functions: download(run: string, format: "zip" | "html" | "json")@L42
+ * variables: fragment@L10; supplied@L11; response@L23; error@L32; response@L44; url@L50; link@L51
+ * </code-map> */
+
 /** Authenticated, same-origin client; no provider keys in the renderer. Symbols: docs/code-index.md. */
 const fragment = new URLSearchParams(location.hash.slice(1));
 const supplied = fragment.get("token");

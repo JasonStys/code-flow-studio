@@ -1,3 +1,9 @@
+/* <code-map>
+ * Generated definition map; @L is the exact declaration line.
+ * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+ * types: docs@L3
+ * </code-map> */
+
 /** App entry and offline Monaco worker registry. Symbols/variables: docs/code-index.md. */
 import React from "react";
 import { createRoot } from "react-dom/client";

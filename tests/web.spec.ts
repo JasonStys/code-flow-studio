@@ -1,3 +1,10 @@
+/* <code-map>
+ * Generated definition map; @L is the exact declaration line.
+ * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+ * types: docs@L3; and@L23
+ * variables: errors@L24; download@L75
+ * </code-map> */
+
 /** Real browser flows; controller success does not substitute for isolated worker evidence.
  * Symbols/variables: docs/code-index.md.
  */
@@ -45,7 +52,7 @@ test("editor, catalog, priorities and source-consent boundaries", async ({
   await page
     .getByRole("button", { name: "Generate code", exact: true })
     .click();
-  await expect(page.getByRole("alert")).toContainText(
+  await expect(page.getByRole("alert", {name: "Workspace error"})).toContainText(
     "No AI provider configured",
   );
   expect(errors).toEqual([]);

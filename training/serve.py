@@ -1,3 +1,12 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# classs: Completion@L38
+# functions: create_model_api(directory, token)@L25; complete(request, authorization)@L46; main()@L67
+# variables: tokenizer@L32; model@L33; app@L36; model_config@L41; messages@L42; max_tokens@L43; message@L50; text@L50; context@L53; budget@L54; batch@L55; generated@L58; result@L61; parser@L71; args@L74; token@L75
+# parameters: directory@L25; token@L25; authorization@L46; request@L46
+# </code-map>
+
 """Authenticated loopback OpenAI-compatible API for locally trained safe-tensor models.
 
 Symbol and variable locations: docs/code-index.md. Serving is separate from

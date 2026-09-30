@@ -1,3 +1,12 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# classs: Store@L32
+# functions: __init__(self, path)@L35; connect(self)@L44; create(self, payload, parent)@L55; revision(self, identifier)@L82; history(self)@L95; queue(self, revision)@L105; finish(self, identifier, status, result)@L114; run(self, identifier)@L121; runs(self, revision)@L129
+# variables: SCHEMA@L22; connection@L39; connection@L46; revision@L57; connection@L58; previous@L60; old@L65; project@L72; project@L74; connection@L84; row@L85; connection@L97; row@L100; identifier@L107; connection@L108; connection@L116; connection@L123; row@L124; connection@L131; identifiers@L132; row@L134; identifier@L138
+# parameters: path@L35; self@L35; self@L44; parent@L55; payload@L55; self@L55; identifier@L82; self@L82; self@L95; revision@L105; self@L105; identifier@L114; result@L114; self@L114; status@L114; identifier@L121; self@L121; revision@L129; self@L129
+# </code-map>
+
 """SQLite append-only project revisions and durable job evidence.
 
 Symbol and variable locations: docs/code-index.md. Database connection lifetimes

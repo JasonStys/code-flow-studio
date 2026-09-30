@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: prepare(path, seed)@L22
+# variables: LICENSES@L19; seen@L26; groups@L27; duplicates@L28; line@L29; row@L32; value@L35; key@L37; duplicates@L41; ordered@L47; validation_count@L48; validation_projects@L49; group@L50; row@L50; train@L50; group@L51; row@L51; validation@L51; row@L62
+# parameters: path@L22; seed@L22; group@L47
+# </code-map>
+
 """Rights-aware, group-disjoint training data preparation without executing examples.
 
 Symbol and variable locations: docs/code-index.md. Each record requires provenance;

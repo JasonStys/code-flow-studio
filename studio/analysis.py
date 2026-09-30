@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: inspect_source(project)@L22; compare(baseline, candidate, priorities)@L63
+# variables: file@L24; text@L24; lines@L25; findings@L26; patterns@L27; message@L33; pattern@L33; match@L34; functions@L38; branches@L39; file@L42; tree@L42; functions@L43; node@L44; branches@L46; node@L47; line@L55; reasons@L65; result@L66; dimensions@L87; area@L88; key@L88; metric@L88; after@L94; before@L94; metric@L97; total@L97; score@L98; metric@L99; value@L99
+# parameters: project@L22; baseline@L63; candidate@L63; priorities@L63
+# </code-map>
+
 """Non-executing source heuristics and cautious measured candidate comparisons.
 
 Symbol and variable locations: docs/code-index.md. Heuristics are warnings,

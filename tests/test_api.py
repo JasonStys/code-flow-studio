@@ -1,3 +1,11 @@
+# <code-map>
+# Generated definition map; @L is the exact declaration line.
+# Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
+# functions: client(tmp_path)@L22; test_auth_and_origin(client, project)@L28; test_revision_reports(client, project)@L40; test_no_provider(client, project)@L58; test_blocked_execution_retained(client, project, monkeypatch)@L67; blocked(_project)@L70; test_compare_unrelated(client, project)@L82
+# variables: TOKEN@L17; AUTH@L18; value@L24; response@L36; saved@L42; store@L49; identifier@L50; format@L52; result@L53; body@L60; result@L63; saved@L74; job@L75; result@L77; store@L84; runs@L85; _@L86; saved@L87
+# parameters: tmp_path@L22; client@L28; project@L28; client@L40; project@L40; client@L58; project@L58; client@L67; monkeypatch@L67; project@L67; _project@L70; client@L82; project@L82
+# </code-map>
+
 """API security, asynchronous execution and failure semantics. Symbols: docs/code-index.md."""
 
 import pytest

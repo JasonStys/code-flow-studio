@@ -25,6 +25,7 @@ jobs:
           cache: npm
       - run: pip install -e '.[dev]'
       - run: python -m ruff check studio training runner scripts examples tests
+      - run: python scripts/code_index.py --check
       - run: python -m pytest --cov=studio --cov=training.dataset --cov-fail-under=80 --cov-report=xml:artifacts/coverage.xml --junitxml=artifacts/tests.xml
       - run: npm ci
       - run: npm audit --audit-level=high
