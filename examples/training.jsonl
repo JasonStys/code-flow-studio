@@ -1,0 +1,6 @@
+{"prompt":"Explain a Python finite numeric input check.","completion":"Use math.isfinite after numeric conversion and reject NaN and infinity.","project":"numeric-validation","license":"owned"}
+{"prompt":"How do I isolate uploaded programs?","completion":"Use a restricted no-network worker with bounded resources and no host credentials.","project":"execution-isolation","license":"owned"}
+{"prompt":"Can fuzzing prove correctness?","completion":"No. Retain reproducible findings and use independent behavioral oracles.","project":"fuzzing-evidence","license":"owned"}
+{"prompt":"Explain branch coverage limitations.","completion":"Branch coverage measures executed control paths, not correctness or every condition combination.","project":"coverage-evidence","license":"owned"}
+{"prompt":"How should I compare runtime measurements?","completion":"Use identical inputs and environments, repeated samples, and report noise and startup overhead.","project":"benchmark-design","license":"owned"}
+

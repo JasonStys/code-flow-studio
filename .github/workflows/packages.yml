@@ -1,0 +1,46 @@
+name: Desktop packages
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+          cache: npm
+      - run: pip install -e '.[dev]'
+      - run: npm ci
+      - run: npm run build
+      - run: python -m PyInstaller --noconfirm --onefile --name code-flow-service --distpath release/service --paths . scripts/frozen_entry.py
+      - run: npm run test:desktop
+        if: runner.os != 'Linux'
+      - run: xvfb-run -a npm run test:desktop
+        if: runner.os == 'Linux'
+      - run: npm run package -- --publish never
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: desktop-${{ matrix.os }}
+          path: |
+            release/installers/*.exe
+            release/installers/*.AppImage
+            release/installers/*.dmg
+            test-results/
+

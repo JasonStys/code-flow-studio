@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "code-flow-studio"
+version = "0.1.0"
+description = "Evidence-first, isolated polyglot testing and AI development workbench"
+requires-python = ">=3.12"
+dependencies = ["fastapi==0.142.1", "uvicorn==0.38.0", "httpx==0.28.1", "pydantic==2.13.2"]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2", "pytest-cov==7.0.0", "ruff==0.14.0", "pyinstaller==6.22.3", "hypothesis==6.142.4"]
+training = ["torch>=2.6,<3", "transformers>=4.56,<6", "datasets>=4,<5", "accelerate>=1.10,<2"]
+
+[project.scripts]
+code-flow = "studio.cli:main"
+
+[tool.setuptools]
+packages = ["studio", "training"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "S"]
+ignore = ["E501", "S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"runner/*.py" = ["S603", "S607"]
+"tests/*.py" = ["S105", "S106"]
+

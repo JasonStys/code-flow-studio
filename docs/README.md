@@ -1,0 +1,12 @@
+# Documentation
+
+- [Architecture and decisions](architecture.md): trust boundaries, language choices, revision flow and trade-offs.
+- [Setup and installation](setup.md): packaged vs source use, worker prerequisites, keys and diagnostics.
+- [Language adapters](languages.md): toolchains, supported entry contracts and extension rules.
+- [Testing strategy](testing.md): original capstone parity, category applicability, fuzzing, failure gates and edge cases.
+- [Security](security.md): isolation limitations, threats, private source handling and deployment restrictions.
+- [Model training](training.md): rights-cleared data, parameter budgets, evaluation and local API.
+- [Validation report](validation.md): measured local/CI results and explicit blocked/unverified items.
+- [Code index](code-index.md): mechanically checked exact source symbol/variable locations.
+- [Research and provenance](research.md): source review and primary technical references.
+

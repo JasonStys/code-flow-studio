@@ -1,0 +1,9 @@
+{
+  "providers": [
+    {"id": "local", "kind": "ollama", "url": "http://127.0.0.1:11434/api/chat", "model": "set-an-installed-coding-model"},
+    {"id": "remote", "kind": "openai", "url": "https://api.openai.com/v1/chat/completions", "model": "set-a-model-you-have-access-to", "key_env": "STUDIO_OPENAI_KEY"},
+    {"id": "reviewer", "kind": "anthropic", "url": "https://api.anthropic.com/v1/messages", "model": "set-a-model-you-have-access-to", "key_env": "STUDIO_ANTHROPIC_KEY"}
+  ],
+  "routes": {"generate": "remote", "tests": "local", "improve": "remote", "suggest": "local"}
+}
+

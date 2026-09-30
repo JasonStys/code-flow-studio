@@ -1,0 +1,51 @@
+{
+  "name": "code-flow-studio",
+  "version": "0.1.0",
+  "description": "Isolated polyglot testing and evidence-first AI development studio",
+  "author": "Jason Stys",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "build": "tsc --noEmit && vite build",
+    "dev": "vite --host 127.0.0.1",
+    "desktop": "electron .",
+    "package": "electron-builder",
+    "test:browser": "playwright test",
+    "test:desktop": "playwright test --config playwright.desktop.config.ts"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "4.7.0",
+    "monaco-editor": "0.57.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@types/node": "^24.0.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "electron": "44.5.0",
+    "electron-builder": "26.15.3",
+    "typescript": "5.9.3",
+    "vite": "8.3.1"
+  },
+  "build": {
+    "appId": "dev.jasonstys.codeflow",
+    "productName": "Code Flow Studio",
+    "directories": {"output": "release/installers"},
+    "files": ["desktop/**/*", "package.json"],
+    "extraResources": [
+      {"from": "dist/ui", "to": "ui"},
+      {"from": "release/service", "to": "service"},
+      {"from": "runner", "to": "runner", "filter": ["Dockerfile", "worker.py"]}
+    ],
+    "win": {"target": ["nsis"], "signAndEditExecutable": false},
+    "nsis": {"oneClick": true, "perMachine": false, "allowToChangeInstallationDirectory": false, "deleteAppDataOnUninstall": false},
+    "linux": {"target": ["AppImage"], "category": "Development"},
+    "mac": {"target": ["dmg"], "category": "public.app-category.developer-tools"}
+  }
+}
+
