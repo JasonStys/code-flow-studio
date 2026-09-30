@@ -55,7 +55,7 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `ui/index.html`, `ui/style.css` | Local HTML entry and responsive accessible layout. |
 | `desktop/main.cjs` | Sandboxed Electron renderer and private bundled-service lifecycle. |
 | `training/dataset.py`, `training/train.py`, `training/serve.py` | Provenance/split validation, parameterized real training, local model API. |
-| `examples/projects.py` | Independent compiler-contract fixtures for all built-in adapters. |
+| `examples/projects.py`, `examples/web-demo.project.json` | Compiler-contract fixtures and the exact synthetic CSV source/manifest used by the UI, checked in CI. |
 | `examples/training.json`, `examples/training.jsonl` | Tiny rights-owned training smoke parameters and data; no quality claims. |
 | `scripts/frozen_entry.py` | Frozen-service entry point for installers. |
 | `scripts/worker_checks.py` | Actual isolated compiler/fuzz/security-boundary integration scenarios. |

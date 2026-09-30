@@ -3,7 +3,7 @@
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L25
 # functions: __setitem__(self, key, value)@L28; main()@L38
-# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; attack@L68; code@L74; name@L74; target@L75; cpp@L79
+# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; attack@L68; code@L74; name@L74; target@L75; cpp@L79; web_demo@L118
 # parameters: key@L28; self@L28; value@L28
 # </code-map>
 
@@ -109,11 +109,18 @@ async def main():
     assert reports["failed-generated-test"]["mutation"]["status"] == "blocked"
     python.update({"tests": "", "mutation": False, "fuzz_cases": 5, "fuzz_methods": ["mutation"]})
     python["files"][0]["content"] = (
-        "import sys\ndata=sys.stdin.buffer.read()\nif data == b'2': print(4)\nelif any(value > 127 for value in data): raise SystemExit(-11)\n"
+        "import sys\ndata=sys.stdin.buffer.read()\nif data == b'2\\n': print(4)\nelse: raise SystemExit(2)\n"
     )
     reports["binary-mutation"] = await run(Project.model_validate(python))
     assert reports["binary-mutation"]["fuzz"]["executed"] == 5
+    assert reports["binary-mutation"]["checks"]["passed"] == 1
     # Seeds are raw bytes, not replacement-decoded text; an empty findings list is valid.
+    web_demo = Project.model_validate_json(Path("examples/web-demo.project.json").read_text())
+    reports["web-demo"] = await run(web_demo)
+    assert reports["web-demo"]["checks"]["passed"] == 3, reports["web-demo"]
+    assert reports["web-demo"]["checks"]["failed"] == 0, reports["web-demo"]
+    assert reports["web-demo"]["generated_tests"]["exit_code"] == 0, reports["web-demo"]
+    assert reports["web-demo"]["fuzz"]["status"] == "completed", reports["web-demo"]
     print(f"Validated {len(reports)} real isolated worker scenarios")
 
 

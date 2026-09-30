@@ -296,6 +296,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `name` | 74 |
 | variable | `target` | 75 |
 | variable | `cpp` | 79 |
+| variable | `web_demo` | 118 |
 
 ## studio/__init__.py
 
@@ -741,61 +742,64 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `test_unsafe_names(name)` | 45 |
-| parameter | `name` | 45 |
-| function | `test_safe_flat_names(suffix)` | 52 |
-| parameter | `suffix` | 52 |
-| function | `test_project_invalid(project, changes)` | 71 |
-| parameter | `changes` | 71 |
-| parameter | `project` | 71 |
-| function | `test_invalid_binary(project)` | 77 |
-| parameter | `project` | 77 |
-| variable | `payload` | 79 |
-| function | `test_zero_weights()` | 85 |
-| function | `test_history_retains_oracles(tmp_path, project)` | 91 |
-| parameter | `project` | 91 |
-| parameter | `tmp_path` | 91 |
-| variable | `store` | 93 |
-| variable | `payload` | 94 |
-| variable | `initial` | 96 |
-| variable | `candidate` | 97 |
-| variable | `change` | 102 |
-| function | `test_history_restart(tmp_path, project)` | 110 |
-| parameter | `project` | 110 |
-| parameter | `tmp_path` | 110 |
-| variable | `store` | 112 |
-| variable | `revision` | 113 |
-| variable | `run` | 114 |
-| variable | `restarted` | 115 |
-| function | `test_reports_escaped(project)` | 121 |
-| parameter | `project` | 121 |
-| variable | `run` | 123 |
-| variable | `report` | 124 |
-| variable | `archive` | 126 |
-| function | `test_static_no_execution(project, tmp_path)` | 131 |
-| parameter | `project` | 131 |
-| parameter | `tmp_path` | 131 |
-| variable | `sentinel` | 133 |
-| variable | `payload` | 134 |
-| variable | `result` | 136 |
-| function | `test_comparison_gates()` | 140 |
-| variable | `valid` | 142 |
-| variable | `candidate` | 150 |
-| variable | `changes` | 152 |
-| function | `test_catalog_no_fake_passes()` | 165 |
-| variable | `rows` | 167 |
-| variable | `row` | 168 |
-| variable | `row` | 171 |
-| function | `test_training_split()` | 174 |
-| variable | `result` | 176 |
-| variable | `train` | 176 |
-| variable | `validation` | 176 |
-| variable | `row` | 177 |
-| function | `test_training_bad_data(tmp_path, rows)` | 192 |
-| parameter | `rows` | 192 |
-| parameter | `tmp_path` | 192 |
-| variable | `path` | 194 |
-| variable | `row` | 195 |
+| function | `test_unsafe_names(name)` | 47 |
+| parameter | `name` | 47 |
+| function | `test_safe_flat_names(suffix)` | 54 |
+| parameter | `suffix` | 54 |
+| function | `test_project_invalid(project, changes)` | 73 |
+| parameter | `changes` | 73 |
+| parameter | `project` | 73 |
+| function | `test_invalid_binary(project)` | 79 |
+| parameter | `project` | 79 |
+| variable | `payload` | 81 |
+| function | `test_zero_weights()` | 87 |
+| function | `test_history_retains_oracles(tmp_path, project)` | 93 |
+| parameter | `project` | 93 |
+| parameter | `tmp_path` | 93 |
+| variable | `store` | 95 |
+| variable | `payload` | 96 |
+| variable | `initial` | 98 |
+| variable | `candidate` | 99 |
+| variable | `change` | 104 |
+| function | `test_history_restart(tmp_path, project)` | 112 |
+| parameter | `project` | 112 |
+| parameter | `tmp_path` | 112 |
+| variable | `store` | 114 |
+| variable | `revision` | 115 |
+| variable | `run` | 116 |
+| variable | `restarted` | 117 |
+| function | `test_reports_escaped(project)` | 123 |
+| parameter | `project` | 123 |
+| variable | `run` | 125 |
+| variable | `report` | 126 |
+| variable | `archive` | 128 |
+| function | `test_static_no_execution(project, tmp_path)` | 133 |
+| parameter | `project` | 133 |
+| parameter | `tmp_path` | 133 |
+| variable | `sentinel` | 135 |
+| variable | `payload` | 136 |
+| variable | `result` | 138 |
+| function | `test_comparison_gates()` | 142 |
+| variable | `valid` | 144 |
+| variable | `candidate` | 152 |
+| variable | `changes` | 154 |
+| function | `test_catalog_no_fake_passes()` | 167 |
+| variable | `rows` | 169 |
+| variable | `row` | 170 |
+| variable | `row` | 173 |
+| function | `test_training_split()` | 176 |
+| variable | `result` | 178 |
+| variable | `train` | 178 |
+| variable | `validation` | 178 |
+| variable | `row` | 179 |
+| function | `test_web_demo_source_matches_ci()` | 183 |
+| variable | `manifest` | 185 |
+| variable | `matched` | 186 |
+| function | `test_training_bad_data(tmp_path, rows)` | 203 |
+| parameter | `rows` | 203 |
+| parameter | `tmp_path` | 203 |
+| variable | `path` | 205 |
+| variable | `row` | 206 |
 
 ## tests/test_execution.py
 

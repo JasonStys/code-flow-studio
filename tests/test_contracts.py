@@ -1,15 +1,17 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: test_unsafe_names(name)@L45; test_safe_flat_names(suffix)@L52; test_project_invalid(project, changes)@L71; test_invalid_binary(project)@L77; test_zero_weights()@L85; test_history_retains_oracles(tmp_path, project)@L91; test_history_restart(tmp_path, project)@L110; test_reports_escaped(project)@L121; test_static_no_execution(project, tmp_path)@L131; test_comparison_gates()@L140; test_catalog_no_fake_passes()@L165; test_training_split()@L174; test_training_bad_data(tmp_path, rows)@L192
-# variables: payload@L79; store@L93; payload@L94; initial@L96; candidate@L97; change@L102; store@L112; revision@L113; run@L114; restarted@L115; run@L123; report@L124; archive@L126; sentinel@L133; payload@L134; result@L136; valid@L142; candidate@L150; changes@L152; rows@L167; row@L168; row@L171; result@L176; train@L176; validation@L176; row@L177; path@L194; row@L195
-# parameters: name@L45; suffix@L52; changes@L71; project@L71; project@L77; project@L91; tmp_path@L91; project@L110; tmp_path@L110; project@L121; project@L131; tmp_path@L131; rows@L192; tmp_path@L192
+# functions: test_unsafe_names(name)@L47; test_safe_flat_names(suffix)@L54; test_project_invalid(project, changes)@L73; test_invalid_binary(project)@L79; test_zero_weights()@L87; test_history_retains_oracles(tmp_path, project)@L93; test_history_restart(tmp_path, project)@L112; test_reports_escaped(project)@L123; test_static_no_execution(project, tmp_path)@L133; test_comparison_gates()@L142; test_catalog_no_fake_passes()@L167; test_training_split()@L176; test_web_demo_source_matches_ci()@L183; test_training_bad_data(tmp_path, rows)@L203
+# variables: payload@L81; store@L95; payload@L96; initial@L98; candidate@L99; change@L104; store@L114; revision@L115; run@L116; restarted@L117; run@L125; report@L126; archive@L128; sentinel@L135; payload@L136; result@L138; valid@L144; candidate@L152; changes@L154; rows@L169; row@L170; row@L173; result@L178; train@L178; validation@L178; row@L179; manifest@L185; matched@L186; path@L205; row@L206
+# parameters: name@L47; suffix@L54; changes@L73; project@L73; project@L79; project@L93; tmp_path@L93; project@L112; tmp_path@L112; project@L123; project@L133; tmp_path@L133; rows@L203; tmp_path@L203
 # </code-map>
 
 """Input boundary, history and comparison invariants. Symbols: docs/code-index.md."""
 
+import ast
 import io
 import json
+import re
 import zipfile
 from pathlib import Path
 
@@ -176,6 +178,15 @@ def test_training_split():
     train, validation, result = prepare(Path("examples/training.jsonl"))
     assert {row["project"] for row in train}.isdisjoint(row["project"] for row in validation)
     assert result["project_disjoint"] and result["validation_records"] > 0
+
+
+def test_web_demo_source_matches_ci():
+    """The CI manifest contains the exact inert source shown by the web/native CSV demo."""
+    manifest = Project.model_validate_json(Path("examples/web-demo.project.json").read_text())
+    matched = re.search(r"content:\s*('(?:\\.|[^'])*')", Path("ui/demo.ts").read_text())
+    assert matched is not None
+    assert ast.literal_eval(matched[1]) == manifest.files[0].content
+    assert len(manifest.cases) == 3 and manifest.fuzz_cases == 24
 
 
 @pytest.mark.parametrize(
