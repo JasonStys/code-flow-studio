@@ -1,0 +1,37 @@
+{
+  "source_commit": "9829a50278e5fef42565553174fae41858df7a23",
+  "source_run": "https://github.com/JasonStys/code-flow-studio/actions/runs/36659044896",
+  "environment": "GitHub-hosted Linux runner; isolated worker for compiler jobs",
+  "evidence": {
+    "parameters": {
+      "mode": "new",
+      "seed": 42,
+      "steps": 2,
+      "learning_rate": 0.0005,
+      "context": 128,
+      "layers": 1,
+      "hidden": 32,
+      "heads": 2,
+      "vocab_size": 512,
+      "device": "cpu"
+    },
+    "parameter_count": 33248,
+    "training_loss": [
+      6.216498851776123,
+      6.251512050628662
+    ],
+    "held_out_loss": 6.253328800201416,
+    "provenance": {
+      "train_records": 4,
+      "validation_records": 1,
+      "project_disjoint": true,
+      "duplicates_removed": 0,
+      "seed": 42,
+      "sha256": "534c0b48457c8a928d62241e824c1473bfc23eec1356fadd1fcd61e1ec5ce239",
+      "licenses": [
+        "owned"
+      ]
+    },
+    "caveat": "Small synthetic demonstration is not a useful general coding assistant. Validate generated code with independent tests before deployment."
+  }
+}

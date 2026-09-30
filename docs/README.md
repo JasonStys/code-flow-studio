@@ -9,4 +9,6 @@
 - [Validation report](validation.md): measured local/CI results and explicit blocked/unverified items.
 - [Code index](code-index.md): mechanically checked exact source symbol/variable locations.
 - [Research and provenance](research.md): source review and primary technical references.
+- [Remaining scope](remaining-scope.md): implemented contracts, missing integrations and acceptance milestones.
+- [Evidence files](evidence/worker-evidence.json): genuine isolated worker reports; training and inference reports are in the same directory and linked from the validation report.
 

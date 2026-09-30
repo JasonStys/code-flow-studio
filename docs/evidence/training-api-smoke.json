@@ -1,0 +1,20 @@
+{
+  "source_commit": "9829a50278e5fef42565553174fae41858df7a23",
+  "source_run": "https://github.com/JasonStys/code-flow-studio/actions/runs/36659044896",
+  "environment": "GitHub-hosted Linux runner; isolated worker for compiler jobs",
+  "evidence": {
+    "api_auth_verified": true,
+    "real_model_completion": {
+      "choices": [
+        {
+          "message": {
+            "role": "assistant",
+            "content": ": : . . . . . ."
+          }
+        }
+      ],
+      "verified": false
+    },
+    "caveat": "Pipeline smoke only; tiny model output is not useful or verified code"
+  }
+}

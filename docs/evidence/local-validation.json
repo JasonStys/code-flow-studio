@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-29",
+  "timezone": "America/Los_Angeles",
+  "environment": "Windows 11, Python 3.14.6, current owner's PC",
+  "controller": {"passed": 52, "failed": 0, "errors": 0, "skipped": 0, "covered_statements": 495, "statements": 599, "statement_coverage": 0.8264, "scope": ["studio", "training.dataset"]},
+  "browsers": {"passed": 9, "engines": ["chromium", "firefox", "webkit"], "mobile_viewport": [390, 844]},
+  "installed_desktop": {"installer_exit_code": 0, "smoke_tests_passed": 1, "bundled_service": true, "installer_bytes": 150182049, "installer_sha256": "ff167104eee15ad9c873449f9cc086c7742ddd90c2bfe8dcec699092353cfe9e"},
+  "npm_audit_known_vulnerabilities": 0,
+  "local_compiler_execution": "blocked; owner requested leaving Docker unchanged",
+  "live_ai_generation": "not configured or validated",
+  "caveat": "Local controller/browser/installer evidence, not clean-machine installation, universal platform proof or remote isolated-worker results. Remote reports are separate."
+}

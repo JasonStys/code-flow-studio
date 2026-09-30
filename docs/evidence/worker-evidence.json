@@ -1,0 +1,2102 @@
+{
+  "source_commit": "9829a50278e5fef42565553174fae41858df7a23",
+  "source_run": "https://github.com/JasonStys/code-flow-studio/actions/runs/36659044896",
+  "environment": "GitHub-hosted Linux runner; isolated worker for compiler jobs",
+  "evidence": {
+    "python": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 164.83167699999512,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.88853300000892,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          15.720449000014014,
+          15.684375000006412
+        ],
+        "median_ms": 15.702412000010213,
+        "max_rss_kib": 23264,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 3,
+          "percent_covered": 100,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "cd4555c935292f8efca53acf262eff1d015e033bcf59128283e35a9ffd1509c0",
+        "source_bytes": 112,
+        "lines": 4,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "javascript": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.33459700000981,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 114.24948800001289,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "javascript",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          114.12813500001562,
+          114.20406999999955
+        ],
+        "median_ms": 114.16610250000758,
+        "max_rss_kib": 49864,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "0ca990735a195f9db7f9b951f261810987b1168f2430560befc79ce95d6bdea1",
+        "source_bytes": 131,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "typescript": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 1730.838527000003,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 114.3729050000104,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "typescript",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          114.09504599998854,
+          114.12214699998913
+        ],
+        "median_ms": 114.10859649998883,
+        "max_rss_kib": 181872,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "3ed4f803999efae6c2cbe7e890224e0217f30c7394f5c2b57f7da25c3eb0abd7",
+        "source_bytes": 66,
+        "lines": 2,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "cpp": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 314.702791000002,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1.5690070000005107,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "cpp",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          1.3502669999923,
+          1.3493060000087098
+        ],
+        "median_ms": 1.349786500000505,
+        "max_rss_kib": 79560,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "47bef9b577cd6a215c805021d7ed63c3d6673192bcd692d11bbb771b426fb9cd",
+        "source_bytes": 158,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "c": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 32.005480000009356,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1.432862000001478,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "c",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          1.3455600000042978,
+          1.3499069999909352
+        ],
+        "median_ms": 1.3477334999976165,
+        "max_rss_kib": 28132,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "485f971e7f7bbf03a02f8974cc9354cb11bfcacf2652664a8eeae7bbd8e1545c",
+        "source_bytes": 168,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "java": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 517.3060510000198,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 137.95153300000607,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "java",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          118.46060099998112,
+          114.70836600000212
+        ],
+        "median_ms": 116.58448349999162,
+        "max_rss_kib": 72612,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "86aa311ef5fd9b94acdee1397fd2b861cef6431fd9edefc15a79757ac08bd722",
+        "source_bytes": 219,
+        "lines": 3,
+        "long_lines": 1,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "csharp": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "\nWelcome to .NET 8.0!\r\n---------------------\r\nSDK Version: 8.0.425\n\n----------------\r\nInstalled an ASP.NET Core HTTPS development certificate.\r\nTo trust the certificate, view the instructions: https://aka.ms/dotnet-https-linux\n\n----------------\r\nWrite your first app: https://aka.ms/dotnet-hello-world\r\nFind out what's new: https://aka.ms/dotnet-whats-new\r\nExplore documentation: https://aka.ms/dotnet-docs\r\nReport issues and find source on GitHub: https://github.com/dotnet/core\r\nUse 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli\r\n--------------------------------------------------------------------------------------\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.18\n",
+        "stderr": "",
+        "timeout": false,
+        "ms": 2571.4497250000077,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 65.134334999982,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "csharp",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          65.32336800000849,
+          64.48542299997939
+        ],
+        "median_ms": 64.90439549999394,
+        "max_rss_kib": 167152,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "aa1dc4091d2902ea6cfc9f978902f1709fa2830c420a86983d980acbc4c17443",
+        "source_bytes": 125,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "rust": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 315.4938940000136,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1.5529530000151226,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "rust",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          1.3787299999989955,
+          1.3655909999954474
+        ],
+        "median_ms": 1.3721604999972215,
+        "max_rss_kib": 165568,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "ffacdbc51890d945be16c95626c73dfb81255a7f085a2f541823a8f769fa9fac",
+        "source_bytes": 238,
+        "lines": 3,
+        "long_lines": 1,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "php": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "No syntax errors detected in main.php\n",
+        "stderr": "",
+        "timeout": false,
+        "ms": 15.93320999998582,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.793167999987645,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "php",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          15.67275599998652,
+          15.662061000000449
+        ],
+        "median_ms": 15.667408499993485,
+        "max_rss_kib": 23032,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "2e9bce3defcb6ed4a274b09bc81946fee9b3a2bec8893ca35eadc3c001465871",
+        "source_bytes": 120,
+        "lines": 4,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "bash": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 3.7204329999838137,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1.4245300000084171,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "bash",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          1.387612999991461,
+          1.404449000006025
+        ],
+        "median_ms": 1.396030999998743,
+        "max_rss_kib": 22980,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "445342a80993aa31bff16e37290bac03fda5888c0fdf81dc3b380684dcc5542b",
+        "source_bytes": 81,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "sql": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 64.03817800000411,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "6703e8749f1cd697c633cf5fcf31febac8a5256e68cb3c1b2a009f065bcef34e",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "sql",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          64.03500400000439,
+          63.91071499999157
+        ],
+        "median_ms": 63.97285949999798,
+        "max_rss_kib": 23256,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "88f27bbe227b117e6af260d21e7a3011d821b0c88194149bb321993ddee17343",
+        "source_bytes": 133,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "assembly": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 31.98243399998546,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1.4290759999937563,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "assembly",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          1.3430070000026717,
+          1.3360060000024987
+        ],
+        "median_ms": 1.3395065000025852,
+        "max_rss_kib": 22808,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "108daf181c811a26a14fc963f06c68cd304c6c5f77eea05966bf7641839899b1",
+        "source_bytes": 267,
+        "lines": 13,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "python-full": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.10450299999297,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.802689999986796,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed in 0.56s\n",
+        "stderr": "",
+        "timeout": false,
+        "ms": 1065.8477759999982,
+        "output_truncated": false
+      },
+      "benchmark": {
+        "samples_ms": [
+          17.525328000004947,
+          15.647104999999328
+        ],
+        "median_ms": 16.586216500002138,
+        "max_rss_kib": 47608,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 3,
+          "percent_covered": 100,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "measured",
+        "mutants": [
+          {
+            "index": 0,
+            "status": "killed"
+          }
+        ],
+        "evaluated": 1,
+        "score": 1,
+        "caveat": "At most 8 operator mutants; survivors may be equivalent. Not an exhaustive mutation proof."
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 12,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "cd4555c935292f8efca53acf262eff1d015e033bcf59128283e35a9ffd1509c0",
+        "source_bytes": 112,
+        "lines": 4,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "wrong-oracle": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.09980899998118,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 0,
+        "failed": 1,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": false,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.807066999997232,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "2b97a4c112ad9d60c29cf6470046fc1103c790ba2060e8140a2ae42e6579cb2e",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [],
+        "median_ms": null,
+        "max_rss_kib": 22864,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 3,
+          "percent_covered": 100,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "blocked",
+        "reason": "Baseline failures invalidate mutation"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "cd4555c935292f8efca53acf262eff1d015e033bcf59128283e35a9ffd1509c0",
+        "source_bytes": 112,
+        "lines": 4,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "compile-error": {
+      "tool_status": "compile-error",
+      "compilation": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "main.cpp:1:1: error: expected unqualified-id before ‘not’ token\n    1 | not valid C++\n      | ^~~\n",
+        "timeout": false,
+        "ms": 7.783060999997815,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 0,
+        "failed": 0,
+        "cases": []
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "cpp",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "static": {
+        "sha256": "1876c5665eb467e5a37375afd47c8e3f8699239458a10c62368432b74e069077",
+        "source_bytes": 13,
+        "lines": 1,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "boundary-probes": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.09753600000272,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 63.97123600001464,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          63.880560000001196,
+          63.87868699999899
+        ],
+        "median_ms": 63.87962350000009,
+        "max_rss_kib": 23040,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 11,
+          "num_statements": 12,
+          "percent_covered": 91.66666666666667,
+          "percent_covered_display": "92",
+          "missing_lines": 1,
+          "excluded_lines": 0,
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "b0cec8c781df92ad225aa47bbe201fc4abf3a63fcc53da9094e1f16981456786",
+        "source_bytes": 435,
+        "lines": 13,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 2,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "timeout": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.08291899999767,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 0,
+        "failed": 1,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": false,
+            "exit_code": -9,
+            "stdout": "",
+            "stderr": "",
+            "timeout": true,
+            "ms": 3001.1220989999856,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [],
+        "median_ms": null,
+        "max_rss_kib": 23060,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "blocked",
+        "reason": ""
+      },
+      "mutation": {
+        "status": "blocked",
+        "reason": "Baseline failures invalidate mutation"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "6f03a883a34c8b19ec2dba2a1e2941488319b72a4d2f441aa474cff0744647c1",
+        "source_bytes": 17,
+        "lines": 1,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 1,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "bounded-output": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.10268900002052,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 0,
+        "failed": 1,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": false,
+            "exit_code": 0,
+            "stdout": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.792879999992238,
+            "output_truncated": true
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [],
+        "median_ms": null,
+        "max_rss_kib": 23136,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 1,
+          "num_statements": 1,
+          "percent_covered": 100,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "blocked",
+        "reason": "Baseline failures invalidate mutation"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "c059e0f69a50261484adf42f7b0102eb32d0d74d37a920f80a3141ff5a1e0a00",
+        "source_bytes": 19,
+        "lines": 1,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "libfuzzer": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 264.50512400001,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1.5157670000007784,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "cpp",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          1.3629559999799312,
+          1.3453600000161714
+        ],
+        "median_ms": 1.3541579999980513,
+        "max_rss_kib": 79248,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "libfuzzer",
+        "process": {
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "INFO: Running with entropic power schedule (0xFF, 100).\nINFO: Seed: 3000949433\nINFO: Loaded 1 modules   (4 inline 8-bit counters): 4 [0x559f377b4f00, 0x559f377b4f04), \nINFO: Loaded 1 PC tables (4 PCs): 4 [0x559f377b4f08,0x559f377b4f48), \nINFO:        1 files found in corpus\nINFO: seed corpus: files: 1 min: 2b max: 2b total: 2b rss: 37Mb\n#2\tINITED cov: 2 ft: 2 corp: 1/2b exec/s: 0 rss: 38Mb\n#8\tREDUCE cov: 2 ft: 2 corp: 1/1b lim: 4 exec/s: 0 rss: 38Mb L: 1/1 MS: 1 EraseBytes-\n#128\tDONE   cov: 2 ft: 2 corp: 1/1b lim: 4 exec/s: 0 rss: 38Mb\nDone 128 runs in 0 second(s)\n",
+          "timeout": false,
+          "ms": 31.901516000004904,
+          "output_truncated": false
+        },
+        "caveat": "Instrumentation output retained verbatim. No synthetic edge counts."
+      },
+      "static": {
+        "sha256": "47bef9b577cd6a215c805021d7ed63c3d6673192bcd692d11bbb771b426fb9cd",
+        "source_bytes": 158,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "aflplusplus": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 315.2082150000126,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1.5674240000009831,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "cpp",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          1.3516589999937878,
+          1.344258000017362
+        ],
+        "median_ms": 1.347958500005575,
+        "max_rss_kib": 79600,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "not-applicable",
+        "reason": "Built-in line/branch coverage needs Python and approved cases"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "aflplusplus",
+        "process": {
+          "exit_code": 0,
+          "stdout": "704, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=740, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=777, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=811, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=811, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 9.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=850, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=2043, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=843, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=886, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #0 (4 total, 0 crashes saved, perf_score=459, exec_us=228, hits=0, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=914, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 10.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=915, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=957, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=987, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=2385, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=2499, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1018, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 11.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1042, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1071, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1093, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1131, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1151, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=2762, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 12.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=2885, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=3018, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=952, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #0 (4 total, 0 crashes saved, perf_score=459, exec_us=228, hits=0, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1020, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1190, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 13.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1049, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=3338, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=3449, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1217, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=3584, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=3714, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 14.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1245, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1087, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1118, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1145, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #0 (4 total, 0 crashes saved, perf_score=459, exec_us=228, hits=0, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1218, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 15.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=4002, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1254, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=4138, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=4266, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=4392, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1286, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 16.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1313, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=4563, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1282, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1310, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=4719, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1335, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 17.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=4865, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1359, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #2 (4 total, 0 crashes saved, perf_score=114, exec_us=213, hits=1351, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1393, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=5034, map=6, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #3 (4 total, 0 crashes saved, perf_score=114, exec_us=253, hits=1426, map=7, ascii=0)...\u001b[0m\n\u001b[1;94m[*] \u001b[0mEntering queue cycle 18.\u001b[0m\n\u001b[1;94m[*] \u001b[0mFuzzing test case #1 (4 total, 0 crashes saved, perf_score=114, exec_us=222, hits=5183, map=6, ascii=0)...\u001b[0m\n\u001b[?25h\u001b[1;91m\n\n+++ Testing aborted programmatically +++\n\u001b[0m\u001b[1;93m[!] \u001b[0mTime limit was reached\n\u001b[1;94m[*] \u001b[0mStatistics: 3 new corpus items found, 62.50% coverage achieved, 0 crashes saved, 0 timeouts saved, total runtime 0 days, 0 hrs, 0 min, 8 sec\u001b[0m\n\u001b[1;92m[+] \u001b[0mWe're done here. Have a nice day!\n\u001b[0m\n",
+          "stderr": "",
+          "timeout": false,
+          "ms": 8028.549127999981,
+          "output_truncated": true
+        },
+        "caveat": "Instrumentation output retained verbatim. No synthetic edge counts."
+      },
+      "static": {
+        "sha256": "47bef9b577cd6a215c805021d7ed63c3d6673192bcd692d11bbb771b426fb9cd",
+        "source_bytes": 158,
+        "lines": 3,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "atheris": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.09994199999574,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.795999999994592,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed in 0.57s\n",
+        "stderr": "",
+        "timeout": false,
+        "ms": 1065.7826869999951,
+        "output_truncated": false
+      },
+      "benchmark": {
+        "samples_ms": [
+          15.688017000002219,
+          15.66102600000363
+        ],
+        "median_ms": 15.674521500002925,
+        "max_rss_kib": 47588,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 3,
+          "percent_covered": 100,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "measured",
+        "mutants": [
+          {
+            "index": 0,
+            "status": "killed"
+          }
+        ],
+        "evaluated": 1,
+        "score": 1,
+        "caveat": "At most 8 operator mutants; survivors may be equivalent. Not an exhaustive mutation proof."
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "atheris",
+        "process": {
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "INFO: Using built-in libfuzzer\nWARNING: Failed to find function \"__sanitizer_acquire_crash_state\".\nWARNING: Failed to find function \"__sanitizer_print_stack_trace\".\nWARNING: Failed to find function \"__sanitizer_set_death_callback\".\nINFO: Running with entropic power schedule (0xFF, 100).\nINFO: Seed: 3254626049\nINFO:        1 files found in corpus\nINFO: seed corpus: files: 1 min: 2b max: 2b total: 2b rss: 46Mb\n#2\tINITED cov: 3 ft: 3 corp: 1/2b exec/s: 0 rss: 46Mb\n#7\tREDUCE cov: 3 ft: 3 corp: 1/1b lim: 4 exec/s: 0 rss: 46Mb L: 1/1 MS: 5 ChangeASCIIInt-ShuffleBytes-ChangeByte-ChangeBinInt-EraseBytes-\n#128\tDONE   cov: 3 ft: 3 corp: 1/1b lim: 4 exec/s: 0 rss: 46Mb\nDone 128 runs in 0 second(s)\n",
+          "timeout": false,
+          "ms": 214.22959700001343,
+          "output_truncated": false
+        },
+        "caveat": "Instrumentation output retained verbatim. No synthetic edge counts."
+      },
+      "static": {
+        "sha256": "cd4555c935292f8efca53acf262eff1d015e033bcf59128283e35a9ffd1509c0",
+        "source_bytes": 112,
+        "lines": 4,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "failed-generated-test": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.07327200001305,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.786625000004051,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "exit_code": 1,
+        "stdout": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________________ test_reject __________________________________\n\n    def test_reject():\n>    assert False\nE    assert False\n\ntest_generated.py:2: AssertionError\n=========================== short test summary info ============================\nFAILED test_generated.py::test_reject - assert False\n1 failed in 0.56s\n",
+        "stderr": "",
+        "timeout": false,
+        "ms": 1065.7274649999806,
+        "output_truncated": false
+      },
+      "benchmark": {
+        "samples_ms": [
+          15.73758199998565,
+          15.646894999974847
+        ],
+        "median_ms": 15.692238499980249,
+        "max_rss_kib": 47652,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 3,
+          "percent_covered": 100,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "blocked",
+        "reason": "Baseline failures invalidate mutation"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 0,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "cd4555c935292f8efca53acf262eff1d015e033bcf59128283e35a9ffd1509c0",
+        "source_bytes": 112,
+        "lines": 4,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 0,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "binary-mutation": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.11966200000734,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "double-two",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "4\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 15.790812999995296,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "da9f8fc545bc1afbf5b4dfccf9e7a0c0d4f78d8ed5bf6f7d2992bb34cec67f33",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 2
+      },
+      "generated_tests": {
+        "status": "not-provided"
+      },
+      "benchmark": {
+        "samples_ms": [
+          15.683901000016931,
+          15.61285399998269
+        ],
+        "median_ms": 15.64837749999981,
+        "max_rss_kib": 23172,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 4,
+          "percent_covered": 66.66666666666667,
+          "percent_covered_display": "67",
+          "missing_lines": 1,
+          "excluded_lines": 0,
+          "num_branches": 2,
+          "num_partial_branches": 1,
+          "covered_branches": 1,
+          "missing_branches": 1
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "not-selected"
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 5,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "83d2932ea95d60dc05306cb997b1450e320e27228c41d4fe1cab51ca73e9617a",
+        "source_bytes": 94,
+        "lines": 4,
+        "long_lines": 0,
+        "function_count": 0,
+        "branch_nodes": 1,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    },
+    "web-demo": {
+      "tool_status": "completed",
+      "compilation": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timeout": false,
+        "ms": 114.08347799999774,
+        "output_truncated": false
+      },
+      "checks": {
+        "passed": 3,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "inch",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "a,25.40\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 63.953480999998646,
+            "output_truncated": false
+          },
+          {
+            "name": "centimetre",
+            "passed": true,
+            "exit_code": 0,
+            "stdout": "b,20.00\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 64.0428750000126,
+            "output_truncated": false
+          },
+          {
+            "name": "nonfinite",
+            "passed": true,
+            "exit_code": 2,
+            "stdout": "",
+            "stderr": "Invalid input\n",
+            "timeout": false,
+            "ms": 63.819448999993256,
+            "output_truncated": false
+          }
+        ]
+      },
+      "oracle_hash": "69631b8b9f491b4b4c0432f65bb7661f7b558970d94f48c0c7dd807dc871209c",
+      "environment": {
+        "worker": "polyglot-v1",
+        "python": "3.12.12",
+        "language": "python",
+        "machine": "x86_64",
+        "benchmark_repeats": 3
+      },
+      "generated_tests": {
+        "exit_code": 0,
+        "stdout": "...                                                                      [100%]\n3 passed in 0.62s\n",
+        "stderr": "",
+        "timeout": false,
+        "ms": 1115.8479689999865,
+        "output_truncated": false
+      },
+      "benchmark": {
+        "samples_ms": [
+          63.88949400002275,
+          63.89672500000643,
+          63.8904049999951,
+          63.93048600000384,
+          63.88089099999661,
+          63.890937000024906,
+          63.886589999981425,
+          63.90998499998091,
+          63.88604899998995
+        ],
+        "median_ms": 63.8904049999951,
+        "max_rss_kib": 47740,
+        "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+      },
+      "coverage": {
+        "status": "measured",
+        "entry": {
+          "covered_lines": 19,
+          "num_statements": 19,
+          "percent_covered": 96,
+          "percent_covered_display": "96",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 6,
+          "num_partial_branches": 1,
+          "covered_branches": 5,
+          "missing_branches": 1
+        },
+        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC"
+      },
+      "mutation": {
+        "status": "measured",
+        "mutants": [
+          {
+            "index": 0,
+            "status": "killed"
+          },
+          {
+            "index": 1,
+            "status": "killed"
+          },
+          {
+            "index": 2,
+            "status": "killed"
+          }
+        ],
+        "evaluated": 3,
+        "score": 1,
+        "caveat": "At most 8 operator mutants; survivors may be equivalent. Not an exhaustive mutation proof."
+      },
+      "fuzz": {
+        "status": "completed",
+        "engine": "blackbox",
+        "executed": 24,
+        "seed": 42,
+        "findings": [],
+        "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+        "blocked_methods": [],
+        "coverage_guided": false
+      },
+      "static": {
+        "sha256": "5a841c1c72a9a7c0c5b2b6ca794dc6f6aa46d4c2a011152f32c17ddf5001f39b",
+        "source_bytes": 765,
+        "lines": 23,
+        "long_lines": 0,
+        "function_count": 1,
+        "branch_nodes": 4,
+        "findings": [],
+        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification."
+      },
+      "isolation": {
+        "network": "none",
+        "memory_mib": 1024,
+        "cpus": 2,
+        "pids": 128,
+        "read_only": true
+      }
+    }
+  }
+}
