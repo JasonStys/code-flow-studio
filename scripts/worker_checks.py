@@ -67,7 +67,7 @@ async def main():
     assert reports["compile-error"]["tool_status"] == "compile-error"
     attack = fixture("python").model_dump()
     attack["files"][0]["content"] = (
-        '"""Probe only this job’s security boundary."""\nimport os,socket\nassert not os.environ.get("STUDIO_OPENAI_KEY")\ntry:\n open("/opt/probe.txt","w").write("blocked")\n raise AssertionError("root writable")\nexcept PermissionError: pass\ns=socket.socket();s.settimeout(.2)\ntry:\n s.connect(("1.1.1.1",443));raise AssertionError("network connected")\nexcept OSError: pass\nprint(4)\n'
+        '"""Probe only this job’s security boundary."""\nimport errno,os,socket\nassert not os.environ.get("STUDIO_OPENAI_KEY")\ntry:\n open("/opt/probe.txt","w").write("blocked")\n raise AssertionError("root writable")\nexcept OSError as error:\n assert error.errno in (errno.EROFS,errno.EACCES,errno.EPERM)\ns=socket.socket();s.settimeout(.2)\ntry:\n s.connect(("1.1.1.1",443));raise AssertionError("network connected")\nexcept OSError: pass\nprint(4)\n'
     )
     reports["boundary-probes"] = await run(Project.model_validate(attack))
     assert reports["boundary-probes"]["checks"]["passed"] == 1

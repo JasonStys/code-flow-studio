@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Store@L32
-# functions: __init__(self, path)@L35; connect(self)@L44; create(self, payload, parent)@L55; revision(self, identifier)@L82; history(self)@L95; queue(self, revision)@L105; finish(self, identifier, status, result)@L114; run(self, identifier)@L121; runs(self, revision)@L129
-# variables: SCHEMA@L22; connection@L39; connection@L46; revision@L57; connection@L58; previous@L60; old@L65; project@L72; project@L74; connection@L84; row@L85; connection@L97; row@L100; identifier@L107; connection@L108; connection@L116; connection@L123; row@L124; connection@L131; identifiers@L132; row@L134; identifier@L138
-# parameters: path@L35; self@L35; self@L44; parent@L55; payload@L55; self@L55; identifier@L82; self@L82; self@L95; revision@L105; self@L105; identifier@L114; result@L114; self@L114; status@L114; identifier@L121; self@L121; revision@L129; self@L129
+# classes: Store@L33
+# functions: __init__(self, path)@L36; connect(self)@L45; create(self, payload, parent)@L56; revision(self, identifier)@L83; history(self)@L96; queue(self, revision)@L106; finish(self, identifier, status, result)@L115; run(self, identifier)@L122; runs(self, revision)@L130; timeline(self, revision)@L141
+# variables: SCHEMA@L23; connection@L40; connection@L47; revision@L58; connection@L59; previous@L61; old@L66; project@L73; project@L75; connection@L85; row@L86; connection@L98; row@L101; identifier@L108; connection@L109; connection@L117; connection@L124; row@L125; connection@L132; identifiers@L133; row@L135; identifier@L139; project@L143; connection@L144; rows@L145; items@L149; row@L150; payload@L151; attempts@L152; summaries@L156; attempt@L157; result@L158; key@L165
+# parameters: path@L36; self@L36; self@L45; parent@L56; payload@L56; self@L56; identifier@L83; self@L83; self@L96; revision@L106; self@L106; identifier@L115; result@L115; self@L115; status@L115; identifier@L122; self@L122; revision@L130; self@L130; revision@L141; self@L141
 # </code-map>
 
 """SQLite append-only project revisions and durable job evidence.
@@ -13,6 +13,7 @@ Symbol and variable locations: docs/code-index.md. Database connection lifetimes
 are short; bound parameters and transactions prevent partial history updates.
 """
 
+import hashlib
 import json
 import sqlite3
 from contextlib import contextmanager
@@ -136,3 +137,53 @@ class Store:
                 )
             ]
         return [self.run(identifier) for identifier in identifiers]
+
+    def timeline(self, revision: str) -> dict:
+        """Export the latest 50 project revisions with bounded evidence summaries, not source/log bodies."""
+        project = self.revision(revision)["project_id"]
+        with self.connect() as connection:
+            rows = connection.execute(
+                "SELECT id,parent_id,payload,created FROM revisions WHERE project_id=? ORDER BY rowid DESC LIMIT 51",
+                (project,),
+            ).fetchall()
+            items = []
+            for row in reversed(rows[:50]):
+                payload = json.loads(row["payload"])
+                attempts = connection.execute(
+                    "SELECT id,status,result,created FROM runs WHERE revision_id=? ORDER BY rowid DESC LIMIT 10",
+                    (row["id"],),
+                ).fetchall()
+                summaries = []
+                for attempt in reversed(attempts):
+                    result = json.loads(attempt["result"])
+                    summaries.append(
+                        {
+                            "id": attempt["id"],
+                            "status": attempt["status"],
+                            "created": attempt["created"],
+                            "checks": {
+                                key: result.get("checks", {}).get(key) for key in ("passed", "failed")
+                            },
+                            "benchmark": result.get("benchmark", {}),
+                            "coverage": result.get("coverage", {}),
+                            "mutation_score": result.get("mutation", {}).get("score"),
+                            "fuzz_status": result.get("fuzz", {}).get("status"),
+                            "generated_tests_exit": result.get("generated_tests", {}).get("exit_code"),
+                        }
+                    )
+                items.append(
+                    {
+                        "id": row["id"],
+                        "parent_id": row["parent_id"],
+                        "created": row["created"],
+                        "snapshot_sha256": hashlib.sha256(row["payload"].encode()).hexdigest(),
+                        "priorities": payload["priorities"],
+                        "attempts": summaries,
+                    }
+                )
+        return {
+            "project_id": project,
+            "revisions": items,
+            "truncated": len(rows) > 50,
+            "scope": "Latest 50 revisions; latest 10 attempts each. Full source/logs remain in their individual exports.",
+        }

@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: app@L14; page@L19
+ * variables: app@L14; page@L20
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -12,7 +12,8 @@ import { test, expect, _electron as electron } from "@playwright/test";
 test("bundled desktop launches a sandboxed working editor", async () => {
   /** Native renderer and bundled service both start without a separately installed Python runtime. */
   const app = await electron.launch({
-    args: ["."],
+    executablePath: process.env.STUDIO_INSTALLED_APP,
+    args: process.env.STUDIO_INSTALLED_APP ? [] : ["."],
     env: { ...process.env, STUDIO_DESKTOP_TEST: "1" },
   });
   try {
@@ -29,6 +30,11 @@ test("bundled desktop launches a sandboxed working editor", async () => {
     );
     await page.getByRole("button", { name: "Test catalog" }).click();
     await expect(page.locator(".catalog-grid article")).toHaveCount(48);
+    await page.getByRole("button", { name: "Workspace", exact: true }).click();
+    await page.screenshot({
+      path: "artifacts/desktop-workspace.png",
+      fullPage: true,
+    });
   } finally {
     await app.close();
   }

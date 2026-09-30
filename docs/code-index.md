@@ -239,22 +239,27 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `main()` | 25 |
-| variable | `output` | 27 |
-| variable | `manifest` | 29 |
-| variable | `project` | 30 |
-| variable | `evidence` | 31 |
-| variable | `config` | 38 |
-| variable | `router` | 40 |
-| variable | `tests` | 41 |
-| variable | `payload` | 42 |
-| variable | `tested` | 44 |
-| variable | `generated` | 45 |
-| variable | `improved` | 46 |
-| variable | `replacements` | 47 |
-| variable | `item` | 49 |
-| variable | `row` | 49 |
-| variable | `candidate` | 51 |
+| function | `main()` | 26 |
+| variable | `output` | 28 |
+| variable | `manifest` | 30 |
+| variable | `project` | 31 |
+| variable | `evidence` | 32 |
+| variable | `config` | 39 |
+| variable | `config_json` | 40 |
+| variable | `router` | 41 |
+| variable | `directory` | 44 |
+| variable | `path` | 45 |
+| variable | `router` | 47 |
+| variable | `router` | 49 |
+| variable | `tests` | 51 |
+| variable | `payload` | 52 |
+| variable | `tested` | 54 |
+| variable | `generated` | 55 |
+| variable | `improved` | 56 |
+| variable | `replacements` | 57 |
+| variable | `item` | 59 |
+| variable | `row` | 59 |
+| variable | `candidate` | 61 |
 
 ## scripts/training_checks.py
 
@@ -392,15 +397,15 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `identifier` | 181 |
 | variable | `result` | 184 |
 | variable | `source` | 185 |
-| function | `compare_runs(baseline, candidate)` | 201 |
-| parameter | `baseline` | 201 |
-| parameter | `candidate` | 201 |
-| variable | `new` | 204 |
-| variable | `old` | 204 |
-| variable | `new_revision` | 205 |
-| variable | `old_revision` | 205 |
-| function | `ai(request)` | 216 |
-| parameter | `request` | 216 |
+| function | `compare_runs(baseline, candidate)` | 202 |
+| parameter | `baseline` | 202 |
+| parameter | `candidate` | 202 |
+| variable | `new` | 205 |
+| variable | `old` | 205 |
+| variable | `new_revision` | 206 |
+| variable | `old_revision` | 206 |
+| function | `ai(request)` | 217 |
+| parameter | `request` | 217 |
 
 ## studio/catalog.py
 
@@ -597,57 +602,71 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `SCHEMA` | 22 |
-| class | `Store` | 32 |
-| function | `__init__(self, path)` | 35 |
-| parameter | `path` | 35 |
-| parameter | `self` | 35 |
-| variable | `connection` | 39 |
-| function | `connect(self)` | 44 |
-| parameter | `self` | 44 |
-| variable | `connection` | 46 |
-| function | `create(self, payload, parent)` | 55 |
-| parameter | `parent` | 55 |
-| parameter | `payload` | 55 |
-| parameter | `self` | 55 |
-| variable | `revision` | 57 |
-| variable | `connection` | 58 |
-| variable | `previous` | 60 |
-| variable | `old` | 65 |
-| variable | `project` | 72 |
-| variable | `project` | 74 |
-| function | `revision(self, identifier)` | 82 |
-| parameter | `identifier` | 82 |
-| parameter | `self` | 82 |
-| variable | `connection` | 84 |
-| variable | `row` | 85 |
-| function | `history(self)` | 95 |
-| parameter | `self` | 95 |
-| variable | `connection` | 97 |
-| variable | `row` | 100 |
-| function | `queue(self, revision)` | 105 |
-| parameter | `revision` | 105 |
-| parameter | `self` | 105 |
-| variable | `identifier` | 107 |
-| variable | `connection` | 108 |
-| function | `finish(self, identifier, status, result)` | 114 |
-| parameter | `identifier` | 114 |
-| parameter | `result` | 114 |
-| parameter | `self` | 114 |
-| parameter | `status` | 114 |
-| variable | `connection` | 116 |
-| function | `run(self, identifier)` | 121 |
-| parameter | `identifier` | 121 |
-| parameter | `self` | 121 |
-| variable | `connection` | 123 |
-| variable | `row` | 124 |
-| function | `runs(self, revision)` | 129 |
-| parameter | `revision` | 129 |
-| parameter | `self` | 129 |
-| variable | `connection` | 131 |
-| variable | `identifiers` | 132 |
-| variable | `row` | 134 |
-| variable | `identifier` | 138 |
+| variable | `SCHEMA` | 23 |
+| class | `Store` | 33 |
+| function | `__init__(self, path)` | 36 |
+| parameter | `path` | 36 |
+| parameter | `self` | 36 |
+| variable | `connection` | 40 |
+| function | `connect(self)` | 45 |
+| parameter | `self` | 45 |
+| variable | `connection` | 47 |
+| function | `create(self, payload, parent)` | 56 |
+| parameter | `parent` | 56 |
+| parameter | `payload` | 56 |
+| parameter | `self` | 56 |
+| variable | `revision` | 58 |
+| variable | `connection` | 59 |
+| variable | `previous` | 61 |
+| variable | `old` | 66 |
+| variable | `project` | 73 |
+| variable | `project` | 75 |
+| function | `revision(self, identifier)` | 83 |
+| parameter | `identifier` | 83 |
+| parameter | `self` | 83 |
+| variable | `connection` | 85 |
+| variable | `row` | 86 |
+| function | `history(self)` | 96 |
+| parameter | `self` | 96 |
+| variable | `connection` | 98 |
+| variable | `row` | 101 |
+| function | `queue(self, revision)` | 106 |
+| parameter | `revision` | 106 |
+| parameter | `self` | 106 |
+| variable | `identifier` | 108 |
+| variable | `connection` | 109 |
+| function | `finish(self, identifier, status, result)` | 115 |
+| parameter | `identifier` | 115 |
+| parameter | `result` | 115 |
+| parameter | `self` | 115 |
+| parameter | `status` | 115 |
+| variable | `connection` | 117 |
+| function | `run(self, identifier)` | 122 |
+| parameter | `identifier` | 122 |
+| parameter | `self` | 122 |
+| variable | `connection` | 124 |
+| variable | `row` | 125 |
+| function | `runs(self, revision)` | 130 |
+| parameter | `revision` | 130 |
+| parameter | `self` | 130 |
+| variable | `connection` | 132 |
+| variable | `identifiers` | 133 |
+| variable | `row` | 135 |
+| variable | `identifier` | 139 |
+| function | `timeline(self, revision)` | 141 |
+| parameter | `revision` | 141 |
+| parameter | `self` | 141 |
+| variable | `project` | 143 |
+| variable | `connection` | 144 |
+| variable | `rows` | 145 |
+| variable | `items` | 149 |
+| variable | `row` | 150 |
+| variable | `payload` | 151 |
+| variable | `attempts` | 152 |
+| variable | `summaries` | 156 |
+| variable | `attempt` | 157 |
+| variable | `result` | 158 |
+| variable | `key` | 165 |
 
 ## tests/conftest.py
 
@@ -660,7 +679,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | Kind | Declaration | Line |
 |---|---|---|
 | variable | `app` | 14 |
-| variable | `page` | 19 |
+| variable | `page` | 20 |
 
 ## tests/test_api.py
 
@@ -688,22 +707,35 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `project` | 58 |
 | variable | `body` | 60 |
 | variable | `result` | 63 |
-| function | `test_blocked_execution_retained(client, project, monkeypatch)` | 67 |
+| function | `test_export_iteration_history(client, project)` | 67 |
 | parameter | `client` | 67 |
-| parameter | `monkeypatch` | 67 |
 | parameter | `project` | 67 |
-| function | `blocked(_project)` | 70 |
-| parameter | `_project` | 70 |
-| variable | `saved` | 74 |
-| variable | `job` | 75 |
-| variable | `result` | 77 |
-| function | `test_compare_unrelated(client, project)` | 82 |
-| parameter | `client` | 82 |
-| parameter | `project` | 82 |
-| variable | `store` | 84 |
-| variable | `runs` | 85 |
-| variable | `_` | 86 |
-| variable | `saved` | 87 |
+| variable | `store` | 69 |
+| variable | `original` | 70 |
+| variable | `candidate` | 71 |
+| variable | `unrelated` | 72 |
+| variable | `revision` | 73 |
+| variable | `identifier` | 74 |
+| variable | `run` | 78 |
+| variable | `exported` | 79 |
+| variable | `timeline` | 80 |
+| variable | `row` | 81 |
+| function | `test_blocked_execution_retained(client, project, monkeypatch)` | 88 |
+| parameter | `client` | 88 |
+| parameter | `monkeypatch` | 88 |
+| parameter | `project` | 88 |
+| function | `blocked(_project)` | 91 |
+| parameter | `_project` | 91 |
+| variable | `saved` | 95 |
+| variable | `job` | 96 |
+| variable | `result` | 98 |
+| function | `test_compare_unrelated(client, project)` | 103 |
+| parameter | `client` | 103 |
+| parameter | `project` | 103 |
+| variable | `store` | 105 |
+| variable | `runs` | 106 |
+| variable | `_` | 107 |
+| variable | `saved` | 108 |
 
 ## tests/test_contracts.py
 
@@ -972,8 +1004,8 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | function | `acceptProposal()` | 210 |
 | variable | `updates` | 213 |
 | variable | `files` | 214 |
-| variable | `checks` | 229 |
-| variable | `metrics` | 230 |
+| variable | `checks` | 233 |
+| variable | `metrics` | 234 |
 
 ## ui/api.ts
 

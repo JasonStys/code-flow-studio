@@ -53,6 +53,10 @@ jobs:
       - run: docker build -t code-flow-worker:0.1.0 runner
       - run: python -m scripts.worker_checks
       - run: python -m scripts.push_analysis
+        env:
+          STUDIO_AI_CONFIG: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.CODE_FLOW_ENABLE_AI == 'true' && secrets.STUDIO_AI_CONFIG || '' }}
+          STUDIO_OPENAI_KEY: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.CODE_FLOW_ENABLE_AI == 'true' && secrets.STUDIO_OPENAI_KEY || '' }}
+          STUDIO_ANTHROPIC_KEY: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.CODE_FLOW_ENABLE_AI == 'true' && secrets.STUDIO_ANTHROPIC_KEY || '' }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

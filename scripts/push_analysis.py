@@ -1,8 +1,8 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: main()@L25
-# variables: output@L27; manifest@L29; project@L30; evidence@L31; config@L38; router@L40; tests@L41; payload@L42; tested@L44; generated@L45; improved@L46; replacements@L47; item@L49; row@L49; candidate@L51
+# functions: main()@L26
+# variables: output@L28; manifest@L30; project@L31; evidence@L32; config@L39; config_json@L40; router@L41; directory@L44; path@L45; router@L47; router@L49; tests@L51; payload@L52; tested@L54; generated@L55; improved@L56; replacements@L57; item@L59; row@L59; candidate@L61
 # </code-map>
 
 """Push-triggered generation, test validation and candidate evaluation.
@@ -14,6 +14,7 @@ push-only. No credential ever enters the compiler container; no code is committe
 import asyncio
 import json
 import os
+import tempfile
 from pathlib import Path
 
 from examples.projects import fixture
@@ -36,8 +37,17 @@ async def main():
         },
     }
     config = os.environ.get("STUDIO_PROVIDER_CONFIG")
-    if config:
+    config_json = os.environ.get("STUDIO_AI_CONFIG")
+    router = None
+    if config_json:
+        # Private CI configuration never enters repository artifacts or compiler mounts.
+        with tempfile.TemporaryDirectory(prefix="code-flow-provider-") as directory:
+            path = Path(directory) / "providers.json"
+            path.write_text(config_json, encoding="utf-8")
+            router = Providers(path)
+    elif config:
         router = Providers(Path(config))
+    if router:
         tests = await router.request(AIRequest(task="tests", project=project, consent=True))
         payload = project.model_dump()
         payload["tests"] += "\n" + tests["proposal"]["tests"]

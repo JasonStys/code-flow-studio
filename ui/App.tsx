@@ -2,7 +2,7 @@
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
  * functions: App()@L40; refresh()@L65; saveAndRun()@L121; openRevision(id: string)@L154; upload(files: FileList | null)@L169; acceptProposal()@L210
- * variables: languages@L24; cloneDemo@L38; [project, setProject]@L42; [revision, setRevision]@L43; [historyRows, setHistory]@L44; [run, setRun]@L45; [status, setStatus]@L46; [capabilities, setCapabilities]@L47; [tab, setTab]@L48; [fileName, setFileName]@L49; [error, setError]@L50; [busy, setBusy]@L51; [prompt, setPrompt]@L52; [consent, setConsent]@L53; [live, setLive]@L54; [proposal, setProposal]@L55; [caseText, setCaseText]@L56; [comparison, setComparison]@L59; [baseline, setBaseline]@L60; generation@L61; selected@L62; timer@L78; requestGeneration@L93; result@L96; timer@L112; cases@L126; payload@L127; saved@L128; job@L135; saved@L157; additions@L173; bytes@L177; updates@L213; files@L214; checks@L229; metrics@L230
+ * variables: languages@L24; cloneDemo@L38; [project, setProject]@L42; [revision, setRevision]@L43; [historyRows, setHistory]@L44; [run, setRun]@L45; [status, setStatus]@L46; [capabilities, setCapabilities]@L47; [tab, setTab]@L48; [fileName, setFileName]@L49; [error, setError]@L50; [busy, setBusy]@L51; [prompt, setPrompt]@L52; [consent, setConsent]@L53; [live, setLive]@L54; [proposal, setProposal]@L55; [caseText, setCaseText]@L56; [comparison, setComparison]@L59; [baseline, setBaseline]@L60; generation@L61; selected@L62; timer@L78; requestGeneration@L93; result@L96; timer@L112; cases@L126; payload@L127; saved@L128; job@L135; saved@L157; additions@L173; bytes@L177; updates@L213; files@L214; checks@L233; metrics@L234
  * </code-map> */
 
 /** Evidence-first editor, runner and history UI. Symbols/variables: docs/code-index.md.
@@ -95,7 +95,7 @@ export default function App() {
     try {
       const result = await api<AIResult>("ai", "POST", {
         task,
-        project,
+        project: { ...project, cases: JSON.parse(caseText) as Case[] },
         prompt,
         consent,
       });
@@ -220,7 +220,11 @@ export default function App() {
     setProject({
       ...project,
       files,
-      tests: proposal.proposal.tests || project.tests,
+      tests: proposal.proposal.tests
+        ? proposal.proposal.tests.startsWith(project.tests)
+          ? proposal.proposal.tests
+          : project.tests + "\n" + proposal.proposal.tests
+        : project.tests,
     });
     setProposal(null);
     setTab("workspace");

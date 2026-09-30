@@ -34,6 +34,10 @@ Ollama requires a separately installed local model. OpenAI-compatible and Anthro
 
 `python -m studio.cli analyze --project FILE --output artifacts` uses the exact same broker. An optional `code-flow.project.json` selects push inputs. `scripts/push_analysis.py` runs a baseline; an explicitly configured `STUDIO_PROVIDER_CONFIG` enables test/improvement generation and candidate retesting. AI execution should be push/manual-only, with read-only checkout and no secrets in fork PRs. Retained candidate artifacts require review; no automatic commits or merges occur.
 
+The supplied Actions workflow has an explicit opt-in: add the repository variable `CODE_FLOW_ENABLE_AI=true`, the `STUDIO_AI_CONFIG` secret containing your reviewed provider JSON, and the separately named `STUDIO_OPENAI_KEY` and/or `STUDIO_ANTHROPIC_KEY` secrets. Configuration routes must reference those key environment names. AI credentials are provided only on main-branch push/manual runs, never pull-request runs. Leave the opt-in unset to avoid paid calls. Hosted GitHub runners cannot reach an Ollama instance on your PC; use an authorized HTTPS provider for CI. Configure secrets yourself through GitHub; do not paste them into chat, source, workflow YAML or reports.
+
+Exports include bounded revision timelines (latest 50 revisions, latest ten attempts each), hashes, priorities and measurement summaries. Full source/logs are in each individual run export. Appending tests retains earlier test text, but cannot prove a malicious appended harness has not overridden behavior; independent approved cases and human review remain necessary.
+
 ## Diagnostics and recovery
 
 “Docker unavailable” is not a code failure and is not a passed test. A missing image is a separate setup issue. Interrupted controller jobs become `interrupted` after restart. Stop the controller before moving/backing up the entire app data directory including SQLite/WAL companions. Do not reset Docker or delete existing containers/images to troubleshoot this application without explicit approval.
