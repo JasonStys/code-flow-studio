@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: create_app(data_directory, token, ui_directory, config, private_mode, owned_providers)@L35; lifespan(app)@L53; private_invalid(request, error)@L75; guard(request, call_next)@L80; health()@L109; shutdown()@L114; status()@L123; capabilities()@L134; review(project)@L139; history()@L144; save(project, parent)@L149; revision(identifier)@L157; work(identifier, project)@L164; start(identifier)@L184; get_run(identifier)@L199; report(identifier, format)@L207; compare_runs(baseline, candidate)@L228; ai(request)@L243
-# variables: store@L46; providers@L47; active@L48; semaphore@L49; ai_semaphore@L50; task@L56; app@L60; host@L82; origin@L83; permitted@L84; body@L93; chunk@L94; response@L99; callback@L116; result@L169; project@L189; job@L192; task@L193; result@L210; source@L211; new@L231; old@L231; new_revision@L232; old_revision@L232
-# parameters: data_directory@L36; token@L37; ui_directory@L38; config@L39; private_mode@L40; owned_providers@L41; app@L53; error@L75; request@L75; call_next@L80; request@L80; project@L139; parent@L149; project@L149; identifier@L157; identifier@L164; project@L164; identifier@L184; identifier@L199; format@L207; identifier@L207; baseline@L228; candidate@L228; request@L243
+# functions: create_app(data_directory, token, ui_directory, config, private_mode, owned_providers)@L35; lifespan(app)@L53; probe()@L56; private_invalid(request, error)@L90; guard(request, call_next)@L95; health()@L124; shutdown()@L129; status()@L138; capabilities()@L147; review(project)@L152; history()@L157; save(project, parent)@L162; revision(identifier)@L170; work(identifier, project)@L177; start(identifier)@L197; get_run(identifier)@L212; report(identifier, format)@L220; compare_runs(baseline, candidate)@L241; ai(request)@L256
+# variables: store@L46; providers@L47; active@L48; semaphore@L49; ai_semaphore@L50; checking@L62; owned@L66; task@L67; app@L71; host@L97; origin@L98; permitted@L99; body@L108; chunk@L109; response@L114; callback@L131; result@L182; project@L202; job@L205; task@L206; result@L223; source@L224; new@L244; old@L244; new_revision@L245; old_revision@L245
+# parameters: data_directory@L36; token@L37; ui_directory@L38; config@L39; private_mode@L40; owned_providers@L41; app@L53; error@L90; request@L90; call_next@L95; request@L95; project@L152; parent@L162; project@L162; identifier@L170; identifier@L177; project@L177; identifier@L197; identifier@L212; format@L220; identifier@L220; baseline@L241; candidate@L241; request@L256
 # </code-map>
 
 """Loopback-first authenticated API for web and native clients.
@@ -52,10 +52,21 @@ def create_app(
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         """Cancel broker-owned work on shutdown so containers are cleaned up."""
-        yield
-        for task in list(active):
-            task.cancel()
-        await asyncio.gather(*active, return_exceptions=True)
+
+        async def probe():
+            """Private readiness is cached, so a missing slow engine cannot hold the account request lock."""
+            while True:
+                app.state.worker_status = await execution.diagnostics(local_only=True)
+                await asyncio.sleep(30)
+
+        checking = asyncio.create_task(probe()) if private_mode else None
+        try:
+            yield
+        finally:
+            owned = list(active) + ([checking] if checking else [])
+            for task in owned:
+                task.cancel()
+            await asyncio.gather(*owned, return_exceptions=True)
 
     app = FastAPI(
         title="Code Flow Studio",
@@ -68,6 +79,10 @@ def create_app(
     app.state.store = store
     app.state.active = active
     app.state.providers = providers
+    app.state.worker_status = {
+        "ready": False,
+        "reason": "Checking local isolation; readiness refreshes every 30 seconds",
+    }
 
     if private_mode:
 
@@ -123,9 +138,7 @@ def create_app(
     async def status():
         """Show independent controller, worker and configured AI readiness."""
         return {
-            "worker": await execution.diagnostics(local_only=True)
-            if private_mode
-            else await execution.diagnostics(),
+            "worker": app.state.worker_status if private_mode else await execution.diagnostics(),
             "providers": providers.public(),
             "active_jobs": len(active),
         }

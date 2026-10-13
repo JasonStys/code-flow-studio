@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: client(tmp_path)@L32; register(client, alias)@L39; unlock(client, key)@L46; test_registration_private_headers_and_zero_secret_echo(client)@L52; test_request_origin_host_mutation_rejected(client, headers)@L83; test_real_revisions_encrypted_lock_reopen(client, project)@L93; test_two_accounts_and_same_account_new_session_need_key(client, project)@L115; test_recovery_logout_expiry_delete(client)@L147; test_expiry_and_human_idle(client)@L171; test_private_static_review_and_blocked_execution(client, project, monkeypatch)@L186; unavailable()@L189; test_provider_keys_private_and_consent_version(client, project)@L211; test_recovery_save_failure_preserves_code(client, monkeypatch)@L255; unavailable()@L264; test_archive_paths(name)@L278; test_archive_authentication_before_extract(tmp_path)@L284; test_single_instance_and_launcher_not_browser(client)@L300; test_warning_budget_is_bounded(project)@L307
-# variables: PASSWORD@L25; KEY@L26; SALT@L27; HEADERS@L28; app@L34; session@L35; response@L41; response@L48; response@L56; invalid@L64; db@L68; row@L69; result@L97; identity@L99; manager@L100; owner@L101; archive@L105; wrong@L108; identity@L119; original@L120; recovery@L149; body@L151; changed@L152; manager@L175; human@L176; db@L181; review@L196; identity@L198; job@L199; _@L200; result@L201; report@L206; config@L215; saved@L227; before@L237; repeated@L238; changed@L240; manager@L247; owner@L248; recovery@L259; original@L262; body@L269; root@L286; path@L289; damaged@L292; changed@L311; result@L313
-# parameters: tmp_path@L32; alias@L39; client@L39; client@L46; key@L46; client@L52; client@L83; headers@L83; client@L93; project@L93; client@L115; project@L115; client@L147; client@L171; client@L186; monkeypatch@L186; project@L186; kwargs@L189; client@L211; project@L211; client@L255; monkeypatch@L255; args@L264; name@L278; tmp_path@L284; client@L300; project@L307
+# functions: client(tmp_path)@L32; register(client, alias)@L39; unlock(client, key)@L46; test_registration_private_headers_and_zero_secret_echo(client)@L52; test_request_origin_host_mutation_rejected(client, headers)@L83; test_real_revisions_encrypted_lock_reopen(client, project)@L93; test_two_accounts_and_same_account_new_session_need_key(client, project)@L115; test_recovery_logout_expiry_delete(client)@L147; test_expiry_and_human_idle(client)@L171; test_private_static_review_and_blocked_execution(client, project, monkeypatch)@L186; unavailable()@L189; test_provider_keys_private_and_consent_version(client, project)@L211; test_recovery_save_failure_preserves_code(client, monkeypatch)@L255; unavailable()@L264; test_archive_paths(name)@L278; test_archive_authentication_before_extract(tmp_path)@L284; test_single_instance_and_launcher_not_browser(client)@L300; test_warning_budget_is_bounded(project)@L307; test_slow_worker_diagnostic_does_not_block_saving(client, project, monkeypatch)@L317; slow_probe()@L321
+# variables: PASSWORD@L25; KEY@L26; SALT@L27; HEADERS@L28; app@L34; session@L35; response@L41; response@L48; response@L56; invalid@L64; db@L68; row@L69; result@L97; identity@L99; manager@L100; owner@L101; archive@L105; wrong@L108; identity@L119; original@L120; recovery@L149; body@L151; changed@L152; manager@L175; human@L176; db@L181; review@L196; identity@L198; job@L199; _@L200; result@L201; report@L206; config@L215; saved@L227; before@L237; repeated@L238; changed@L240; manager@L247; owner@L248; recovery@L259; original@L262; body@L269; root@L286; path@L289; damaged@L292; changed@L311; result@L313; started@L328
+# parameters: tmp_path@L32; alias@L39; client@L39; client@L46; key@L46; client@L52; client@L83; headers@L83; client@L93; project@L93; client@L115; project@L115; client@L147; client@L171; client@L186; monkeypatch@L186; project@L186; kwargs@L189; client@L211; project@L211; client@L255; monkeypatch@L255; args@L264; name@L278; tmp_path@L284; client@L300; project@L307; client@L317; monkeypatch@L317; project@L317; kwargs@L321
 # </code-map>
 
 """Jason Stys: actual private-account, archive, provider, ownership and blocked-execution regression tests.
@@ -312,3 +312,20 @@ def test_warning_budget_is_bounded(project):
     changed.files[0].content = "eval('1')\n" * 2000
     result = inspect_source(changed)
     assert len(result["findings"]) == 1000 and result["findings_truncated"]
+
+
+def test_slow_worker_diagnostic_does_not_block_saving(client, project, monkeypatch):
+    """A genuinely pending probe never holds the account's source/history request lock."""
+    import asyncio
+
+    async def slow_probe(**kwargs):
+        await asyncio.sleep(60)
+        return {"ready": False, "reason": "fixture"}
+
+    monkeypatch.setattr(execution, "diagnostics", slow_probe)
+    register(client)
+    unlock(client)
+    started = time.monotonic()
+    assert client.get("/private/api/status").status_code == 200
+    assert client.post("/private/api/revisions", json=project.model_dump()).status_code == 200
+    assert time.monotonic() - started < 5

@@ -524,58 +524,61 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `ai_semaphore` | 50 |
 | function | `lifespan(app)` | 53 |
 | parameter | `app` | 53 |
-| variable | `task` | 56 |
-| variable | `app` | 60 |
-| function | `private_invalid(request, error)` | 75 |
-| parameter | `error` | 75 |
-| parameter | `request` | 75 |
-| function | `guard(request, call_next)` | 80 |
-| parameter | `call_next` | 80 |
-| parameter | `request` | 80 |
-| variable | `host` | 82 |
-| variable | `origin` | 83 |
-| variable | `permitted` | 84 |
-| variable | `body` | 93 |
-| variable | `chunk` | 94 |
-| variable | `response` | 99 |
-| function | `health()` | 109 |
-| function | `shutdown()` | 114 |
-| variable | `callback` | 116 |
-| function | `status()` | 123 |
-| function | `capabilities()` | 134 |
-| function | `review(project)` | 139 |
-| parameter | `project` | 139 |
-| function | `history()` | 144 |
-| function | `save(project, parent)` | 149 |
-| parameter | `parent` | 149 |
-| parameter | `project` | 149 |
-| function | `revision(identifier)` | 157 |
-| parameter | `identifier` | 157 |
-| function | `work(identifier, project)` | 164 |
-| parameter | `identifier` | 164 |
-| parameter | `project` | 164 |
-| variable | `result` | 169 |
-| function | `start(identifier)` | 184 |
-| parameter | `identifier` | 184 |
-| variable | `project` | 189 |
-| variable | `job` | 192 |
-| variable | `task` | 193 |
-| function | `get_run(identifier)` | 199 |
-| parameter | `identifier` | 199 |
-| function | `report(identifier, format)` | 207 |
-| parameter | `format` | 207 |
-| parameter | `identifier` | 207 |
-| variable | `result` | 210 |
-| variable | `source` | 211 |
-| function | `compare_runs(baseline, candidate)` | 228 |
-| parameter | `baseline` | 228 |
-| parameter | `candidate` | 228 |
-| variable | `new` | 231 |
-| variable | `old` | 231 |
-| variable | `new_revision` | 232 |
-| variable | `old_revision` | 232 |
-| function | `ai(request)` | 243 |
-| parameter | `request` | 243 |
+| function | `probe()` | 56 |
+| variable | `checking` | 62 |
+| variable | `owned` | 66 |
+| variable | `task` | 67 |
+| variable | `app` | 71 |
+| function | `private_invalid(request, error)` | 90 |
+| parameter | `error` | 90 |
+| parameter | `request` | 90 |
+| function | `guard(request, call_next)` | 95 |
+| parameter | `call_next` | 95 |
+| parameter | `request` | 95 |
+| variable | `host` | 97 |
+| variable | `origin` | 98 |
+| variable | `permitted` | 99 |
+| variable | `body` | 108 |
+| variable | `chunk` | 109 |
+| variable | `response` | 114 |
+| function | `health()` | 124 |
+| function | `shutdown()` | 129 |
+| variable | `callback` | 131 |
+| function | `status()` | 138 |
+| function | `capabilities()` | 147 |
+| function | `review(project)` | 152 |
+| parameter | `project` | 152 |
+| function | `history()` | 157 |
+| function | `save(project, parent)` | 162 |
+| parameter | `parent` | 162 |
+| parameter | `project` | 162 |
+| function | `revision(identifier)` | 170 |
+| parameter | `identifier` | 170 |
+| function | `work(identifier, project)` | 177 |
+| parameter | `identifier` | 177 |
+| parameter | `project` | 177 |
+| variable | `result` | 182 |
+| function | `start(identifier)` | 197 |
+| parameter | `identifier` | 197 |
+| variable | `project` | 202 |
+| variable | `job` | 205 |
+| variable | `task` | 206 |
+| function | `get_run(identifier)` | 212 |
+| parameter | `identifier` | 212 |
+| function | `report(identifier, format)` | 220 |
+| parameter | `format` | 220 |
+| parameter | `identifier` | 220 |
+| variable | `result` | 223 |
+| variable | `source` | 224 |
+| function | `compare_runs(baseline, candidate)` | 241 |
+| parameter | `baseline` | 241 |
+| parameter | `candidate` | 241 |
+| variable | `new` | 244 |
+| variable | `old` | 244 |
+| variable | `new_revision` | 245 |
+| variable | `old_revision` | 245 |
+| function | `ai(request)` | 256 |
+| parameter | `request` | 256 |
 
 ## studio/catalog.py
 
@@ -1547,6 +1550,13 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `project` | 307 |
 | variable | `changed` | 311 |
 | variable | `result` | 313 |
+| function | `test_slow_worker_diagnostic_does_not_block_saving(client, project, monkeypatch)` | 317 |
+| parameter | `client` | 317 |
+| parameter | `monkeypatch` | 317 |
+| parameter | `project` | 317 |
+| function | `slow_probe()` | 321 |
+| parameter | `kwargs` | 321 |
+| variable | `started` | 328 |
 
 ## tests/test_providers.py
 
@@ -1770,49 +1780,49 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 |---|---|---|
 | variable | `languages` | 24 |
 | variable | `cloneDemo` | 38 |
-| function | `App()` | 40 |
-| variable | `[project, setProject]` | 42 |
-| variable | `[revision, setRevision]` | 43 |
-| variable | `[historyRows, setHistory]` | 44 |
-| variable | `[run, setRun]` | 45 |
-| variable | `[status, setStatus]` | 46 |
-| variable | `[capabilities, setCapabilities]` | 47 |
-| variable | `[tab, setTab]` | 48 |
-| variable | `[fileName, setFileName]` | 49 |
-| variable | `[error, setError]` | 50 |
-| variable | `[busy, setBusy]` | 51 |
-| variable | `[prompt, setPrompt]` | 52 |
-| variable | `[consent, setConsent]` | 53 |
-| variable | `[live, setLive]` | 54 |
-| variable | `[proposal, setProposal]` | 55 |
-| variable | `[caseText, setCaseText]` | 56 |
-| variable | `[comparison, setComparison]` | 59 |
-| variable | `[baseline, setBaseline]` | 60 |
-| variable | `[review, setReview]` | 61 |
-| variable | `generation` | 62 |
-| variable | `selected` | 63 |
-| function | `refresh()` | 66 |
-| variable | `changed` | 76 |
-| variable | `timer` | 88 |
-| variable | `requestGeneration` | 103 |
-| variable | `result` | 106 |
-| variable | `timer` | 122 |
-| function | `saveAndRun(execute = true)` | 131 |
-| variable | `cases` | 136 |
-| variable | `payload` | 137 |
-| variable | `saved` | 138 |
-| variable | `job` | 150 |
-| function | `staticReview()` | 169 |
-| function | `openRevision(id: string)` | 187 |
-| variable | `saved` | 190 |
-| function | `upload(files: FileList / null)` | 202 |
-| variable | `additions` | 206 |
-| variable | `bytes` | 210 |
-| function | `acceptProposal()` | 243 |
-| variable | `updates` | 246 |
-| variable | `files` | 247 |
-| variable | `checks` | 266 |
-| variable | `metrics` | 267 |
+| variable | `[project, setProject]` | 46 |
+| variable | `[revision, setRevision]` | 47 |
+| variable | `[historyRows, setHistory]` | 48 |
+| variable | `[run, setRun]` | 49 |
+| variable | `[status, setStatus]` | 50 |
+| variable | `[capabilities, setCapabilities]` | 51 |
+| variable | `[tab, setTab]` | 52 |
+| variable | `[fileName, setFileName]` | 53 |
+| variable | `[error, setError]` | 54 |
+| variable | `[busy, setBusy]` | 55 |
+| variable | `[prompt, setPrompt]` | 56 |
+| variable | `[consent, setConsent]` | 57 |
+| variable | `[live, setLive]` | 58 |
+| variable | `[proposal, setProposal]` | 59 |
+| variable | `[caseText, setCaseText]` | 60 |
+| variable | `[comparison, setComparison]` | 63 |
+| variable | `[baseline, setBaseline]` | 64 |
+| variable | `[review, setReview]` | 65 |
+| variable | `generation` | 66 |
+| variable | `selected` | 67 |
+| function | `refresh()` | 70 |
+| variable | `changed` | 80 |
+| variable | `timer` | 92 |
+| variable | `timer` | 101 |
+| variable | `requestGeneration` | 116 |
+| variable | `result` | 119 |
+| variable | `timer` | 135 |
+| function | `saveAndRun(execute = true)` | 144 |
+| variable | `cases` | 149 |
+| variable | `payload` | 150 |
+| variable | `saved` | 151 |
+| variable | `job` | 163 |
+| function | `staticReview()` | 182 |
+| function | `openRevision(id: string)` | 200 |
+| variable | `saved` | 203 |
+| function | `upload(files: FileList / null)` | 215 |
+| variable | `additions` | 219 |
+| variable | `bytes` | 223 |
+| function | `acceptProposal()` | 256 |
+| variable | `updates` | 259 |
+| variable | `files` | 260 |
+| variable | `checks` | 279 |
+| variable | `metrics` | 280 |
 
 ## ui/api.ts
 

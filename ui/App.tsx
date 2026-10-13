@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: App()@L40; refresh()@L66; saveAndRun(execute = true)@L131; staticReview()@L169; openRevision(id: string)@L187; upload(files: FileList | null)@L202; acceptProposal()@L243
- * variables: languages@L24; cloneDemo@L38; [project, setProject]@L42; [revision, setRevision]@L43; [historyRows, setHistory]@L44; [run, setRun]@L45; [status, setStatus]@L46; [capabilities, setCapabilities]@L47; [tab, setTab]@L48; [fileName, setFileName]@L49; [error, setError]@L50; [busy, setBusy]@L51; [prompt, setPrompt]@L52; [consent, setConsent]@L53; [live, setLive]@L54; [proposal, setProposal]@L55; [caseText, setCaseText]@L56; [comparison, setComparison]@L59; [baseline, setBaseline]@L60; [review, setReview]@L61; generation@L62; selected@L63; changed@L76; timer@L88; requestGeneration@L103; result@L106; timer@L122; cases@L136; payload@L137; saved@L138; job@L150; saved@L190; additions@L206; bytes@L210; updates@L246; files@L247; checks@L266; metrics@L267
+ * functions: refresh()@L70; saveAndRun(execute = true)@L144; staticReview()@L182; openRevision(id: string)@L200; upload(files: FileList | null)@L215; acceptProposal()@L256
+ * variables: languages@L24; cloneDemo@L38; [project, setProject]@L46; [revision, setRevision]@L47; [historyRows, setHistory]@L48; [run, setRun]@L49; [status, setStatus]@L50; [capabilities, setCapabilities]@L51; [tab, setTab]@L52; [fileName, setFileName]@L53; [error, setError]@L54; [busy, setBusy]@L55; [prompt, setPrompt]@L56; [consent, setConsent]@L57; [live, setLive]@L58; [proposal, setProposal]@L59; [caseText, setCaseText]@L60; [comparison, setComparison]@L63; [baseline, setBaseline]@L64; [review, setReview]@L65; generation@L66; selected@L67; changed@L80; timer@L92; timer@L101; requestGeneration@L116; result@L119; timer@L135; cases@L149; payload@L150; saved@L151; job@L163; saved@L203; additions@L219; bytes@L223; updates@L259; files@L260; checks@L279; metrics@L280
  * </code-map> */
 
 /** Evidence-first editor, runner and history UI. Symbols/variables: docs/code-index.md.
@@ -37,7 +37,11 @@ const languages = [
 ];
 const cloneDemo = () => structuredClone(demo);
 
-export default function App() {
+export default function App({
+  privateAccounts = false,
+}: {
+  privateAccounts?: boolean;
+}) {
   /** Coordinate editor state, explicit source snapshots, bounded polling and optional AI suggestions. */
   const [project, setProject] = useState<Project>(cloneDemo);
   const [revision, setRevision] = useState<string | null>(null);
@@ -83,6 +87,15 @@ export default function App() {
     window.addEventListener("cfs-settings-changed", changed);
     return () => window.removeEventListener("cfs-settings-changed", changed);
   }, []);
+  useEffect(() => {
+    if (!privateAccounts) return;
+    const timer = setInterval(() => {
+      void api("status")
+        .then(setStatus)
+        .catch((reason) => setError(reason.message));
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [privateAccounts]);
   useEffect(() => {
     if (!run || !["queued", "running"].includes(run.status)) return;
     const timer = setInterval(

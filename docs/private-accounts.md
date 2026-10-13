@@ -44,6 +44,8 @@ Review destinations, then opt in to sending project text. Requirements/cases/har
 
 Compiler jobs require a local Unix/named-pipe engine and the reviewed `code-flow-worker:0.1.0` image. Remote Docker contexts are blocked in account mode; targets get no network, broad host mounts, account database, provider settings or Docker socket. No automatic Docker installation/repair and no direct-host execution fallback exist. Training remains a separate optional, rights-checked ML workflow, not bundled in the end-user runtime.
 
+Private readiness is refreshed in the background every thirty seconds, without blocking source saving. The UI polls that cached badge every five seconds; it never renews the human-idle clock. Each actual execution rechecks and pins the engine, so a stale ready badge cannot authorize a host fallback.
+
 ## Source operation and limits
 
 Python 3.12+ and Node 24 are required only for source development:

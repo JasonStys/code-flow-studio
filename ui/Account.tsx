@@ -730,7 +730,7 @@ export default function Account() {
           </details>
         </section>
       )}
-      <App />
+      <App privateAccounts />
     </>
   );
 }
