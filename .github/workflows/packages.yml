@@ -1,6 +1,20 @@
 name: Desktop packages
 on:
   push:
+    paths:
+      - 'studio/**'
+      - 'scripts/**'
+      - 'ui/**'
+      - 'desktop/**'
+      - 'runner/**'
+      - 'training/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+      - 'docs/licenses/**'
+      - 'package*.json'
+      - 'pyproject.toml'
+      - '*config*'
+      - 'LICENSE'
   workflow_dispatch:
 permissions:
   contents: read

@@ -63,4 +63,6 @@ The printed URL is nonsecret. Ctrl+C requests sealing. Legacy `python -m studio.
 
 Limits: 20 flat files/1 MiB project; 192 KiB browser file import; 64 cases; 4 MiB HTTP request; 500 revisions/128 MiB history; 512 MiB/2,000 archived workspace files; eight providers; one unlocked engine; bounded worker output/deadlines/resources. Unexpected/unsupported formats fail explicitly. Run hostile unknown code in a dedicated disposable VM with independent review; containers are not a certified hostile multi-tenant boundary.
 
+The 128 MiB history threshold stops new revisions and run queues. A 160 MiB recovery reserve keeps existing history readable after a final write/in-flight result crosses the soft threshold. Reads, backups, lock/reopen and existing report exports remain available; no history is automatically erased to satisfy a quota.
+
 Help is available inside the app before and after login. Do not send credentials/private source with support requests. Only creator links selected by the user open externally; unsolicited popups/navigation/permissions and renderer external network requests are blocked. CSP is defense in depth, not a browser-extension ad blocker or absolute immunity to XSS.

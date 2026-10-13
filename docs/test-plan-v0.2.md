@@ -14,3 +14,5 @@ Risk-based testing prioritizes confidentiality, data loss and untrusted executio
 | Dependency/release problems | Python/npm audits, Ruff, checked source maps, build, retained >=80% coverage gate, license bundles, exact-source CI gate and checksummed Release assets. |
 
 Known exclusions: physical mobile devices, notarization/signing, independent penetration testing, power-cut/fault campaigns, OS compromise, live paid AI quality/cost evaluation, exhaustive semantic equivalence and certified hostile-kernel isolation. Missing Docker locally is a blocked execution result, not a passing compiler test.
+
+Native packages are rebuilt for source, test, build configuration or redistribution-license changes; documentation-only updates run Validate without rebuilding unchanged installers. Manual native release gates require the exact source commit's successful Validate and Desktop packages runs. History-capacity regression checks ensure the write stop cannot lock out existing data or start unbounded repeat runs.

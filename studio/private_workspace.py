@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: InstanceLock@L47; Workspaces@L75
-# functions: atomic_json(path, value)@L34; __init__(self, path)@L50; close(self)@L70; __init__(self, root)@L78; archive(self, owner)@L113; status(self, owner, session)@L121; providers(self)@L133; unlock(self, owner, session, encoded, salt)@L147; require(self, owner, session)@L211; save(self, force)@L217; remove_active(self, owner)@L232; lock(self, owner)@L244; delete(self, owner)@L262; close(self)@L270
-# variables: descriptor@L36; name@L36; stream@L38; allowed@L84; p@L93; c@L116; config@L123; path@L135; data@L136; data@L140; k@L142; p@L142; v@L142; p@L145; key@L151; current@L152; config@L153; proof@L156; nonce@L167; config@L168; keys@L197; settings@L197; current@L225
-# parameters: path@L34; value@L34; path@L50; self@L50; self@L70; root@L78; self@L78; owner@L113; self@L113; owner@L121; self@L121; session@L121; self@L133; encoded@L147; owner@L147; salt@L147; self@L147; session@L147; owner@L211; self@L211; session@L211; force@L217; self@L217; owner@L232; self@L232; owner@L244; self@L244; owner@L262; self@L262; self@L270
+# classes: InstanceLock@L50; Workspaces@L78
+# functions: atomic_json(path, value)@L37; __init__(self, path)@L53; close(self)@L73; __init__(self, root)@L81; archive(self, owner)@L116; status(self, owner, session)@L124; providers(self)@L136; unlock(self, owner, session, encoded, salt)@L150; require(self, owner, session)@L214; save(self, force)@L220; remove_active(self, owner)@L235; lock(self, owner)@L247; delete(self, owner)@L265; close(self)@L273
+# variables: HISTORY_RECOVERY_BYTES@L34; descriptor@L39; name@L39; stream@L41; allowed@L87; p@L96; c@L119; config@L126; path@L138; data@L139; data@L143; k@L145; p@L145; v@L145; p@L148; key@L154; current@L155; config@L156; proof@L159; nonce@L170; config@L171; keys@L200; settings@L200; current@L228
+# parameters: path@L37; value@L37; path@L53; self@L53; self@L73; root@L81; self@L81; owner@L116; self@L116; owner@L124; self@L124; session@L124; self@L136; encoded@L150; owner@L150; salt@L150; self@L150; session@L150; owner@L214; self@L214; session@L214; force@L220; self@L220; owner@L235; self@L235; owner@L247; self@L247; owner@L265; self@L265; self@L273
 # </code-map>
 
 """Jason Stys: exclusive account-scoped controller, encrypted history/providers, and recoverable shutdown.
@@ -29,6 +29,9 @@ from studio.api import create_app
 from studio.permissions import protect_directory
 from studio.providers import Providers
 from studio.vault import AAD, decrypt_workspace, encrypt_workspace, members, signature
+
+# Read recovery reserve exceeds the write stop, so a last in-flight job cannot lock out exports.
+HISTORY_RECOVERY_BYTES = 160 * 1024**2
 
 
 def atomic_json(path: Path, value: dict):
@@ -192,8 +195,8 @@ class Workspaces:
         members(self.active)
         if (self.active / "history.sqlite").exists() and (
             self.active / "history.sqlite"
-        ).stat().st_size > 128 * 1024**2:
-            raise ValueError("History exceeds 128 MiB; preserve this archive and export data")
+        ).stat().st_size > HISTORY_RECOVERY_BYTES:
+            raise ValueError("History exceeds the recovery reserve; preserve this archive and seek support")
         settings, keys = self.providers()
         self.app = create_app(
             self.active,

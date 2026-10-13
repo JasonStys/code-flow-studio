@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Boundary@L39; Closed@L139; Credentials@L145; Recovery@L152; Unlock@L158; Activity@L165; Delete@L171; Provider@L178; Settings@L191; Proxy@L225
-# functions: __init__(self, app, manager, port)@L42; __call__(self, scope, receive, send)@L48; guarded(message)@L55; deny(status, detail)@L76; replay()@L128; coherent(self)@L200; public_settings(manager)@L212; __init__(self, manager)@L228; __call__(self, scope, receive, send)@L232; create_private_app(root, port, ui, launcher_token, nonce)@L278; lifespan(app)@L286; idle()@L289; invalid(request, error)@L325; bad_value(request, error)@L330; bad_disk(request, error)@L335; identify(request)@L341; signed(owner, data)@L345; auth_limit(alias)@L358; health()@L366; shutdown(request)@L377; register(data)@L390; login(data)@L400; reset(data)@L409; account(request)@L426; unlock(request, data)@L436; activity(request, data)@L447; save(request)@L455; lock(request)@L462; logout(request)@L470; delete(request, data)@L482; backup(request)@L498; get_providers(request)@L509; providers(request, data)@L516
-# variables: CSP@L36; raw@L52; headers@L53; k@L53; v@L53; k@L60; v@L60; _@L82; k@L82; cookies@L100; token@L105; account@L106; chunks@L114; length@L114; message@L116; data@L119; length@L120; delivered@L126; delivered@L132; model_config@L142; alias@L148; password@L149; recovery@L155; key@L161; salt@L162; idle_seconds@L168; password@L174; confirm@L175; id@L181; kind@L182; url@L183; model@L184; key@L185; retain_key@L186; token_parameter@L187; temperature@L188; providers@L194; routes@L195; ids@L202; p@L202; value@L203; p@L206; keys@L214; settings@L214; data@L215; p@L217; manager@L236; app@L239; path@L244; db@L250; count@L251; headers@L258; forwarded@L267; k@L268; v@L268; manager@L282; task@L303; app@L313; response@L347; callback@L383; owner@L394; recovery@L394; owner@L403; db@L413; row@L414; fresh@L420; owner@L428; session@L428; owner@L438; session@L438; owner@L465; session@L465; owner@L473; session@L473; response@L477; _@L485; owner@L485; db@L486; row@L487; response@L493; _@L500; owner@L500; path@L501; keys@L520; old@L520; rows@L521; provider@L522; row@L523; p@L525; previous@L525; config@L530; router@L531; k@L533; p@L533; v@L533; p@L536
-# parameters: app@L42; manager@L42; port@L42; self@L42; receive@L48; scope@L48; self@L48; send@L48; message@L55; detail@L76; status@L76; self@L200; manager@L212; manager@L228; self@L228; receive@L232; scope@L232; self@L232; send@L232; launcher_token@L279; nonce@L279; port@L279; root@L279; ui@L279; app@L286; error@L325; request@L325; error@L330; request@L330; error@L335; request@L335; request@L341; data@L345; owner@L345; alias@L358; request@L377; data@L390; data@L400; data@L409; request@L426; data@L436; request@L436; data@L447; request@L447; request@L455; request@L462; request@L470; data@L482; request@L482; request@L498; request@L509; data@L516; request@L516
+# classes: Boundary@L40; Closed@L140; Credentials@L146; Recovery@L153; Unlock@L159; Activity@L166; Delete@L172; Provider@L179; Settings@L192; Proxy@L226
+# functions: __init__(self, app, manager, port)@L43; __call__(self, scope, receive, send)@L49; guarded(message)@L56; deny(status, detail)@L77; replay()@L129; coherent(self)@L201; public_settings(manager)@L213; __init__(self, manager)@L229; __call__(self, scope, receive, send)@L233; create_private_app(root, port, ui, launcher_token, nonce)@L284; lifespan(app)@L292; idle()@L295; invalid(request, error)@L331; bad_value(request, error)@L336; bad_disk(request, error)@L341; identify(request)@L347; signed(owner, data)@L351; auth_limit(alias)@L364; health()@L372; shutdown(request)@L383; register(data)@L396; login(data)@L406; reset(data)@L415; account(request)@L432; unlock(request, data)@L442; activity(request, data)@L453; save(request)@L461; lock(request)@L468; logout(request)@L476; delete(request, data)@L488; backup(request)@L504; get_providers(request)@L515; providers(request, data)@L522
+# variables: CSP@L36; HISTORY_STOP_BYTES@L37; raw@L53; headers@L54; k@L54; v@L54; k@L61; v@L61; _@L83; k@L83; cookies@L101; token@L106; account@L107; chunks@L115; length@L115; message@L117; data@L120; length@L121; delivered@L127; delivered@L133; model_config@L143; alias@L149; password@L150; recovery@L156; key@L162; salt@L163; idle_seconds@L169; password@L175; confirm@L176; id@L182; kind@L183; url@L184; model@L185; key@L186; retain_key@L187; token_parameter@L188; temperature@L189; providers@L195; routes@L196; ids@L203; p@L203; value@L204; p@L207; keys@L215; settings@L215; data@L216; p@L218; manager@L237; app@L240; path@L245; db@L251; count@L252; headers@L264; forwarded@L273; k@L274; v@L274; manager@L288; task@L309; app@L319; response@L353; callback@L389; owner@L400; recovery@L400; owner@L409; db@L419; row@L420; fresh@L426; owner@L434; session@L434; owner@L444; session@L444; owner@L471; session@L471; owner@L479; session@L479; response@L483; _@L491; owner@L491; db@L492; row@L493; response@L499; _@L506; owner@L506; path@L507; keys@L526; old@L526; rows@L527; provider@L528; row@L529; p@L531; previous@L531; config@L536; router@L537; k@L539; p@L539; v@L539; p@L542
+# parameters: app@L43; manager@L43; port@L43; self@L43; receive@L49; scope@L49; self@L49; send@L49; message@L56; detail@L77; status@L77; self@L201; manager@L213; manager@L229; self@L229; receive@L233; scope@L233; self@L233; send@L233; launcher_token@L285; nonce@L285; port@L285; root@L285; ui@L285; app@L292; error@L331; request@L331; error@L336; request@L336; error@L341; request@L341; request@L347; data@L351; owner@L351; alias@L364; request@L383; data@L396; data@L406; data@L415; request@L432; data@L442; request@L442; data@L453; request@L453; request@L461; request@L468; request@L476; data@L488; request@L488; request@L504; request@L515; data@L522; request@L522
 # </code-map>
 
 """Jason Stys: loopback-only real accounts, session-proven vaults, private AI settings and scoped controller.
@@ -34,6 +34,7 @@ from studio.private_workspace import Workspaces, atomic_json
 from studio.providers import Providers
 
 CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; img-src 'self' data: blob:; connect-src 'self'; font-src 'self' data:; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self'"
+HISTORY_STOP_BYTES = 128 * 1024**2
 
 
 class Boundary:
@@ -249,10 +250,15 @@ class Proxy:
             if scope["method"] == "POST" and path == "/revisions":
                 with app.state.store.connect() as db:
                     count = db.execute("SELECT count(*) FROM revisions").fetchone()[0]
-                if count >= 500 or app.state.store.path.stat().st_size >= 128 * 1024**2:
+                if count >= 500 or app.state.store.path.stat().st_size >= HISTORY_STOP_BYTES:
                     return await JSONResponse(
                         {"detail": "History capacity reached; export/backup before creating a new account"},
                         409,
+                    )(scope, receive, send)
+            if scope["method"] == "POST" and path.startswith("/revisions/") and path.endswith("/run"):
+                if app.state.store.path.stat().st_size >= HISTORY_STOP_BYTES:
+                    return await JSONResponse(
+                        {"detail": "History capacity reached; reads and exports remain available"}, 409
                     )(scope, receive, send)
             if path == "/ai":
                 headers = dict(scope["headers"])
