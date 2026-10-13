@@ -1,5 +1,7 @@
 # Architecture and decisions
 
+Current 0.2 account wrapper and its active-plaintext/local trust decision are documented in [the ADR](adr-private-local.md); the controller/worker decisions below remain applicable. No public backend is hosted.
+
 Status: development preview. This implementation is independently written, not a redistribution of the private group capstone.
 
 ```text

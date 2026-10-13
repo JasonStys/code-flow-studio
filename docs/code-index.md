@@ -305,14 +305,16 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `main()` | 16 |
-| variable | `root` | 18 |
-| variable | `platform` | 19 |
-| variable | `folder` | 20 |
-| variable | `base` | 29 |
-| variable | `path` | 31 |
-| variable | `stream` | 33 |
-| variable | `digest` | 34 |
+| function | `write_release_checksum(path)` | 17 |
+| parameter | `path` | 17 |
+| variable | `stream` | 19 |
+| variable | `digest` | 20 |
+| function | `main()` | 26 |
+| variable | `root` | 28 |
+| variable | `platform` | 29 |
+| variable | `folder` | 30 |
+| variable | `base` | 39 |
+| variable | `path` | 41 |
 
 ## scripts/training_checks.py
 
@@ -1602,6 +1604,16 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `body` | 130 |
 | variable | `real` | 148 |
 | parameter | `kwargs` | 150 |
+
+## tests/test_release.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_checksum_download_filename(tmp_path, name)` | 27 |
+| parameter | `name` | 27 |
+| parameter | `tmp_path` | 27 |
+| variable | `path` | 29 |
+| variable | `expected` | 32 |
 
 ## tests/web.spec.ts
 

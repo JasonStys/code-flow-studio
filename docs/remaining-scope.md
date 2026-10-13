@@ -1,5 +1,7 @@
 # Implemented scope and remaining integrations
 
+Version 0.2 adds real local accounts, encrypted locked history/providers, per-session key proof, recovery, help and public downloadable releases. [Current measured results](validation-v0.2.md) supersede the older preview evidence. Public repository visibility is approved; paid/public account hosting remains out of scope. Live model quality, signing and universal integrations remain unverified.
+
 This is a usable development preview, not a claim that the entire universal-language/universal-testing vision is complete. The original workflow informed the design; private group source was not redistributed.
 
 | Requested capability | Current implementation | Remaining acceptance work |

@@ -9,7 +9,7 @@
 
 """Jason Stys: streaming authenticated archives for locked, local source-code workspaces.
 
-Keys exist only in the trusted local service while unlocked. The ML workspace is
+Keys exist only in the trusted local service while unlocked. The code workspace is
 plaintext during computation; these archives do not protect a compromised OS.
 """
 
