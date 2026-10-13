@@ -1,5 +1,7 @@
 # Validation evidence — development preview
 
+Historical 0.1 evidence, not current account-mode certification. See [0.2 results](validation-v0.2.md) for this release.
+
 Observed on 2026-09-29 (America/Los_Angeles). Tested source commit: `9829a50278e5fef42565553174fae41858df7a23`. Documentation-only evidence updates do not imply additional functional capabilities.
 
 ## Results

@@ -7,7 +7,10 @@
 Symbol locations: docs/code-index.md. Calls the same audited CLI as source mode.
 """
 
-from studio.cli import main
+from multiprocessing import freeze_support
+
+from studio.private_cli import main
 
 if __name__ == "__main__":
+    freeze_support()
     main()

@@ -2,7 +2,9 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Development preview.** A recognized language or test category is not a claim of universal support. Read [validation evidence](docs/validation.md), [language contracts](docs/languages.md), and [security boundaries](docs/security.md) before executing code. This is not a production multi-tenant sandbox or an autonomous correctness oracle.
+**Version 0.2: real private local accounts.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+
+Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-v0.2.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
 ## The development loop
 
@@ -16,13 +18,14 @@ An independently written successor to a group AI-in-SDLC capstone: a local-first
 
 | Feature | Implemented contract |
 |---|---|
+| Private accounts | Real alias/password registration, hashed sessions and one-use login recovery. Independent browser-derived vault key, authenticated AES-256-GCM locked source/history/provider archives and per-session unlock proof. No developer plaintext read API. Trusted local service and OS can access active plaintext; not browser-only E2EE. |
 | Desktop application | Electron shell and bundled Python service; one-click Windows installer plus OS-specific Linux/macOS builds. No IntelliJ or separately installed Python required for the UI. Unsigned development packages. |
 | Web application | Same responsive editor/API served on loopback. Narrow-screen browser support; not a native Android/iOS installer or public hosted service. |
 | Polyglot execution | Fixed CLI adapters for Python, JavaScript, TypeScript, C/C++, Java, C#, Rust, PHP, Bash, SQLite SQL and GNU x86-64 assembly. Actual toolchains live inside the worker image. |
 | Testing | Approved CLI oracles and reviewed pytest harnesses, including subprocess harnesses for non-Python targets. 48-category applicability catalog; human, hardware, cloud/load and specialized tool checks need independent integrations. |
 | Coverage/mutation | Python entry line/branch coverage; up to eight operator mutants. No fabricated condition/MC/DC, function, edge or universal mutation scores. |
 | Fuzzing | Seeded black-box generation, mutation, dictionary, boundaries and CSV/SQL grammar; instrumented libFuzzer/AFL++ for reviewed C/C++ harnesses and Atheris for Python harnesses. Differential/metamorphic/stateful relations require custom oracles. |
-| AI routing | OpenAI-compatible, Anthropic and Ollama protocols; per-task administrator routing and consent; no credentials in renderer, history exports or execution containers. Protocol tests use mocks, not a claim of live model quality. |
+| AI routing | Account-owned OpenAI-compatible, Anthropic and Ollama endpoints/keys, four task routes and destination-version-bound consent. Keys stay server-side after explicit settings submission, outside histories/exports/workers. Protocol tests use mocks, not a claim of live model quality. |
 | Metrics/ranking | Repeated process wall times, peak child RSS, source bytes and transparent long-line proxy. Passing independent cases is mandatory. No syntax-based Big-O claims or automatic “best” model claims. |
 | Training | Rights-checked, project-disjoint JSONL preparation, actual small causal-model creation or approved local-model fine-tuning, safe-tensor output and authenticated local inference API. Tiny synthetic smoke training is not a useful general coding model. |
 | CI | SHA-pinned, read-only Actions validate controller/browser behavior, real worker scenarios, training smoke and native packages. Push analysis retains generated tests/candidate evidence when a provider is explicitly configured; never auto-commits model changes. |
@@ -31,7 +34,7 @@ Binary formats can be retained as fixtures. There is no promise to understand ev
 
 ## Run and install
 
-For end users, use an OS-specific installer produced by the **Desktop packages** workflow. The UI runtime is bundled. Compiler jobs still require an isolated Docker engine and the trusted worker image; the app reports blocked execution if these are missing. No host-execution fallback exists.
+For end users, use the checksummed OS-specific packages in Releases. The UI runtime is bundled. Open the app's **Code Flow → Open local website** menu for browser use; no login token appears in the URL. Compiler jobs require an isolated local Unix/named-pipe Docker engine and the trusted worker image. Missing isolation is blocked, never passed; there is no host-execution fallback. Save/edit/static review/history/help remain usable without Docker.
 
 Source-development instructions, provider setup, first-run diagnostics and packaging are in [setup](docs/setup.md). All documentation is indexed in [docs](docs/README.md). Original private capstone code, team files, API credentials and vendor trees are not distributed here.
 
@@ -39,6 +42,11 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 
 | Location | Responsibility |
 |---|---|
+| `studio/accounts.py`, `studio/permissions.py` | scrypt logins, session/recovery digests, bounded attempts and private per-OS data permissions. |
+| `studio/private_api.py` | Account-only HTTP/CSRF boundary, own provider settings, per-session key proof, backup/recovery/deletion and scoped controller proxy. |
+| `studio/private_workspace.py`, `studio/vault.py` | Single-instance ownership, account-specific engine lifecycle, authenticated streaming encryption, SQLite online snapshots and safe restoration. |
+| `studio/private_cli.py` | Token-free loopback account service, dedicated data root and exact-parent graceful shutdown monitor. |
+| `ui/Account.tsx` | Sign-in/unlock/recovery, contextual help, encrypted backup, private AI configuration and creator contact. |
 | `studio/models.py` | Validated flat-file, project, case, preference and AI proposal schemas; size/path limits. |
 | `studio/api.py` | Authenticated loopback API, bounded jobs, history, reports, comparisons and AI tasks. |
 | `studio/store.py` | SQLite transactions, append-only revisions, immutable baseline oracles and interrupted-job recovery. |
@@ -59,10 +67,14 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `examples/training.json`, `examples/training.jsonl` | Tiny rights-owned training smoke parameters and data; no quality claims. |
 | `scripts/frozen_entry.py` | Frozen-service entry point for installers. |
 | `scripts/worker_checks.py` | Actual isolated compiler/fuzz/security-boundary integration scenarios. |
+| `scripts/private_worker_checks.py` | Real twelve-adapter execution through authenticated account API and encrypted-history reopen. |
+| `scripts/license_bundle.py`, `scripts/release_archive.py` | Generated third-party notices, portable app packages and SHA-256 checksums; never package user accounts. |
 | `scripts/push_analysis.py` | Push generation/test/candidate workflow without automatic source promotion. |
 | `tests/` | Controller/security/history/provider/metric tests, browser flows and native launch smoke. |
 | `.github/workflows/` | Validation, real isolated workers, training and native OS-package workflows. |
 | `pyproject.toml`, `package.json`, lockfile, TypeScript/Vite/Playwright configs | Dependency and reproducible build/test definitions. |
 
 Every source header points to the checked symbol/variable line map. [Architecture](docs/architecture.md) explains trade-offs; [testing](docs/testing.md) separates test claims from evidence.
+
+Historical 0.1 bearer-token CLI mode remains explicitly opt-in for existing automation; it is not account mode. No automatic import of legacy plaintext projects or global AI keys occurs.
 

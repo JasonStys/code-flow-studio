@@ -1,5 +1,7 @@
 # Setup and operation
 
+**Current installed/account mode:** follow [private-account setup](private-accounts.md) and use checksummed Releases. Source website command is `python -m studio.private_cli`; it prints a token-free loopback URL. The older token/config instructions below are only for explicit legacy developer/CI mode. No automatic legacy-data migration is performed.
+
 ## Packaged users
 
 Windows: launch the single `Code Flow Studio Setup … .exe` artifact. It installs for the current user, retains history on uninstall, and bundles Electron, editor assets and the frozen service. No IntelliJ or separately installed Python is required. Development installers are unsigned and may prompt OS warnings; do not describe them as notarized/signed releases.

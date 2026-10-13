@@ -19,6 +19,100 @@
 body {
   margin: 0;
 }
+/* Account forms, help and controls share the editor's responsive theme, with no remote assets. */
+.account-card {
+  max-width: 720px;
+  margin: 5vh auto;
+  padding: 36px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.account-card label,
+.account-settings label {
+  margin: 16px 0;
+}
+.account-card input:not([type="checkbox"]),
+.account-settings input:not([type="checkbox"]) {
+  width: 100%;
+}
+.account-card button,
+.account-toolbar button,
+.account-settings button {
+  padding: 10px 14px;
+  border-radius: 7px;
+  background: #157f81;
+  color: white;
+  margin: 4px;
+}
+.account-actions,
+.account-toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.account-toolbar {
+  padding: 12px 24px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+.account-toolbar p,
+.account-toolbar details {
+  flex-basis: 100%;
+  margin: 0;
+}
+.account-settings {
+  margin: 20px auto;
+  padding: 24px;
+  max-width: 950px;
+  background: white;
+  border: 1px solid var(--border);
+}
+.account-help {
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.account-help h3 {
+  margin-top: 20px;
+}
+.account-help li {
+  line-height: 1.7;
+}
+.creator {
+  font-size: 12px;
+}
+.creator a {
+  color: #12666b;
+}
+#account-notice {
+  color: #983426;
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+#recovery-code {
+  display: block;
+  overflow-wrap: anywhere;
+  padding: 16px;
+  background: #e9f2f4;
+}
+.provider-destinations {
+  grid-column: 1 / -1;
+  max-height: 160px;
+  overflow: auto;
+}
+.contract-panel .actions {
+  margin-top: 12px;
+}
+@media (max-width: 760px) {
+  .account-card {
+    margin: 12px;
+    padding: 24px;
+  }
+  .account-toolbar {
+    padding: 12px;
+  }
+}
 button,
 input,
 select,

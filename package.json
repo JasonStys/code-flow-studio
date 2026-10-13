@@ -1,10 +1,16 @@
 {
   "name": "code-flow-studio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Isolated polyglot testing and evidence-first AI development studio",
   "author": "Jason Stys",
   "license": "MIT",
   "private": true,
+  "overrides": {
+    "dompurify": "3.4.17",
+    "http-cache-semantics": "4.3.0",
+    "source-map-js": "1.2.2",
+    "global-agent": "4.1.3"
+  },
   "type": "module",
   "main": "desktop/main.cjs",
   "scripts": {
@@ -13,6 +19,7 @@
     "desktop": "electron .",
     "package": "electron-builder",
     "test:browser": "playwright test",
+    "test:private": "playwright test --config playwright.private.config.ts",
     "test:desktop": "playwright test --config playwright.desktop.config.ts"
   },
   "dependencies": {
@@ -35,17 +42,55 @@
   "build": {
     "appId": "dev.jasonstys.codeflow",
     "productName": "Code Flow Studio",
-    "directories": {"output": "release/installers"},
-    "files": ["desktop/**/*", "package.json"],
-    "extraResources": [
-      {"from": "dist/ui", "to": "ui"},
-      {"from": "release/service", "to": "service"},
-      {"from": "runner", "to": "runner", "filter": ["Dockerfile", "worker.py"]}
+    "directories": {
+      "output": "release/installers"
+    },
+    "files": [
+      "desktop/**/*",
+      "package.json"
     ],
-    "win": {"target": ["nsis"], "signAndEditExecutable": false},
-    "nsis": {"oneClick": true, "perMachine": false, "allowToChangeInstallationDirectory": false, "deleteAppDataOnUninstall": false},
-    "linux": {"target": ["AppImage"], "category": "Development"},
-    "mac": {"target": ["dmg"], "category": "public.app-category.developer-tools"}
+    "extraResources": [
+      {"from":"release/notices","to":"notices"},
+      {
+        "from": "dist/ui",
+        "to": "ui"
+      },
+      {
+        "from": "release/service",
+        "to": "service"
+      },
+      {
+        "from": "runner",
+        "to": "runner",
+        "filter": [
+          "Dockerfile",
+          "worker.py"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "deleteAppDataOnUninstall": false
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.developer-tools"
+    }
   }
 }
-

@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: App()@L40; refresh()@L65; saveAndRun()@L121; openRevision(id: string)@L154; upload(files: FileList | null)@L169; acceptProposal()@L210
- * variables: languages@L24; cloneDemo@L38; [project, setProject]@L42; [revision, setRevision]@L43; [historyRows, setHistory]@L44; [run, setRun]@L45; [status, setStatus]@L46; [capabilities, setCapabilities]@L47; [tab, setTab]@L48; [fileName, setFileName]@L49; [error, setError]@L50; [busy, setBusy]@L51; [prompt, setPrompt]@L52; [consent, setConsent]@L53; [live, setLive]@L54; [proposal, setProposal]@L55; [caseText, setCaseText]@L56; [comparison, setComparison]@L59; [baseline, setBaseline]@L60; generation@L61; selected@L62; timer@L78; requestGeneration@L93; result@L96; timer@L112; cases@L126; payload@L127; saved@L128; job@L135; saved@L157; additions@L173; bytes@L177; updates@L213; files@L214; checks@L233; metrics@L234
+ * functions: App()@L40; refresh()@L66; saveAndRun(execute = true)@L131; staticReview()@L169; openRevision(id: string)@L187; upload(files: FileList | null)@L202; acceptProposal()@L243
+ * variables: languages@L24; cloneDemo@L38; [project, setProject]@L42; [revision, setRevision]@L43; [historyRows, setHistory]@L44; [run, setRun]@L45; [status, setStatus]@L46; [capabilities, setCapabilities]@L47; [tab, setTab]@L48; [fileName, setFileName]@L49; [error, setError]@L50; [busy, setBusy]@L51; [prompt, setPrompt]@L52; [consent, setConsent]@L53; [live, setLive]@L54; [proposal, setProposal]@L55; [caseText, setCaseText]@L56; [comparison, setComparison]@L59; [baseline, setBaseline]@L60; [review, setReview]@L61; generation@L62; selected@L63; changed@L76; timer@L88; requestGeneration@L103; result@L106; timer@L122; cases@L136; payload@L137; saved@L138; job@L150; saved@L190; additions@L206; bytes@L210; updates@L246; files@L247; checks@L266; metrics@L267
  * </code-map> */
 
 /** Evidence-first editor, runner and history UI. Symbols/variables: docs/code-index.md.
@@ -58,6 +58,7 @@ export default function App() {
   );
   const [comparison, setComparison] = useState<any>(null);
   const [baseline, setBaseline] = useState<Run | null>(null);
+  const [review, setReview] = useState<any>(null);
   const generation = useRef(0);
   const selected =
     project.files.find((file) => file.name === fileName) ?? project.files[0];
@@ -72,6 +73,15 @@ export default function App() {
   }
   useEffect(() => {
     refresh().catch((reason) => setError(reason.message));
+    const changed = () => {
+      ++generation.current;
+      setConsent(false);
+      setLive(false);
+      setProposal(null);
+      void refresh().catch((reason) => setError(reason.message));
+    };
+    window.addEventListener("cfs-settings-changed", changed);
+    return () => window.removeEventListener("cfs-settings-changed", changed);
   }, []);
   useEffect(() => {
     if (!run || !["queued", "running"].includes(run.status)) return;
@@ -118,7 +128,7 @@ export default function App() {
     };
   }, [selected.content, live, consent]);
 
-  async function saveAndRun() {
+  async function saveAndRun(execute = true) {
     /** Save a new revision before execution; retain approved case oracles for a candidate. */
     setBusy(true);
     setError("");
@@ -132,6 +142,11 @@ export default function App() {
       );
       setProject(payload);
       setRevision(saved.id);
+      if (!execute) {
+        setError("");
+        await refresh();
+        return;
+      }
       const job = await api<{ id: string; status: string }>(
         `revisions/${saved.id}/run`,
         "POST",
@@ -144,6 +159,24 @@ export default function App() {
       });
       setTab("evidence");
       await refresh();
+    } catch (reason) {
+      setError((reason as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function staticReview() {
+    /** Inspect bounded source without executing it; findings are not test results. */
+    setBusy(true);
+    try {
+      setReview(
+        await api("review", "POST", {
+          ...project,
+          cases: JSON.parse(caseText),
+        }),
+      );
+      setTab("evidence");
     } catch (reason) {
       setError((reason as Error).message);
     } finally {
@@ -282,7 +315,7 @@ export default function App() {
       <main>
         <header>
           <div>
-            <span className="eyebrow">ENGINEERING WORKBENCH / v0.1</span>
+            <span className="eyebrow">ENGINEERING WORKBENCH / v0.2</span>
             <h2>
               {tab === "workspace"
                 ? "Make your next iteration count."
@@ -491,6 +524,26 @@ export default function App() {
                 >
                   Save revision & run checks <span>→</span>
                 </button>
+                <div className="actions">
+                  <button
+                    className="secondary"
+                    disabled={busy}
+                    onClick={() => void saveAndRun(false)}
+                  >
+                    Save revision only
+                  </button>
+                  <button
+                    className="secondary"
+                    disabled={busy}
+                    onClick={() => void staticReview()}
+                  >
+                    Static review · no execution
+                  </button>
+                </div>
+                <p className="note">
+                  Save revisions before locking. Compilation requires the
+                  isolated Docker worker; it never runs directly on your PC.
+                </p>
               </section>
             </div>
             <section className="panel ai-panel">
@@ -520,6 +573,14 @@ export default function App() {
                 />
                 I approve sending this project's text to the configured model.
               </label>
+              <p className="note">
+                Review the destinations below before opting in. Cloud providers
+                receive source, requirements and test text, may retain it under
+                their policies, and may charge usage fees.
+              </p>
+              <pre className="provider-destinations">
+                {JSON.stringify(status?.providers ?? [], null, 2)}
+              </pre>
               <div className="actions">
                 {[
                   ["generate", "Generate code"],
@@ -573,6 +634,14 @@ export default function App() {
         )}
         {tab === "evidence" && (
           <>
+            {review && (
+              <section className="panel">
+                <h3>Static review — code was not executed</h3>
+                <pre className="evidence">
+                  {JSON.stringify(review, null, 2)}
+                </pre>
+              </section>
+            )}
             <section className="metric-grid">
               {[
                 ["Tool status", run?.status ?? "No run"],
@@ -822,9 +891,11 @@ export default function App() {
             <section className="panel">
               <h3>AI routing stays on the server</h3>
               <p>
-                Configure providers and per-task routes in a private config
-                file. Keys belong in environment variables, never in this
-                editor, reports or compiler workers.
+                In account mode, use Private settings above to configure your
+                own providers and per-task routes. Keys stay in your encrypted
+                workspace, never in source reports or compiler workers. Legacy
+                CLI mode uses its separate private config and environment
+                variables.
               </p>
               <pre>{JSON.stringify(status?.providers ?? [], null, 2)}</pre>
               <p className="note">
@@ -845,7 +916,7 @@ export default function App() {
         <footer>
           CODE FLOW STUDIO{" "}
           <span>
-            Independent successor · local-first · no unverified promotion
+            By Jason Stys · independent successor · no unverified promotion
           </span>
         </footer>
       </main>

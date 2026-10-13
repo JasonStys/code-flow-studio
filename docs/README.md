@@ -1,5 +1,9 @@
 # Documentation
 
+- [Private accounts and end-user operation](private-accounts.md): installation, privacy, backups/recovery and provider setup.
+- [Local trust-boundary decision](adr-private-local.md), [account release test plan](test-plan-v0.2.md) and [current 0.2 validation](validation-v0.2.md).
+- [Release notes](releases/v0.2.0.md), [Python redistribution terms](licenses/python-3.12.txt); generated full runtime notices accompany packages.
+
 - [Architecture and decisions](architecture.md): trust boundaries, language choices, revision flow and trade-offs.
 - [Setup and installation](setup.md): packaged vs source use, worker prerequisites, keys and diagnostics.
 - [Language adapters](languages.md): toolchains, supported entry contracts and extension rules.

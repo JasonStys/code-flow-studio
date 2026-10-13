@@ -1,6 +1,12 @@
 # Security and trust boundaries
 
+**0.2 account mode:** see [private accounts](private-accounts.md) and [ADR](adr-private-local.md). Password/session authorization and independent vault proof replace renderer bearer tokens in installed/account mode. Account-owned keys/history are encrypted at lock outside Git; active data is plaintext in the trusted local service. Legacy developer CLI token/environment behavior below remains opt-in, not a private-mode fallback. No operator source-read endpoint or public hosting is provided.
+
+References used for this boundary: [OWASP password storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html), [Electron security](https://www.electronjs.org/docs/latest/tutorial/security), [Docker engine security](https://docs.docker.com/engine/security/), [cryptography authenticated encryption](https://cryptography.io/en/stable/hazmat/primitives/symmetric-encryption/), and [OpenAI Chat Completions protocol](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create). Parameter availability varies by model. Audits/tests do not certify freedom from vulnerabilities.
+
 Threats include malicious source/harnesses, compiler exploits, traversal, resource exhaustion, report XSS, DNS rebinding/cross-origin submissions, leaked API keys, prompt injection, supply-chain changes and model/data licensing mistakes.
+
+Account jobs resolve the effective local engine respecting DOCKER_CONTEXT precedence, then pin that verified Unix/named-pipe endpoint for info/image/run/cleanup. A generated empty Docker CLI config prevents automatic host proxy credentials from entering targets. This follows [Docker CLI environment/config precedence](https://docs.docker.com/reference/cli/docker/); it neither changes the user's Docker config nor repairs the engine.
 
 The controller accepts bounded flat file names, retains binary fixtures without interpreting them, validates schemas, checks loopback hosts/origins and requires a strong per-process token. Reports escape all untrusted content. SQLite uses bound parameters and transactions. The renderer has no Node integration or privileged preload, context isolation and process sandboxing enabled, denied permissions/window opening and no remote navigation. Monaco assets are bundled locally.
 

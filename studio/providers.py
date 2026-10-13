@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Providers@L37
-# functions: __init__(self, path)@L40; public(self)@L56; request(self, request)@L68
-# variables: SYSTEM@L25; provider@L45; url@L46; row@L65; identifier@L72; provider@L73; row@L73; key@L76; source@L79; row@L81; user@L82; headers@L85; kind@L86; headers@L88; body@L89; body@L98; client@L107; response@L108; data@L110; chunk@L111; message@L115; text@L117; block@L118; text@L121; text@L123; text@L125; proposal@L126
-# parameters: path@L40; self@L40; self@L56; request@L68; self@L68
+# functions: __init__(self, path, settings, credentials)@L40; public(self)@L61; request(self, request)@L74; key(self, provider)@L146
+# variables: SYSTEM@L25; provider@L50; url@L51; row@L71; identifier@L78; provider@L79; row@L79; key@L82; source@L85; row@L87; user@L88; headers@L91; kind@L92; headers@L94; body@L95; body@L104; temperature@L112; client@L115; response@L116; data@L118; chunk@L119; message@L123; text@L125; block@L126; text@L129; text@L131; text@L135; proposal@L136
+# parameters: credentials@L41; path@L41; self@L41; settings@L41; self@L61; request@L74; self@L74; provider@L146; self@L146
 # </code-map>
 
 """Server-only task routing for OpenAI-compatible, Anthropic and Ollama APIs.
@@ -37,10 +37,15 @@ If uncertain, return suggestions and explain missing requirements instead of fab
 class Providers:
     """Own trusted endpoint routing without exposing API keys to renderers or workers."""
 
-    def __init__(self, path: Path | None = None):
+    def __init__(
+        self, path: Path | None = None, settings: dict | None = None, credentials: dict | None = None
+    ):
         """Load optional local configuration; reject insecure or credential-bearing endpoints."""
+        self.credentials = credentials
         self.config = (
-            json.loads(path.read_text()) if path and path.exists() else {"providers": [], "routes": {}}
+            settings
+            if settings is not None
+            else (json.loads(path.read_text()) if path and path.exists() else {"providers": [], "routes": {}})
         )
         for provider in self.config["providers"]:
             url = urlparse(provider["url"])
@@ -60,7 +65,8 @@ class Providers:
                 "id": row["id"],
                 "kind": row["kind"],
                 "model": row["model"],
-                "ready": row["kind"] == "ollama" or bool(os.environ.get(row.get("key_env", ""))),
+                "ready": row["kind"] == "ollama" or bool(self.key(row)),
+                "destination": row["url"],
             }
             for row in self.config["providers"]
         ]
@@ -73,7 +79,7 @@ class Providers:
         provider = next((row for row in self.config["providers"] if row["id"] == identifier), None)
         if not provider:
             raise ValueError("No AI provider configured for this task")
-        key = os.environ.get(provider.get("key_env", ""), "")
+        key = self.key(provider)
         if provider["kind"] != "ollama" and not key:
             raise ValueError("Configure the provider key privately on the server")
         source = request.project.model_dump()
@@ -99,11 +105,13 @@ class Providers:
                 "model": provider["model"],
                 "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}],
             }
-            body.update(
-                {"stream": False, "format": "json", "options": {"num_predict": 8192}}
-                if kind == "ollama"
-                else {"max_tokens": 8192, "temperature": 0.2}
-            )
+            if kind == "ollama":
+                body.update({"stream": False, "format": "json", "options": {"num_predict": 8192}})
+            else:
+                body[provider.get("token_parameter", "max_tokens")] = 8192
+                temperature = provider.get("temperature", 0.2)
+                if temperature is not None:
+                    body["temperature"] = temperature
         async with httpx.AsyncClient(timeout=45, follow_redirects=False, trust_env=False) as client:
             async with client.stream("POST", provider["url"], json=body, headers=headers) as response:
                 response.raise_for_status()
@@ -121,6 +129,8 @@ class Providers:
             text = message["message"]["content"]
         else:
             text = message["choices"][0]["message"]["content"]
+        if key and key in text:
+            raise ValueError("Provider returned a credential; the response was discarded")
         if text.strip().startswith("```"):
             text = "\n".join(text.strip().splitlines()[1:-1])
         proposal = Proposal.model_validate_json(text)
@@ -132,3 +142,9 @@ class Providers:
             "proposal": proposal.model_dump(),
             "notice": "Untrusted proposal. Save a new revision and run independent tests before using it.",
         }
+
+    def key(self, provider: dict) -> str:
+        """Private account mode never falls back to another account's/global environment credentials."""
+        if self.credentials is not None:
+            return self.credentials.get(provider["id"], "")
+        return os.environ.get(provider.get("key_env", ""), "")

@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: command(argv, timeout, output_limit)@L31; read()@L38; container_arguments(input_directory, name)@L57; diagnostics()@L90; run(project)@L112
-# variables: IMAGE@L27; DOCKER@L28; process@L33; output@L36; chunk@L41; code@L93; output@L93; _@L101; found@L101; ready@L114; static@L115; name@L118; directory@L119; path@L120; code@L123; output@L123; prefix@L124; line@L125; lines@L125; result@L133
-# parameters: argv@L31; output_limit@L31; timeout@L31; input_directory@L57; name@L57; project@L112
+# functions: command(argv, timeout, output_limit)@L31; read()@L49; container_arguments(input_directory, name)@L68; diagnostics(local_only)@L101; run(project, local_only, scratch)@L159
+# variables: IMAGE@L27; DOCKER@L28; environment@L33; environment@L35; selector@L36; process@L44; output@L47; chunk@L52; endpoint@L105; context@L107; context_code@L107; endpoint@L117; config@L124; prefix@L125; code@L126; output@L126; _@L129; found@L129; code@L135; output@L135; _@L138; found@L138; ready@L161; static@L162; name@L165; directory@L168; path@L169; config@L172; prefix@L174; prefix@L176; code@L178; output@L178; marker@L179; line@L180; lines@L180; result@L188
+# parameters: argv@L31; output_limit@L31; timeout@L31; input_directory@L68; name@L68; local_only@L101; local_only@L159; project@L159; scratch@L159
 # </code-map>
 
 """Host broker: no uploaded code runs outside a restricted, named container.
@@ -30,8 +30,19 @@ DOCKER = os.environ.get("STUDIO_DOCKER", shutil.which("docker") or "docker")
 
 async def command(argv: list[str], timeout: int = 180, output_limit: int = 1572864) -> tuple[int, str]:
     """Bound controller subprocess duration and captured output; never invoke a shell."""
+    environment = None
+    if len(argv) > 2 and argv[0] == DOCKER and "--host" in argv:
+        environment = dict(os.environ)
+        for selector in (
+            "DOCKER_CONTEXT",
+            "DOCKER_HOST",
+            "DOCKER_TLS",
+            "DOCKER_TLS_VERIFY",
+            "DOCKER_CERT_PATH",
+        ):
+            environment.pop(selector, None)
     process = await asyncio.create_subprocess_exec(
-        *argv, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT
+        *argv, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT, env=environment
     )
     output = bytearray()
 
@@ -87,42 +98,86 @@ def container_arguments(input_directory: Path, name: str) -> list[str]:
     ]
 
 
-async def diagnostics() -> dict:
+async def diagnostics(local_only: bool = False) -> dict:
     """Distinguish missing engine from missing worker image without running target code."""
     try:
-        code, output = await command(
-            [DOCKER, "info", "--format", "{{.ServerVersion}}"], timeout=8, output_limit=16384
-        )
+        if local_only:
+            endpoint = os.environ.get("DOCKER_HOST", "") if not os.environ.get("DOCKER_CONTEXT") else ""
+            if not endpoint:
+                context_code, context = await command(
+                    [DOCKER, "context", "inspect", "--format", "{{json .Endpoints.docker.Host}}"],
+                    timeout=8,
+                    output_limit=4096,
+                )
+                if context_code:
+                    return {
+                        "ready": False,
+                        "reason": "Local Docker context is unavailable; no source was transmitted",
+                    }
+                endpoint = json.loads(context.strip())
+            if not isinstance(endpoint, str) or not endpoint.startswith(("unix:///", "npipe:////./pipe/")):
+                return {
+                    "ready": False,
+                    "reason": "Account mode requires a local Unix/named-pipe Docker engine; remote contexts are blocked",
+                }
+        if local_only:
+            with tempfile.TemporaryDirectory(prefix="code-flow-docker-config-") as config:
+                prefix = [DOCKER, "--host", endpoint, "--config", config]
+                code, output = await command(
+                    prefix + ["info", "--format", "{{.ServerVersion}}"], timeout=8, output_limit=16384
+                )
+                found, _ = (
+                    await command(prefix + ["image", "inspect", IMAGE], timeout=8, output_limit=32768)
+                    if not code
+                    else (1, "")
+                )
+        else:
+            code, output = await command(
+                [DOCKER, "info", "--format", "{{.ServerVersion}}"], timeout=8, output_limit=16384
+            )
+            found, _ = (
+                await command([DOCKER, "image", "inspect", IMAGE], timeout=8, output_limit=32768)
+                if not code
+                else (1, "")
+            )
         if code:
             return {
                 "ready": False,
                 "reason": "Docker engine unavailable; start Docker Desktop or configure an isolated Linux worker",
             }
-        found, _ = await command([DOCKER, "image", "inspect", IMAGE], timeout=8, output_limit=32768)
         return {
             "ready": found == 0,
             "engine": output.strip(),
             "image": IMAGE,
             "reason": "Worker image needs installation" if found else "Ready",
+            **({"endpoint": endpoint} if local_only else {}),
         }
     except (OSError, TimeoutError, ValueError):
         return {"ready": False, "reason": "Docker is missing or unresponsive; host execution is disabled"}
 
 
-async def run(project: Project) -> dict:
+async def run(project: Project, local_only: bool = False, scratch: Path | None = None) -> dict:
     """Isolate one immutable project and retain bounded evidence even on failure."""
-    ready = await diagnostics()
+    ready = await diagnostics(local_only=True) if local_only else await diagnostics()
     static = inspect_source(project)
     if not ready["ready"]:
         return {"tool_status": "blocked", "reason": ready["reason"], "static": static}
     name = "code-flow-" + uuid4().hex
-    with tempfile.TemporaryDirectory(prefix="code-flow-") as directory:
+    if scratch is not None:
+        scratch.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with tempfile.TemporaryDirectory(prefix="code-flow-", dir=scratch) as directory:
         path = Path(directory)
         (path / "job.json").write_text(project.model_dump_json(), encoding="utf-8")
+        if local_only:
+            config = path / "docker-config"
+            config.mkdir()
+            prefix = [DOCKER, "--host", ready["endpoint"], "--config", str(config)]
+        else:
+            prefix = [DOCKER]
         try:
-            code, output = await command(container_arguments(path, name))
-            prefix = "STUDIO_RESULT="
-            lines = [line[len(prefix) :] for line in output.splitlines() if line.startswith(prefix)]
+            code, output = await command(prefix + container_arguments(path, name)[1:])
+            marker = "STUDIO_RESULT="
+            lines = [line[len(marker) :] for line in output.splitlines() if line.startswith(marker)]
             if code or len(lines) != 1:
                 return {
                     "tool_status": "runner-error",
@@ -149,4 +204,4 @@ async def run(project: Project) -> dict:
         finally:
             # Kill only this broker-owned exact container, never unrelated jobs.
             with contextlib.suppress(OSError, TimeoutError, ValueError):
-                await command([DOCKER, "rm", "--force", name], timeout=10, output_limit=4096)
+                await command(prefix + ["rm", "--force", name], timeout=10, output_limit=4096)

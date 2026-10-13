@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: test_provider_protocols(tmp_path, project, monkeypatch, kind)@L24; handler(request)@L49; test_provider_endpoint_validation(tmp_path, url)@L84
-# variables: path@L26; proposal@L44; captured@L47; body@L51; real_client@L60; router@L64; result@L65; path@L86
-# parameters: kind@L24; monkeypatch@L24; project@L24; tmp_path@L24; request@L49; kwargs@L62; tmp_path@L84; url@L84
+# functions: test_provider_protocols(tmp_path, project, monkeypatch, kind)@L24; handler(request)@L49; test_provider_endpoint_validation(tmp_path, url)@L84; test_owned_key_never_uses_global_environment(project, monkeypatch)@L92; test_owned_protocol_parameters_and_secret_echo(project, monkeypatch)@L113; handler(request)@L129
+# variables: path@L26; proposal@L44; captured@L47; body@L51; real_client@L60; router@L64; result@L65; path@L86; settings@L95; router@L107; settings@L115; body@L130; real@L148
+# parameters: kind@L24; monkeypatch@L24; project@L24; tmp_path@L24; request@L49; kwargs@L62; tmp_path@L84; url@L84; monkeypatch@L92; project@L92; monkeypatch@L113; project@L113; request@L129; kwargs@L150
 # </code-map>
 
 """Mocked protocol contracts, consent and response validation; not live AI quality tests.
@@ -87,3 +87,71 @@ def test_provider_endpoint_validation(tmp_path, url):
     path.write_text(json.dumps({"providers": [{"id": "bad", "kind": "openai", "model": "test", "url": url}]}))
     with pytest.raises(ValueError):
         Providers(path)
+
+
+def test_owned_key_never_uses_global_environment(project, monkeypatch):
+    """A private account cannot borrow an operator/global key, even with a matching environment selector."""
+    monkeypatch.setenv("STUDIO_TEST_KEY", "fictional-global-key")
+    settings = {
+        "providers": [
+            {
+                "id": "owned",
+                "kind": "openai",
+                "url": "https://model.example/api",
+                "model": "fixture",
+                "key_env": "STUDIO_TEST_KEY",
+            }
+        ],
+        "routes": {"improve": "owned"},
+    }
+    router = Providers(settings=settings, credentials={})
+    assert not router.public()[0]["ready"]
+    with pytest.raises(ValueError, match="key"):
+        asyncio.run(router.request(AIRequest(task="improve", project=project, consent=True)))
+
+
+def test_owned_protocol_parameters_and_secret_echo(project, monkeypatch):
+    """Modern completion limits/omitted temperature are honored; a key echoed by a provider is discarded."""
+    settings = {
+        "providers": [
+            {
+                "id": "owned",
+                "kind": "openai",
+                "url": "https://model.example/api",
+                "model": "fixture",
+                "token_parameter": "max_completion_tokens",
+                "temperature": None,
+            }
+        ],
+        "routes": {"improve": "owned"},
+    }
+
+    def handler(request):
+        body = json.loads(request.content)
+        assert (
+            body["max_completion_tokens"] == 8192 and "temperature" not in body and "max_tokens" not in body
+        )
+        assert "fictional-owned-key" not in request.content.decode()
+        return httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "message": {
+                            "content": '{"explanation":"fictional-owned-key","files":[],"tests":"","suggestions":[]}'
+                        }
+                    }
+                ]
+            },
+        )
+
+    real = httpx.AsyncClient
+    monkeypatch.setattr(
+        httpx, "AsyncClient", lambda **kwargs: real(transport=httpx.MockTransport(handler), **kwargs)
+    )
+    with pytest.raises(ValueError, match="credential"):
+        asyncio.run(
+            Providers(settings=settings, credentials={"owned": "fictional-owned-key"}).request(
+                AIRequest(task="improve", project=project, consent=True)
+            )
+        )

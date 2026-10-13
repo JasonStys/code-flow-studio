@@ -18,3 +18,7 @@ test-results/
 *.spec
 .hypothesis/
 
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.cfsvault

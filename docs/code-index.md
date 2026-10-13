@@ -6,34 +6,35 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `{ app, BrowserWindow, dialog, Menu, session }` | 11 |
-| variable | `{ spawn }` | 12 |
-| variable | `{ randomBytes }` | 13 |
-| variable | `{ join }` | 14 |
-| variable | `net` | 15 |
-| variable | `fs` | 16 |
-| variable | `service` | 17 |
-| variable | `serviceOrigin` | 18 |
-| variable | `serviceToken` | 19 |
-| variable | `closing` | 20 |
-| function | `port()` | 22 |
-| variable | `server` | 24 |
-| variable | `selected` | 28 |
-| function | `launch()` | 33 |
-| variable | `selected` | 35 |
-| variable | `token` | 36 |
-| variable | `resources` | 38 |
-| variable | `executable` | 41 |
-| variable | `ui` | 48 |
-| variable | `config` | 51 |
-| variable | `log` | 53 |
-| variable | `exited` | 78 |
-| variable | `origin` | 85 |
-| variable | `ready` | 87 |
-| variable | `attempt` | 88 |
-| variable | `response` | 90 |
-| variable | `window` | 107 |
-| variable | `stopped` | 156 |
+| variable | `{ spawn }` | 17 |
+| variable | `{ randomBytes }` | 18 |
+| variable | `{ join }` | 19 |
+| variable | `net` | 20 |
+| variable | `fs` | 21 |
+| variable | `service` | 22 |
+| variable | `closing` | 23 |
+| function | `port()` | 26 |
+| variable | `server` | 27 |
+| variable | `selected` | 31 |
+| function | `launch()` | 37 |
+| variable | `selected` | 38 |
+| variable | `nonce` | 40 |
+| variable | `resources` | 41 |
+| variable | `executable` | 44 |
+| variable | `ui` | 51 |
+| variable | `log` | 55 |
+| variable | `env` | 60 |
+| variable | `exited` | 76 |
+| variable | `origin` | 84 |
+| variable | `ready` | 86 |
+| variable | `attempt` | 87 |
+| variable | `response` | 89 |
+| variable | `health` | 92 |
+| variable | `isolated` | 106 |
+| variable | `allowed` | 114 |
+| variable | `window` | 122 |
+| variable | `stopped` | 202 |
+| variable | `window` | 230 |
 
 ## examples/projects.py
 
@@ -52,6 +53,11 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 |---|---|---|
 
 ## playwright.desktop.config.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+
+## playwright.private.config.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
@@ -235,6 +241,40 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | Kind | Declaration | Line |
 |---|---|---|
 
+## scripts/license_bundle.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `main()` | 17 |
+| variable | `root` | 19 |
+| variable | `output` | 20 |
+| variable | `records` | 23 |
+| variable | `distribution` | 24 |
+| variable | `name` | 25 |
+| variable | `file` | 34 |
+| variable | `target` | 40 |
+| variable | `python_license` | 43 |
+| variable | `candidates` | 50 |
+| variable | `candidate` | 51 |
+| variable | `folder` | 59 |
+| variable | `path` | 66 |
+| variable | `target` | 68 |
+
+## scripts/private_worker_checks.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `main()` | 22 |
+| variable | `temporary` | 24 |
+| variable | `app` | 25 |
+| variable | `client` | 30 |
+| variable | `key` | 38 |
+| variable | `language` | 40 |
+| variable | `revision` | 41 |
+| variable | `job` | 44 |
+| variable | `deadline` | 45 |
+| variable | `report` | 47 |
+
 ## scripts/push_analysis.py
 
 | Kind | Declaration | Line |
@@ -260,6 +300,19 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `item` | 59 |
 | variable | `row` | 59 |
 | variable | `candidate` | 61 |
+
+## scripts/release_archive.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `main()` | 16 |
+| variable | `root` | 18 |
+| variable | `platform` | 19 |
+| variable | `folder` | 20 |
+| variable | `base` | 29 |
+| variable | `path` | 31 |
+| variable | `stream` | 33 |
+| variable | `digest` | 34 |
 
 ## scripts/training_checks.py
 
@@ -303,110 +356,226 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | Kind | Declaration | Line |
 |---|---|---|
 
+## studio/accounts.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `SESSION_SECONDS` | 26 |
+| variable | `IDLE_SECONDS` | 27 |
+| variable | `HASH_SLOTS` | 28 |
+| function | `digest(value)` | 31 |
+| parameter | `value` | 31 |
+| function | `password_hash(password, salt)` | 36 |
+| parameter | `password` | 36 |
+| parameter | `salt` | 36 |
+| variable | `salt` | 38 |
+| variable | `key` | 40 |
+| function | `password_matches(password, stored)` | 46 |
+| parameter | `password` | 46 |
+| parameter | `stored` | 46 |
+| variable | `_` | 49 |
+| variable | `salt` | 49 |
+| variable | `version` | 49 |
+| class | `Accounts` | 55 |
+| function | `__init__(self, path)` | 58 |
+| parameter | `path` | 58 |
+| parameter | `self` | 58 |
+| variable | `db` | 64 |
+| function | `connection(self)` | 80 |
+| parameter | `self` | 80 |
+| variable | `db` | 82 |
+| function | `throttle(self, key, maximum, window)` | 91 |
+| parameter | `key` | 91 |
+| parameter | `maximum` | 91 |
+| parameter | `self` | 91 |
+| parameter | `window` | 91 |
+| variable | `now` | 93 |
+| variable | `db` | 94 |
+| variable | `row` | 97 |
+| variable | `count` | 98 |
+| function | `register(self, username, password)` | 105 |
+| parameter | `password` | 105 |
+| parameter | `self` | 105 |
+| parameter | `username` | 105 |
+| variable | `owner` | 107 |
+| variable | `recovery` | 107 |
+| variable | `hashed` | 108 |
+| variable | `db` | 109 |
+| function | `login(self, username, password)` | 118 |
+| parameter | `password` | 118 |
+| parameter | `self` | 118 |
+| parameter | `username` | 118 |
+| variable | `db` | 120 |
+| variable | `row` | 121 |
+| variable | `valid` | 122 |
+| function | `session(self, owner)` | 125 |
+| parameter | `owner` | 125 |
+| parameter | `self` | 125 |
+| variable | `now` | 127 |
+| variable | `token` | 127 |
+| variable | `db` | 128 |
+| function | `owner(self, token)` | 140 |
+| parameter | `self` | 140 |
+| parameter | `token` | 140 |
+| variable | `now` | 142 |
+| variable | `db` | 143 |
+| variable | `row` | 144 |
+| function | `revoke(self, token)` | 152 |
+| parameter | `self` | 152 |
+| parameter | `token` | 152 |
+| variable | `db` | 154 |
+| function | `vault(self, owner)` | 157 |
+| parameter | `owner` | 157 |
+| parameter | `self` | 157 |
+| variable | `db` | 159 |
+| variable | `row` | 160 |
+| function | `save(self, owner, envelope, revision)` | 167 |
+| parameter | `envelope` | 167 |
+| parameter | `owner` | 167 |
+| parameter | `revision` | 167 |
+| parameter | `self` | 167 |
+| variable | `db` | 169 |
+| variable | `row` | 171 |
+| function | `reset(self, username, recovery, password)` | 180 |
+| parameter | `password` | 180 |
+| parameter | `recovery` | 180 |
+| parameter | `self` | 180 |
+| parameter | `username` | 180 |
+| variable | `db` | 182 |
+| variable | `row` | 183 |
+| variable | `fresh` | 186 |
+| variable | `hashed` | 186 |
+| variable | `db` | 187 |
+| variable | `updated` | 188 |
+| function | `delete(self, owner, password)` | 197 |
+| parameter | `owner` | 197 |
+| parameter | `password` | 197 |
+| parameter | `self` | 197 |
+| variable | `db` | 199 |
+| variable | `row` | 200 |
+| variable | `db` | 203 |
+| function | `decode_field(value, minimum, maximum)` | 209 |
+| parameter | `maximum` | 209 |
+| parameter | `minimum` | 209 |
+| parameter | `value` | 209 |
+| variable | `result` | 212 |
+
 ## studio/analysis.py
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `inspect_source(project)` | 22 |
-| parameter | `project` | 22 |
-| variable | `file` | 24 |
-| variable | `text` | 24 |
-| variable | `lines` | 25 |
-| variable | `findings` | 26 |
-| variable | `patterns` | 27 |
-| variable | `message` | 33 |
-| variable | `pattern` | 33 |
-| variable | `match` | 34 |
-| variable | `functions` | 38 |
-| variable | `branches` | 39 |
-| variable | `file` | 42 |
-| variable | `tree` | 42 |
-| variable | `functions` | 43 |
-| variable | `node` | 44 |
-| variable | `branches` | 46 |
-| variable | `node` | 47 |
-| variable | `line` | 55 |
-| function | `compare(baseline, candidate, priorities)` | 63 |
-| parameter | `baseline` | 63 |
-| parameter | `candidate` | 63 |
-| parameter | `priorities` | 63 |
-| variable | `reasons` | 65 |
-| variable | `result` | 66 |
-| variable | `dimensions` | 87 |
-| variable | `area` | 88 |
-| variable | `key` | 88 |
-| variable | `metric` | 88 |
-| variable | `after` | 94 |
-| variable | `before` | 94 |
-| variable | `metric` | 97 |
-| variable | `total` | 97 |
-| variable | `score` | 98 |
-| variable | `metric` | 99 |
-| variable | `value` | 99 |
+| function | `inspect_source(project)` | 23 |
+| parameter | `project` | 23 |
+| variable | `file` | 25 |
+| variable | `text` | 25 |
+| variable | `lines` | 26 |
+| variable | `findings` | 27 |
+| variable | `char` | 28 |
+| variable | `index` | 28 |
+| variable | `offsets` | 28 |
+| variable | `truncated` | 29 |
+| variable | `patterns` | 30 |
+| variable | `message` | 36 |
+| variable | `pattern` | 36 |
+| variable | `match` | 37 |
+| variable | `truncated` | 39 |
+| variable | `functions` | 44 |
+| variable | `branches` | 45 |
+| variable | `file` | 48 |
+| variable | `tree` | 48 |
+| variable | `functions` | 49 |
+| variable | `node` | 50 |
+| variable | `branches` | 52 |
+| variable | `node` | 53 |
+| variable | `line` | 67 |
+| function | `compare(baseline, candidate, priorities)` | 76 |
+| parameter | `baseline` | 76 |
+| parameter | `candidate` | 76 |
+| parameter | `priorities` | 76 |
+| variable | `reasons` | 78 |
+| variable | `result` | 79 |
+| variable | `dimensions` | 100 |
+| variable | `area` | 101 |
+| variable | `key` | 101 |
+| variable | `metric` | 101 |
+| variable | `after` | 107 |
+| variable | `before` | 107 |
+| variable | `metric` | 110 |
+| variable | `total` | 110 |
+| variable | `score` | 111 |
+| variable | `metric` | 112 |
+| variable | `value` | 112 |
 
 ## studio/api.py
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `create_app(data_directory, token, ui_directory, config)` | 34 |
-| parameter | `config` | 35 |
-| parameter | `data_directory` | 35 |
-| parameter | `token` | 35 |
-| parameter | `ui_directory` | 35 |
-| variable | `store` | 40 |
-| variable | `providers` | 41 |
-| variable | `active` | 42 |
-| variable | `semaphore` | 43 |
-| variable | `ai_semaphore` | 44 |
-| function | `lifespan(app)` | 47 |
-| parameter | `app` | 47 |
-| variable | `task` | 50 |
-| variable | `app` | 54 |
-| function | `guard(request, call_next)` | 65 |
-| parameter | `call_next` | 65 |
-| parameter | `request` | 65 |
-| variable | `host` | 67 |
-| variable | `origin` | 68 |
-| variable | `permitted` | 69 |
-| variable | `body` | 78 |
-| variable | `chunk` | 79 |
-| variable | `response` | 84 |
-| function | `health()` | 94 |
-| function | `shutdown()` | 99 |
-| variable | `callback` | 101 |
-| function | `status()` | 108 |
-| function | `capabilities()` | 117 |
-| function | `history()` | 122 |
-| function | `save(project, parent)` | 127 |
-| parameter | `parent` | 127 |
-| parameter | `project` | 127 |
-| function | `revision(identifier)` | 135 |
-| parameter | `identifier` | 135 |
-| function | `work(identifier, project)` | 142 |
-| parameter | `identifier` | 142 |
-| parameter | `project` | 142 |
-| variable | `result` | 147 |
-| function | `start(identifier)` | 158 |
-| parameter | `identifier` | 158 |
-| variable | `project` | 163 |
-| variable | `job` | 166 |
-| variable | `task` | 167 |
-| function | `get_run(identifier)` | 173 |
-| parameter | `identifier` | 173 |
-| function | `report(identifier, format)` | 181 |
-| parameter | `format` | 181 |
-| parameter | `identifier` | 181 |
-| variable | `result` | 184 |
-| variable | `source` | 185 |
-| function | `compare_runs(baseline, candidate)` | 202 |
-| parameter | `baseline` | 202 |
-| parameter | `candidate` | 202 |
-| variable | `new` | 205 |
-| variable | `old` | 205 |
-| variable | `new_revision` | 206 |
-| variable | `old_revision` | 206 |
-| function | `ai(request)` | 217 |
-| parameter | `request` | 217 |
+| function | `create_app(data_directory, token, ui_directory, config, private_mode, owned_providers)` | 35 |
+| parameter | `data_directory` | 36 |
+| parameter | `token` | 37 |
+| parameter | `ui_directory` | 38 |
+| parameter | `config` | 39 |
+| parameter | `private_mode` | 40 |
+| parameter | `owned_providers` | 41 |
+| variable | `store` | 46 |
+| variable | `providers` | 47 |
+| variable | `active` | 48 |
+| variable | `semaphore` | 49 |
+| variable | `ai_semaphore` | 50 |
+| function | `lifespan(app)` | 53 |
+| parameter | `app` | 53 |
+| variable | `task` | 56 |
+| variable | `app` | 60 |
+| function | `private_invalid(request, error)` | 75 |
+| parameter | `error` | 75 |
+| parameter | `request` | 75 |
+| function | `guard(request, call_next)` | 80 |
+| parameter | `call_next` | 80 |
+| parameter | `request` | 80 |
+| variable | `host` | 82 |
+| variable | `origin` | 83 |
+| variable | `permitted` | 84 |
+| variable | `body` | 93 |
+| variable | `chunk` | 94 |
+| variable | `response` | 99 |
+| function | `health()` | 109 |
+| function | `shutdown()` | 114 |
+| variable | `callback` | 116 |
+| function | `status()` | 123 |
+| function | `capabilities()` | 134 |
+| function | `review(project)` | 139 |
+| parameter | `project` | 139 |
+| function | `history()` | 144 |
+| function | `save(project, parent)` | 149 |
+| parameter | `parent` | 149 |
+| parameter | `project` | 149 |
+| function | `revision(identifier)` | 157 |
+| parameter | `identifier` | 157 |
+| function | `work(identifier, project)` | 164 |
+| parameter | `identifier` | 164 |
+| parameter | `project` | 164 |
+| variable | `result` | 169 |
+| function | `start(identifier)` | 184 |
+| parameter | `identifier` | 184 |
+| variable | `project` | 189 |
+| variable | `job` | 192 |
+| variable | `task` | 193 |
+| function | `get_run(identifier)` | 199 |
+| parameter | `identifier` | 199 |
+| function | `report(identifier, format)` | 207 |
+| parameter | `format` | 207 |
+| parameter | `identifier` | 207 |
+| variable | `result` | 210 |
+| variable | `source` | 211 |
+| function | `compare_runs(baseline, candidate)` | 228 |
+| parameter | `baseline` | 228 |
+| parameter | `candidate` | 228 |
+| variable | `new` | 231 |
+| variable | `old` | 231 |
+| variable | `new_revision` | 232 |
+| variable | `old_revision` | 232 |
+| function | `ai(request)` | 243 |
+| parameter | `request` | 243 |
 
 ## studio/catalog.py
 
@@ -448,31 +617,50 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `argv` | 31 |
 | parameter | `output_limit` | 31 |
 | parameter | `timeout` | 31 |
-| variable | `process` | 33 |
-| variable | `output` | 36 |
-| function | `read()` | 38 |
-| variable | `chunk` | 41 |
-| function | `container_arguments(input_directory, name)` | 57 |
-| parameter | `input_directory` | 57 |
-| parameter | `name` | 57 |
-| function | `diagnostics()` | 90 |
-| variable | `code` | 93 |
-| variable | `output` | 93 |
-| variable | `_` | 101 |
-| variable | `found` | 101 |
-| function | `run(project)` | 112 |
-| parameter | `project` | 112 |
-| variable | `ready` | 114 |
-| variable | `static` | 115 |
-| variable | `name` | 118 |
-| variable | `directory` | 119 |
-| variable | `path` | 120 |
-| variable | `code` | 123 |
-| variable | `output` | 123 |
-| variable | `prefix` | 124 |
-| variable | `line` | 125 |
-| variable | `lines` | 125 |
-| variable | `result` | 133 |
+| variable | `environment` | 33 |
+| variable | `environment` | 35 |
+| variable | `selector` | 36 |
+| variable | `process` | 44 |
+| variable | `output` | 47 |
+| function | `read()` | 49 |
+| variable | `chunk` | 52 |
+| function | `container_arguments(input_directory, name)` | 68 |
+| parameter | `input_directory` | 68 |
+| parameter | `name` | 68 |
+| function | `diagnostics(local_only)` | 101 |
+| parameter | `local_only` | 101 |
+| variable | `endpoint` | 105 |
+| variable | `context` | 107 |
+| variable | `context_code` | 107 |
+| variable | `endpoint` | 117 |
+| variable | `config` | 124 |
+| variable | `prefix` | 125 |
+| variable | `code` | 126 |
+| variable | `output` | 126 |
+| variable | `_` | 129 |
+| variable | `found` | 129 |
+| variable | `code` | 135 |
+| variable | `output` | 135 |
+| variable | `_` | 138 |
+| variable | `found` | 138 |
+| function | `run(project, local_only, scratch)` | 159 |
+| parameter | `local_only` | 159 |
+| parameter | `project` | 159 |
+| parameter | `scratch` | 159 |
+| variable | `ready` | 161 |
+| variable | `static` | 162 |
+| variable | `name` | 165 |
+| variable | `directory` | 168 |
+| variable | `path` | 169 |
+| variable | `config` | 172 |
+| variable | `prefix` | 174 |
+| variable | `prefix` | 176 |
+| variable | `code` | 178 |
+| variable | `output` | 178 |
+| variable | `marker` | 179 |
+| variable | `line` | 180 |
+| variable | `lines` | 180 |
+| variable | `result` | 188 |
 
 ## studio/models.py
 
@@ -544,46 +732,361 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `tests` | 201 |
 | variable | `suggestions` | 202 |
 
+## studio/permissions.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `protect_directory(root)` | 18 |
+| parameter | `root` | 18 |
+| variable | `root` | 20 |
+| variable | `system` | 26 |
+| variable | `flags` | 27 |
+| variable | `identity` | 28 |
+| variable | `rows` | 35 |
+
+## studio/private_api.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `CSP` | 36 |
+| class | `Boundary` | 39 |
+| function | `__init__(self, app, manager, port)` | 42 |
+| parameter | `app` | 42 |
+| parameter | `manager` | 42 |
+| parameter | `port` | 42 |
+| parameter | `self` | 42 |
+| function | `__call__(self, scope, receive, send)` | 48 |
+| parameter | `receive` | 48 |
+| parameter | `scope` | 48 |
+| parameter | `self` | 48 |
+| parameter | `send` | 48 |
+| variable | `raw` | 52 |
+| variable | `headers` | 53 |
+| variable | `k` | 53 |
+| variable | `v` | 53 |
+| function | `guarded(message)` | 55 |
+| parameter | `message` | 55 |
+| variable | `k` | 60 |
+| variable | `v` | 60 |
+| function | `deny(status, detail)` | 76 |
+| parameter | `detail` | 76 |
+| parameter | `status` | 76 |
+| variable | `_` | 82 |
+| variable | `k` | 82 |
+| variable | `cookies` | 100 |
+| variable | `token` | 105 |
+| variable | `account` | 106 |
+| variable | `chunks` | 114 |
+| variable | `length` | 114 |
+| variable | `message` | 116 |
+| variable | `data` | 119 |
+| variable | `length` | 120 |
+| variable | `delivered` | 126 |
+| function | `replay()` | 128 |
+| variable | `delivered` | 132 |
+| class | `Closed` | 139 |
+| variable | `model_config` | 142 |
+| class | `Credentials` | 145 |
+| variable | `alias` | 148 |
+| variable | `password` | 149 |
+| class | `Recovery` | 152 |
+| variable | `recovery` | 155 |
+| class | `Unlock` | 158 |
+| variable | `key` | 161 |
+| variable | `salt` | 162 |
+| class | `Activity` | 165 |
+| variable | `idle_seconds` | 168 |
+| class | `Delete` | 171 |
+| variable | `password` | 174 |
+| variable | `confirm` | 175 |
+| class | `Provider` | 178 |
+| variable | `id` | 181 |
+| variable | `kind` | 182 |
+| variable | `url` | 183 |
+| variable | `model` | 184 |
+| variable | `key` | 185 |
+| variable | `retain_key` | 186 |
+| variable | `token_parameter` | 187 |
+| variable | `temperature` | 188 |
+| class | `Settings` | 191 |
+| variable | `providers` | 194 |
+| variable | `routes` | 195 |
+| function | `coherent(self)` | 200 |
+| parameter | `self` | 200 |
+| variable | `ids` | 202 |
+| variable | `p` | 202 |
+| variable | `value` | 203 |
+| variable | `p` | 206 |
+| function | `public_settings(manager)` | 212 |
+| parameter | `manager` | 212 |
+| variable | `keys` | 214 |
+| variable | `settings` | 214 |
+| variable | `data` | 215 |
+| variable | `p` | 217 |
+| class | `Proxy` | 225 |
+| function | `__init__(self, manager)` | 228 |
+| parameter | `manager` | 228 |
+| parameter | `self` | 228 |
+| function | `__call__(self, scope, receive, send)` | 232 |
+| parameter | `receive` | 232 |
+| parameter | `scope` | 232 |
+| parameter | `self` | 232 |
+| parameter | `send` | 232 |
+| variable | `manager` | 236 |
+| variable | `app` | 239 |
+| variable | `path` | 244 |
+| variable | `db` | 250 |
+| variable | `count` | 251 |
+| variable | `headers` | 258 |
+| variable | `forwarded` | 267 |
+| variable | `k` | 268 |
+| variable | `v` | 268 |
+| function | `create_private_app(root, port, ui, launcher_token, nonce)` | 278 |
+| parameter | `launcher_token` | 279 |
+| parameter | `nonce` | 279 |
+| parameter | `port` | 279 |
+| parameter | `root` | 279 |
+| parameter | `ui` | 279 |
+| variable | `manager` | 282 |
+| function | `lifespan(app)` | 286 |
+| parameter | `app` | 286 |
+| function | `idle()` | 289 |
+| variable | `task` | 303 |
+| variable | `app` | 313 |
+| function | `invalid(request, error)` | 325 |
+| parameter | `error` | 325 |
+| parameter | `request` | 325 |
+| function | `bad_value(request, error)` | 330 |
+| parameter | `error` | 330 |
+| parameter | `request` | 330 |
+| function | `bad_disk(request, error)` | 335 |
+| parameter | `error` | 335 |
+| parameter | `request` | 335 |
+| function | `identify(request)` | 341 |
+| parameter | `request` | 341 |
+| function | `signed(owner, data)` | 345 |
+| parameter | `data` | 345 |
+| parameter | `owner` | 345 |
+| variable | `response` | 347 |
+| function | `auth_limit(alias)` | 358 |
+| parameter | `alias` | 358 |
+| function | `health()` | 366 |
+| function | `shutdown(request)` | 377 |
+| parameter | `request` | 377 |
+| variable | `callback` | 383 |
+| function | `register(data)` | 390 |
+| parameter | `data` | 390 |
+| variable | `owner` | 394 |
+| variable | `recovery` | 394 |
+| function | `login(data)` | 400 |
+| parameter | `data` | 400 |
+| variable | `owner` | 403 |
+| function | `reset(data)` | 409 |
+| parameter | `data` | 409 |
+| variable | `db` | 413 |
+| variable | `row` | 414 |
+| variable | `fresh` | 420 |
+| function | `account(request)` | 426 |
+| parameter | `request` | 426 |
+| variable | `owner` | 428 |
+| variable | `session` | 428 |
+| function | `unlock(request, data)` | 436 |
+| parameter | `data` | 436 |
+| parameter | `request` | 436 |
+| variable | `owner` | 438 |
+| variable | `session` | 438 |
+| function | `activity(request, data)` | 447 |
+| parameter | `data` | 447 |
+| parameter | `request` | 447 |
+| function | `save(request)` | 455 |
+| parameter | `request` | 455 |
+| function | `lock(request)` | 462 |
+| parameter | `request` | 462 |
+| variable | `owner` | 465 |
+| variable | `session` | 465 |
+| function | `logout(request)` | 470 |
+| parameter | `request` | 470 |
+| variable | `owner` | 473 |
+| variable | `session` | 473 |
+| variable | `response` | 477 |
+| function | `delete(request, data)` | 482 |
+| parameter | `data` | 482 |
+| parameter | `request` | 482 |
+| variable | `_` | 485 |
+| variable | `owner` | 485 |
+| variable | `db` | 486 |
+| variable | `row` | 487 |
+| variable | `response` | 493 |
+| function | `backup(request)` | 498 |
+| parameter | `request` | 498 |
+| variable | `_` | 500 |
+| variable | `owner` | 500 |
+| variable | `path` | 501 |
+| function | `get_providers(request)` | 509 |
+| parameter | `request` | 509 |
+| function | `providers(request, data)` | 516 |
+| parameter | `data` | 516 |
+| parameter | `request` | 516 |
+| variable | `keys` | 520 |
+| variable | `old` | 520 |
+| variable | `rows` | 521 |
+| variable | `provider` | 522 |
+| variable | `row` | 523 |
+| variable | `p` | 525 |
+| variable | `previous` | 525 |
+| variable | `config` | 530 |
+| variable | `router` | 531 |
+| variable | `k` | 533 |
+| variable | `p` | 533 |
+| variable | `v` | 533 |
+| variable | `p` | 536 |
+
+## studio/private_cli.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `data_directory()` | 26 |
+| variable | `base` | 31 |
+| variable | `base` | 33 |
+| variable | `base` | 35 |
+| function | `parent_guard(server)` | 39 |
+| parameter | `server` | 39 |
+| variable | `pid` | 41 |
+| variable | `started` | 42 |
+| variable | `parent` | 46 |
+| function | `main()` | 60 |
+| variable | `parser` | 62 |
+| variable | `args` | 67 |
+| variable | `bundle` | 70 |
+| variable | `ui` | 71 |
+| variable | `listener` | 72 |
+| variable | `port` | 75 |
+| variable | `app` | 76 |
+| variable | `server` | 83 |
+| variable | `thread` | 96 |
+| variable | `deadline` | 100 |
+| variable | `url` | 105 |
+
+## studio/private_workspace.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `atomic_json(path, value)` | 34 |
+| parameter | `path` | 34 |
+| parameter | `value` | 34 |
+| variable | `descriptor` | 36 |
+| variable | `name` | 36 |
+| variable | `stream` | 38 |
+| class | `InstanceLock` | 47 |
+| function | `__init__(self, path)` | 50 |
+| parameter | `path` | 50 |
+| parameter | `self` | 50 |
+| function | `close(self)` | 70 |
+| parameter | `self` | 70 |
+| class | `Workspaces` | 75 |
+| function | `__init__(self, root)` | 78 |
+| parameter | `root` | 78 |
+| parameter | `self` | 78 |
+| variable | `allowed` | 84 |
+| variable | `p` | 93 |
+| function | `archive(self, owner)` | 113 |
+| parameter | `owner` | 113 |
+| parameter | `self` | 113 |
+| variable | `c` | 116 |
+| function | `status(self, owner, session)` | 121 |
+| parameter | `owner` | 121 |
+| parameter | `self` | 121 |
+| parameter | `session` | 121 |
+| variable | `config` | 123 |
+| function | `providers(self)` | 133 |
+| parameter | `self` | 133 |
+| variable | `path` | 135 |
+| variable | `data` | 136 |
+| variable | `data` | 140 |
+| variable | `k` | 142 |
+| variable | `p` | 142 |
+| variable | `v` | 142 |
+| variable | `p` | 145 |
+| function | `unlock(self, owner, session, encoded, salt)` | 147 |
+| parameter | `encoded` | 147 |
+| parameter | `owner` | 147 |
+| parameter | `salt` | 147 |
+| parameter | `self` | 147 |
+| parameter | `session` | 147 |
+| variable | `key` | 151 |
+| variable | `current` | 152 |
+| variable | `config` | 153 |
+| variable | `proof` | 156 |
+| variable | `nonce` | 167 |
+| variable | `config` | 168 |
+| variable | `keys` | 197 |
+| variable | `settings` | 197 |
+| function | `require(self, owner, session)` | 211 |
+| parameter | `owner` | 211 |
+| parameter | `self` | 211 |
+| parameter | `session` | 211 |
+| function | `save(self, force)` | 217 |
+| parameter | `force` | 217 |
+| parameter | `self` | 217 |
+| variable | `current` | 225 |
+| function | `remove_active(self, owner)` | 232 |
+| parameter | `owner` | 232 |
+| parameter | `self` | 232 |
+| function | `lock(self, owner)` | 244 |
+| parameter | `owner` | 244 |
+| parameter | `self` | 244 |
+| function | `delete(self, owner)` | 262 |
+| parameter | `owner` | 262 |
+| parameter | `self` | 262 |
+| function | `close(self)` | 270 |
+| parameter | `self` | 270 |
+
 ## studio/providers.py
 
 | Kind | Declaration | Line |
 |---|---|---|
 | variable | `SYSTEM` | 25 |
 | class | `Providers` | 37 |
-| function | `__init__(self, path)` | 40 |
-| parameter | `path` | 40 |
-| parameter | `self` | 40 |
-| variable | `provider` | 45 |
-| variable | `url` | 46 |
-| function | `public(self)` | 56 |
-| parameter | `self` | 56 |
-| variable | `row` | 65 |
-| function | `request(self, request)` | 68 |
-| parameter | `request` | 68 |
-| parameter | `self` | 68 |
-| variable | `identifier` | 72 |
-| variable | `provider` | 73 |
-| variable | `row` | 73 |
-| variable | `key` | 76 |
-| variable | `source` | 79 |
-| variable | `row` | 81 |
-| variable | `user` | 82 |
-| variable | `headers` | 85 |
-| variable | `kind` | 86 |
-| variable | `headers` | 88 |
-| variable | `body` | 89 |
-| variable | `body` | 98 |
-| variable | `client` | 107 |
-| variable | `response` | 108 |
-| variable | `data` | 110 |
-| variable | `chunk` | 111 |
-| variable | `message` | 115 |
-| variable | `text` | 117 |
-| variable | `block` | 118 |
-| variable | `text` | 121 |
-| variable | `text` | 123 |
+| function | `__init__(self, path, settings, credentials)` | 40 |
+| parameter | `credentials` | 41 |
+| parameter | `path` | 41 |
+| parameter | `self` | 41 |
+| parameter | `settings` | 41 |
+| variable | `provider` | 50 |
+| variable | `url` | 51 |
+| function | `public(self)` | 61 |
+| parameter | `self` | 61 |
+| variable | `row` | 71 |
+| function | `request(self, request)` | 74 |
+| parameter | `request` | 74 |
+| parameter | `self` | 74 |
+| variable | `identifier` | 78 |
+| variable | `provider` | 79 |
+| variable | `row` | 79 |
+| variable | `key` | 82 |
+| variable | `source` | 85 |
+| variable | `row` | 87 |
+| variable | `user` | 88 |
+| variable | `headers` | 91 |
+| variable | `kind` | 92 |
+| variable | `headers` | 94 |
+| variable | `body` | 95 |
+| variable | `body` | 104 |
+| variable | `temperature` | 112 |
+| variable | `client` | 115 |
+| variable | `response` | 116 |
+| variable | `data` | 118 |
+| variable | `chunk` | 119 |
+| variable | `message` | 123 |
 | variable | `text` | 125 |
-| variable | `proposal` | 126 |
+| variable | `block` | 126 |
+| variable | `text` | 129 |
+| variable | `text` | 131 |
+| variable | `text` | 135 |
+| variable | `proposal` | 136 |
+| function | `key(self, provider)` | 146 |
+| parameter | `provider` | 146 |
+| parameter | `self` | 146 |
 
 ## studio/reports.py
 
@@ -669,6 +1172,104 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `result` | 158 |
 | variable | `key` | 165 |
 
+## studio/vault.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `MAGIC` | 30 |
+| variable | `AAD` | 31 |
+| variable | `MAX_BYTES` | 32 |
+| variable | `MAX_FILES` | 33 |
+| variable | `CHUNK` | 34 |
+| function | `safe_name(name)` | 37 |
+| parameter | `name` | 37 |
+| variable | `path` | 39 |
+| variable | `devices` | 40 |
+| variable | `i` | 45 |
+| variable | `i` | 46 |
+| variable | `c` | 53 |
+| variable | `c` | 54 |
+| variable | `p` | 57 |
+| function | `members(root)` | 64 |
+| parameter | `root` | 64 |
+| variable | `found` | 66 |
+| variable | `names` | 66 |
+| variable | `total` | 66 |
+| variable | `path` | 67 |
+| variable | `name` | 72 |
+| variable | `total` | 77 |
+| function | `signature(root)` | 83 |
+| parameter | `root` | 83 |
+| variable | `p` | 86 |
+| class | `EncryptedWriter` | 90 |
+| function | `__init__(self, stream, encryptor)` | 93 |
+| parameter | `encryptor` | 93 |
+| parameter | `self` | 93 |
+| parameter | `stream` | 93 |
+| function | `writable(self)` | 97 |
+| parameter | `self` | 97 |
+| function | `write(self, data)` | 101 |
+| parameter | `data` | 101 |
+| parameter | `self` | 101 |
+| function | `tell(self)` | 107 |
+| parameter | `self` | 107 |
+| function | `encrypt_workspace(root, destination, key)` | 112 |
+| parameter | `destination` | 112 |
+| parameter | `key` | 112 |
+| parameter | `root` | 112 |
+| variable | `paths` | 114 |
+| variable | `p` | 115 |
+| variable | `descriptor` | 117 |
+| variable | `temporary` | 117 |
+| variable | `scratch` | 118 |
+| variable | `nonce` | 120 |
+| variable | `encryptor` | 121 |
+| variable | `stream` | 123 |
+| variable | `writer` | 125 |
+| variable | `archive` | 126 |
+| variable | `path` | 128 |
+| variable | `source` | 129 |
+| variable | `source` | 131 |
+| variable | `original` | 133 |
+| variable | `copied` | 134 |
+| variable | `content` | 138 |
+| variable | `entry` | 139 |
+| function | `decrypt_workspace(source, root, key)` | 153 |
+| parameter | `key` | 153 |
+| parameter | `root` | 153 |
+| parameter | `source` | 153 |
+| variable | `descriptor` | 157 |
+| variable | `temporary` | 157 |
+| variable | `plain` | 159 |
+| variable | `stream` | 159 |
+| variable | `nonce` | 162 |
+| variable | `tag` | 164 |
+| variable | `remaining` | 166 |
+| variable | `decryptor` | 167 |
+| variable | `chunk` | 170 |
+| variable | `remaining` | 173 |
+| variable | `archive` | 176 |
+| variable | `entries` | 177 |
+| variable | `names` | 178 |
+| variable | `total` | 178 |
+| variable | `entry` | 181 |
+| variable | `name` | 182 |
+| variable | `total` | 187 |
+| variable | `metadata` | 190 |
+| variable | `original` | 193 |
+| variable | `entry` | 204 |
+| variable | `target` | 207 |
+| variable | `content` | 209 |
+| variable | `output` | 209 |
+
+## tests/account-session.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| type | `Page` | 9 |
+| function | `createSession(page: Page, alias: string)` | 12 |
+| function | `editorJourney(page: Page)` | 40 |
+
 ## tests/conftest.py
 
 | Kind | Declaration | Line |
@@ -679,8 +1280,16 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `app` | 14 |
-| variable | `page` | 20 |
+| variable | `app` | 18 |
+| variable | `page` | 28 |
+
+## tests/private.spec.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `external` | 14 |
+| variable | `url` | 16 |
+| variable | `downloaded` | 33 |
 
 ## tests/test_api.py
 
@@ -817,6 +1426,127 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `project` | 40 |
 | function | `unavailable()` | 43 |
 | variable | `result` | 47 |
+| function | `test_private_remote_context_blocked(endpoint, monkeypatch)` | 54 |
+| parameter | `endpoint` | 54 |
+| parameter | `monkeypatch` | 54 |
+| function | `forbidden()` | 59 |
+| parameter | `args` | 59 |
+| parameter | `kwargs` | 59 |
+| function | `test_private_local_context_and_scoped_job(project, monkeypatch, tmp_path)` | 66 |
+| parameter | `monkeypatch` | 66 |
+| parameter | `project` | 66 |
+| parameter | `tmp_path` | 66 |
+| variable | `observed` | 69 |
+| function | `fake_command(argv)` | 71 |
+| parameter | `argv` | 71 |
+| parameter | `kwargs` | 71 |
+| variable | `argv` | 75 |
+| variable | `mount` | 80 |
+| variable | `x` | 80 |
+| variable | `result` | 87 |
+| variable | `argv` | 89 |
+| function | `test_context_overrides_host_but_remote_source_stays_blocked(monkeypatch)` | 93 |
+| parameter | `monkeypatch` | 93 |
+| function | `context_only(argv)` | 98 |
+| parameter | `argv` | 98 |
+| parameter | `kwargs` | 98 |
+
+## tests/test_private.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `PASSWORD` | 25 |
+| variable | `KEY` | 26 |
+| variable | `SALT` | 27 |
+| variable | `HEADERS` | 28 |
+| function | `client(tmp_path)` | 32 |
+| parameter | `tmp_path` | 32 |
+| variable | `app` | 34 |
+| variable | `session` | 35 |
+| function | `register(client, alias)` | 39 |
+| parameter | `alias` | 39 |
+| parameter | `client` | 39 |
+| variable | `response` | 41 |
+| function | `unlock(client, key)` | 46 |
+| parameter | `client` | 46 |
+| parameter | `key` | 46 |
+| variable | `response` | 48 |
+| function | `test_registration_private_headers_and_zero_secret_echo(client)` | 52 |
+| parameter | `client` | 52 |
+| variable | `response` | 56 |
+| variable | `invalid` | 64 |
+| variable | `db` | 68 |
+| variable | `row` | 69 |
+| function | `test_request_origin_host_mutation_rejected(client, headers)` | 83 |
+| parameter | `client` | 83 |
+| parameter | `headers` | 83 |
+| function | `test_real_revisions_encrypted_lock_reopen(client, project)` | 93 |
+| parameter | `client` | 93 |
+| parameter | `project` | 93 |
+| variable | `result` | 97 |
+| variable | `identity` | 99 |
+| variable | `manager` | 100 |
+| variable | `owner` | 101 |
+| variable | `archive` | 105 |
+| variable | `wrong` | 108 |
+| function | `test_two_accounts_and_same_account_new_session_need_key(client, project)` | 115 |
+| parameter | `client` | 115 |
+| parameter | `project` | 115 |
+| variable | `identity` | 119 |
+| variable | `original` | 120 |
+| function | `test_recovery_logout_expiry_delete(client)` | 147 |
+| parameter | `client` | 147 |
+| variable | `recovery` | 149 |
+| variable | `body` | 151 |
+| variable | `changed` | 152 |
+| function | `test_expiry_and_human_idle(client)` | 171 |
+| parameter | `client` | 171 |
+| variable | `manager` | 175 |
+| variable | `human` | 176 |
+| variable | `db` | 181 |
+| function | `test_private_static_review_and_blocked_execution(client, project, monkeypatch)` | 186 |
+| parameter | `client` | 186 |
+| parameter | `monkeypatch` | 186 |
+| parameter | `project` | 186 |
+| function | `unavailable()` | 189 |
+| parameter | `kwargs` | 189 |
+| variable | `review` | 196 |
+| variable | `identity` | 198 |
+| variable | `job` | 199 |
+| variable | `_` | 200 |
+| variable | `result` | 201 |
+| variable | `report` | 206 |
+| function | `test_provider_keys_private_and_consent_version(client, project)` | 211 |
+| parameter | `client` | 211 |
+| parameter | `project` | 211 |
+| variable | `config` | 215 |
+| variable | `saved` | 227 |
+| variable | `before` | 237 |
+| variable | `repeated` | 238 |
+| variable | `changed` | 240 |
+| variable | `manager` | 247 |
+| variable | `owner` | 248 |
+| function | `test_recovery_save_failure_preserves_code(client, monkeypatch)` | 255 |
+| parameter | `client` | 255 |
+| parameter | `monkeypatch` | 255 |
+| variable | `recovery` | 259 |
+| variable | `original` | 262 |
+| function | `unavailable()` | 264 |
+| parameter | `args` | 264 |
+| variable | `body` | 269 |
+| function | `test_archive_paths(name)` | 278 |
+| parameter | `name` | 278 |
+| function | `test_archive_authentication_before_extract(tmp_path)` | 284 |
+| parameter | `tmp_path` | 284 |
+| variable | `root` | 286 |
+| variable | `path` | 289 |
+| variable | `damaged` | 292 |
+| function | `test_single_instance_and_launcher_not_browser(client)` | 300 |
+| parameter | `client` | 300 |
+| function | `test_warning_budget_is_bounded(project)` | 307 |
+| parameter | `project` | 307 |
+| variable | `changed` | 311 |
+| variable | `result` | 313 |
 
 ## tests/test_providers.py
 
@@ -841,6 +1571,20 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `tmp_path` | 84 |
 | parameter | `url` | 84 |
 | variable | `path` | 86 |
+| function | `test_owned_key_never_uses_global_environment(project, monkeypatch)` | 92 |
+| parameter | `monkeypatch` | 92 |
+| parameter | `project` | 92 |
+| variable | `settings` | 95 |
+| variable | `router` | 107 |
+| function | `test_owned_protocol_parameters_and_secret_echo(project, monkeypatch)` | 113 |
+| parameter | `monkeypatch` | 113 |
+| parameter | `project` | 113 |
+| variable | `settings` | 115 |
+| function | `handler(request)` | 129 |
+| parameter | `request` | 129 |
+| variable | `body` | 130 |
+| variable | `real` | 148 |
+| parameter | `kwargs` | 150 |
 
 ## tests/web.spec.ts
 
@@ -964,6 +1708,62 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `parser` | 159 |
 | variable | `args` | 163 |
 
+## ui/Account.tsx
+
+| Kind | Declaration | Line |
+|---|---|---|
+| type | `FormEvent` | 10 |
+| type | `Status` | 14 |
+| type | `Provider` | 24 |
+| type | `Config` | 33 |
+| function | `Creator()` | 40 |
+| function | `Help()` | 60 |
+| function | `value(form: HTMLFormElement, name: string)` | 150 |
+| function | `derive(phrase: string, salt: string / null)` | 155 |
+| variable | `bytes` | 156 |
+| variable | `material` | 159 |
+| variable | `key` | 166 |
+| variable | `result` | 173 |
+| function | `Account()` | 182 |
+| variable | `[status, setStatus]` | 183 |
+| variable | `[loading, setLoading]` | 184 |
+| variable | `[mode, setMode]` | 185 |
+| variable | `[recovery, setRecovery]` | 186 |
+| variable | `[notice, setNotice]` | 187 |
+| variable | `[busy, setBusy]` | 188 |
+| variable | `[settings, setSettings]` | 189 |
+| variable | `[showSettings, setShowSettings]` | 190 |
+| variable | `[idle, setIdle]` | 191 |
+| variable | `lastHuman` | 192 |
+| variable | `heartbeat` | 193 |
+| function | `refresh()` | 195 |
+| variable | `response` | 197 |
+| variable | `data` | 210 |
+| function | `run(task: ()` | 215 |
+| variable | `disposed` | 236 |
+| variable | `timer` | 245 |
+| variable | `human` | 248 |
+| variable | `close` | 257 |
+| function | `authenticate(event: FormEvent<HTMLFormElement>)` | 278 |
+| variable | `form` | 281 |
+| variable | `data` | 283 |
+| variable | `result` | 288 |
+| function | `unlock(event: FormEvent<HTMLFormElement>)` | 303 |
+| variable | `form` | 306 |
+| variable | `payload` | 308 |
+| function | `configure(event: FormEvent<HTMLFormElement>)` | 315 |
+| variable | `form` | 318 |
+| variable | `id` | 320 |
+| variable | `provider` | 321 |
+| variable | `providers` | 334 |
+| variable | `routes` | 340 |
+| variable | `task` | 341 |
+| variable | `data` | 343 |
+| variable | `a` | 532 |
+| variable | `next` | 571 |
+| variable | `data` | 684 |
+| variable | `form` | 703 |
+
 ## ui/App.tsx
 
 | Kind | Declaration | Line |
@@ -988,41 +1788,50 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `[caseText, setCaseText]` | 56 |
 | variable | `[comparison, setComparison]` | 59 |
 | variable | `[baseline, setBaseline]` | 60 |
-| variable | `generation` | 61 |
-| variable | `selected` | 62 |
-| function | `refresh()` | 65 |
-| variable | `timer` | 78 |
-| variable | `requestGeneration` | 93 |
-| variable | `result` | 96 |
-| variable | `timer` | 112 |
-| function | `saveAndRun()` | 121 |
-| variable | `cases` | 126 |
-| variable | `payload` | 127 |
-| variable | `saved` | 128 |
-| variable | `job` | 135 |
-| function | `openRevision(id: string)` | 154 |
-| variable | `saved` | 157 |
-| function | `upload(files: FileList / null)` | 169 |
-| variable | `additions` | 173 |
-| variable | `bytes` | 177 |
-| function | `acceptProposal()` | 210 |
-| variable | `updates` | 213 |
-| variable | `files` | 214 |
-| variable | `checks` | 233 |
-| variable | `metrics` | 234 |
+| variable | `[review, setReview]` | 61 |
+| variable | `generation` | 62 |
+| variable | `selected` | 63 |
+| function | `refresh()` | 66 |
+| variable | `changed` | 76 |
+| variable | `timer` | 88 |
+| variable | `requestGeneration` | 103 |
+| variable | `result` | 106 |
+| variable | `timer` | 122 |
+| function | `saveAndRun(execute = true)` | 131 |
+| variable | `cases` | 136 |
+| variable | `payload` | 137 |
+| variable | `saved` | 138 |
+| variable | `job` | 150 |
+| function | `staticReview()` | 169 |
+| function | `openRevision(id: string)` | 187 |
+| variable | `saved` | 190 |
+| function | `upload(files: FileList / null)` | 202 |
+| variable | `additions` | 206 |
+| variable | `bytes` | 210 |
+| function | `acceptProposal()` | 243 |
+| variable | `updates` | 246 |
+| variable | `files` | 247 |
+| variable | `checks` | 266 |
+| variable | `metrics` | 267 |
 
 ## ui/api.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `fragment` | 9 |
-| variable | `supplied` | 10 |
-| variable | `response` | 22 |
-| variable | `error` | 31 |
-| function | `download(run: string, format: "zip" / "html" / "json")` | 41 |
-| variable | `response` | 43 |
-| variable | `url` | 49 |
-| variable | `link` | 50 |
+| variable | `privateMode` | 9 |
+| variable | `providerRevision` | 10 |
+| function | `enableLegacyMode()` | 13 |
+| variable | `supplied` | 15 |
+| function | `setProviderRevision(revision: string)` | 23 |
+| variable | `response` | 33 |
+| variable | `data` | 40 |
+| variable | `headers` | 54 |
+| variable | `response` | 63 |
+| variable | `data` | 73 |
+| function | `download(run: string, format: "zip" / "html" / "json")` | 84 |
+| variable | `response` | 85 |
+| variable | `url` | 103 |
+| variable | `link` | 104 |
 
 ## ui/demo.ts
 
@@ -1034,6 +1843,11 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
+| variable | `root` | 35 |
+| function | `boot()` | 37 |
+| variable | `response` | 39 |
+| variable | `health` | 41 |
+| variable | `screen` | 44 |
 
 ## ui/types.ts
 
