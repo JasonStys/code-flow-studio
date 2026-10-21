@@ -15,11 +15,22 @@ By Jason Stys. This report supplements, rather than rewrites, [historical accoun
 
 The first [remote validation](https://github.com/JasonStys/code-flow-studio/actions/runs/39667375186) passed controller/browser/training gates but exposed .NET's patched named-mutex directory requirements during C# startup. The fix creates a UID-owned mode-0700 `XDG_RUNTIME_DIR` inside each fresh job tmpfs; read-only root, non-root UID, no network and existing mounts/capabilities remain unchanged. The boundary probe checks directory ownership/permissions, and all twelve compiler adapters must still pass. This is a worker environment fix, not a failed user-source diagnostic or a Docker Desktop repair. [Upstream explanation](https://github.com/dotnet/runtime/issues/135726). The worker environment marker is versioned to prevent comparing pre/post-change benchmark environments as identical.
 
-Native-package and GitHub Actions results are pending until the implementation is published and validated remotely. Do not interpret this section as a passing remote run. The final update will link exact source/run evidence. A 0.2.1 release is gated on successful validation and three-OS package checks for its exact source commit; older releases are not overwritten.
+Source commit: `fbe30155ba050298d8fbaef8b31e934be2693940`.
+
+| Gate | Measured result |
+|---|---|
+| [Validate 39668197433](https://github.com/JasonStys/code-flow-studio/actions/runs/39668197433) | **Passed**: 121 Linux Python tests, **84.37%** coverage (OS branches differ from Windows); 15 actual browser tests across Chromium/Firefox/WebKit; six private-account browser journeys; lint, source maps, dependency audits, build and real training smoke. |
+| Same run, isolated workers | **27 real container scenarios passed**, plus authenticated private-account execution through all twelve adapters and push analysis. No host target execution. |
+| [Desktop packages 39668197529](https://github.com/JasonStys/code-flow-studio/actions/runs/39668197529) | **All three OS jobs passed**, including actual frozen/packaged application launch and account/editor journeys on Windows, Linux and macOS. Unsigned development packages, not app-store or clean-machine certification. |
+| [Located acceptance evidence](evidence/located-diagnostics.json) | Genuine synthetic-fixture tool results: `helper.py:3` uncovered, missing arc `[2,3]`, unimported `unused.py:1,2` uncovered; unused function at `unused.py:1`; runtime failure at `main.py:2`; compiler error `main.cpp:1`; original TypeScript `main.ts:2`; wrong-answer case explicitly unlocated. Source hashes and provenance are retained. |
+
+Version 0.2.1 installer publication is gated on these exact source results and fresh native checks in [release workflow 39668826844](https://github.com/JasonStys/code-flow-studio/actions/runs/39668826844). Its audit trail records the prepare/build/publish outcomes and checksummed assets. The workflow publishes only after every native build/test succeeds; older releases are not overwritten.
 
 ## Storage and data safety
 
 Initial fresh read: **61,385,326 artifact bytes** across the account; separate caches **13,254,452,931 bytes**. Quota percentage unavailable. Artifact uploads remain governed by the existing opt-in repository variable; no retention, deletion or cleanup was authorized or performed. Account data, API keys and local test traces are not committed.
+
+Fresh post-validation check at `2026-10-21T20:12:57Z`: artifact bytes remained **61,385,326**; caches were separately **13,305,406,689 bytes**. These are live byte counts, not a reconstruction of the unavailable accumulated billing meter. Releases use the existing draft-release upload path rather than enabling Actions artifact uploads.
 
 ## Rollback and remaining limits
 

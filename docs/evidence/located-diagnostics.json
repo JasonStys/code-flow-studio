@@ -1,0 +1,208 @@
+{
+  "source_commit": "fbe30155ba050298d8fbaef8b31e934be2693940",
+  "source_run": "https://github.com/JasonStys/code-flow-studio/actions/runs/39668197433",
+  "environment": "GitHub-hosted Linux, actual restricted worker containers; synthetic authored fixtures, not host execution or mocked coverage",
+  "evidence": {
+    "coverage": {
+      "status": "measured",
+      "entry": {
+        "covered_lines": 2,
+        "num_statements": 2,
+        "percent_covered": 100,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "num_branches": 0,
+        "num_partial_branches": 0,
+        "covered_branches": 0,
+        "missing_branches": 0
+      },
+      "files": {
+        "main.py": {
+          "status": "measured",
+          "summary": {
+            "covered_lines": 2,
+            "num_statements": 2,
+            "percent_covered": 100,
+            "percent_covered_display": "100",
+            "missing_lines": 0,
+            "excluded_lines": 0,
+            "num_branches": 0,
+            "num_partial_branches": 0,
+            "covered_branches": 0,
+            "missing_branches": 0
+          },
+          "source_sha256": "a923e41e4448423709ca4109ef66a919f45856416d30d98897780ba258d0580e",
+          "truncated": false,
+          "missing_lines": [],
+          "missing_branches": [],
+          "executed_lines": [
+            1,
+            2
+          ],
+          "excluded_lines": []
+        },
+        "helper.py": {
+          "status": "measured",
+          "summary": {
+            "covered_lines": 3,
+            "num_statements": 4,
+            "percent_covered": 66.66666666666667,
+            "percent_covered_display": "67",
+            "missing_lines": 1,
+            "excluded_lines": 0,
+            "num_branches": 2,
+            "num_partial_branches": 1,
+            "covered_branches": 1,
+            "missing_branches": 1
+          },
+          "source_sha256": "62a0c50064fa336debc17aa6494a0fc6d75905f42608bb7037c50fa26dd38775",
+          "truncated": false,
+          "missing_lines": [
+            3
+          ],
+          "missing_branches": [
+            [
+              2,
+              3
+            ]
+          ],
+          "executed_lines": [
+            1,
+            2,
+            4
+          ],
+          "excluded_lines": []
+        },
+        "unused.py": {
+          "status": "measured",
+          "summary": {
+            "covered_lines": 0,
+            "num_statements": 2,
+            "percent_covered": 0,
+            "percent_covered_display": "0",
+            "missing_lines": 2,
+            "excluded_lines": 0,
+            "num_branches": 0,
+            "num_partial_branches": 0,
+            "covered_branches": 0,
+            "missing_branches": 0
+          },
+          "source_sha256": "b09cf5ed65fc57ad494d8942f804cc3c4ef97f1c8e6d943c7e474fccbc86703d",
+          "truncated": false,
+          "missing_lines": [
+            1,
+            2
+          ],
+          "missing_branches": [],
+          "executed_lines": [],
+          "excluded_lines": []
+        }
+      },
+      "locations_truncated": false,
+      "scope": "Supplied Python sources under approved CLI cases only, not generated pytest tests; line/branch, not condition/MC/DC. At most 20,000 location entries, missing before executed; negative branch destinations denote function exits."
+    },
+    "unused": [
+      {
+        "file": "unused.py",
+        "line": 1,
+        "column": 1,
+        "source_sha256": "b09cf5ed65fc57ad494d8942f804cc3c4ef97f1c8e6d943c7e474fccbc86703d",
+        "code": "PY-UNUSED-FUNCTION",
+        "message": "Possibly unused function 'unused'; external/dynamic callers may exist",
+        "severity": "review",
+        "origin": "python-static"
+      }
+    ],
+    "runtime": [
+      {
+        "file": "main.py",
+        "line": 4,
+        "column": null,
+        "column_unit": "tool-reported",
+        "stage": "case:0:double-two",
+        "code": "TOOL-LOCATION",
+        "origin": "tool-output",
+        "severity": "error",
+        "message": "  File \"/tmp/project/main.py\", line 4, in <module>",
+        "source_sha256": "6f39a6c4c1e79cd8be43cfa703429d7c86aa9a604ce129f563f24974ff164629",
+        "artifact": "source"
+      },
+      {
+        "file": "main.py",
+        "line": 2,
+        "column": null,
+        "column_unit": "tool-reported",
+        "stage": "case:0:double-two",
+        "code": "TOOL-LOCATION",
+        "origin": "tool-output",
+        "severity": "error",
+        "message": "  File \"/tmp/project/main.py\", line 2, in fail",
+        "source_sha256": "6f39a6c4c1e79cd8be43cfa703429d7c86aa9a604ce129f563f24974ff164629",
+        "artifact": "source"
+      }
+    ],
+    "typescript": [
+      {
+        "file": "main.ts",
+        "line": 2,
+        "column": null,
+        "column_unit": "tool-reported",
+        "stage": "case:0:double-two",
+        "code": "TOOL-LOCATION",
+        "origin": "tool-output",
+        "severity": "error",
+        "message": "/tmp/project/main.ts:2",
+        "source_sha256": "fb027e2c1e31a5a6880616e1fb60d8d797a0b0e5793454e20823608fe0ad98e9",
+        "artifact": "source"
+      },
+      {
+        "file": "main.ts",
+        "line": 2,
+        "column": 9,
+        "column_unit": "tool-reported",
+        "stage": "case:0:double-two",
+        "code": "TOOL-LOCATION",
+        "origin": "tool-output",
+        "severity": "error",
+        "message": "    at fail (/tmp/project/main.ts:2:9)",
+        "source_sha256": "fb027e2c1e31a5a6880616e1fb60d8d797a0b0e5793454e20823608fe0ad98e9",
+        "artifact": "source"
+      },
+      {
+        "file": "main.ts",
+        "line": 4,
+        "column": 1,
+        "column_unit": "tool-reported",
+        "stage": "case:0:double-two",
+        "code": "TOOL-LOCATION",
+        "origin": "tool-output",
+        "severity": "error",
+        "message": "    at Object.<anonymous> (/tmp/project/main.ts:4:1)",
+        "source_sha256": "fb027e2c1e31a5a6880616e1fb60d8d797a0b0e5793454e20823608fe0ad98e9",
+        "artifact": "source"
+      }
+    ],
+    "compiler": [
+      {
+        "file": "main.cpp",
+        "line": 1,
+        "column": 1,
+        "column_unit": "tool-reported",
+        "stage": "compilation",
+        "code": "TOOL-LOCATION",
+        "origin": "tool-output",
+        "severity": "error",
+        "message": "main.cpp:1:1: error: expected unqualified-id before ‘not’ token",
+        "source_sha256": "1876c5665eb467e5a37375afd47c8e3f8699239458a10c62368432b74e069077",
+        "artifact": "source"
+      }
+    ],
+    "unlocated_oracle": [
+      {
+        "stage": "case:0:double-two",
+        "reason": "Failure has no recognized in-range source location; review raw evidence. No root-cause line inferred."
+      }
+    ]
+  }
+}
