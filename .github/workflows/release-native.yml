@@ -9,7 +9,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: code-flow-release-v0.2.0
+  group: code-flow-release
   cancel-in-progress: false
 jobs:
   prepare:
@@ -19,6 +19,7 @@ jobs:
       actions: read
     outputs:
       sha: ${{ steps.gate.outputs.sha }}
+      tag: ${{ steps.gate.outputs.tag }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -30,14 +31,19 @@ jobs:
         run: |
           set -euo pipefail
           sha=$(git rev-parse HEAD)
+          version=$(python -c 'import json; print(json.load(open("package.json"))["version"])')
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          test "$version" = "$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+          tag="v$version"
           test "$(gh run list --workflow validate.yml --commit "$sha" --limit 1 --json conclusion --jq '.[0].conclusion')" = success
           test "$(gh run list --workflow packages.yml --commit "$sha" --limit 1 --json conclusion --jq '.[0].conclusion')" = success
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
-          if gh release view v0.2.0 --json isDraft,targetCommitish > /tmp/cfs-release.json 2>/dev/null; then
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if gh release view "$tag" --json isDraft,targetCommitish > /tmp/cfs-release.json 2>/dev/null; then
             test "$(jq -r '.isDraft' /tmp/cfs-release.json)" = true
             test "$(jq -r '.targetCommitish' /tmp/cfs-release.json)" = "$sha"
           else
-            gh release create v0.2.0 --draft --target "$sha" --title "Code Flow Studio 0.2.0 — private local accounts" --notes-file docs/releases/v0.2.0.md
+            gh release create "$tag" --draft --target "$sha" --title "Code Flow Studio $version — located diagnostics" --notes-file "docs/releases/$tag.md"
           fi
   build:
     needs: prepare
@@ -51,6 +57,7 @@ jobs:
       contents: write
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -90,13 +97,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          gh release upload v0.2.0 release/installers/*.sha256 --clobber
+          gh release upload "$RELEASE_TAG" release/installers/*.sha256 --clobber
           if [ "$RUNNER_OS" = Windows ]; then
-            gh release upload v0.2.0 release/installers/*.exe release/installers/*.zip --clobber
+            gh release upload "$RELEASE_TAG" release/installers/*.exe release/installers/*.zip --clobber
           elif [ "$RUNNER_OS" = macOS ]; then
-            gh release upload v0.2.0 release/installers/*.dmg release/installers/*.tar.gz --clobber
+            gh release upload "$RELEASE_TAG" release/installers/*.dmg release/installers/*.tar.gz --clobber
           else
-            gh release upload v0.2.0 release/installers/*.AppImage release/installers/*.tar.gz --clobber
+            gh release upload "$RELEASE_TAG" release/installers/*.AppImage release/installers/*.tar.gz --clobber
           fi
   publish:
     needs: [prepare, build]
@@ -107,4 +114,5 @@ jobs:
       - env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: gh release edit v0.2.0 --draft=false
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+        run: gh release edit "$RELEASE_TAG" --draft=false

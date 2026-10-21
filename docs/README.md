@@ -1,5 +1,7 @@
 # Documentation
 
+- [Exact file/line diagnostics, unused checks and uncovered lines](located-diagnostics.md), with [current location validation](validation-locations.md).
+
 - [Private accounts and end-user operation](private-accounts.md): installation, privacy, backups/recovery and provider setup.
 - [Private API contract](private-api.md) and [release checklist/rollback](release-checklist-v0.2.md).
 - [Local trust-boundary decision](adr-private-local.md), [account release test plan](test-plan-v0.2.md) and [current 0.2 validation](validation-v0.2.md).

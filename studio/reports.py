@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: html_report(run)@L21; bundle(run, revision)@L31
-# variables: evidence@L23; buffer@L33; archive@L34; file@L38
-# parameters: run@L21; revision@L31; run@L31
+# functions: location_summary(run)@L21; escape(value)@L26; html_report(run)@L96; bundle(run, revision)@L108
+# variables: result@L23; findings@L24; rows@L30; value@L34; item@L43; coverage@L45; data@L63; name@L63; unknown@L65; item@L67; unknown@L69; data@L75; name@L75; evidence@L98; buffer@L110; archive@L111; file@L115
+# parameters: run@L21; value@L26; run@L96; revision@L108; run@L108
 # </code-map>
 
 """Portable machine-readable and escaped HTML evidence reports.
@@ -18,11 +18,88 @@ import json
 import zipfile
 
 
+def location_summary(run: dict) -> str:
+    """Render escaped location tables for both API envelopes and raw CLI results; retain legacy unknowns."""
+    result = run.get("result", run)
+    findings = result.get("static", {}).get("findings", []) + result.get("diagnostics", [])
+
+    def escape(value) -> str:
+        """Escape every label/message derived from source or tools, including malicious diagnostics."""
+        return html.escape(str(value))
+
+    rows = "".join(
+        "<tr>"
+        + "".join(
+            "<td>" + escape(value) + "</td>"
+            for value in (
+                item.get("file", "Legacy: unavailable"),
+                item.get("line", "Unavailable"),
+                item.get("column") or "—",
+                item.get("code", ""),
+                item.get("message", ""),
+            )
+        )
+        + "</tr>"
+        for item in findings[:200]
+    )
+    coverage = "".join(
+        "<h3>"
+        + escape(name)
+        + "</h3><p>"
+        + (
+            "Uncovered lines: "
+            + escape(", ".join(map(str, data.get("missing_lines", []))) or "None recorded")
+            + ". Missing branch arcs: "
+            + escape(data.get("missing_branches", []))
+            + (
+                ". Truncated: an empty retained list is not full-coverage evidence."
+                if data.get("truncated")
+                else ""
+            )
+            if data.get("status") == "measured"
+            else escape(data.get("reason", "Not measured"))
+        )
+        + "</p>"
+        for name, data in result.get("coverage", {}).get("files", {}).items()
+    )
+    unknown = "".join(
+        "<p>" + escape(item["stage"]) + ": " + escape(item["reason"]) + "</p>"
+        for item in result.get("unlocated_failures", [])
+    )
+    unknown += "".join(
+        "<p>"
+        + escape(name)
+        + ": parser stopped ("
+        + escape(data.get("reason"))
+        + "); exact line unavailable.</p>"
+        for name, data in result.get("static", {}).get("files", {}).items()
+        if data.get("parsed") is False and not data.get("location_available")
+    )
+    return (
+        "<h2>Exact source locations</h2><p>Saved source snapshot, not unsaved editor text. Tool locations are not proven root causes; unused candidates are not uncovered lines. Up to 200 rows shown; raw evidence follows.</p>"
+        + (
+            "<table><tr><th>File</th><th>Line</th><th>Column</th><th>Code</th><th>Finding</th></tr>"
+            + rows
+            + "</table>"
+            if rows
+            else "<p>No located findings recorded; not proof of correctness.</p>"
+        )
+        + unknown
+        + "<h2>Uncovered Python lines</h2>"
+        + (
+            coverage
+            or "<p>Exact missing lines unavailable/not measured in this report. Legacy totals cannot reconstruct line locations; rerun with the updated worker.</p>"
+        )
+    )
+
+
 def html_report(run: dict) -> str:
     """Render a self-contained, script-free report preserving measured and blocked states."""
     evidence = html.escape(json.dumps(run, indent=2, ensure_ascii=False))
     return (
-        '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Code Flow evidence</title><style>body{font:16px system-ui;max-width:1000px;margin:3rem auto;padding:1rem;color:#152238}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5fa;padding:1rem}</style><h1>Code Flow Studio · evidence report</h1><p>Tool completion is separate from target correctness. Missing checks are not passes. Review raw evidence and measurement caveats.</p><pre>'
+        '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Code Flow evidence</title><style>body{font:16px system-ui;max-width:1000px;margin:3rem auto;padding:1rem;color:#152238}td,th{padding:.5rem;text-align:left;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5fa;padding:1rem}</style><h1>Code Flow Studio · evidence report</h1><p>By Jason Stys. Tool completion is separate from target correctness. Missing checks are not passes. Review raw evidence and measurement caveats.</p>'
+        + location_summary(run)
+        + "<h2>Raw evidence</h2><pre>"
         + evidence
         + "</pre></html>"
     )

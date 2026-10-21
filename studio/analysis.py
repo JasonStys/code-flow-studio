@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: inspect_source(project)@L23; compare(baseline, candidate, priorities)@L76
-# variables: file@L25; text@L25; lines@L26; findings@L27; char@L28; index@L28; offsets@L28; truncated@L29; patterns@L30; message@L36; pattern@L36; match@L37; truncated@L39; functions@L44; branches@L45; file@L48; tree@L48; functions@L49; node@L50; branches@L52; node@L53; line@L67; reasons@L78; result@L79; dimensions@L100; area@L101; key@L101; metric@L101; after@L107; before@L107; metric@L110; total@L110; score@L111; metric@L112; value@L112
-# parameters: project@L23; baseline@L76; candidate@L76; priorities@L76
+# functions: inspect_source(project)@L23; compare(baseline, candidate, priorities)@L93
+# variables: file@L25; text@L25; lines@L26; findings@L27; truncated@L28; files@L29; patterns@L30; functions@L36; branches@L37; python_files@L38; file@L40; file@L45; used@L45; file@L46; digest@L49; located@L52; metadata@L52; functions@L55; branches@L56; content@L58; char@L59; index@L59; offsets@L59; message@L60; pattern@L60; match@L61; line@L64; previous@L65; truncated@L78; line@L83; reasons@L95; result@L96; dimensions@L117; area@L118; key@L118; metric@L118; after@L124; before@L124; metric@L127; total@L127; score@L128; metric@L129; value@L129
+# parameters: project@L23; baseline@L93; candidate@L93; priorities@L93
 # </code-map>
 
 """Non-executing source heuristics and cautious measured candidate comparisons.
@@ -12,12 +12,12 @@ Symbol and variable locations: docs/code-index.md. Heuristics are warnings,
 not a security audit, semantic proof, or empirical Big-O measurement.
 """
 
-import ast
 import hashlib
 import re
 from bisect import bisect_right
 
 from studio.models import Project
+from studio.source_checks import python_checks, references
 
 
 def inspect_source(project: Project) -> dict:
@@ -25,41 +25,57 @@ def inspect_source(project: Project) -> dict:
     text = "\n".join(file.content for file in project.files if file.encoding == "text")
     lines = text.splitlines()
     findings = []
-    offsets = [index for index, char in enumerate(text) if char == "\n"]
     truncated = False
+    files = {}
     patterns = (
         (r"\beval\s*\(", "Dynamic evaluation"),
         (r"shell\s*=\s*True", "Shell execution"),
         (r"\bpickle\.loads?\s*\(", "Unsafe deserialization"),
         (r"(?i)(api[_-]?key|password|secret)\s*=\s*['\"][^'\"]{8,}", "Possible embedded secret"),
     )
-    for pattern, message in patterns:
-        for match in re.finditer(pattern, text):
-            if len(findings) >= 1000:
-                truncated = True
-                break
-            findings.append(
-                {"line": bisect_right(offsets, match.start()) + 1, "message": message, "severity": "review"}
-            )
     functions = 0
     branches = 0
-    if project.language == "python":
-        try:
-            tree = ast.parse(next(file.content for file in project.files if file.name == project.entry))
-            functions = sum(
-                isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) for node in ast.walk(tree)
-            )
-            branches = sum(
-                isinstance(node, (ast.If, ast.For, ast.While, ast.Try, ast.Match)) for node in ast.walk(tree)
-            )
-        except (SyntaxError, RecursionError, ValueError) as error:
-            findings.append(
-                {
-                    "line": getattr(error, "lineno", None),
-                    "message": "Python syntax/parser limit error",
-                    "severity": "error",
-                }
-            )
+    python_files = [
+        file
+        for file in project.files
+        if file.encoding == "text"
+        and project.language == "python"
+        and (file.name.endswith(".py") or file.name == project.entry)
+    ]
+    used = references([file.content for file in python_files])
+    for file in project.files:
+        if file.encoding != "text":
+            continue
+        digest = hashlib.sha256(file.content.encode()).hexdigest()
+        files[file.name] = {"source_sha256": digest}
+        if file in python_files:
+            located, metadata = python_checks(file.name, file.content, used)
+            files[file.name].update(metadata)
+            findings.extend(located[: max(0, 1001 - len(findings))])
+            functions += metadata.get("function_count", 0)
+            branches += metadata.get("branch_nodes", 0)
+        else:
+            content = file.content.replace("\r\n", "\n").replace("\r", "\n")
+            offsets = [index for index, char in enumerate(content) if char == "\n"]
+            for pattern, message in patterns:
+                for match in re.finditer(pattern, content):
+                    if len(findings) >= 1001:
+                        break
+                    line = bisect_right(offsets, match.start()) + 1
+                    previous = offsets[line - 2] if line > 1 else -1
+                    findings.append(
+                        {
+                            "file": file.name,
+                            "line": line,
+                            "column": match.start() - previous,
+                            "source_sha256": digest,
+                            "code": "TEXT-RISK",
+                            "message": message,
+                            "severity": "review",
+                            "origin": "text-heuristic",
+                        }
+                    )
+    truncated = len(findings) > 1000
     return {
         "sha256": hashlib.sha256(text.encode()).hexdigest(),
         "source_bytes": len(text.encode()),
@@ -67,9 +83,10 @@ def inspect_source(project: Project) -> dict:
         "long_lines": sum(len(line) > 110 for line in lines),
         "function_count": functions,
         "branch_nodes": branches,
-        "findings": findings,
+        "findings": findings[:1000],
+        "files": files,
         "findings_truncated": truncated,
-        "caveat": "Readability/complexity proxies only. No inferred Big-O or security certification.",
+        "caveat": "Python syntax and conservative unused/unreachable candidates; other text uses risk patterns only. Unused is not uncovered. No inferred Big-O, complete bug detection or security certification.",
     }
 
 

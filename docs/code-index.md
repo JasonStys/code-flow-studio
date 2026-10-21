@@ -85,89 +85,102 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `entry` | 70 |
 | parameter | `language` | 70 |
 | variable | `plans` | 72 |
-| function | `seeds(project)` | 105 |
-| parameter | `project` | 105 |
-| variable | `rng` | 107 |
-| variable | `case` | 108 |
-| variable | `corpus` | 108 |
-| variable | `boundaries` | 109 |
-| variable | `dictionary` | 110 |
-| variable | `enabled` | 111 |
-| variable | `method` | 113 |
-| variable | `rows` | 116 |
-| variable | `index` | 117 |
-| variable | `method` | 120 |
-| variable | `value` | 122 |
-| variable | `_` | 124 |
-| variable | `value` | 124 |
-| variable | `value` | 126 |
-| variable | `value` | 133 |
-| variable | `data` | 135 |
-| variable | `position` | 136 |
-| variable | `strategy` | 137 |
-| variable | `value` | 148 |
-| function | `coverage(command, project)` | 153 |
-| parameter | `command` | 153 |
-| parameter | `project` | 153 |
-| variable | `case` | 160 |
-| variable | `measured` | 176 |
-| variable | `data` | 179 |
-| variable | `entry` | 180 |
-| function | `mutants(command, project)` | 188 |
-| parameter | `command` | 188 |
-| parameter | `project` | 188 |
-| variable | `path` | 197 |
-| variable | `original` | 198 |
-| variable | `tree` | 199 |
-| variable | `node` | 200 |
-| variable | `sites` | 200 |
-| variable | `outcomes` | 201 |
-| variable | `index` | 203 |
-| variable | `candidate` | 204 |
-| variable | `node` | 205 |
-| variable | `target` | 205 |
-| variable | `compile_check` | 213 |
-| variable | `killed` | 217 |
-| variable | `inconclusive` | 218 |
-| variable | `case` | 219 |
-| variable | `result` | 220 |
-| variable | `inconclusive` | 221 |
-| variable | `killed` | 222 |
-| variable | `result` | 227 |
-| variable | `inconclusive` | 228 |
-| variable | `killed` | 229 |
-| variable | `item` | 238 |
-| variable | `valid` | 238 |
-| variable | `item` | 243 |
-| function | `instrumented_fuzz(project)` | 248 |
-| parameter | `project` | 248 |
-| variable | `engine` | 250 |
-| variable | `harness` | 251 |
-| variable | `result` | 258 |
-| variable | `build` | 262 |
-| variable | `argv` | 275 |
-| variable | `build` | 277 |
-| variable | `argv` | 280 |
-| variable | `result` | 283 |
-| function | `main()` | 294 |
-| variable | `project` | 296 |
-| variable | `file` | 298 |
-| variable | `build` | 315 |
-| variable | `command` | 315 |
-| variable | `compilation` | 316 |
-| variable | `report` | 317 |
-| variable | `times` | 333 |
-| variable | `case` | 334 |
-| variable | `result` | 335 |
-| variable | `passed` | 336 |
-| variable | `_` | 344 |
-| variable | `benchmark` | 345 |
-| variable | `findings` | 378 |
-| variable | `corpus` | 379 |
-| variable | `method` | 380 |
-| variable | `value` | 380 |
-| variable | `result` | 381 |
-| variable | `method` | 407 |
+| function | `seeds(project)` | 115 |
+| parameter | `project` | 115 |
+| variable | `rng` | 117 |
+| variable | `case` | 118 |
+| variable | `corpus` | 118 |
+| variable | `boundaries` | 119 |
+| variable | `dictionary` | 120 |
+| variable | `enabled` | 121 |
+| variable | `method` | 123 |
+| variable | `rows` | 126 |
+| variable | `index` | 127 |
+| variable | `method` | 130 |
+| variable | `value` | 132 |
+| variable | `_` | 134 |
+| variable | `value` | 134 |
+| variable | `value` | 136 |
+| variable | `value` | 143 |
+| variable | `data` | 145 |
+| variable | `position` | 146 |
+| variable | `strategy` | 147 |
+| variable | `value` | 158 |
+| function | `coverage(command, project)` | 163 |
+| parameter | `command` | 163 |
+| parameter | `project` | 163 |
+| variable | `case` | 170 |
+| variable | `measured` | 187 |
+| variable | `data` | 190 |
+| variable | `files` | 191 |
+| variable | `measured_files` | 192 |
+| variable | `budget` | 193 |
+| variable | `file` | 194 |
+| variable | `name` | 195 |
+| variable | `measured_file` | 198 |
+| variable | `record` | 205 |
+| variable | `key` | 214 |
+| variable | `measured_file` | 215 |
+| variable | `name` | 215 |
+| variable | `values` | 216 |
+| variable | `budget` | 218 |
+| variable | `entry` | 220 |
+| variable | `file` | 227 |
+| function | `mutants(command, project)` | 232 |
+| parameter | `command` | 232 |
+| parameter | `project` | 232 |
+| variable | `path` | 241 |
+| variable | `original` | 242 |
+| variable | `tree` | 243 |
+| variable | `node` | 244 |
+| variable | `sites` | 244 |
+| variable | `outcomes` | 245 |
+| variable | `index` | 247 |
+| variable | `candidate` | 248 |
+| variable | `node` | 249 |
+| variable | `target` | 249 |
+| variable | `compile_check` | 257 |
+| variable | `killed` | 261 |
+| variable | `inconclusive` | 262 |
+| variable | `case` | 263 |
+| variable | `result` | 264 |
+| variable | `inconclusive` | 265 |
+| variable | `killed` | 266 |
+| variable | `result` | 271 |
+| variable | `inconclusive` | 272 |
+| variable | `killed` | 273 |
+| variable | `item` | 282 |
+| variable | `valid` | 282 |
+| variable | `item` | 287 |
+| function | `instrumented_fuzz(project)` | 292 |
+| parameter | `project` | 292 |
+| variable | `engine` | 294 |
+| variable | `harness` | 295 |
+| variable | `result` | 302 |
+| variable | `build` | 306 |
+| variable | `argv` | 319 |
+| variable | `build` | 321 |
+| variable | `argv` | 324 |
+| variable | `result` | 327 |
+| function | `main()` | 338 |
+| variable | `project` | 340 |
+| variable | `file` | 342 |
+| variable | `build` | 359 |
+| variable | `command` | 359 |
+| variable | `compilation` | 360 |
+| variable | `report` | 361 |
+| variable | `times` | 377 |
+| variable | `case` | 378 |
+| variable | `result` | 379 |
+| variable | `passed` | 380 |
+| variable | `_` | 388 |
+| variable | `benchmark` | 389 |
+| variable | `findings` | 422 |
+| variable | `corpus` | 423 |
+| variable | `method` | 424 |
+| variable | `value` | 424 |
+| variable | `result` | 425 |
+| variable | `method` | 451 |
 
 ## scripts/code_index.py
 
@@ -305,16 +318,17 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `write_release_checksum(path)` | 17 |
-| parameter | `path` | 17 |
-| variable | `stream` | 19 |
-| variable | `digest` | 20 |
-| function | `main()` | 26 |
-| variable | `root` | 28 |
-| variable | `platform` | 29 |
-| variable | `folder` | 30 |
-| variable | `base` | 39 |
-| variable | `path` | 41 |
+| function | `write_release_checksum(path)` | 18 |
+| parameter | `path` | 18 |
+| variable | `stream` | 20 |
+| variable | `digest` | 21 |
+| function | `main()` | 27 |
+| variable | `root` | 29 |
+| variable | `platform` | 30 |
+| variable | `folder` | 31 |
+| variable | `version` | 40 |
+| variable | `base` | 41 |
+| variable | `path` | 43 |
 
 ## scripts/training_checks.py
 
@@ -346,12 +360,21 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `python` | 46 |
 | variable | `bad` | 60 |
 | variable | `invalid` | 64 |
-| variable | `attack` | 68 |
-| variable | `code` | 74 |
-| variable | `name` | 74 |
-| variable | `target` | 75 |
-| variable | `cpp` | 79 |
-| variable | `web_demo` | 118 |
+| variable | `item` | 69 |
+| variable | `attack` | 71 |
+| variable | `code` | 77 |
+| variable | `name` | 77 |
+| variable | `target` | 78 |
+| variable | `cpp` | 82 |
+| variable | `web_demo` | 121 |
+| variable | `located` | 127 |
+| variable | `measured` | 144 |
+| variable | `item` | 151 |
+| variable | `crashing` | 153 |
+| variable | `item` | 170 |
+| variable | `mapped` | 172 |
+| variable | `item` | 189 |
+| variable | `item` | 199 |
 
 ## studio/__init__.py
 
@@ -472,41 +495,49 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `text` | 25 |
 | variable | `lines` | 26 |
 | variable | `findings` | 27 |
-| variable | `char` | 28 |
-| variable | `index` | 28 |
-| variable | `offsets` | 28 |
-| variable | `truncated` | 29 |
+| variable | `truncated` | 28 |
+| variable | `files` | 29 |
 | variable | `patterns` | 30 |
-| variable | `message` | 36 |
-| variable | `pattern` | 36 |
-| variable | `match` | 37 |
-| variable | `truncated` | 39 |
-| variable | `functions` | 44 |
-| variable | `branches` | 45 |
-| variable | `file` | 48 |
-| variable | `tree` | 48 |
-| variable | `functions` | 49 |
-| variable | `node` | 50 |
-| variable | `branches` | 52 |
-| variable | `node` | 53 |
-| variable | `line` | 67 |
-| function | `compare(baseline, candidate, priorities)` | 76 |
-| parameter | `baseline` | 76 |
-| parameter | `candidate` | 76 |
-| parameter | `priorities` | 76 |
-| variable | `reasons` | 78 |
-| variable | `result` | 79 |
-| variable | `dimensions` | 100 |
-| variable | `area` | 101 |
-| variable | `key` | 101 |
-| variable | `metric` | 101 |
-| variable | `after` | 107 |
-| variable | `before` | 107 |
-| variable | `metric` | 110 |
-| variable | `total` | 110 |
-| variable | `score` | 111 |
-| variable | `metric` | 112 |
-| variable | `value` | 112 |
+| variable | `functions` | 36 |
+| variable | `branches` | 37 |
+| variable | `python_files` | 38 |
+| variable | `file` | 40 |
+| variable | `file` | 45 |
+| variable | `used` | 45 |
+| variable | `file` | 46 |
+| variable | `digest` | 49 |
+| variable | `located` | 52 |
+| variable | `metadata` | 52 |
+| variable | `functions` | 55 |
+| variable | `branches` | 56 |
+| variable | `content` | 58 |
+| variable | `char` | 59 |
+| variable | `index` | 59 |
+| variable | `offsets` | 59 |
+| variable | `message` | 60 |
+| variable | `pattern` | 60 |
+| variable | `match` | 61 |
+| variable | `line` | 64 |
+| variable | `previous` | 65 |
+| variable | `truncated` | 78 |
+| variable | `line` | 83 |
+| function | `compare(baseline, candidate, priorities)` | 93 |
+| parameter | `baseline` | 93 |
+| parameter | `candidate` | 93 |
+| parameter | `priorities` | 93 |
+| variable | `reasons` | 95 |
+| variable | `result` | 96 |
+| variable | `dimensions` | 117 |
+| variable | `area` | 118 |
+| variable | `key` | 118 |
+| variable | `metric` | 118 |
+| variable | `after` | 124 |
+| variable | `before` | 124 |
+| variable | `metric` | 127 |
+| variable | `total` | 127 |
+| variable | `score` | 128 |
+| variable | `metric` | 129 |
+| variable | `value` | 129 |
 
 ## studio/api.py
 
@@ -616,56 +647,104 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `IMAGE` | 27 |
-| variable | `DOCKER` | 28 |
-| function | `command(argv, timeout, output_limit)` | 31 |
-| parameter | `argv` | 31 |
-| parameter | `output_limit` | 31 |
-| parameter | `timeout` | 31 |
-| variable | `environment` | 33 |
-| variable | `environment` | 35 |
-| variable | `selector` | 36 |
-| variable | `process` | 44 |
-| variable | `output` | 47 |
-| function | `read()` | 49 |
-| variable | `chunk` | 52 |
-| function | `container_arguments(input_directory, name)` | 68 |
-| parameter | `input_directory` | 68 |
-| parameter | `name` | 68 |
-| function | `diagnostics(local_only)` | 101 |
-| parameter | `local_only` | 101 |
-| variable | `endpoint` | 105 |
-| variable | `context` | 107 |
-| variable | `context_code` | 107 |
-| variable | `endpoint` | 117 |
-| variable | `config` | 124 |
-| variable | `prefix` | 125 |
-| variable | `code` | 126 |
-| variable | `output` | 126 |
-| variable | `_` | 129 |
-| variable | `found` | 129 |
-| variable | `code` | 135 |
-| variable | `output` | 135 |
-| variable | `_` | 138 |
-| variable | `found` | 138 |
-| function | `run(project, local_only, scratch)` | 159 |
-| parameter | `local_only` | 159 |
-| parameter | `project` | 159 |
-| parameter | `scratch` | 159 |
-| variable | `ready` | 161 |
-| variable | `static` | 162 |
-| variable | `name` | 165 |
-| variable | `directory` | 168 |
-| variable | `path` | 169 |
-| variable | `config` | 172 |
-| variable | `prefix` | 174 |
-| variable | `prefix` | 176 |
-| variable | `code` | 178 |
-| variable | `output` | 178 |
-| variable | `marker` | 179 |
-| variable | `line` | 180 |
-| variable | `lines` | 180 |
-| variable | `result` | 188 |
+| variable | `IMAGE` | 28 |
+| variable | `DOCKER` | 29 |
+| function | `command(argv, timeout, output_limit)` | 32 |
+| parameter | `argv` | 32 |
+| parameter | `output_limit` | 32 |
+| parameter | `timeout` | 32 |
+| variable | `environment` | 34 |
+| variable | `environment` | 36 |
+| variable | `selector` | 37 |
+| variable | `process` | 45 |
+| variable | `output` | 48 |
+| function | `read()` | 50 |
+| variable | `chunk` | 53 |
+| function | `container_arguments(input_directory, name)` | 69 |
+| parameter | `input_directory` | 69 |
+| parameter | `name` | 69 |
+| function | `diagnostics(local_only)` | 102 |
+| parameter | `local_only` | 102 |
+| variable | `endpoint` | 106 |
+| variable | `context` | 108 |
+| variable | `context_code` | 108 |
+| variable | `endpoint` | 118 |
+| variable | `config` | 125 |
+| variable | `prefix` | 126 |
+| variable | `code` | 127 |
+| variable | `output` | 127 |
+| variable | `_` | 130 |
+| variable | `found` | 130 |
+| variable | `code` | 136 |
+| variable | `output` | 136 |
+| variable | `_` | 139 |
+| variable | `found` | 139 |
+| function | `run(project, local_only, scratch)` | 160 |
+| parameter | `local_only` | 160 |
+| parameter | `project` | 160 |
+| parameter | `scratch` | 160 |
+| variable | `ready` | 162 |
+| variable | `static` | 163 |
+| variable | `name` | 166 |
+| variable | `directory` | 169 |
+| variable | `path` | 170 |
+| variable | `config` | 173 |
+| variable | `prefix` | 175 |
+| variable | `prefix` | 177 |
+| variable | `code` | 179 |
+| variable | `output` | 179 |
+| variable | `marker` | 180 |
+| variable | `line` | 181 |
+| variable | `lines` | 181 |
+| variable | `result` | 189 |
+
+## studio/locations.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `LIMIT` | 20 |
+| variable | `ANSI` | 21 |
+| function | `tool_locations(result, project)` | 24 |
+| parameter | `project` | 24 |
+| parameter | `result` | 24 |
+| variable | `file` | 26 |
+| variable | `sources` | 26 |
+| variable | `name` | 30 |
+| variable | `text` | 30 |
+| variable | `name` | 40 |
+| variable | `names` | 40 |
+| variable | `path` | 41 |
+| variable | `patterns` | 42 |
+| variable | `details` | 49 |
+| variable | `artifact` | 55 |
+| variable | `name` | 55 |
+| variable | `text` | 55 |
+| variable | `findings` | 57 |
+| variable | `unlocated` | 58 |
+| variable | `seen` | 59 |
+| variable | `truncated` | 60 |
+| function | `process(record, stage, failed)` | 62 |
+| parameter | `failed` | 62 |
+| parameter | `record` | 62 |
+| parameter | `stage` | 62 |
+| variable | `before` | 65 |
+| variable | `stream` | 66 |
+| variable | `output` | 67 |
+| variable | `message` | 68 |
+| variable | `pattern` | 69 |
+| variable | `match` | 70 |
+| variable | `name` | 71 |
+| variable | `line` | 77 |
+| variable | `column` | 80 |
+| variable | `key` | 85 |
+| variable | `truncated` | 90 |
+| variable | `compilation` | 115 |
+| variable | `case` | 117 |
+| variable | `index` | 117 |
+| variable | `generated` | 119 |
+| variable | `fuzz` | 121 |
+| variable | `finding` | 122 |
+| variable | `index` | 122 |
 
 ## studio/models.py
 
@@ -1099,15 +1178,109 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `html_report(run)` | 21 |
+| function | `location_summary(run)` | 21 |
 | parameter | `run` | 21 |
-| variable | `evidence` | 23 |
-| function | `bundle(run, revision)` | 31 |
-| parameter | `revision` | 31 |
-| parameter | `run` | 31 |
-| variable | `buffer` | 33 |
-| variable | `archive` | 34 |
-| variable | `file` | 38 |
+| variable | `result` | 23 |
+| variable | `findings` | 24 |
+| function | `escape(value)` | 26 |
+| parameter | `value` | 26 |
+| variable | `rows` | 30 |
+| variable | `value` | 34 |
+| variable | `item` | 43 |
+| variable | `coverage` | 45 |
+| variable | `data` | 63 |
+| variable | `name` | 63 |
+| variable | `unknown` | 65 |
+| variable | `item` | 67 |
+| variable | `unknown` | 69 |
+| variable | `data` | 75 |
+| variable | `name` | 75 |
+| function | `html_report(run)` | 96 |
+| parameter | `run` | 96 |
+| variable | `evidence` | 98 |
+| function | `bundle(run, revision)` | 108 |
+| parameter | `revision` | 108 |
+| parameter | `run` | 108 |
+| variable | `buffer` | 110 |
+| variable | `archive` | 111 |
+| variable | `file` | 115 |
+
+## studio/source_checks.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `source_location(name, lines, digest, node)` | 20 |
+| parameter | `digest` | 20 |
+| parameter | `lines` | 20 |
+| parameter | `name` | 20 |
+| parameter | `node` | 20 |
+| variable | `line` | 22 |
+| variable | `prefix` | 23 |
+| function | `block_nodes(root)` | 27 |
+| parameter | `root` | 27 |
+| variable | `pending` | 29 |
+| variable | `node` | 31 |
+| function | `python_checks(name, text, project_references)` | 49 |
+| parameter | `name` | 49 |
+| parameter | `project_references` | 49 |
+| parameter | `text` | 49 |
+| variable | `findings` | 51 |
+| variable | `digest` | 52 |
+| variable | `lines` | 54 |
+| function | `add(node, code, message, severity)` | 56 |
+| parameter | `code` | 56 |
+| parameter | `message` | 56 |
+| parameter | `node` | 56 |
+| parameter | `severity` | 56 |
+| variable | `tree` | 70 |
+| variable | `table` | 72 |
+| variable | `line` | 74 |
+| variable | `nodes` | 94 |
+| variable | `exports` | 95 |
+| variable | `dynamic_exports` | 96 |
+| variable | `node` | 97 |
+| variable | `t` | 99 |
+| variable | `item` | 102 |
+| variable | `item` | 104 |
+| variable | `dynamic_exports` | 106 |
+| variable | `keyword` | 116 |
+| variable | `value` | 124 |
+| variable | `targets` | 125 |
+| variable | `word` | 131 |
+| variable | `target` | 132 |
+| function | `scope(root, symbols)` | 137 |
+| parameter | `root` | 137 |
+| parameter | `symbols` | 137 |
+| variable | `children` | 139 |
+| variable | `captures` | 140 |
+| variable | `pending` | 141 |
+| variable | `child` | 143 |
+| variable | `symbol` | 146 |
+| variable | `bindings` | 150 |
+| variable | `definitions` | 151 |
+| variable | `node` | 152 |
+| variable | `alias` | 156 |
+| variable | `symbol` | 165 |
+| variable | `identifier` | 166 |
+| variable | `kind` | 174 |
+| variable | `node` | 174 |
+| variable | `child` | 201 |
+| variable | `node` | 202 |
+| variable | `node` | 207 |
+| variable | `_` | 208 |
+| variable | `value` | 208 |
+| variable | `item` | 212 |
+| variable | `terminated` | 215 |
+| variable | `statement` | 216 |
+| variable | `terminated` | 223 |
+| variable | `node` | 226 |
+| variable | `node` | 228 |
+| function | `references(texts)` | 233 |
+| parameter | `texts` | 233 |
+| variable | `result` | 235 |
+| variable | `text` | 236 |
+| variable | `node` | 238 |
+| variable | `alias` | 242 |
 
 ## studio/store.py
 
@@ -1458,6 +1631,112 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `argv` | 98 |
 | parameter | `kwargs` | 98 |
 
+## tests/test_locations.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `manifest(files, entry, language)` | 32 |
+| parameter | `entry` | 32 |
+| parameter | `files` | 32 |
+| parameter | `language` | 32 |
+| variable | `name` | 38 |
+| variable | `text` | 38 |
+| function | `test_multifile_unicode_syntax_and_no_source_execution(tmp_path)` | 43 |
+| parameter | `tmp_path` | 43 |
+| variable | `sentinel` | 45 |
+| variable | `project` | 46 |
+| variable | `result` | 53 |
+| variable | `dynamic` | 54 |
+| variable | `item` | 54 |
+| variable | `item` | 56 |
+| variable | `syntax` | 56 |
+| function | `test_unused_and_unreachable_locations()` | 62 |
+| variable | `text` | 64 |
+| variable | `result` | 65 |
+| variable | `item` | 66 |
+| variable | `located` | 66 |
+| variable | `item` | 73 |
+| function | `test_physical_newlines_not_unicode_string_separators(separator)` | 77 |
+| parameter | `separator` | 77 |
+| variable | `text` | 79 |
+| variable | `finding` | 80 |
+| variable | `item` | 82 |
+| function | `test_unused_false_positive_boundaries(text)` | 100 |
+| parameter | `text` | 100 |
+| function | `test_cross_file_references_and_empty_or_unparseable_source()` | 105 |
+| variable | `project` | 107 |
+| variable | `empty` | 111 |
+| variable | `invalid` | 113 |
+| function | `test_unrelated_module_names_do_not_hide_unused_imports_or_locals()` | 118 |
+| variable | `result` | 120 |
+| variable | `item` | 128 |
+| variable | `located` | 128 |
+| variable | `item` | 131 |
+| function | `test_structural_python_errors_and_other_language_offsets()` | 134 |
+| variable | `result` | 136 |
+| variable | `other` | 138 |
+| variable | `result` | 143 |
+| function | `test_toolchain_formats(entry, language, output)` | 164 |
+| parameter | `entry` | 164 |
+| parameter | `language` | 164 |
+| parameter | `output` | 164 |
+| variable | `project` | 166 |
+| variable | `result` | 167 |
+| function | `test_unmapped_failure_bounds_duplicates_ansi_and_generated_artifacts()` | 176 |
+| variable | `project` | 178 |
+| variable | `evidence` | 180 |
+| variable | `result` | 189 |
+| function | `test_tool_location_limit_and_fuzz_paths()` | 195 |
+| variable | `project` | 197 |
+| variable | `index` | 198 |
+| variable | `output` | 198 |
+| variable | `result` | 199 |
+| variable | `item` | 212 |
+| function | `test_api_and_exports_preserve_locations_and_escape(tmp_path)` | 215 |
+| parameter | `tmp_path` | 215 |
+| variable | `project` | 217 |
+| variable | `token` | 218 |
+| variable | `headers` | 219 |
+| variable | `client` | 220 |
+| variable | `review` | 221 |
+| variable | `store` | 223 |
+| variable | `revision` | 224 |
+| variable | `run` | 225 |
+| variable | `result` | 226 |
+| variable | `exported` | 242 |
+| variable | `html` | 244 |
+| variable | `archive` | 247 |
+| variable | `saved` | 248 |
+| function | `coverage_function(monkeypatch, tmp_path, data)` | 254 |
+| parameter | `data` | 254 |
+| parameter | `monkeypatch` | 254 |
+| parameter | `tmp_path` | 254 |
+| variable | `worker` | 256 |
+| variable | `function` | 257 |
+| variable | `node` | 258 |
+| variable | `namespace` | 261 |
+| parameter | `args` | 265 |
+| parameter | `kwargs` | 265 |
+| function | `test_coverage_exact_lists_multifile_unknown_and_generated_exclusion(monkeypatch, tmp_path)` | 271 |
+| parameter | `monkeypatch` | 271 |
+| parameter | `tmp_path` | 271 |
+| variable | `project` | 273 |
+| variable | `data` | 274 |
+| variable | `measure` | 285 |
+| variable | `result` | 286 |
+| function | `test_coverage_budget_and_missing_entry(monkeypatch, tmp_path)` | 297 |
+| parameter | `monkeypatch` | 297 |
+| parameter | `tmp_path` | 297 |
+| variable | `project` | 299 |
+| variable | `data` | 300 |
+| variable | `result` | 303 |
+| function | `test_coverage_prioritizes_later_file_missing_lines(monkeypatch, tmp_path)` | 309 |
+| parameter | `monkeypatch` | 309 |
+| parameter | `tmp_path` | 309 |
+| variable | `project` | 311 |
+| variable | `data` | 312 |
+| variable | `result` | 318 |
+
 ## tests/test_private.py
 
 | Kind | Declaration | Line |
@@ -1621,6 +1900,9 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 |---|---|---|
 | variable | `errors` | 23 |
 | variable | `download` | 74 |
+| variable | `locations` | 98 |
+| variable | `unreachable` | 100 |
+| variable | `locations` | 119 |
 
 ## training/__init__.py
 
@@ -1797,51 +2079,61 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `languages` | 24 |
-| variable | `cloneDemo` | 38 |
-| variable | `[project, setProject]` | 46 |
-| variable | `[revision, setRevision]` | 47 |
-| variable | `[historyRows, setHistory]` | 48 |
-| variable | `[run, setRun]` | 49 |
-| variable | `[status, setStatus]` | 50 |
-| variable | `[capabilities, setCapabilities]` | 51 |
-| variable | `[tab, setTab]` | 52 |
-| variable | `[fileName, setFileName]` | 53 |
-| variable | `[error, setError]` | 54 |
-| variable | `[busy, setBusy]` | 55 |
-| variable | `[prompt, setPrompt]` | 56 |
-| variable | `[consent, setConsent]` | 57 |
-| variable | `[live, setLive]` | 58 |
-| variable | `[proposal, setProposal]` | 59 |
-| variable | `[caseText, setCaseText]` | 60 |
-| variable | `[comparison, setComparison]` | 63 |
-| variable | `[baseline, setBaseline]` | 64 |
-| variable | `[review, setReview]` | 65 |
-| variable | `generation` | 66 |
-| variable | `selected` | 67 |
-| function | `refresh()` | 70 |
-| variable | `changed` | 80 |
-| variable | `timer` | 92 |
-| variable | `timer` | 101 |
-| variable | `requestGeneration` | 116 |
-| variable | `result` | 119 |
-| variable | `timer` | 135 |
-| function | `saveAndRun(execute = true)` | 144 |
-| variable | `cases` | 149 |
-| variable | `payload` | 150 |
-| variable | `saved` | 151 |
-| variable | `job` | 163 |
-| function | `staticReview()` | 182 |
-| function | `openRevision(id: string)` | 200 |
-| variable | `saved` | 203 |
-| function | `upload(files: FileList / null)` | 215 |
-| variable | `additions` | 219 |
-| variable | `bytes` | 223 |
-| function | `acceptProposal()` | 256 |
-| variable | `updates` | 259 |
-| variable | `files` | 260 |
-| variable | `checks` | 279 |
-| variable | `metrics` | 280 |
+| variable | `languages` | 25 |
+| variable | `cloneDemo` | 39 |
+| variable | `[project, setProject]` | 47 |
+| variable | `[revision, setRevision]` | 48 |
+| variable | `[historyRows, setHistory]` | 49 |
+| variable | `[run, setRun]` | 50 |
+| variable | `[status, setStatus]` | 51 |
+| variable | `[capabilities, setCapabilities]` | 52 |
+| variable | `[tab, setTab]` | 53 |
+| variable | `[fileName, setFileName]` | 54 |
+| variable | `[error, setError]` | 55 |
+| variable | `[busy, setBusy]` | 56 |
+| variable | `[prompt, setPrompt]` | 57 |
+| variable | `[consent, setConsent]` | 58 |
+| variable | `[live, setLive]` | 59 |
+| variable | `[proposal, setProposal]` | 60 |
+| variable | `[caseText, setCaseText]` | 61 |
+| variable | `[comparison, setComparison]` | 64 |
+| variable | `[baseline, setBaseline]` | 65 |
+| variable | `[review, setReview]` | 66 |
+| variable | `generation` | 67 |
+| variable | `selected` | 68 |
+| function | `refresh()` | 71 |
+| variable | `changed` | 81 |
+| variable | `timer` | 93 |
+| variable | `timer` | 102 |
+| variable | `requestGeneration` | 117 |
+| variable | `result` | 120 |
+| variable | `timer` | 136 |
+| function | `saveAndRun(execute = true)` | 145 |
+| variable | `cases` | 150 |
+| variable | `payload` | 151 |
+| variable | `saved` | 152 |
+| variable | `job` | 165 |
+| function | `staticReview()` | 184 |
+| function | `openRevision(id: string)` | 202 |
+| variable | `saved` | 205 |
+| function | `upload(files: FileList / null)` | 218 |
+| variable | `additions` | 222 |
+| variable | `bytes` | 226 |
+| function | `acceptProposal()` | 259 |
+| variable | `updates` | 262 |
+| variable | `files` | 263 |
+| variable | `checks` | 282 |
+| variable | `metrics` | 283 |
+
+## ui/Locations.tsx
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `Locations({ evidence }: { evidence: Record<string, any> })` | 13 |
+| variable | `findings` | 15 |
+| variable | `files` | 19 |
+| variable | `unlocated` | 20 |
+| variable | `parserLimits` | 21 |
 
 ## ui/api.ts
 
@@ -1888,8 +2180,9 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | type | `Project` | 26 |
 | type | `Revision` | 43 |
 | type | `Run` | 50 |
-| type | `Capability` | 56 |
-| type | `AIResult` | 62 |
+| type | `Finding` | 57 |
+| type | `Capability` | 66 |
+| type | `AIResult` | 72 |
 
 ## vite.config.ts
 

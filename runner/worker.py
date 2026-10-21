@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: execute(argv, stdin, timeout)@L32; adapter(language, entry)@L70; seeds(project)@L105; coverage(command, project)@L153; mutants(command, project)@L188; instrumented_fuzz(project)@L248; main()@L294
-# variables: DEADLINE@L28; WORK@L29; remaining@L34; started@L37; errors@L38; output@L38; child@L40; expired@L47; expired@L51; code@L52; size@L56; plans@L72; rng@L107; case@L108; corpus@L108; boundaries@L109; dictionary@L110; enabled@L111; method@L113; rows@L116; index@L117; method@L120; value@L122; _@L124; value@L124; value@L126; value@L133; data@L135; position@L136; strategy@L137; value@L148; case@L160; measured@L176; data@L179; entry@L180; path@L197; original@L198; tree@L199; node@L200; sites@L200; outcomes@L201; index@L203; candidate@L204; node@L205; target@L205; compile_check@L213; killed@L217; inconclusive@L218; case@L219; result@L220; inconclusive@L221; killed@L222; result@L227; inconclusive@L228; killed@L229; item@L238; valid@L238; item@L243; engine@L250; harness@L251; result@L258; build@L262; argv@L275; build@L277; argv@L280; result@L283; project@L296; file@L298; build@L315; command@L315; compilation@L316; report@L317; times@L333; case@L334; result@L335; passed@L336; _@L344; benchmark@L345; findings@L378; corpus@L379; method@L380; value@L380; result@L381; method@L407
-# parameters: argv@L32; stdin@L32; timeout@L32; entry@L70; language@L70; project@L105; command@L153; project@L153; command@L188; project@L188; project@L248
+# functions: execute(argv, stdin, timeout)@L32; adapter(language, entry)@L70; seeds(project)@L115; coverage(command, project)@L163; mutants(command, project)@L232; instrumented_fuzz(project)@L292; main()@L338
+# variables: DEADLINE@L28; WORK@L29; remaining@L34; started@L37; errors@L38; output@L38; child@L40; expired@L47; expired@L51; code@L52; size@L56; plans@L72; rng@L117; case@L118; corpus@L118; boundaries@L119; dictionary@L120; enabled@L121; method@L123; rows@L126; index@L127; method@L130; value@L132; _@L134; value@L134; value@L136; value@L143; data@L145; position@L146; strategy@L147; value@L158; case@L170; measured@L187; data@L190; files@L191; measured_files@L192; budget@L193; file@L194; name@L195; measured_file@L198; record@L205; key@L214; measured_file@L215; name@L215; values@L216; budget@L218; entry@L220; file@L227; path@L241; original@L242; tree@L243; node@L244; sites@L244; outcomes@L245; index@L247; candidate@L248; node@L249; target@L249; compile_check@L257; killed@L261; inconclusive@L262; case@L263; result@L264; inconclusive@L265; killed@L266; result@L271; inconclusive@L272; killed@L273; item@L282; valid@L282; item@L287; engine@L294; harness@L295; result@L302; build@L306; argv@L319; build@L321; argv@L324; result@L327; project@L340; file@L342; build@L359; command@L359; compilation@L360; report@L361; times@L377; case@L378; result@L379; passed@L380; _@L388; benchmark@L389; findings@L422; corpus@L423; method@L424; value@L424; result@L425; method@L451
+# parameters: argv@L32; stdin@L32; timeout@L32; entry@L70; language@L70; project@L115; command@L163; project@L163; command@L232; project@L232; project@L292
 # </code-map>
 
 """Container-only compiler/test/fuzz worker. Never import this module on the host.
@@ -73,8 +73,18 @@ def adapter(language: str, entry: str) -> tuple[list[str] | None, list[str]]:
         "python": (["python", "-m", "py_compile", entry], ["python", entry]),
         "javascript": (["node", "--check", entry], ["node", entry]),
         "typescript": (
-            ["tsc", entry, "--target", "ES2022", "--module", "commonjs", "--outDir", "compiled"],
-            ["node", f"compiled/{Path(entry).stem}.js"],
+            [
+                "tsc",
+                entry,
+                "--target",
+                "ES2022",
+                "--module",
+                "commonjs",
+                "--sourceMap",
+                "--outDir",
+                "compiled",
+            ],
+            ["node", "--enable-source-maps", f"compiled/{Path(entry).stem}.js"],
         ),
         "cpp": (["g++", "-std=c++20", "-O2", "-Wall", "-Wextra", entry, "-o", "target"], ["./target"]),
         "c": (["gcc", "-std=c17", "-O2", "-Wall", "-Wextra", entry, "-o", "target"], ["./target"]),
@@ -151,7 +161,7 @@ def seeds(project: dict) -> list[tuple[str, bytes]]:
 
 
 def coverage(command: list[str], project: dict) -> dict:
-    """Measure Python line/branch coverage using approved cases; never invent condition coverage."""
+    """Retain per-supplied-file Python coverage locations; never invent condition or non-Python coverage."""
     if project["language"] != "python" or not project["cases"]:
         return {
             "status": "not-applicable",
@@ -164,6 +174,7 @@ def coverage(command: list[str], project: dict) -> dict:
                 "-m",
                 "coverage",
                 "run",
+                "--rcfile=/dev/null",
                 "--parallel-mode",
                 "--branch",
                 "--source",
@@ -172,16 +183,49 @@ def coverage(command: list[str], project: dict) -> dict:
             ],
             case["stdin"],
         )
-    execute(["python", "-m", "coverage", "combine"])
-    measured = execute(["python", "-m", "coverage", "json", "-o", "coverage.json"])
+    execute(["python", "-m", "coverage", "combine", "--rcfile=/dev/null"])
+    measured = execute(["python", "-m", "coverage", "json", "--rcfile=/dev/null", "-o", "coverage.json"])
     if measured["exit_code"] != 0 or not (WORK / "coverage.json").exists():
         return {"status": "blocked", "reason": measured["stderr"]}
     data = json.loads((WORK / "coverage.json").read_text())
-    entry = data["files"].get(project["entry"], {}).get("summary", {})
+    files = {}
+    measured_files = {}
+    budget = 20000
+    for file in project["files"]:
+        name = file["name"]
+        if file["encoding"] != "text" or not (name.endswith(".py") or name == project["entry"]):
+            continue
+        measured_file = data["files"].get(name)
+        if measured_file is None:
+            files[name] = {
+                "status": "not-measured",
+                "reason": "No coverage record; not assumed covered or uncovered",
+            }
+            continue
+        record = {
+            "status": "measured",
+            "summary": measured_file["summary"],
+            "source_sha256": hashlib.sha256(file["content"].encode()).hexdigest(),
+            "truncated": False,
+        }
+        files[name] = record
+        measured_files[name] = measured_file
+    # Prioritize every file's missing locations before spending the shared budget on executed lines.
+    for key in ("missing_lines", "missing_branches", "executed_lines", "excluded_lines"):
+        for name, measured_file in measured_files.items():
+            values = measured_file.get(key, [])
+            files[name][key] = values[:budget]
+            budget -= len(files[name][key])
+            files[name]["truncated"] |= len(files[name][key]) != len(values)
+    entry = files.get(project["entry"], {}).get("summary", {})
+    if not entry:
+        return {"status": "blocked", "reason": "No entry coverage record", "files": files}
     return {
         "status": "measured",
         "entry": entry,
-        "scope": "Entry source only, approved CLI cases; line and branch, not condition/MC/DC",
+        "files": files,
+        "locations_truncated": any(file.get("truncated", False) for file in files.values()),
+        "scope": "Supplied Python sources under approved CLI cases only, not generated pytest tests; line/branch, not condition/MC/DC. At most 20,000 location entries, missing before executed; negative branch destinations denote function exits.",
     }
 
 

@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: refresh()@L70; saveAndRun(execute = true)@L144; staticReview()@L182; openRevision(id: string)@L200; upload(files: FileList | null)@L215; acceptProposal()@L256
- * variables: languages@L24; cloneDemo@L38; [project, setProject]@L46; [revision, setRevision]@L47; [historyRows, setHistory]@L48; [run, setRun]@L49; [status, setStatus]@L50; [capabilities, setCapabilities]@L51; [tab, setTab]@L52; [fileName, setFileName]@L53; [error, setError]@L54; [busy, setBusy]@L55; [prompt, setPrompt]@L56; [consent, setConsent]@L57; [live, setLive]@L58; [proposal, setProposal]@L59; [caseText, setCaseText]@L60; [comparison, setComparison]@L63; [baseline, setBaseline]@L64; [review, setReview]@L65; generation@L66; selected@L67; changed@L80; timer@L92; timer@L101; requestGeneration@L116; result@L119; timer@L135; cases@L149; payload@L150; saved@L151; job@L163; saved@L203; additions@L219; bytes@L223; updates@L259; files@L260; checks@L279; metrics@L280
+ * functions: refresh()@L71; saveAndRun(execute = true)@L145; staticReview()@L184; openRevision(id: string)@L202; upload(files: FileList | null)@L218; acceptProposal()@L259
+ * variables: languages@L25; cloneDemo@L39; [project, setProject]@L47; [revision, setRevision]@L48; [historyRows, setHistory]@L49; [run, setRun]@L50; [status, setStatus]@L51; [capabilities, setCapabilities]@L52; [tab, setTab]@L53; [fileName, setFileName]@L54; [error, setError]@L55; [busy, setBusy]@L56; [prompt, setPrompt]@L57; [consent, setConsent]@L58; [live, setLive]@L59; [proposal, setProposal]@L60; [caseText, setCaseText]@L61; [comparison, setComparison]@L64; [baseline, setBaseline]@L65; [review, setReview]@L66; generation@L67; selected@L68; changed@L81; timer@L93; timer@L102; requestGeneration@L117; result@L120; timer@L136; cases@L150; payload@L151; saved@L152; job@L165; saved@L205; additions@L222; bytes@L226; updates@L262; files@L263; checks@L282; metrics@L283
  * </code-map> */
 
 /** Evidence-first editor, runner and history UI. Symbols/variables: docs/code-index.md.
@@ -10,6 +10,7 @@
  */
 import { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
+import Locations from "./Locations";
 import { api, download } from "./api";
 import { demo } from "./demo";
 import type {
@@ -155,6 +156,7 @@ export default function App({
       );
       setProject(payload);
       setRevision(saved.id);
+      setReview(null);
       if (!execute) {
         setError("");
         await refresh();
@@ -206,6 +208,7 @@ export default function App({
       setFileName(saved.project.entry);
       setCaseText(JSON.stringify(saved.project.cases, null, 2));
       setRun(saved.runs?.at(-1) ?? null);
+      setReview(null);
       setTab("workspace");
     } catch (reason) {
       setError((reason as Error).message);
@@ -647,6 +650,7 @@ export default function App({
         )}
         {tab === "evidence" && (
           <>
+            {(review || run) && <Locations evidence={review ?? run?.result ?? {}} />}
             {review && (
               <section className="panel">
                 <h3>Static review — code was not executed</h3>

@@ -3,7 +3,7 @@
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L25
 # functions: __setitem__(self, key, value)@L28; main()@L38
-# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; attack@L68; code@L74; name@L74; target@L75; cpp@L79; web_demo@L118
+# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; item@L69; attack@L71; code@L77; name@L77; target@L78; cpp@L82; web_demo@L121; located@L127; measured@L144; item@L151; crashing@L153; item@L170; mapped@L172; item@L189; item@L199
 # parameters: key@L28; self@L28; value@L28
 # </code-map>
 
@@ -65,6 +65,9 @@ async def main():
     invalid["files"][0]["content"] = "not valid C++"
     reports["compile-error"] = await run(Project.model_validate(invalid))
     assert reports["compile-error"]["tool_status"] == "compile-error"
+    assert any(
+        item["file"] == "main.cpp" and item["line"] == 1 for item in reports["compile-error"]["diagnostics"]
+    )
     attack = fixture("python").model_dump()
     attack["files"][0]["content"] = (
         '"""Probe only this job’s security boundary."""\nimport errno,os,socket\nassert not os.environ.get("STUDIO_OPENAI_KEY")\ntry:\n open("/opt/probe.txt","w").write("blocked")\n raise AssertionError("root writable")\nexcept OSError as error:\n assert error.errno in (errno.EROFS,errno.EACCES,errno.EPERM)\ns=socket.socket();s.settimeout(.2)\ntry:\n s.connect(("1.1.1.1",443));raise AssertionError("network connected")\nexcept OSError: pass\nprint(4)\n'
@@ -121,6 +124,86 @@ async def main():
     assert reports["web-demo"]["checks"]["failed"] == 0, reports["web-demo"]
     assert reports["web-demo"]["generated_tests"]["exit_code"] == 0, reports["web-demo"]
     assert reports["web-demo"]["fuzz"]["status"] == "completed", reports["web-demo"]
+    located = fixture("python").model_dump()
+    located.update(
+        {
+            "files": [
+                {"name": "main.py", "content": "import helper\nprint(helper.scale(2))\n", "encoding": "text"},
+                {
+                    "name": "helper.py",
+                    "content": "def scale(value):\n    if value < 0:\n        return 0\n    return value * 2\n",
+                    "encoding": "text",
+                },
+                {"name": "unused.py", "content": "def unused():\n    return 7\n", "encoding": "text"},
+            ],
+            "fuzz_cases": 0,
+            "benchmark_repeats": 1,
+        }
+    )
+    reports["multifile-locations"] = await run(Project.model_validate(located))
+    measured = reports["multifile-locations"]
+    assert measured["checks"]["passed"] == 1, measured
+    assert measured["coverage"]["files"]["helper.py"]["missing_lines"] == [3], measured
+    assert [2, 3] in measured["coverage"]["files"]["helper.py"]["missing_branches"], measured
+    assert measured["coverage"]["files"]["unused.py"]["missing_lines"] == [1, 2], measured
+    assert any(
+        item["file"] == "unused.py" and item["line"] == 1 and item["code"] == "PY-UNUSED-FUNCTION"
+        for item in measured["static"]["findings"]
+    ), measured
+    crashing = fixture("python").model_dump()
+    crashing.update(
+        {
+            "fuzz_cases": 0,
+            "files": [
+                {
+                    "name": "main.py",
+                    "encoding": "text",
+                    "content": "def fail():\n    return 1 / 0\n\nfail()\n",
+                }
+            ],
+        }
+    )
+    reports["runtime-locations"] = await run(Project.model_validate(crashing))
+    assert reports["runtime-locations"]["checks"]["failed"] == 1
+    assert any(
+        item["file"] == "main.py" and item["line"] == 2
+        for item in reports["runtime-locations"]["diagnostics"]
+    )
+    mapped = fixture("typescript").model_dump()
+    mapped.update(
+        {
+            "fuzz_cases": 0,
+            "files": [
+                {
+                    "name": mapped["entry"],
+                    "encoding": "text",
+                    "content": "function fail(): never {\n  throw new Error('fixture');\n}\nfail();\n",
+                }
+            ],
+        }
+    )
+    reports["typescript-original-location"] = await run(Project.model_validate(mapped))
+    assert reports["typescript-original-location"]["checks"]["failed"] == 1
+    assert any(
+        item["file"] == mapped["entry"] and item["line"] == 2
+        for item in reports["typescript-original-location"]["diagnostics"]
+    ), reports["typescript-original-location"]
+    assert reports["wrong-oracle"]["unlocated_failures"], (
+        "Wrong answers must not fabricate source root causes"
+    )
+    print(
+        "LOCATED_ACCEPTANCE="
+        + json.dumps(
+            {
+                "coverage": measured["coverage"],
+                "unused": [item for item in measured["static"]["findings"] if item["file"] == "unused.py"],
+                "runtime": reports["runtime-locations"]["diagnostics"],
+                "typescript": reports["typescript-original-location"]["diagnostics"],
+                "compiler": reports["compile-error"]["diagnostics"],
+                "unlocated_oracle": reports["wrong-oracle"]["unlocated_failures"],
+            }
+        )
+    )
     print(f"Validated {len(reports)} real isolated worker scenarios")
 
 

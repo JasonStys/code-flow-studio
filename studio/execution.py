@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: command(argv, timeout, output_limit)@L31; read()@L49; container_arguments(input_directory, name)@L68; diagnostics(local_only)@L101; run(project, local_only, scratch)@L159
-# variables: IMAGE@L27; DOCKER@L28; environment@L33; environment@L35; selector@L36; process@L44; output@L47; chunk@L52; endpoint@L105; context@L107; context_code@L107; endpoint@L117; config@L124; prefix@L125; code@L126; output@L126; _@L129; found@L129; code@L135; output@L135; _@L138; found@L138; ready@L161; static@L162; name@L165; directory@L168; path@L169; config@L172; prefix@L174; prefix@L176; code@L178; output@L178; marker@L179; line@L180; lines@L180; result@L188
-# parameters: argv@L31; output_limit@L31; timeout@L31; input_directory@L68; name@L68; local_only@L101; local_only@L159; project@L159; scratch@L159
+# functions: command(argv, timeout, output_limit)@L32; read()@L50; container_arguments(input_directory, name)@L69; diagnostics(local_only)@L102; run(project, local_only, scratch)@L160
+# variables: IMAGE@L28; DOCKER@L29; environment@L34; environment@L36; selector@L37; process@L45; output@L48; chunk@L53; endpoint@L106; context@L108; context_code@L108; endpoint@L118; config@L125; prefix@L126; code@L127; output@L127; _@L130; found@L130; code@L136; output@L136; _@L139; found@L139; ready@L162; static@L163; name@L166; directory@L169; path@L170; config@L173; prefix@L175; prefix@L177; code@L179; output@L179; marker@L180; line@L181; lines@L181; result@L189
+# parameters: argv@L32; output_limit@L32; timeout@L32; input_directory@L69; name@L69; local_only@L102; local_only@L160; project@L160; scratch@L160
 # </code-map>
 
 """Host broker: no uploaded code runs outside a restricted, named container.
@@ -22,6 +22,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from studio.analysis import inspect_source
+from studio.locations import tool_locations
 from studio.models import Project
 
 IMAGE = "code-flow-worker:0.1.0"
@@ -190,6 +191,7 @@ async def run(project: Project, local_only: bool = False, scratch: Path | None =
                 raise ValueError("Malformed worker evidence")
             return {
                 **result,
+                **tool_locations(result, project),
                 "static": static,
                 "isolation": {
                     "network": "none",

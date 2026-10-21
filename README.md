@@ -2,7 +2,7 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Version 0.2: real private local accounts.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+**Version 0.2.1: real private local accounts and located diagnostics.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
 Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-v0.2.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
@@ -16,6 +16,8 @@ Download OS-specific installers/portable packages from [Releases](https://github
 
 ## Features and limits
 
+**Located diagnostics:** static review and execution evidence now list original filenames and local line locations, with snapshot hashes. Python checks include auxiliary-file syntax, possibly unused imports/locals/functions and directly unreachable statements. Real Python coverage retains per-file uncovered-line and missing-branch lists; tool-output references have a readable UI/HTML table. Unsupported locations and wrong-answer failures without a source reference are explicitly unlocated. See [file/line diagnostics](docs/located-diagnostics.md) and [validation](docs/validation-locations.md). No tool can guarantee discovery or root-cause localization of every bug.
+
 | Feature | Implemented contract |
 |---|---|
 | Private accounts | Real alias/password registration, hashed sessions and one-use login recovery. Independent browser-derived vault key, authenticated AES-256-GCM locked source/history/provider archives and per-session unlock proof. No developer plaintext read API. Trusted local service and OS can access active plaintext; not browser-only E2EE. |
@@ -23,7 +25,7 @@ Download OS-specific installers/portable packages from [Releases](https://github
 | Web application | Same responsive editor/API served on loopback. Narrow-screen browser support; not a native Android/iOS installer or public hosted service. |
 | Polyglot execution | Fixed CLI adapters for Python, JavaScript, TypeScript, C/C++, Java, C#, Rust, PHP, Bash, SQLite SQL and GNU x86-64 assembly. Actual toolchains live inside the worker image. |
 | Testing | Approved CLI oracles and reviewed pytest harnesses, including subprocess harnesses for non-Python targets. 48-category applicability catalog; human, hardware, cloud/load and specialized tool checks need independent integrations. |
-| Coverage/mutation | Python entry line/branch coverage; up to eight operator mutants. No fabricated condition/MC/DC, function, edge or universal mutation scores. |
+| Coverage/mutation | Per-supplied-file Python line/branch coverage with exact missing lines/arcs under approved CLI cases; up to eight operator mutants. Generated pytest tests are outside that coverage run. No fabricated condition/MC/DC, function, edge or universal mutation scores. |
 | Fuzzing | Seeded black-box generation, mutation, dictionary, boundaries and CSV/SQL grammar; instrumented libFuzzer/AFL++ for reviewed C/C++ harnesses and Atheris for Python harnesses. Differential/metamorphic/stateful relations require custom oracles. |
 | AI routing | Account-owned OpenAI-compatible, Anthropic and Ollama endpoints/keys, four task routes and destination-version-bound consent. Keys stay server-side after explicit settings submission, outside histories/exports/workers. Protocol tests use mocks, not a claim of live model quality. |
 | Metrics/ranking | Repeated process wall times, peak child RSS, source bytes and transparent long-line proxy. Passing independent cases is mandatory. No syntax-based Big-O claims or automatic “best” model claims. |
@@ -52,6 +54,7 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `studio/store.py` | SQLite transactions, append-only revisions, immutable baseline oracles and interrupted-job recovery. |
 | `studio/execution.py` | Fixed container flags, readiness checks, output/deadline bounds and exact owned-container cleanup. |
 | `studio/analysis.py` | Non-executing source heuristics and correctness-gated weighted comparisons. |
+| `studio/source_checks.py`, `studio/locations.py`, `ui/Locations.tsx` | Python syntax/unused/unreachable candidates, bounded tool-output source references and readable exact-location/coverage evidence views. |
 | `studio/providers.py` | Private provider configuration, task routes, consent, bounded requests and proposal schema validation. |
 | `studio/catalog.py` | All 48 supplied test categories with applicability/integration requirements. |
 | `studio/reports.py` | Escaped, inert HTML/JSON/ZIP evidence exports. |

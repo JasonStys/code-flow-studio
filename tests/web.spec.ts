@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: errors@L23; download@L74
+ * variables: errors@L23; download@L74; locations@L98; unreachable@L100; locations@L119
  * </code-map> */
 
 /** Real browser flows; controller success does not substitute for isolated worker evidence.
@@ -87,4 +87,42 @@ test("mobile layout fits without page overflow", async ({ page }) => {
       () => document.documentElement.scrollWidth <= window.innerWidth,
     ),
   ).toBe(true);
+});
+
+test("real static review lists auxiliary-file locations and unused code", async ({ page }) => {
+  /** Real API, inert upload; this is not a mocked worker/coverage acceptance test. */
+  await page.locator('input[type="file"]').setInputFiles([
+    { name: "helper.py", mimeType: "text/plain", buffer: Buffer.from("import math\ndef unused():\n    leftover = 1\n    return 7\n    print('never')\n") },
+  ]);
+  await page.getByRole("button", { name: "Static review · no execution", exact: true }).click();
+  const locations = page.getByRole("region", { name: "Located diagnostics" });
+  await expect(locations.getByRole("row").filter({ hasText: "PY-UNUSED-IMPORT" })).toContainText("helper.py");
+  const unreachable = locations.getByRole("row").filter({ hasText: "PY-UNREACHABLE" });
+  await expect(unreachable.getByRole("cell").nth(0)).toHaveText("helper.py");
+  await expect(unreachable.getByRole("cell").nth(1)).toHaveText("5");
+  await expect(locations).toContainText("Not measured");
+});
+
+test("coverage and unknown failures render accurately from report contract", async ({ page }) => {
+  /** UI-only fixture; genuine coverage/runtime acceptance is separately verified by isolated workers. */
+  await page.route("**/api/review", async (route) => route.fulfill({
+    json: {
+      static: { findings: [{ file: "helper.py", line: 2, message: "<script>inert</script>", code: "FIXTURE" }] },
+      unlocated_failures: [{ stage: "case:wrong-answer", reason: "No root-cause line inferred." }],
+      coverage: { status: "measured", files: {
+        "helper.py": { status: "measured", missing_lines: [3, 7], missing_branches: [[2, 3], [7, -1]] },
+        "unknown.py": { status: "not-measured", reason: "No coverage record" },
+      } },
+    },
+  }));
+  await page.getByRole("button", { name: "Static review · no execution", exact: true }).click();
+  const locations = page.getByRole("region", { name: "Located diagnostics" });
+  await expect(locations).toContainText("Uncovered lines: 3, 7");
+  await expect(locations).toContainText("2 → 3, 7 → exit(-1)");
+  await expect(locations).toContainText("No coverage record");
+  await expect(locations).toContainText("No root-cause line inferred");
+  await expect(locations).toContainText("<script>inert</script>");
+  await expect(locations.locator("script")).toHaveCount(0);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

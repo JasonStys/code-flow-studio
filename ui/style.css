@@ -804,3 +804,8 @@ footer span {
     display: block;
   }
 }
+.location-table { overflow-x: auto; max-height: 28rem; }
+.location-table table { width: 100%; border-collapse: collapse; text-align: left; }
+.location-table th, .location-table td { padding: .65rem; border-bottom: 1px solid #c8d3df; vertical-align: top; }
+.location-table td { overflow-wrap: anywhere; }
+.coverage-file { border-top: 1px solid #c8d3df; overflow-wrap: anywhere; }

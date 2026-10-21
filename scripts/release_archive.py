@@ -1,14 +1,15 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: write_release_checksum(path)@L17; main()@L26
-# variables: stream@L19; digest@L20; root@L28; platform@L29; folder@L30; base@L39; path@L41
-# parameters: path@L17
+# functions: write_release_checksum(path)@L18; main()@L27
+# variables: stream@L20; digest@L21; root@L29; platform@L30; folder@L31; version@L40; base@L41; path@L43
+# parameters: path@L18
 # </code-map>
 
 """Jason Stys: checksummed portable desktop archives, alongside tested one-click OS installers."""
 
 import hashlib
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -36,7 +37,8 @@ def main():
     )
     if not folder.is_dir():
         raise ValueError("Expected packaged application is absent")
-    base = root / f"CodeFlowStudio-0.2.0-{platform}"
+    version = json.loads((root.parents[1] / "package.json").read_text(encoding="utf-8"))["version"]
+    base = root / f"CodeFlowStudio-{version}-{platform}"
     shutil.make_archive(str(base), "zip" if sys.platform == "win32" else "gztar", root_dir=folder)
     for path in root.iterdir():
         if path.is_file() and path.name.endswith((".exe", ".dmg", ".AppImage", ".zip", ".tar.gz")):

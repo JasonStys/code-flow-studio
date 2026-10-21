@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: SourceFile@L8; Case@L13; Priorities@L19; Project@L26; Revision@L43; Run@L50; Capability@L56; AIResult@L62
+ * types: SourceFile@L8; Case@L13; Priorities@L19; Project@L26; Revision@L43; Run@L50; Finding@L57; Capability@L66; AIResult@L72
  * </code-map> */
 
 /** Shared renderer contracts. Server validation is authoritative. Symbols: docs/code-index.md. */
@@ -52,6 +52,16 @@ export interface Run {
   revision_id: string;
   status: string;
   result: Record<string, any>;
+}
+/** One-based source reference; absent fields are legacy/unavailable, never fabricated. */
+export interface Finding {
+  file?: string;
+  line?: number;
+  column?: number;
+  message: string;
+  code?: string;
+  stage?: string;
+  source_sha256?: string;
 }
 export interface Capability {
   id: number;
