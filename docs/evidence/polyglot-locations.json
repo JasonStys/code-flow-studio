@@ -1,0 +1,766 @@
+{
+  "source_commit": "74c689ccc9943ca059851967cf2f2ba7bff5bc5f",
+  "workflow": "https://github.com/JasonStys/code-flow-studio/actions/runs/39675935177",
+  "provenance": "NATIVE_ACCEPTANCE records emitted only after independent exact-location assertions passed in actual restricted Linux workers. Synthetic reviewed source only; no host target execution or mocked compiler evidence.",
+  "languages": {
+    "javascript": {
+      "entry": "main.js",
+      "unused_line": 1,
+      "missing_line": 2,
+      "coverage": {
+        "status": "measured",
+        "tool": "Node V8/v8-to-Istanbul",
+        "metric": "v8-block-derived-line",
+        "files": {
+          "main.js": {
+            "status": "measured",
+            "metric": "v8-block-derived-line",
+            "summary": {
+              "covered_lines": 1,
+              "num_statements": 4,
+              "missing_lines": 3,
+              "percent_covered": 25
+            },
+            "source_sha256": "389ddde48a0f1f56497ca03799ba009d0323eb3bc9a23b320b36926c24b494f5",
+            "missing_lines": [
+              1,
+              2,
+              3
+            ],
+            "executed_lines": [
+              4
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 1,
+          "num_statements": 4,
+          "missing_lines": 3,
+          "percent_covered": 25
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.js",
+          "line": 1,
+          "column": 10,
+          "code": "no-unused-vars",
+          "message": "'unused' is defined but never used. Allowed unused vars must match /^_/u.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "389ddde48a0f1f56497ca03799ba009d0323eb3bc9a23b320b36926c24b494f5"
+        }
+      ]
+    },
+    "typescript": {
+      "entry": "main.ts",
+      "unused_line": 1,
+      "missing_line": 2,
+      "coverage": {
+        "status": "measured",
+        "tool": "Node V8/v8-to-Istanbul",
+        "metric": "v8-block-derived-line",
+        "files": {
+          "main.ts": {
+            "status": "measured",
+            "metric": "v8-block-derived-line",
+            "summary": {
+              "covered_lines": 1,
+              "num_statements": 4,
+              "missing_lines": 3,
+              "percent_covered": 25
+            },
+            "source_sha256": "ebdcf23f788dd4ea1269e82793f279a010646d72a7de44f555a4e395f12508d5",
+            "missing_lines": [
+              1,
+              2,
+              3
+            ],
+            "executed_lines": [
+              4
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 1,
+          "num_statements": 4,
+          "missing_lines": 3,
+          "percent_covered": 25
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.ts",
+          "line": 1,
+          "column": 10,
+          "code": "@typescript-eslint/no-unused-vars",
+          "message": "'unused' is defined but never used. Allowed unused vars must match /^_/u.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "ebdcf23f788dd4ea1269e82793f279a010646d72a7de44f555a4e395f12508d5"
+        }
+      ]
+    },
+    "c": {
+      "entry": "main.c",
+      "unused_line": 6,
+      "missing_line": 3,
+      "coverage": {
+        "status": "measured",
+        "tool": "GCC/gcov JSON",
+        "metric": "gcov-executable-line",
+        "files": {
+          "main.c": {
+            "status": "measured",
+            "metric": "gcov-executable-line",
+            "summary": {
+              "covered_lines": 4,
+              "num_statements": 6,
+              "missing_lines": 2,
+              "percent_covered": 66.66666666666667
+            },
+            "source_sha256": "ff66ac2b4c126ebb567015d77577fe4dbbd8f175b1b1faf3bf9feaffbcc95038",
+            "missing_lines": [
+              2,
+              3
+            ],
+            "executed_lines": [
+              5,
+              6,
+              7,
+              8
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 4,
+          "num_statements": 6,
+          "missing_lines": 2,
+          "percent_covered": 66.66666666666667
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.c",
+          "line": 6,
+          "column": 7,
+          "code": "-Wunused-variable",
+          "message": "unused variable ‘leftover’",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "ff66ac2b4c126ebb567015d77577fe4dbbd8f175b1b1faf3bf9feaffbcc95038"
+        },
+        {
+          "file": "main.c",
+          "line": 2,
+          "column": 12,
+          "code": "-Wunused-function",
+          "message": "‘unused’ defined but not used",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "ff66ac2b4c126ebb567015d77577fe4dbbd8f175b1b1faf3bf9feaffbcc95038"
+        }
+      ]
+    },
+    "cpp": {
+      "entry": "main.cpp",
+      "unused_line": 6,
+      "missing_line": 3,
+      "coverage": {
+        "status": "measured",
+        "tool": "GCC/gcov JSON",
+        "metric": "gcov-executable-line",
+        "files": {
+          "main.cpp": {
+            "status": "measured",
+            "metric": "gcov-executable-line",
+            "summary": {
+              "covered_lines": 4,
+              "num_statements": 6,
+              "missing_lines": 2,
+              "percent_covered": 66.66666666666667
+            },
+            "source_sha256": "22e794f9cb69e8dd44786c6df24594915eba5233b5fea70b8f016eff70d1f4c8",
+            "missing_lines": [
+              2,
+              3
+            ],
+            "executed_lines": [
+              5,
+              6,
+              7,
+              8
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 4,
+          "num_statements": 6,
+          "missing_lines": 2,
+          "percent_covered": 66.66666666666667
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.cpp",
+          "line": 6,
+          "column": 7,
+          "code": "-Wunused-variable",
+          "message": "unused variable ‘leftover’",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "22e794f9cb69e8dd44786c6df24594915eba5233b5fea70b8f016eff70d1f4c8"
+        },
+        {
+          "file": "main.cpp",
+          "line": 2,
+          "column": 12,
+          "code": "-Wunused-function",
+          "message": "‘int unused()’ defined but not used",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "22e794f9cb69e8dd44786c6df24594915eba5233b5fea70b8f016eff70d1f4c8"
+        }
+      ]
+    },
+    "rust": {
+      "entry": "main.rs",
+      "unused_line": 5,
+      "missing_line": 2,
+      "coverage": {
+        "status": "measured",
+        "tool": "rustc 1.99.1/matching LLVM lcov",
+        "metric": "llvm-source-region-line",
+        "files": {
+          "main.rs": {
+            "status": "measured",
+            "metric": "llvm-source-region-line",
+            "summary": {
+              "covered_lines": 4,
+              "num_statements": 7,
+              "missing_lines": 3,
+              "percent_covered": 57.142857142857146
+            },
+            "source_sha256": "63d2de318f4fb3d41c811796a1f3124d8d0ed341e03f3eb4b8aedc1486341b82",
+            "missing_lines": [
+              1,
+              2,
+              3
+            ],
+            "executed_lines": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 4,
+          "num_statements": 7,
+          "missing_lines": 3,
+          "percent_covered": 57.142857142857146
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.rs",
+          "line": 5,
+          "column": 9,
+          "code": "unused_variables",
+          "message": "unused variable: `leftover`",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "63d2de318f4fb3d41c811796a1f3124d8d0ed341e03f3eb4b8aedc1486341b82"
+        },
+        {
+          "file": "main.rs",
+          "line": 1,
+          "column": 4,
+          "code": "dead_code",
+          "message": "function `unused` is never used",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "63d2de318f4fb3d41c811796a1f3124d8d0ed341e03f3eb4b8aedc1486341b82"
+        }
+      ]
+    },
+    "java": {
+      "entry": "Main.java",
+      "unused_line": 6,
+      "missing_line": 3,
+      "coverage": {
+        "status": "measured",
+        "tool": "JaCoCo 0.8.15",
+        "metric": "jacoco-instruction-backed-line",
+        "files": {
+          "Main.java": {
+            "status": "measured",
+            "metric": "jacoco-instruction-backed-line",
+            "summary": {
+              "covered_lines": 3,
+              "num_statements": 5,
+              "missing_lines": 2,
+              "percent_covered": 60
+            },
+            "source_sha256": "7dfd27ae90dcc836d240f8ba307105011d81ac1c998d0803c19f6f5ef8fe5334",
+            "missing_lines": [
+              1,
+              3
+            ],
+            "executed_lines": [
+              6,
+              7,
+              8
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 5,
+          "missing_lines": 2,
+          "percent_covered": 60
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "Main.java",
+          "line": 2,
+          "column": 22,
+          "code": "UnusedPrivateMethod",
+          "message": "Avoid unused private methods such as 'unused()'.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "7dfd27ae90dcc836d240f8ba307105011d81ac1c998d0803c19f6f5ef8fe5334"
+        },
+        {
+          "file": "Main.java",
+          "line": 6,
+          "column": 9,
+          "code": "UnusedLocalVariable",
+          "message": "Avoid unused local variables such as 'leftover'.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "7dfd27ae90dcc836d240f8ba307105011d81ac1c998d0803c19f6f5ef8fe5334"
+        }
+      ]
+    },
+    "csharp": {
+      "entry": "Program.cs",
+      "unused_line": 3,
+      "missing_line": 5,
+      "coverage": {
+        "status": "measured",
+        "tool": "Coverlet 8.0.1",
+        "metric": "portable-pdb-sequence-point-line",
+        "files": {
+          "Program.cs": {
+            "status": "measured",
+            "metric": "portable-pdb-sequence-point-line",
+            "summary": {
+              "covered_lines": 3,
+              "num_statements": 6,
+              "missing_lines": 3,
+              "percent_covered": 50
+            },
+            "source_sha256": "b1bf410fbd1d8c51fa57bcfe8bdca14366dcd06790748ccf38dd87fe6965f69a",
+            "missing_lines": [
+              4,
+              5,
+              6
+            ],
+            "executed_lines": [
+              7,
+              8,
+              9
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 3,
+          "num_statements": 6,
+          "missing_lines": 3,
+          "percent_covered": 50
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false,
+            "collector_messages": "4\n\nCalculating coverage result...\n  Generating report '/tmp/project/.analysis/case-0.json'\n+--------+------+--------+--------+\n| Module | Line | Branch | Method |\n+--------+------+--------+--------+\n| App    | 50%  | 100%   | 50%    |\n+--------+------+--------+--------+\n\n+---------+------+--------+--------+\n|         | Line | Branch | Method |\n+---------+------+--------+--------+\n| Total   | 50%  | 100%   | 50%    |\n+---------+------+--------+--------+\n| Average | 50%  | 100%   | 50%    |\n+---------+------+--------+--------+\n\n"
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "Program.cs",
+          "line": 3,
+          "column": 22,
+          "code": "CS0169",
+          "message": "The field 'Program.leftover' is never used",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "b1bf410fbd1d8c51fa57bcfe8bdca14366dcd06790748ccf38dd87fe6965f69a"
+        }
+      ]
+    },
+    "php": {
+      "entry": "main.php",
+      "unused_line": 6,
+      "missing_line": 3,
+      "coverage": {
+        "status": "measured",
+        "tool": "PHP Xdebug",
+        "metric": "php-opcode-line",
+        "files": {
+          "main.php": {
+            "status": "measured",
+            "metric": "php-opcode-line",
+            "summary": {
+              "covered_lines": 5,
+              "num_statements": 6,
+              "missing_lines": 1,
+              "percent_covered": 83.33333333333333
+            },
+            "source_sha256": "f667cc61a5706eec7b3f032c1c198311cbaefab35de661dad17c61cfc931c1a6",
+            "missing_lines": [
+              3
+            ],
+            "executed_lines": [
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 5,
+          "num_statements": 6,
+          "missing_lines": 1,
+          "percent_covered": 83.33333333333333
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.php",
+          "line": 6,
+          "column": null,
+          "code": "UnusedLocalVariable",
+          "message": "Avoid unused local variables such as '$leftover'.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "f667cc61a5706eec7b3f032c1c198311cbaefab35de661dad17c61cfc931c1a6"
+        }
+      ]
+    },
+    "bash": {
+      "entry": "main.sh",
+      "unused_line": 5,
+      "missing_line": 3,
+      "coverage": {
+        "status": "measured",
+        "tool": "shfmt Bash AST + Bash xtrace",
+        "metric": "bash-command-entry-line",
+        "files": {
+          "main.sh": {
+            "status": "measured",
+            "metric": "bash-command-entry-line",
+            "summary": {
+              "covered_lines": 2,
+              "num_statements": 3,
+              "missing_lines": 1,
+              "percent_covered": 66.66666666666667
+            },
+            "source_sha256": "5f55539c1d52ecdd477209859a1561b14ea7e7561d167aa6e8ee228d426b1da6",
+            "missing_lines": [
+              3
+            ],
+            "executed_lines": [
+              5,
+              6
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 2,
+          "num_statements": 3,
+          "missing_lines": 1,
+          "percent_covered": 66.66666666666667
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.sh",
+          "line": 5,
+          "column": 1,
+          "code": "SC2034",
+          "message": "leftover appears unused. Verify use (or export if used externally).",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "5f55539c1d52ecdd477209859a1561b14ea7e7561d167aa6e8ee228d426b1da6"
+        }
+      ]
+    },
+    "sql": {
+      "entry": "main.sql",
+      "unused_line": 1,
+      "missing_line": 3,
+      "coverage": {
+        "status": "measured",
+        "tool": "SQLite complete_statement/execute",
+        "metric": "sql-top-level-statement-start",
+        "files": {
+          "main.sql": {
+            "status": "measured",
+            "metric": "sql-top-level-statement-start",
+            "summary": {
+              "covered_lines": 1,
+              "num_statements": 3,
+              "missing_lines": 2,
+              "percent_covered": 33.333333333333336
+            },
+            "source_sha256": "1595ecfc05c9bff408263b0b3962a19a3fa94d78022454e48b6190f6656be858",
+            "missing_lines": [
+              2,
+              3
+            ],
+            "executed_lines": [
+              1
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 1,
+          "num_statements": 3,
+          "missing_lines": 2,
+          "percent_covered": 33.333333333333336
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 1,
+            "expected_exit_code": 1,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.sql",
+          "line": 1,
+          "column": 6,
+          "code": "ST03",
+          "message": "Query defines CTE \"unused\" but does not use it.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "1595ecfc05c9bff408263b0b3962a19a3fa94d78022454e48b6190f6656be858"
+        }
+      ]
+    },
+    "assembly": {
+      "entry": "main.S",
+      "unused_line": 13,
+      "missing_line": 14,
+      "coverage": {
+        "status": "measured",
+        "tool": "DWARF/Valgrind Callgrind",
+        "metric": "instruction-backed-assembly-line",
+        "files": {
+          "main.S": {
+            "status": "measured",
+            "metric": "instruction-backed-assembly-line",
+            "summary": {
+              "covered_lines": 6,
+              "num_statements": 8,
+              "missing_lines": 2,
+              "percent_covered": 75
+            },
+            "source_sha256": "14393bd3ced8fa6672000ffcabd14f28b16dd838ee15da1310db9dd7746fa059",
+            "missing_lines": [
+              14,
+              15
+            ],
+            "executed_lines": [
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          }
+        },
+        "entry": {
+          "covered_lines": 6,
+          "num_statements": 8,
+          "missing_lines": 2,
+          "percent_covered": 75
+        },
+        "cases": [
+          {
+            "name": "known-path",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "unused": [
+        {
+          "file": "main.S",
+          "line": 13,
+          "column": 1,
+          "code": "ASM-UNREFERENCED-LABEL",
+          "message": "Possibly unreferenced local label 'unused'; fall-through/dynamic linkage may be intentional",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "14393bd3ced8fa6672000ffcabd14f28b16dd838ee15da1310db9dd7746fa059"
+        }
+      ]
+    }
+  }
+}

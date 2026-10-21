@@ -81,7 +81,7 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `.github/workflows/` | Validation, real isolated workers, training and native OS-package workflows. |
 | `pyproject.toml`, `package.json`, lockfile, TypeScript/Vite/Playwright configs | Dependency and reproducible build/test definitions. |
 
-Every source header points to the checked symbol/variable line map. [Architecture](docs/architecture.md) explains trade-offs; [testing](docs/testing.md) separates test claims from evidence.
+Indexed Python/TypeScript/JavaScript headers point to the checked symbol/variable line map; the small Bash/PHP hooks describe their local variables inline. [Architecture](docs/architecture.md) and the [polyglot decision](docs/adr-polyglot-evidence.md) explain trade-offs; [testing](docs/testing.md) separates test claims from evidence.
 
 Historical 0.1 bearer-token CLI mode remains explicitly opt-in for existing automation; it is not account mode. No automatic import of legacy plaintext projects or global AI keys occurs.
 

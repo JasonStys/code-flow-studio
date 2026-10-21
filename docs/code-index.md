@@ -52,6 +52,11 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `line` | 93 |
 | variable | `i` | 94 |
 | variable | `line` | 94 |
+| function | `module_fixture(language)` | 98 |
+| parameter | `language` | 98 |
+| variable | `typed` | 100 |
+| variable | `suffix` | 101 |
+| variable | `data` | 102 |
 
 ## examples/projects.py
 
@@ -759,34 +764,39 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `unused_line` | 61 |
 | variable | `result` | 62 |
 | variable | `key` | 69 |
-| function | `assert_native_locations(language, result, project, unused_line, missing_line)` | 94 |
-| parameter | `language` | 94 |
-| parameter | `missing_line` | 94 |
-| parameter | `project` | 94 |
-| parameter | `result` | 94 |
-| parameter | `unused_line` | 94 |
+| variable | `language` | 90 |
+| variable | `project` | 91 |
+| variable | `result` | 92 |
+| variable | `suffix` | 94 |
 | variable | `item` | 100 |
-| variable | `measured_file` | 103 |
-| function | `original_scenarios(reports)` | 108 |
-| parameter | `reports` | 108 |
-| variable | `python` | 110 |
-| variable | `bad` | 124 |
-| variable | `invalid` | 128 |
-| variable | `item` | 133 |
-| variable | `attack` | 135 |
-| variable | `code` | 146 |
-| variable | `name` | 146 |
-| variable | `target` | 147 |
-| variable | `cpp` | 151 |
-| variable | `web_demo` | 190 |
-| variable | `located` | 196 |
-| variable | `measured` | 213 |
-| variable | `item` | 220 |
-| variable | `crashing` | 222 |
-| variable | `item` | 239 |
-| variable | `mapped` | 241 |
-| variable | `item` | 258 |
-| variable | `item` | 268 |
+| function | `assert_native_locations(language, result, project, unused_line, missing_line)` | 111 |
+| parameter | `language` | 111 |
+| parameter | `missing_line` | 111 |
+| parameter | `project` | 111 |
+| parameter | `result` | 111 |
+| parameter | `unused_line` | 111 |
+| variable | `item` | 117 |
+| variable | `measured_file` | 120 |
+| function | `original_scenarios(reports)` | 125 |
+| parameter | `reports` | 125 |
+| variable | `python` | 127 |
+| variable | `bad` | 141 |
+| variable | `invalid` | 145 |
+| variable | `item` | 150 |
+| variable | `attack` | 152 |
+| variable | `code` | 163 |
+| variable | `name` | 163 |
+| variable | `target` | 164 |
+| variable | `cpp` | 168 |
+| variable | `web_demo` | 207 |
+| variable | `located` | 213 |
+| variable | `measured` | 230 |
+| variable | `item` | 237 |
+| variable | `crashing` | 239 |
+| variable | `item` | 256 |
+| variable | `mapped` | 258 |
+| variable | `item` | 275 |
+| variable | `item` | 285 |
 
 ## studio/__init__.py
 

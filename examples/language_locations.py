@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: location_fixture(language)@L77
-# variables: SAMPLES@L18; data@L79; missing@L80; source@L80; unused@L80; lines@L90; i@L93; line@L93; i@L94; line@L94
-# parameters: language@L77
+# functions: location_fixture(language)@L77; module_fixture(language)@L98
+# variables: SAMPLES@L18; data@L79; missing@L80; source@L80; unused@L80; lines@L90; i@L93; line@L93; i@L94; line@L94; typed@L100; suffix@L101; data@L102
+# parameters: language@L77; language@L98
 # </code-map>
 
 """Jason Stys: known positive/negative polyglot location oracles, executed only in restricted CI workers.
@@ -93,3 +93,34 @@ def location_fixture(language: str) -> tuple[Project, int, int]:
         next(i for i, line in enumerate(lines, 1) if unused in line),
         next(i for i, line in enumerate(lines, 1) if missing in line),
     )
+
+
+def module_fixture(language: str) -> Project:
+    """Exercise original auxiliary-module locations and genuinely unloaded files, never entry-only totals."""
+    typed = language == "typescript"
+    suffix = "ts" if typed else "js"
+    data = fixture(language).model_dump()
+    data.update(
+        files=[
+            {
+                "name": data["entry"],
+                "content": "import { work } from './helper';\nconsole.log(work());\n"
+                if typed
+                else "const helper = require('./helper.js');\nconsole.log(helper.work());\n",
+            },
+            {
+                "name": f"helper.{suffix}",
+                "content": (
+                    "function unused(): number {\n  return 7;\n}\nexport function work(): number {\n  return 4;\n}\n"
+                    if typed
+                    else "function unused() {\n  return 7;\n}\nexports.work = function work() {\n  return 4;\n};\n"
+                ),
+            },
+            {
+                "name": f"unloaded.{suffix}",
+                "content": "throw new Error('never import this auxiliary source during static analysis');\n",
+            },
+        ],
+        benchmark_repeats=1,
+    )
+    return Project.model_validate(data)

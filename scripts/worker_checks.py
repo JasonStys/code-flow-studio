@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L26
-# functions: __setitem__(self, key, value)@L29; main()@L39; assert_native_locations(language, result, project, unused_line, missing_line)@L94; original_scenarios(reports)@L108
-# variables: path@L32; temporary@L34; reports@L41; baseline_errors@L42; language@L43; result@L44; key@L55; acceptance@L58; native_errors@L59; language@L60; missing_line@L61; project@L61; unused_line@L61; result@L62; key@L69; item@L100; measured_file@L103; python@L110; bad@L124; invalid@L128; item@L133; attack@L135; code@L146; name@L146; target@L147; cpp@L151; web_demo@L190; located@L196; measured@L213; item@L220; crashing@L222; item@L239; mapped@L241; item@L258; item@L268
-# parameters: key@L29; self@L29; value@L29; language@L94; missing_line@L94; project@L94; result@L94; unused_line@L94; reports@L108
+# functions: __setitem__(self, key, value)@L29; main()@L39; assert_native_locations(language, result, project, unused_line, missing_line)@L111; original_scenarios(reports)@L125
+# variables: path@L32; temporary@L34; reports@L41; baseline_errors@L42; language@L43; result@L44; key@L55; acceptance@L58; native_errors@L59; language@L60; missing_line@L61; project@L61; unused_line@L61; result@L62; key@L69; language@L90; project@L91; result@L92; suffix@L94; item@L100; item@L117; measured_file@L120; python@L127; bad@L141; invalid@L145; item@L150; attack@L152; code@L163; name@L163; target@L164; cpp@L168; web_demo@L207; located@L213; measured@L230; item@L237; crashing@L239; item@L256; mapped@L258; item@L275; item@L285
+# parameters: key@L29; self@L29; value@L29; language@L111; missing_line@L111; project@L111; result@L111; unused_line@L111; reports@L125
 # </code-map>
 
 """Real compiler, generated-test, fuzz and adversarial-container integration checks.
@@ -17,7 +17,7 @@ import asyncio
 import json
 from pathlib import Path
 
-from examples.language_locations import SAMPLES, location_fixture
+from examples.language_locations import SAMPLES, location_fixture, module_fixture
 from examples.projects import fixture
 from studio.execution import run
 from studio.models import LANGUAGES, Project
@@ -87,6 +87,23 @@ async def main():
         print("NATIVE_ACCEPTANCE=" + json.dumps({language: acceptance[language]}), flush=True)
     assert not native_errors, ("Native location contract failures", native_errors)
     assert not baseline_errors, ("Native baseline/stdin contract failures", baseline_errors)
+    for language in ("javascript", "typescript"):
+        project = module_fixture(language)
+        result = await run(project)
+        reports[f"{language}-module-locations"] = result
+        suffix = "js" if language == "javascript" else "ts"
+        assert result["checks"]["passed"] == 1 and result["coverage"]["status"] == "measured", result
+        assert 2 in result["coverage"]["files"][f"helper.{suffix}"]["missing_lines"], result
+        assert result["coverage"]["files"][f"unloaded.{suffix}"]["status"] == "not-measured", result
+        assert any(
+            item["file"] == f"helper.{suffix}" and item["line"] == 1 and item["stage"] == "unused-code"
+            for item in result["diagnostics"]
+        ), result
+        print(
+            "MODULE_ACCEPTANCE="
+            + json.dumps({language: {"coverage": result["coverage"], "diagnostics": result["diagnostics"]}}),
+            flush=True,
+        )
 
     await original_scenarios(reports)
 
