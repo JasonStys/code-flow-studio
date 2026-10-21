@@ -1,6 +1,6 @@
 {
-  "source_commit": "74c689ccc9943ca059851967cf2f2ba7bff5bc5f",
-  "workflow": "https://github.com/JasonStys/code-flow-studio/actions/runs/39675935177",
+  "source_commit": "a19407baac7213d8aae7a87fd8d98888c477731d",
+  "workflow": "https://github.com/JasonStys/code-flow-studio/actions/runs/39676853834",
   "provenance": "NATIVE_ACCEPTANCE records emitted only after independent exact-location assertions passed in actual restricted Linux workers. Synthetic reviewed source only; no host target execution or mocked compiler evidence.",
   "languages": {
     "javascript": {
@@ -759,6 +759,198 @@
           "severity": "review",
           "origin": "native-unused",
           "source_sha256": "14393bd3ced8fa6672000ffcabd14f28b16dd838ee15da1310db9dd7746fa059"
+        }
+      ]
+    }
+  },
+  "modules": {
+    "javascript": {
+      "coverage": {
+        "status": "measured",
+        "tool": "Node V8/v8-to-Istanbul",
+        "metric": "v8-block-derived-line",
+        "files": {
+          "main.js": {
+            "status": "measured",
+            "metric": "v8-block-derived-line",
+            "summary": {
+              "covered_lines": 2,
+              "num_statements": 2,
+              "missing_lines": 0,
+              "percent_covered": 100
+            },
+            "source_sha256": "a11457cac69b7b838d8f2b33ee713d31fb81caf1afd12f2701bfb3a481c01592",
+            "missing_lines": [],
+            "executed_lines": [
+              1,
+              2
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          },
+          "helper.js": {
+            "status": "measured",
+            "metric": "v8-block-derived-line",
+            "summary": {
+              "covered_lines": 3,
+              "num_statements": 6,
+              "missing_lines": 3,
+              "percent_covered": 50
+            },
+            "source_sha256": "42ff2457ea92b4cc98e0babc4544b5896d6bce99d530f8e21cd90036e0d0575f",
+            "missing_lines": [
+              1,
+              2,
+              3
+            ],
+            "executed_lines": [
+              4,
+              5,
+              6
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          },
+          "unloaded.js": {
+            "status": "not-measured",
+            "reason": "Tool reported no executable locations; not assumed fully covered",
+            "missing_lines": [],
+            "truncated": false,
+            "branch_points": [],
+            "executed_lines": [],
+            "excluded_lines": []
+          }
+        },
+        "entry": {
+          "covered_lines": 2,
+          "num_statements": 2,
+          "missing_lines": 0,
+          "percent_covered": 100
+        },
+        "cases": [
+          {
+            "name": "double-two",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "diagnostics": [
+        {
+          "file": "helper.js",
+          "line": 1,
+          "column": 10,
+          "code": "no-unused-vars",
+          "message": "'unused' is defined but never used. Allowed unused vars must match /^_/u.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "42ff2457ea92b4cc98e0babc4544b5896d6bce99d530f8e21cd90036e0d0575f",
+          "stage": "unused-code",
+          "artifact": "source",
+          "column_unit": "tool-reported"
+        }
+      ]
+    },
+    "typescript": {
+      "coverage": {
+        "status": "measured",
+        "tool": "Node V8/v8-to-Istanbul",
+        "metric": "v8-block-derived-line",
+        "files": {
+          "main.ts": {
+            "status": "measured",
+            "metric": "v8-block-derived-line",
+            "summary": {
+              "covered_lines": 2,
+              "num_statements": 2,
+              "missing_lines": 0,
+              "percent_covered": 100
+            },
+            "source_sha256": "4468857281d13bde6cdf0a460579302a7708c7c97b5936f3c8827fb1c203bb57",
+            "missing_lines": [],
+            "executed_lines": [
+              1,
+              2
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          },
+          "helper.ts": {
+            "status": "measured",
+            "metric": "v8-block-derived-line",
+            "summary": {
+              "covered_lines": 3,
+              "num_statements": 6,
+              "missing_lines": 3,
+              "percent_covered": 50
+            },
+            "source_sha256": "0bd8eb69ec30c2ba27e6376501b568fc4621944bc454c6bd08c6dc3b47e124ae",
+            "missing_lines": [
+              1,
+              2,
+              3
+            ],
+            "executed_lines": [
+              4,
+              5,
+              6
+            ],
+            "excluded_lines": [],
+            "missing_branches": [],
+            "branch_points": [],
+            "truncated": false
+          },
+          "unloaded.ts": {
+            "status": "not-measured",
+            "reason": "Tool reported no executable locations; not assumed fully covered",
+            "missing_lines": [],
+            "truncated": false,
+            "branch_points": [],
+            "executed_lines": [],
+            "excluded_lines": []
+          }
+        },
+        "entry": {
+          "covered_lines": 2,
+          "num_statements": 2,
+          "missing_lines": 0,
+          "percent_covered": 100
+        },
+        "cases": [
+          {
+            "name": "double-two",
+            "exit_code": 0,
+            "expected_exit_code": 0,
+            "timeout": false
+          }
+        ],
+        "requested_cases": 1,
+        "locations_truncated": false,
+        "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+      },
+      "diagnostics": [
+        {
+          "file": "helper.ts",
+          "line": 1,
+          "column": 10,
+          "code": "@typescript-eslint/no-unused-vars",
+          "message": "'unused' is defined but never used. Allowed unused vars must match /^_/u.",
+          "severity": "review",
+          "origin": "native-unused",
+          "source_sha256": "0bd8eb69ec30c2ba27e6376501b568fc4621944bc454c6bd08c6dc3b47e124ae",
+          "stage": "unused-code",
+          "artifact": "source",
+          "column_unit": "tool-reported"
         }
       ]
     }

@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: evidence(language, source)@L40; test_source_binding_union_and_partial()@L47; test_unknown_and_location_budget()@L68; test_gcov_lcov_and_branch_ids(tmp_path)@L81; test_xml_coverage_and_reject_entities(tmp_path)@L107; test_shell_ast_and_assembly_exports()@L141; test_sql_statement_start_anchors(text, lines)@L166; test_bounded_tools_fail_closed(tmp_path, language)@L172; unavailable()@L178; test_controller_rebinds_native_findings_and_escapes()@L187; test_native_parser_failures_are_not_clean_unused_reports(tmp_path)@L201; parsed_error(argv)@L205; test_native_duplicate_findings_do_not_consume_limit()@L232
-# variables: project@L42; item@L49; result@L54; item@L70; line@L72; result@L73; index@L76; item@L83; path@L84; item@L109; path@L110; unknown@L127; item@L149; finding@L151; item@L168; _@L174; project@L174; work@L175; coverage@L182; unused@L182; _@L189; project@L189; item@L190; raw@L192; result@L193; report@L196; item@L203; result@L226; item@L234; _@L235
-# parameters: language@L40; source@L40; tmp_path@L81; tmp_path@L107; lines@L166; text@L166; language@L172; tmp_path@L172; args@L178; kwargs@L178; tmp_path@L201; argv@L205; kwargs@L205
+# functions: evidence(language, source)@L40; test_source_binding_union_and_partial()@L47; test_unknown_and_location_budget()@L68; test_gcov_lcov_and_branch_ids(tmp_path)@L81; test_xml_coverage_and_reject_entities(tmp_path)@L107; test_shell_ast_and_assembly_exports()@L141; test_sql_statement_start_anchors(text, lines)@L166; test_bounded_tools_fail_closed(tmp_path, language)@L172; unavailable()@L178; test_controller_rebinds_native_findings_and_escapes()@L187; test_native_parser_failures_are_not_clean_unused_reports(tmp_path)@L201; parsed_error(argv)@L205; test_native_duplicate_findings_do_not_consume_limit()@L232; test_deep_shell_ast_walk_is_iterative()@L241; test_assembly_literal_unicode_separator_does_not_shift_lines()@L249; test_invalid_unicode_sql_whitespace_is_not_silently_removed()@L256; test_deep_native_json_fails_closed(tmp_path, monkeypatch)@L263; too_deep()@L267
+# variables: project@L42; item@L49; result@L54; item@L70; line@L72; result@L73; index@L76; item@L83; path@L84; item@L109; path@L110; unknown@L127; item@L149; finding@L151; item@L168; _@L174; project@L174; work@L175; coverage@L182; unused@L182; _@L189; project@L189; item@L190; raw@L192; result@L193; report@L196; item@L203; result@L226; item@L234; _@L235; tree@L243; _@L244; tree@L245; item@L251; chunks@L258; _@L275; project@L275; _@L276; coverage@L276
+# parameters: language@L40; source@L40; tmp_path@L81; tmp_path@L107; lines@L166; text@L166; language@L172; tmp_path@L172; args@L178; kwargs@L178; tmp_path@L201; argv@L205; kwargs@L205; monkeypatch@L263; tmp_path@L263; args@L267; args@L273
 # </code-map>
 
 """Jason Stys: inert native-report parser regressions; never execute submitted programs on the host.
@@ -236,3 +236,42 @@ def test_native_duplicate_findings_do_not_consume_limit():
         item.finding("main.cpp", 2, 3, "unused", "same candidate")
     assert len(item.findings) == 1
     assert not item.findings_truncated
+
+
+def test_deep_shell_ast_walk_is_iterative():
+    """Deep parser output cannot overflow Python recursion or repeatedly copy growing child sets."""
+    tree = {"Type": "CallExpr", "Pos": {"Line": 3}}
+    for _ in range(3000):
+        tree = {"Body": [tree]}
+    assert shell_lines(tree) == {3}
+
+
+def test_assembly_literal_unicode_separator_does_not_shift_lines():
+    """Only physical source newlines shift label locations, not separators inside data strings."""
+    item = evidence("assembly", '.string "a\u2028b"\nunused:\n ret\n')
+    assembly_symbols(item)
+    assert item.findings[0]["line"] == 2
+
+
+def test_invalid_unicode_sql_whitespace_is_not_silently_removed():
+    """A non-SQL Unicode separator is retained for SQLite to reject, not reported as an empty script."""
+    chunks = statements("\u2028")
+    assert len(chunks) == 1 and chunks[0]["column"] == 1
+    assert statements("\u2028SELECT 1;")[0]["column"] == 1
+
+
+def test_deep_native_json_fails_closed(tmp_path, monkeypatch):
+    """Report decoder depth errors become explicit blocked evidence, not a whole-worker crash."""
+    from runner import language_checks
+
+    def too_deep(*args):
+        """Stand in for the bounded JSON decoder rejecting excessive nesting, never a compiler result."""
+        raise RecursionError("report nesting")
+
+    monkeypatch.setattr(language_checks, "measure", too_deep)
+    monkeypatch.setattr(
+        language_checks, "unused_checks", lambda *args: {"status": "completed", "findings": []}
+    )
+    project, _, _ = location_fixture("cpp")
+    coverage, _ = native_checks(project.model_dump(), tmp_path, None, [])
+    assert coverage["status"] == "blocked" and "RecursionError" in coverage["reason"]
