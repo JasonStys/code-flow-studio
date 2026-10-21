@@ -17,7 +17,7 @@ from studio.models import Project
 
 SAMPLES = {
     "javascript": (
-        "function unused() {\n  return 7; // missed\n}\nconsole.log(4);\n",
+        "function unused() {\n  return 7; // missed\n}\nconsole.log(4);\n/*# sourceMappingURL=/input/never-follow-uploaded-map.json */\n",
         "function unused",
         "return 7",
     ),

@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: main()@L21
- * variables: fs@L12; path@L13; { fileURLToPath }@L14; toolRequire@L15; { Linter }@L16; tsParser@L17; tsPlugin@L18; v8toIstanbul@L19; [mode, input, output, directory]@L23; project@L24; typed@L25; files@L26; linter@L28; findings@L29; file@L30; config@L31; item@L37; collected@L47; name@L48; report@L50; script@L51; scriptPath@L53; base@L54; original@L55; expectedPath@L56; source@L58; sources@L59; map@L61; converter@L70; coverage@L73; lines@L74; [id, statement]@L75; line@L76
+ * functions: reportJson(file)@L21; main()@L27
+ * variables: fs@L12; path@L13; { fileURLToPath }@L14; toolRequire@L15; { Linter }@L16; tsParser@L17; tsPlugin@L18; v8toIstanbul@L19; [mode, input, output, directory]@L29; project@L30; typed@L31; files@L32; linter@L34; findings@L35; file@L36; config@L37; item@L43; collected@L53; name@L54; report@L56; script@L57; scriptPath@L59; base@L60; original@L61; expectedPath@L62; source@L64; sources@L65; map@L67; converter@L76; coverage@L79; lines@L80; [id, statement]@L81; line@L82
  * </code-map> */
 
 /** Jason Stys: fixed ESLint and V8-to-Istanbul bridge; never import a target module/config/plugin.
@@ -18,10 +18,16 @@ const tsParser = toolRequire("@typescript-eslint/parser");
 const tsPlugin = toolRequire("@typescript-eslint/eslint-plugin");
 const v8toIstanbul = toolRequire("v8-to-istanbul");
 
+function reportJson(file) {
+  /** Bound native V8/job/report input before parsing; no tool-reported external paths are followed. */
+  if (fs.statSync(file).size > 8 * 1024 * 1024) throw Error("Native JSON report exceeds eight MiB");
+  return JSON.parse(fs.readFileSync(file, "utf8"));
+}
+
 async function main() {
   /** Inspect original source or translate native V8 ranges; only supplied paths may enter reports. */
   const [mode, input, output, directory] = process.argv.slice(2);
-  const project = JSON.parse(fs.readFileSync(input, "utf8"));
+  const project = reportJson(input);
   const typed = project.language === "typescript";
   const files = project.files.filter(file => file.encoding === "text" && (file.name.endsWith(typed ? ".ts" : ".js") || file.name === project.entry));
   if (mode === "lint") {
@@ -47,7 +53,7 @@ async function main() {
   const collected = new Map();
   for (const name of fs.readdirSync(directory)) {
     if (!name.endsWith(".json")) continue;
-    const report = JSON.parse(fs.readFileSync(path.join(directory, name), "utf8"));
+    const report = reportJson(path.join(directory, name));
     for (const script of report.result || []) {
       if (!script.url.startsWith("file:")) continue;
       const scriptPath = fileURLToPath(script.url);
@@ -58,13 +64,13 @@ async function main() {
       let source = fs.readFileSync(scriptPath, "utf8");
       let sources;
       if (typed) {
-        const map = JSON.parse(fs.readFileSync(scriptPath + ".map", "utf8"));
+        const map = reportJson(scriptPath + ".map");
         if (map.sources.length !== 1 || path.basename(map.sources[0]) !== original.name) throw Error("Unexpected source map");
         map.sourcesContent = [original.content];
         sources = { source, originalSource: original.content, sourceMap: { sourcemap: map } };
       } else {
         // Never follow uploaded sourceMappingURL paths, URLs or inline maps. Preserve UTF-16 offsets.
-        source = source.replace(/\/\/[#@]\s*sourceMappingURL=[^\r\n]*/g, value => " ".repeat(value.length));
+        source = source.replace(/\/\/[#@]\s*sourceMappingURL=[^\r\n]*|\/\*[#@]\s*sourceMappingURL=[\s\S]*?\*\//g, value => value.replace(/[^\r\n]/g, " "));
         sources = { source };
       }
       const converter = v8toIstanbul(scriptPath, undefined, sources);

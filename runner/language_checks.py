@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L68
-# functions: read_text(path)@L43; read_json(path)@L50; read_xml(path)@L55; __init__(self, project)@L71; name(self, path)@L90; line(self, name, value)@L95; add_lines(self, path, counts)@L100; finding(self, path, line, column, code, message)@L111; coverage(self, tool, metric, cases, expected)@L136; cobertura(evidence, path, case_index)@L190; jacoco(evidence, path)@L212; gcov(evidence, path)@L231; lcov(evidence, text)@L249; shell_lines(node)@L270; assembly_symbols(evidence)@L286; native_checks(project, work, execute, command)@L317; unused_checks(evidence, root, execute)@L335; measure(evidence, root, execute, command)@L560
-# variables: MAX_REPORT@L24; SUFFIXES@L25; text@L59; text@L62; file@L75; name@L82; text@L82; name@L84; text@L84; value@L92; line@L97; name@L102; lines@L105; count@L106; value@L106; line@L107; name@L113; key@L116; files@L138; name@L139; text@L139; counts@L140; covered@L147; value@L147; count@L158; line@L158; count@L159; line@L159; budget@L165; key@L166; record@L167; values@L168; budget@L170; file@L172; measured@L172; complete@L173; case@L175; file@L185; item@L192; name@L193; line@L197; line@L199; condition@L200; file@L214; name@L215; line@L218; line@L226; stream@L233; text@L234; file@L237; name@L238; line@L241; line@L244; branch@L245; index@L245; name@L251; row@L252; name@L254; _@L256; count@L256; line@L256; block@L259; branch@L259; count@L259; line@L259; output@L272; position@L275; value@L278; item@L281; name@L288; text@L288; definitions@L289; exported@L290; used@L291; line@L292; source@L292; source@L293; label@L299; source@L302; source@L304; column@L306; label@L306; line@L306; evidence@L319; root@L320; unused@L322; coverage@L326; coverage@L328; project@L337; language@L338; entry@L339; output@L340; allowed@L341; result@L344; item@L349; tool@L353; result@L355; item@L371; location@L374; tool@L382; result@L384; line@L402; item@L403; code@L404; span@L406; tool@L415; allowed@L417; result@L418; file@L435; item@L436; tool@L444; allowed@L446; result@L447; file@L464; item@L465; tool@L467; allowed@L469; result@L470; item@L482; tool@L486; allowed@L488; result@L489; file@L504; item@L505; tool@L513; result@L515; line@L531; match@L532; tool@L537; result@L540; tool@L541; project@L562; entry@L563; language@L563; work@L564; build@L565; metric@L566; tool@L566; run@L567; metric@L569; tool@L569; build@L570; run@L580; metric@L582; tool@L582; build@L583; run@L598; metric@L600; tool@L600; classes@L601; build@L603; run@L604; metric@L613; tool@L613; build@L614; metric@L616; tool@L616; metric@L619; tool@L619; run@L620; metric@L622; tool@L622; build@L623; metric@L635; tool@L635; name@L636; tree@L637; result@L638; line@L645; metric@L647; tool@L647; result@L649; cases@L652; case@L653; index@L653; output@L654; environment@L655; run@L663; run@L665; run@L676; result@L691; lines@L703; name@L703; count@L704; line@L704; trace@L708; match@L709; current@L712; row@L713; current@L715; _@L717; hits@L717; line@L717; output@L720; result@L721; lines@L727; name@L727; note@L730; result@L731; file@L734; profiles@L737; result@L738; output@L751; result@L752; output@L767; result@L768; result@L789; row@L790; match@L791; name@L793; existing@L795
-# parameters: path@L43; path@L50; path@L55; project@L71; self@L71; path@L90; self@L90; name@L95; self@L95; value@L95; counts@L100; path@L100; self@L100; code@L111; column@L111; line@L111; message@L111; path@L111; self@L111; cases@L136; expected@L136; metric@L136; self@L136; tool@L136; case_index@L190; evidence@L190; path@L190; evidence@L212; path@L212; evidence@L231; path@L231; evidence@L249; text@L249; node@L270; evidence@L286; command@L317; execute@L317; project@L317; work@L317; evidence@L335; execute@L335; root@L335; command@L560; evidence@L560; execute@L560; root@L560
+# functions: read_text(path)@L43; read_json(path)@L50; read_xml(path)@L55; __init__(self, project)@L71; name(self, path)@L90; line(self, name, value)@L95; add_lines(self, path, counts)@L100; finding(self, path, line, column, code, message, severity)@L111; coverage(self, tool, metric, cases, expected)@L136; cobertura(evidence, path, case_index)@L190; jacoco(evidence, path)@L216; gcov(evidence, path)@L235; lcov(evidence, text)@L253; shell_lines(node)@L274; assembly_symbols(evidence)@L290; native_checks(project, work, execute, command)@L321; unused_checks(evidence, root, execute)@L339; measure(evidence, root, execute, command)@L584
+# variables: MAX_REPORT@L24; SUFFIXES@L25; text@L59; text@L62; file@L75; name@L82; text@L82; name@L84; text@L84; value@L92; line@L97; name@L102; lines@L105; count@L106; value@L106; line@L107; name@L113; key@L116; files@L138; name@L139; text@L139; counts@L140; covered@L147; value@L147; count@L158; line@L158; count@L159; line@L159; budget@L165; key@L166; record@L167; values@L168; budget@L170; file@L172; measured@L172; complete@L173; case@L175; file@L185; document@L192; roots@L193; source@L193; item@L194; reported@L195; paths@L196; root@L196; candidate@L197; name@L197; path@L197; line@L201; line@L203; condition@L204; file@L218; name@L219; line@L222; line@L230; stream@L237; text@L238; file@L241; name@L242; line@L245; line@L248; branch@L249; index@L249; name@L255; row@L256; name@L258; _@L260; count@L260; line@L260; block@L263; branch@L263; count@L263; line@L263; output@L276; position@L279; value@L282; item@L285; name@L292; text@L292; definitions@L293; exported@L294; used@L295; line@L296; source@L296; source@L297; label@L303; source@L306; source@L308; column@L310; label@L310; line@L310; evidence@L323; root@L324; unused@L326; coverage@L330; coverage@L332; project@L341; language@L342; entry@L343; output@L344; allowed@L345; result@L346; parse_failed@L347; result@L350; item@L355; parse_failed@L356; tool@L365; result@L367; item@L383; location@L386; tool@L394; result@L396; line@L414; item@L415; code@L416; span@L418; tool@L427; allowed@L429; result@L430; parsed@L447; parse_failed@L448; file@L449; item@L450; tool@L458; allowed@L460; result@L461; parsed@L478; parse_failed@L479; file@L480; item@L481; tool@L483; allowed@L485; result@L486; item@L498; parse_failed@L499; tool@L503; allowed@L505; result@L506; file@L523; item@L524; parse_failed@L525; tool@L533; result@L535; line@L551; match@L552; tool@L557; result@L560; tool@L561; project@L586; entry@L587; language@L587; work@L588; build@L589; metric@L590; tool@L590; run@L591; metric@L593; tool@L593; build@L594; run@L604; metric@L606; tool@L606; build@L607; run@L622; metric@L624; tool@L624; classes@L625; build@L627; run@L628; metric@L637; tool@L637; build@L638; metric@L640; tool@L640; metric@L643; tool@L643; run@L644; metric@L646; tool@L646; build@L647; metric@L659; tool@L659; name@L660; tree@L661; result@L662; line@L669; metric@L671; tool@L671; result@L673; cases@L676; case@L677; index@L677; output@L678; environment@L679; run@L687; run@L689; run@L700; result@L715; lines@L729; name@L729; count@L730; line@L730; trace@L734; match@L735; current@L738; row@L739; current@L741; _@L743; hits@L743; line@L743; output@L746; result@L747; lines@L753; name@L753; note@L756; result@L757; file@L760; profiles@L763; result@L764; output@L777; result@L778; output@L793; result@L794; result@L815; row@L816; match@L817; name@L819; existing@L821
+# parameters: path@L43; path@L50; path@L55; project@L71; self@L71; path@L90; self@L90; name@L95; self@L95; value@L95; counts@L100; path@L100; self@L100; code@L111; column@L111; line@L111; message@L111; path@L111; self@L111; severity@L111; cases@L136; expected@L136; metric@L136; self@L136; tool@L136; case_index@L190; evidence@L190; path@L190; evidence@L216; path@L216; evidence@L235; path@L235; evidence@L253; text@L253; node@L274; evidence@L290; command@L321; execute@L321; project@L321; work@L321; evidence@L339; execute@L339; root@L339; command@L584; evidence@L584; execute@L584; root@L584
 # </code-map>
 
 """Jason Stys: real polyglot coverage and unused-code adapters, container execution only.
@@ -108,7 +108,7 @@ class Evidence:
             if line is not None:
                 lines[line] = max(lines.get(line, 0), max(0, int(count)))
 
-    def finding(self, path, line, column, code, message) -> None:
+    def finding(self, path, line, column, code, message, severity="review") -> None:
         """Bound and bind native lint candidates; source hashes identify the analyzed revision."""
         name = self.name(path)
         if name is None or line is None or self.line(name, line) is None:
@@ -127,7 +127,7 @@ class Evidence:
                 "column": int(column) if column else None,
                 "code": str(code)[:100],
                 "message": str(message)[:500],
-                "severity": "review",
+                "severity": severity,
                 "origin": "native-unused",
                 "source_sha256": self.hashes[name],
             }
@@ -189,8 +189,12 @@ class Evidence:
 
 def cobertura(evidence: Evidence, path: Path, case_index=None) -> None:
     """Read real Coverlet/compatible XML line hits and per-line condition ratios."""
-    for item in read_xml(path).iter("class"):
-        name = evidence.name(item.get("filename", ""))
+    document = read_xml(path)
+    roots = [source.text or "" for source in document.findall("./sources/source")]
+    for item in document.iter("class"):
+        reported = item.get("filename", "")
+        paths = [posixpath.join(root, reported) for root in roots] if roots else [reported]
+        name = next((candidate for path in paths if (candidate := evidence.name(path))), None)
         if name is None:
             continue
         evidence.add_lines(
@@ -339,6 +343,8 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
     entry = project["entry"]
     output = root / "unused.json"
     allowed = {0}
+    result = {"exit_code": None, "stderr": "Tool not started"}
+    parse_failed = False
     try:
         if language in {"javascript", "typescript"}:
             result = execute(
@@ -347,8 +353,14 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
             if result["exit_code"] != 0:
                 raise ValueError(result["stderr"])
             for item in read_json(output)["findings"]:
+                parse_failed |= item["code"] == "parse-error"
                 evidence.finding(
-                    item["file"], item["line"], item.get("column"), item["code"], item["message"]
+                    item["file"],
+                    item["line"],
+                    item.get("column"),
+                    item["code"],
+                    item["message"],
+                    item.get("severity", "review"),
                 )
             tool = "ESLint/@typescript-eslint"
         elif language in {"c", "cpp"}:
@@ -432,7 +444,9 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
                 ],
                 timeout=35,
             )
-            for file in read_json(output).get("files", []):
+            parsed = read_json(output)
+            parse_failed = bool(parsed.get("processingErrors"))
+            for file in parsed.get("files", []):
                 for item in file.get("violations", []):
                     evidence.finding(
                         file["filename"],
@@ -461,7 +475,9 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
                 timeout=25,
                 stdout_path=output,
             )
-            for file in read_json(output).get("files", []):
+            parsed = read_json(output)
+            parse_failed = bool(parsed.get("errors"))
+            for file in parsed.get("files", []):
                 for item in file.get("violations", []):
                     evidence.finding(file["file"], item["beginLine"], None, item["rule"], item["description"])
             tool = "PHPMD unusedcode"
@@ -480,6 +496,7 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
                 stdout_path=output,
             )
             for item in read_json(output):
+                parse_failed |= item["code"] not in {2034, 2317, 2329}
                 evidence.finding(
                     item["file"], item["line"], item["column"], "SC" + str(item["code"]), item["message"]
                 )
@@ -493,6 +510,8 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
                     "--ignore-local-config",
                     "--dialect",
                     "sqlite",
+                    "--templater",
+                    "raw",
                     "--rules",
                     "ST03,AL05",
                     "--format=json",
@@ -503,6 +522,7 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
             )
             for file in read_json(output):
                 for item in file.get("violations", []):
+                    parse_failed |= item["code"] not in {"ST03", "AL05"}
                     evidence.finding(
                         file["filepath"],
                         item.get("start_line_no", item.get("line_no")),
@@ -540,9 +560,12 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
             result = {"exit_code": 0}
             tool = "GNU assembly local-symbol reference candidates"
         return {
-            "status": "completed"
+            "status": ("partial" if parse_failed else "completed")
             if result["exit_code"] in allowed and not result.get("timeout")
             else "blocked",
+            "reason": "A source file could not be fully parsed; review native evidence"
+            if parse_failed
+            else None,
             "tool": tool,
             "process": result,
             "findings": evidence.findings,
@@ -553,6 +576,7 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
         return {
             "status": "blocked",
             "reason": f"Unused checks unavailable: {type(error).__name__}: {str(error)[:300]}",
+            "process": result,
             "findings": evidence.findings,
         }
 
@@ -686,7 +710,7 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
                 "--output",
                 str(output),
                 "--verbosity",
-                "quiet",
+                "normal",
             ]
         result = execute(run, case["stdin"], timeout=20, env=environment)
         cases.append(
@@ -697,6 +721,8 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
                 "timeout": result.get("timeout", False),
             }
         )
+        if language == "csharp":
+            cases[-1]["collector_messages"] = (result["stdout"] + result["stderr"])[-2000:]
         if result.get("timeout") or result["exit_code"] is None:
             break
         if language in {"php", "sql"}:

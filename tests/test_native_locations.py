@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: evidence(language, source)@L39; test_source_binding_union_and_partial()@L46; test_unknown_and_location_budget()@L67; test_gcov_lcov_and_branch_ids(tmp_path)@L80; test_xml_coverage_and_reject_entities(tmp_path)@L106; test_shell_ast_and_assembly_exports()@L129; test_sql_statement_start_anchors(text, lines)@L154; test_bounded_tools_fail_closed(tmp_path, language)@L160; unavailable()@L166; test_controller_rebinds_native_findings_and_escapes()@L175
-# variables: project@L41; item@L48; result@L53; item@L69; line@L71; result@L72; index@L75; item@L82; path@L83; item@L108; path@L109; item@L137; finding@L139; item@L156; _@L162; project@L162; work@L163; coverage@L170; unused@L170; _@L177; project@L177; item@L178; raw@L180; result@L181; report@L184
-# parameters: language@L39; source@L39; tmp_path@L80; tmp_path@L106; lines@L154; text@L154; language@L160; tmp_path@L160; args@L166; kwargs@L166
+# functions: evidence(language, source)@L40; test_source_binding_union_and_partial()@L47; test_unknown_and_location_budget()@L68; test_gcov_lcov_and_branch_ids(tmp_path)@L81; test_xml_coverage_and_reject_entities(tmp_path)@L107; test_shell_ast_and_assembly_exports()@L141; test_sql_statement_start_anchors(text, lines)@L166; test_bounded_tools_fail_closed(tmp_path, language)@L172; unavailable()@L178; test_controller_rebinds_native_findings_and_escapes()@L187; test_native_parser_failures_are_not_clean_unused_reports(tmp_path)@L201; parsed_error(argv)@L205; test_native_duplicate_findings_do_not_consume_limit()@L232
+# variables: project@L42; item@L49; result@L54; item@L70; line@L72; result@L73; index@L76; item@L83; path@L84; item@L109; path@L110; unknown@L127; item@L149; finding@L151; item@L168; _@L174; project@L174; work@L175; coverage@L182; unused@L182; _@L189; project@L189; item@L190; raw@L192; result@L193; report@L196; item@L203; result@L226; item@L234; _@L235
+# parameters: language@L40; source@L40; tmp_path@L81; tmp_path@L107; lines@L166; text@L166; language@L172; tmp_path@L172; args@L178; kwargs@L178; tmp_path@L201; argv@L205; kwargs@L205
 # </code-map>
 
 """Jason Stys: inert native-report parser regressions; never execute submitted programs on the host.
@@ -30,6 +30,7 @@ from runner.language_checks import (
     read_json,
     read_xml,
     shell_lines,
+    unused_checks,
 )
 from runner.sql_runtime import statements
 from studio.locations import tool_locations
@@ -118,6 +119,17 @@ def test_xml_coverage_and_reject_entities(tmp_path):
     )
     cobertura(item, path)
     assert item.counts["Main.java"][3] == 2
+    path.write_text(
+        '<coverage><sources><source>/</source></sources><class filename="tmp/project/Main.java"><lines><line number="1" hits="2"/></lines></class></coverage>'
+    )
+    cobertura(item, path)
+    assert item.counts["Main.java"][1] == 2
+    unknown = evidence("java")
+    path.write_text(
+        '<coverage><sources><source>/elsewhere/</source></sources><class filename="Main.java"><lines><line number="1" hits="2"/></lines></class></coverage>'
+    )
+    cobertura(unknown, path)
+    assert not unknown.counts
     path.write_text('<!DOCTYPE report [<!ENTITY x SYSTEM "file:///secret">]><report>&x;</report>')
     with pytest.raises(ValueError, match="DTD"):
         read_xml(path)
@@ -184,3 +196,43 @@ def test_controller_rebinds_native_findings_and_escapes():
     report = html_report({**raw, **result})
     assert "&lt;script&gt;bad&lt;/script&gt;" in report
     assert "<script>bad</script>" not in report
+
+
+def test_native_parser_failures_are_not_clean_unused_reports(tmp_path):
+    """Auxiliary-source syntax errors stay located errors with incomplete analyzer status."""
+    item = evidence("javascript")
+
+    def parsed_error(argv, **kwargs):
+        """Supply inert ESLint output; no process or target code runs in this unit test."""
+        from pathlib import Path
+
+        Path(argv[4]).write_text(
+            json.dumps(
+                {
+                    "findings": [
+                        {
+                            "file": "main.js",
+                            "line": 2,
+                            "code": "parse-error",
+                            "message": "Unexpected token",
+                            "severity": "error",
+                        }
+                    ]
+                }
+            )
+        )
+        return {"exit_code": 0, "stdout": "", "stderr": ""}
+
+    result = unused_checks(item, tmp_path, parsed_error)
+    assert result["status"] == "partial"
+    assert result["findings"][0]["severity"] == "error"
+    assert result["findings"][0]["line"] == 2
+
+
+def test_native_duplicate_findings_do_not_consume_limit():
+    """Repeated C# compiler summaries produce one candidate, not two duplicated UI rows."""
+    item = evidence()
+    for _ in range(1001):
+        item.finding("main.cpp", 2, 3, "unused", "same candidate")
+    assert len(item.findings) == 1
+    assert not item.findings_truncated
