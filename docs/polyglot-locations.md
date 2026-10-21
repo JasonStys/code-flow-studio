@@ -20,7 +20,7 @@ Choose a supported language/entry, upload the flat source files, approve indepen
 | JavaScript | Node 24 V8 ranges, v8-to-Istanbul 9.3 source mapping | ESLint 10.13 `no-unused-vars`, fixed configuration. Dynamic usage and external consumers require review. |
 | TypeScript | tsc 5.9.3 source maps + Node/V8, mapped to original `.ts` | typescript-eslint 8.72 `no-unused-vars`, not type-aware whole-program analysis. Compiler errors/runtime frames retain original locations. |
 | C / C++ | Separate `-O0 -g --coverage` build; GCC/gcov JSON executable lines and branch IDs | GCC `-Wall -Wextra -Wunused` structured diagnostics for the entry translation unit and included headers. Unincluded translation units are not independently built. Public APIs may be intentionally unreferenced. |
-| Rust | Separate rustc instrument-coverage build; matching LLVM 14 profile merge/export | rustc `unused`/`dead_code` structured primary spans; standalone edition-2021 crate only. |
+| Rust | Separate rustc 1.99.1 instrument-coverage build; matching bundled LLVM profile merge/export | rustc `unused`/`dead_code` structured primary spans; standalone edition-2021 crate only. Official Rust supplies the profiling runtime missing from Debian's rustc package. |
 | Java | Separate debug build + JaCoCo 0.8.15 instruction-backed lines and branch counts | PMD 7.28 fixed unused local/parameter/private-field/private-method rules. Unprovided callers, reflection and public APIs are outside this contract. |
 | C# | Separate .NET 8 debug build + Coverlet 8.0.1 portable-PDB sequence points | Compiler CS0168/CS0169/CS0219/CS0414 unused locals/private fields. **Not** a general unused-method/class analyzer. |
 | PHP | Xdebug opcode-backed source-line coverage, enabled before compiling the target | PHPMD 3.0 `unusedcode` rules; dynamic calls/reflection need review. |
@@ -46,7 +46,7 @@ Targets and tools share an unprivileged UID and writable job tmpfs. Malicious ta
 
 `runner/language_checks.py` normalizes bounded native reports; `node_checks.cjs` uses fixed ESLint/V8 libraries; `sql_runtime.py` preserves source anchors in the SQLite driver; `php_coverage.php` starts Xdebug; `bash_coverage.sh` records command entries; `java-unused.xml` fixes the PMD rules. `runner/tools/package-lock.json` pins JS analyzer dependencies. Image downloads of JaCoCo, PMD and PHPMD are versioned and SHA-256 verified; Coverlet is pinned to a .NET-8-compatible version. Debian supplies matching native compilers/LLVM and package security updates. No additional native tooling is bundled into the desktop host runtime; tool licenses stay in the built image/distribution and apply to those components.
 
-Normalization is linear in bounded report records plus sorting retained line lists (`O(L log L)`); original line limits/hashes are precomputed once per source. Native compilation, analysis and profiling have tool-dependent costs and are bounded by time/memory, not assigned a fabricated source-level Big-O grade. Model suggestions and measurements remain distinct.
+Normalization is linear in bounded report records plus sorting retained line lists (`O(L log L)`); original line limits/hashes are precomputed once per source. C# condition ratios retain a case index rather than falsely merging ratios into a joint branch result. Native compilation, analysis and profiling have tool-dependent costs and are bounded by time/memory, not assigned a fabricated source-level Big-O grade. Model suggestions and measurements remain distinct.
 
 ## Tests and primary references
 

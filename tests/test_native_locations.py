@@ -2,7 +2,7 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # functions: evidence(language, source)@L39; test_source_binding_union_and_partial()@L46; test_unknown_and_location_budget()@L67; test_gcov_lcov_and_branch_ids(tmp_path)@L80; test_xml_coverage_and_reject_entities(tmp_path)@L106; test_shell_ast_and_assembly_exports()@L129; test_sql_statement_start_anchors(text, lines)@L154; test_bounded_tools_fail_closed(tmp_path, language)@L160; unavailable()@L166; test_controller_rebinds_native_findings_and_escapes()@L175
-# variables: project@L41; item@L48; result@L53; item@L69; line@L71; result@L72; _@L75; item@L82; path@L83; item@L108; path@L109; item@L137; finding@L139; item@L156; _@L162; project@L162; work@L163; coverage@L170; unused@L170; _@L177; project@L177; item@L178; raw@L180; result@L181; report@L184
+# variables: project@L41; item@L48; result@L53; item@L69; line@L71; result@L72; index@L75; item@L82; path@L83; item@L108; path@L109; item@L137; finding@L139; item@L156; _@L162; project@L162; work@L163; coverage@L170; unused@L170; _@L177; project@L177; item@L178; raw@L180; result@L181; report@L184
 # parameters: language@L39; source@L39; tmp_path@L80; tmp_path@L106; lines@L154; text@L154; language@L160; tmp_path@L160; args@L166; kwargs@L166
 # </code-map>
 
@@ -72,8 +72,8 @@ def test_unknown_and_location_budget():
     result = item.coverage("tool", "metric", [], 0)
     assert len(result["files"]["main.cpp"]["missing_lines"]) == 20000
     assert result["locations_truncated"]
-    for _ in range(1001):
-        item.finding("main.cpp", 1, 1, "unused", "candidate")
+    for index in range(1001):
+        item.finding("main.cpp", 1, 1, "unused", f"candidate {index}")
     assert len(item.findings) == 1000 and item.findings_truncated
 
 

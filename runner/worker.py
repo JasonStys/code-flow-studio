@@ -2,7 +2,7 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # functions: prepare_runtime()@L35; execute(argv, stdin, timeout, env, stdout_path, stderr_path)@L41; adapter(language, entry)@L96; seeds(project)@L141; coverage(command, project)@L189; mutants(command, project)@L258; instrumented_fuzz(project)@L318; main()@L364
-# variables: DEADLINE@L30; WORK@L31; RUNTIME@L32; remaining@L51; started@L54; output@L56; errors@L57; child@L60; expired@L73; expired@L77; code@L78; size@L82; plans@L98; rng@L143; case@L144; corpus@L144; boundaries@L145; dictionary@L146; enabled@L147; method@L149; rows@L152; index@L153; method@L156; value@L158; _@L160; value@L160; value@L162; value@L169; data@L171; position@L172; strategy@L173; value@L184; case@L196; measured@L213; data@L216; files@L217; measured_files@L218; budget@L219; file@L220; name@L221; measured_file@L224; record@L231; key@L240; measured_file@L241; name@L241; values@L242; budget@L244; entry@L246; file@L253; path@L267; original@L268; tree@L269; node@L270; sites@L270; outcomes@L271; index@L273; candidate@L274; node@L275; target@L275; compile_check@L283; killed@L287; inconclusive@L288; case@L289; result@L290; inconclusive@L291; killed@L292; result@L297; inconclusive@L298; killed@L299; item@L308; valid@L308; item@L313; engine@L320; harness@L321; result@L328; build@L332; argv@L345; build@L347; argv@L350; result@L353; project@L366; file@L369; build@L386; command@L386; compilation@L387; report@L388; times@L404; case@L405; result@L406; passed@L407; _@L415; benchmark@L416; findings@L452; corpus@L453; method@L454; value@L454; result@L455; method@L481
+# variables: DEADLINE@L30; WORK@L31; RUNTIME@L32; remaining@L51; started@L54; output@L56; errors@L57; child@L60; expired@L73; expired@L77; code@L78; size@L82; plans@L98; rng@L143; case@L144; corpus@L144; boundaries@L145; dictionary@L146; enabled@L147; method@L149; rows@L152; index@L153; method@L156; value@L158; _@L160; value@L160; value@L162; value@L169; data@L171; position@L172; strategy@L173; value@L184; case@L196; measured@L213; data@L216; files@L217; measured_files@L218; budget@L219; file@L220; name@L221; measured_file@L224; record@L231; key@L240; measured_file@L241; name@L241; values@L242; budget@L244; entry@L246; file@L253; path@L267; original@L268; tree@L269; node@L270; sites@L270; outcomes@L271; index@L273; candidate@L274; node@L275; target@L275; compile_check@L283; killed@L287; inconclusive@L288; case@L289; result@L290; inconclusive@L291; killed@L292; result@L297; inconclusive@L298; killed@L299; item@L308; valid@L308; item@L313; engine@L320; harness@L321; result@L328; build@L332; argv@L345; build@L347; argv@L350; result@L353; project@L366; file@L369; build@L386; command@L386; compilation@L387; report@L388; times@L413; case@L414; result@L415; passed@L416; _@L424; benchmark@L425; findings@L461; corpus@L462; method@L463; value@L463; result@L464; method@L490
 # parameters: argv@L42; stdin@L43; timeout@L44; env@L46; stdout_path@L47; stderr_path@L48; entry@L96; language@L96; project@L141; command@L189; project@L189; command@L258; project@L258; project@L318
 # </code-map>
 
@@ -400,6 +400,15 @@ def main() -> None:
     }
     if compilation["exit_code"] != 0:
         report["tool_status"] = "compile-error"
+        report["coverage"] = {
+            "status": "blocked",
+            "reason": "Entry compilation failed; no instrumented target executed",
+        }
+        report["unused"] = {
+            "status": "blocked",
+            "reason": "Entry compilation failed; review located compiler diagnostics first",
+            "findings": [],
+        }
     else:
         times = []
         for case in project["cases"]:

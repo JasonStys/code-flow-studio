@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L26
-# functions: __setitem__(self, key, value)@L29; main()@L39; assert_native_locations(language, result, project, unused_line, missing_line)@L82; original_scenarios(reports)@L96
-# variables: path@L32; temporary@L34; reports@L41; language@L42; result@L43; acceptance@L47; native_errors@L48; language@L49; missing_line@L50; project@L50; unused_line@L50; result@L51; key@L58; item@L88; measured_file@L91; python@L98; bad@L112; invalid@L116; item@L121; attack@L123; code@L134; name@L134; target@L135; cpp@L139; web_demo@L178; located@L184; measured@L201; item@L208; crashing@L210; item@L227; mapped@L229; item@L246; item@L256
-# parameters: key@L29; self@L29; value@L29; language@L82; missing_line@L82; project@L82; result@L82; unused_line@L82; reports@L96
+# functions: __setitem__(self, key, value)@L29; main()@L39; assert_native_locations(language, result, project, unused_line, missing_line)@L94; original_scenarios(reports)@L108
+# variables: path@L32; temporary@L34; reports@L41; baseline_errors@L42; language@L43; result@L44; key@L55; acceptance@L58; native_errors@L59; language@L60; missing_line@L61; project@L61; unused_line@L61; result@L62; key@L69; item@L100; measured_file@L103; python@L110; bad@L124; invalid@L128; item@L133; attack@L135; code@L146; name@L146; target@L147; cpp@L151; web_demo@L190; located@L196; measured@L213; item@L220; crashing@L222; item@L239; mapped@L241; item@L258; item@L268
+# parameters: key@L29; self@L29; value@L29; language@L94; missing_line@L94; project@L94; result@L94; unused_line@L94; reports@L108
 # </code-map>
 
 """Real compiler, generated-test, fuzz and adversarial-container integration checks.
@@ -39,11 +39,22 @@ class Evidence(dict):
 async def main():
     """Exercise each adapter and verify failures, output limits, isolation and instrumentation."""
     reports = Evidence()
+    baseline_errors = []
     for language in LANGUAGES:
         result = await run(fixture(language))
         reports[language] = result
         assert result["tool_status"] == "completed", (language, result)
         assert result["checks"]["passed"] == 1 and result["checks"]["failed"] == 0, (language, result)
+        if language != "python" and (
+            result.get("coverage", {}).get("status") != "measured"
+            or result.get("unused", {}).get("status") != "completed"
+        ):
+            baseline_errors.append(language)
+            print(
+                "BASELINE_NATIVE_FAILURE="
+                + json.dumps({language: {key: result.get(key) for key in ("coverage", "unused")}}),
+                flush=True,
+            )
     acceptance = {}
     native_errors = []
     for language in SAMPLES:
@@ -75,6 +86,7 @@ async def main():
         }
         print("NATIVE_ACCEPTANCE=" + json.dumps({language: acceptance[language]}), flush=True)
     assert not native_errors, ("Native location contract failures", native_errors)
+    assert not baseline_errors, ("Native baseline/stdin contract failures", baseline_errors)
 
     await original_scenarios(reports)
 

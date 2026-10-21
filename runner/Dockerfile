@@ -2,13 +2,18 @@
 # Fixed compile/run adapters are documented in docs/languages.md.
 FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim AS dotnet
 FROM node:24-bookworm-slim AS node
+FROM rust:1.99.1-slim-bookworm AS rust
+RUN rustup component add llvm-tools-preview
 FROM python:3.12.12-slim-bookworm
 COPY --from=dotnet /usr/share/dotnet /usr/share/dotnet
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=rust /usr/local/rustup /usr/local/rustup
+COPY --from=rust /usr/local/cargo/bin /usr/local/cargo/bin
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
-ENV DOTNET_ROOT=/usr/share/dotnet PATH="/usr/share/dotnet:${PATH}" DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
-RUN apt-get update && apt-get install -y --no-install-recommends clang llvm-14 libclang-rt-14-dev gcc g++ openjdk-17-jdk-headless php-cli php-xdebug php-xml php-mbstring rustc cargo nasm sqlite3 bash shellcheck shfmt valgrind afl++ libicu72 curl unzip ca-certificates && rm -rf /var/lib/apt/lists/*
+ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/usr/local/cargo PATH="/usr/local/cargo/bin:/usr/share/dotnet:${PATH}" DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+RUN apt-get update && apt-get install -y --no-install-recommends clang llvm-14 libclang-rt-14-dev gcc g++ openjdk-17-jdk-headless php-cli php-xdebug php-xml php-mbstring nasm sqlite3 bash shellcheck shfmt valgrind afl++ libicu72 curl unzip ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN ln -s "$(rustc --print sysroot)/lib/rustlib/$(rustc -vV | sed -n 's/^host: //p')/bin/llvm-cov" /usr/local/bin/rust-llvm-cov && ln -s "$(rustc --print sysroot)/lib/rustlib/$(rustc -vV | sed -n 's/^host: //p')/bin/llvm-profdata" /usr/local/bin/rust-llvm-profdata
 RUN pip install --no-cache-dir pytest==8.4.2 coverage==7.11.0 hypothesis==6.142.4 atheris==3.0.0 sqlfluff==4.4.0 && npm install --global typescript@5.9.3
 COPY tools/package*.json /opt/tools/
 RUN npm ci --prefix /opt/tools --ignore-scripts && npm audit --prefix /opt/tools --omit=dev --audit-level=high

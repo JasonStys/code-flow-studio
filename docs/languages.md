@@ -10,7 +10,7 @@ Every adapter runs inside the trusted Linux worker and receives developer-approv
 | C++ / C | g++ C++20 / gcc C17 | Single translation unit, local include files, stdin/stdout executable. Rich projects need an explicitly reviewed custom harness/build integration. |
 | Java | OpenJDK 17 | Source filename matches public main class. No implicit Maven/Gradle resolution. |
 | C# | .NET SDK 8 | Flat console project, implicit standard-library usings, offline built-in framework restore. No NuGet network downloads. |
-| Rust | Debian rustc, edition 2021 | Standalone standard-library entry; no implicit Cargo crates/network. |
+| Rust | Official rustc 1.99.1, edition 2021 | Standalone standard-library entry; matching LLVM coverage tools/profile runtime. No implicit Cargo crates/network. |
 | PHP | Debian PHP CLI | CLI script and local files; no Composer download. |
 | Bash | bash | Syntax check and stdin/stdout script. It cannot escape the container by invoking shell tools. |
 | SQL | SQLite via Python | Entry creates in-memory schema/data; test stdin supplies query; rows join with `|`. This is not PostgreSQL/MySQL/T-SQL portability proof. |

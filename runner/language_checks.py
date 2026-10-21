@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L68
-# functions: read_text(path)@L43; read_json(path)@L50; read_xml(path)@L55; __init__(self, project)@L71; name(self, path)@L89; line(self, name, value)@L94; add_lines(self, path, counts)@L99; finding(self, path, line, column, code, message)@L110; coverage(self, tool, metric, cases, expected)@L131; cobertura(evidence, path)@L185; jacoco(evidence, path)@L206; gcov(evidence, path)@L225; lcov(evidence, text)@L243; shell_lines(node)@L264; assembly_symbols(evidence)@L280; native_checks(project, work, execute, command)@L311; unused_checks(evidence, root, execute)@L329; measure(evidence, root, execute, command)@L539
-# variables: MAX_REPORT@L24; SUFFIXES@L25; text@L59; text@L62; file@L75; name@L82; text@L82; name@L84; text@L84; value@L91; line@L96; name@L101; lines@L104; count@L105; value@L105; line@L106; name@L112; files@L133; name@L134; text@L134; counts@L135; covered@L142; value@L142; count@L153; line@L153; count@L154; line@L154; budget@L160; key@L161; record@L162; values@L163; budget@L165; file@L167; measured@L167; complete@L168; case@L170; file@L180; item@L187; name@L188; line@L192; line@L194; condition@L195; file@L208; name@L209; line@L212; line@L220; stream@L227; text@L228; file@L231; name@L232; line@L235; line@L238; branch@L239; index@L239; name@L245; row@L246; name@L248; _@L250; count@L250; line@L250; block@L253; branch@L253; count@L253; line@L253; output@L266; position@L269; value@L272; item@L275; name@L282; text@L282; definitions@L283; exported@L284; used@L285; line@L286; source@L286; source@L287; label@L293; source@L296; source@L298; column@L300; label@L300; line@L300; evidence@L313; root@L314; unused@L316; coverage@L320; coverage@L322; project@L331; language@L332; entry@L333; output@L334; allowed@L335; result@L338; item@L343; tool@L347; result@L349; item@L362; location@L365; tool@L373; result@L375; line@L393; item@L394; code@L395; span@L397; tool@L406; allowed@L408; result@L409; file@L426; item@L427; tool@L435; allowed@L437; result@L438; file@L443; item@L444; tool@L446; allowed@L448; result@L449; item@L461; tool@L465; allowed@L467; result@L468; file@L483; item@L484; tool@L492; result@L494; line@L510; match@L511; tool@L516; result@L519; tool@L520; project@L541; entry@L542; language@L542; work@L543; build@L544; metric@L545; tool@L545; run@L546; metric@L548; tool@L548; build@L549; run@L559; metric@L561; tool@L561; build@L562; run@L577; metric@L579; tool@L579; classes@L580; build@L582; run@L583; metric@L592; tool@L592; build@L593; metric@L595; tool@L595; metric@L598; tool@L598; run@L599; metric@L601; tool@L601; build@L602; metric@L614; tool@L614; name@L615; tree@L616; result@L617; line@L624; metric@L626; tool@L626; result@L628; cases@L631; case@L632; index@L632; output@L633; environment@L634; run@L642; run@L644; run@L655; result@L669; lines@L681; name@L681; count@L682; line@L682; trace@L686; match@L687; current@L690; row@L691; current@L693; _@L695; hits@L695; line@L695; output@L698; result@L699; lines@L705; name@L705; note@L708; result@L709; file@L712; profiles@L715; result@L716; output@L722; result@L723; output@L738; result@L739; result@L760; row@L761; match@L762; name@L764; existing@L766
-# parameters: path@L43; path@L50; path@L55; project@L71; self@L71; path@L89; self@L89; name@L94; self@L94; value@L94; counts@L99; path@L99; self@L99; code@L110; column@L110; line@L110; message@L110; path@L110; self@L110; cases@L131; expected@L131; metric@L131; self@L131; tool@L131; evidence@L185; path@L185; evidence@L206; path@L206; evidence@L225; path@L225; evidence@L243; text@L243; node@L264; evidence@L280; command@L311; execute@L311; project@L311; work@L311; evidence@L329; execute@L329; root@L329; command@L539; evidence@L539; execute@L539; root@L539
+# functions: read_text(path)@L43; read_json(path)@L50; read_xml(path)@L55; __init__(self, project)@L71; name(self, path)@L90; line(self, name, value)@L95; add_lines(self, path, counts)@L100; finding(self, path, line, column, code, message)@L111; coverage(self, tool, metric, cases, expected)@L136; cobertura(evidence, path, case_index)@L190; jacoco(evidence, path)@L212; gcov(evidence, path)@L231; lcov(evidence, text)@L249; shell_lines(node)@L270; assembly_symbols(evidence)@L286; native_checks(project, work, execute, command)@L317; unused_checks(evidence, root, execute)@L335; measure(evidence, root, execute, command)@L560
+# variables: MAX_REPORT@L24; SUFFIXES@L25; text@L59; text@L62; file@L75; name@L82; text@L82; name@L84; text@L84; value@L92; line@L97; name@L102; lines@L105; count@L106; value@L106; line@L107; name@L113; key@L116; files@L138; name@L139; text@L139; counts@L140; covered@L147; value@L147; count@L158; line@L158; count@L159; line@L159; budget@L165; key@L166; record@L167; values@L168; budget@L170; file@L172; measured@L172; complete@L173; case@L175; file@L185; item@L192; name@L193; line@L197; line@L199; condition@L200; file@L214; name@L215; line@L218; line@L226; stream@L233; text@L234; file@L237; name@L238; line@L241; line@L244; branch@L245; index@L245; name@L251; row@L252; name@L254; _@L256; count@L256; line@L256; block@L259; branch@L259; count@L259; line@L259; output@L272; position@L275; value@L278; item@L281; name@L288; text@L288; definitions@L289; exported@L290; used@L291; line@L292; source@L292; source@L293; label@L299; source@L302; source@L304; column@L306; label@L306; line@L306; evidence@L319; root@L320; unused@L322; coverage@L326; coverage@L328; project@L337; language@L338; entry@L339; output@L340; allowed@L341; result@L344; item@L349; tool@L353; result@L355; item@L371; location@L374; tool@L382; result@L384; line@L402; item@L403; code@L404; span@L406; tool@L415; allowed@L417; result@L418; file@L435; item@L436; tool@L444; allowed@L446; result@L447; file@L464; item@L465; tool@L467; allowed@L469; result@L470; item@L482; tool@L486; allowed@L488; result@L489; file@L504; item@L505; tool@L513; result@L515; line@L531; match@L532; tool@L537; result@L540; tool@L541; project@L562; entry@L563; language@L563; work@L564; build@L565; metric@L566; tool@L566; run@L567; metric@L569; tool@L569; build@L570; run@L580; metric@L582; tool@L582; build@L583; run@L598; metric@L600; tool@L600; classes@L601; build@L603; run@L604; metric@L613; tool@L613; build@L614; metric@L616; tool@L616; metric@L619; tool@L619; run@L620; metric@L622; tool@L622; build@L623; metric@L635; tool@L635; name@L636; tree@L637; result@L638; line@L645; metric@L647; tool@L647; result@L649; cases@L652; case@L653; index@L653; output@L654; environment@L655; run@L663; run@L665; run@L676; result@L691; lines@L703; name@L703; count@L704; line@L704; trace@L708; match@L709; current@L712; row@L713; current@L715; _@L717; hits@L717; line@L717; output@L720; result@L721; lines@L727; name@L727; note@L730; result@L731; file@L734; profiles@L737; result@L738; output@L751; result@L752; output@L767; result@L768; result@L789; row@L790; match@L791; name@L793; existing@L795
+# parameters: path@L43; path@L50; path@L55; project@L71; self@L71; path@L90; self@L90; name@L95; self@L95; value@L95; counts@L100; path@L100; self@L100; code@L111; column@L111; line@L111; message@L111; path@L111; self@L111; cases@L136; expected@L136; metric@L136; self@L136; tool@L136; case_index@L190; evidence@L190; path@L190; evidence@L212; path@L212; evidence@L231; path@L231; evidence@L249; text@L249; node@L270; evidence@L286; command@L317; execute@L317; project@L317; work@L317; evidence@L335; execute@L335; root@L335; command@L560; evidence@L560; execute@L560; root@L560
 # </code-map>
 
 """Jason Stys: real polyglot coverage and unused-code adapters, container execution only.
@@ -84,6 +84,7 @@ class Evidence:
         self.hashes = {name: hashlib.sha256(text.encode()).hexdigest() for name, text in self.sources.items()}
         self.branches = {}
         self.findings = []
+        self.finding_keys = set()
         self.findings_truncated = False
 
     def name(self, path: str) -> str | None:
@@ -112,9 +113,13 @@ class Evidence:
         name = self.name(path)
         if name is None or line is None or self.line(name, line) is None:
             return
+        key = (name, int(line), column, str(code), str(message))
+        if key in self.finding_keys:
+            return
         if len(self.findings) >= 1000:
             self.findings_truncated = True
             return
+        self.finding_keys.add(key)
         self.findings.append(
             {
                 "file": name,
@@ -182,7 +187,7 @@ class Evidence:
         }
 
 
-def cobertura(evidence: Evidence, path: Path) -> None:
+def cobertura(evidence: Evidence, path: Path, case_index=None) -> None:
     """Read real Coverlet/compatible XML line hits and per-line condition ratios."""
     for item in read_xml(path).iter("class"):
         name = evidence.name(item.get("filename", ""))
@@ -197,6 +202,7 @@ def cobertura(evidence: Evidence, path: Path) -> None:
                     {
                         "line": int(line.attrib["number"]),
                         "branch_id": condition.get("number"),
+                        "case_index": case_index,
                         "coverage": condition.get("coverage"),
                         "kind": "coverlet-condition",
                     }
@@ -349,12 +355,15 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
             result = execute(
                 [
                     "gcc" if language == "c" else "g++",
-                    "-fsyntax-only",
+                    "-c",
+                    "-std=c17" if language == "c" else "-std=c++20",
                     "-Wall",
                     "-Wextra",
                     "-Wunused",
                     "-fdiagnostics-format=json",
                     entry,
+                    "-o",
+                    str(root / "unused.o"),
                 ],
                 timeout=25,
                 stderr_path=output,
@@ -436,7 +445,19 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
         elif language == "php":
             allowed = {0, 2}
             result = execute(
-                ["php", "/opt/phpmd.phar", ",".join(evidence.sources), "json", "unusedcode"],
+                [
+                    "php",
+                    "/opt/phpmd.phar",
+                    "analyze",
+                    "--format",
+                    "json",
+                    "--ruleset",
+                    "phar:///opt/phpmd.phar/rulesets/unusedcode.xml",
+                    "--no-cache",
+                    "--threads",
+                    "1",
+                    *evidence.sources,
+                ],
                 timeout=25,
                 stdout_path=output,
             )
@@ -558,7 +579,7 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
         ]
         run = [str(root / "target")]
     elif language == "rust":
-        tool, metric = "rustc/LLVM 14 lcov", "llvm-source-region-line"
+        tool, metric = "rustc 1.99.1/matching LLVM lcov", "llvm-source-region-line"
         build = [
             "rustc",
             "--edition",
@@ -661,6 +682,7 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
                 str(root / "csharp/App.dll"),
                 "--format",
                 "cobertura",
+                "--include-test-assembly",
                 "--output",
                 str(output),
                 "--verbosity",
@@ -681,7 +703,7 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
             for name, lines in read_json(output).items():
                 evidence.add_lines(name, {line: count for line, count in lines.items() if int(count) >= -1})
         elif language == "csharp":
-            cobertura(evidence, output if output.exists() else output.with_suffix(".cobertura.xml"))
+            cobertura(evidence, output if output.exists() else output.with_suffix(".cobertura.xml"), index)
         elif language == "bash":
             trace = read_text(output)
             for match in re.finditer(r"\x1e([^\x1e\x1f\r\n]+):(\d+)\x1f", trace):
@@ -714,7 +736,14 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
     elif language == "rust":
         profiles = list(root.glob("*.profraw"))
         result = execute(
-            ["llvm-profdata-14", "merge", "-sparse", *map(str, profiles), "-o", str(root / "rust.profdata")],
+            [
+                "rust-llvm-profdata",
+                "merge",
+                "-sparse",
+                *map(str, profiles),
+                "-o",
+                str(root / "rust.profdata"),
+            ],
             timeout=15,
         )
         if result["exit_code"] != 0:
@@ -722,7 +751,7 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
         output = root / "rust.lcov"
         result = execute(
             [
-                "llvm-cov-14",
+                "rust-llvm-cov",
                 "export",
                 "-format=lcov",
                 "-instr-profile=" + str(root / "rust.profdata"),

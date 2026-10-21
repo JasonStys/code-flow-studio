@@ -1,5 +1,7 @@
 # Security and trust boundaries
 
+**0.3 native tools:** [polyglot measurement boundaries](polyglot-locations.md) extend the same sandbox; no network/capability/host-access increase. Fixed tool configurations, source-map restrictions, bounded report reads and source-hash-bound locations reduce accidental misattribution, not malicious-target attestation. Language-native unused candidates never trigger automatic deletion.
+
 **0.2 account mode:** see [private accounts](private-accounts.md) and [ADR](adr-private-local.md). Password/session authorization and independent vault proof replace renderer bearer tokens in installed/account mode. Account-owned keys/history are encrypted at lock outside Git; active data is plaintext in the trusted local service. Legacy developer CLI token/environment behavior below remains opt-in, not a private-mode fallback. No operator source-read endpoint or public hosting is provided.
 
 References used for this boundary: [OWASP password storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html), [Electron security](https://www.electronjs.org/docs/latest/tutorial/security), [Docker engine security](https://docs.docker.com/engine/security/), [cryptography authenticated encryption](https://cryptography.io/en/stable/hazmat/primitives/symmetric-encryption/), and [OpenAI Chat Completions protocol](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create). Parameter availability varies by model. Audits/tests do not certify freedom from vulnerabilities.
