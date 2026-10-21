@@ -42,18 +42,22 @@ export default function Locations({ evidence }: { evidence: Record<string, any> 
         <p>Display limited to 200 rows; inspect the JSON/HTML/ZIP for all retained findings. Analyzer limits may also truncate results.</p>}
       {unlocated.map((item, index) => <p key={index}><strong>{item.stage}</strong>: {item.reason}</p>)}
       {parserLimits.map(([name, value]) => <p key={name}><strong>{name}</strong>: parser stopped ({value.reason}). {value.location_available ? "See the located syntax diagnostic." : "Exact line unavailable; this file was not successfully analyzed."}</p>)}
-      <h4>Uncovered Python lines</h4>
-      <p className="note">Measured only under approved CLI inputs; generated pytest tests are outside this coverage run. Non-Python coverage is not built in.</p>
+      {evidence.unused && <p>Unused-code tool: {evidence.unused.tool ?? "Unavailable"} · {evidence.unused.status}. {evidence.unused.reason} {evidence.unused.scope}</p>}
+      <h4>Uncovered source locations</h4>
+      <p className="note">Approved CLI reruns only, separate from benchmarks and generated pytest tests. Coverage is language-specific, not a proof of correctness. Bash measures command-entry lines, SQL completed statement-start lines, and assembly instruction-backed debug lines.</p>
+      <p>{evidence.coverage?.tool ?? "Python coverage / legacy"} · {evidence.coverage?.status ?? "Not measured"} · {evidence.coverage?.metric} {evidence.coverage?.reason}</p>
       {files.length ? files.map(([name, file]) => (
         <div className="coverage-file" key={name}>
           <h5>{name}</h5>
           {file.status === "measured" ? <>
             <p>Uncovered lines: <code>{file.missing_lines?.length ? file.missing_lines.join(", ") : "None recorded"}</code></p>
+            {file.metric && <p>Measurement: {file.metric}</p>}
             <p>Missing branch arcs: <code>{file.missing_branches?.length ? file.missing_branches.map(([from, to]: number[]) => `${from} → ${to < 0 ? `exit(${to})` : to}`).join(", ") : "None recorded"}</code></p>
+            {!!file.branch_points?.length && <p>Native branch points (IDs/counts, not destination lines): <code>{JSON.stringify(file.branch_points).slice(0, 6000)}</code>. Full retained records in JSON.</p>}
             {file.truncated && <p>Location list truncated; counts remain in the raw summary. An empty retained list does not establish full coverage.</p>}
           </> : <p>{file.reason ?? "Not measured; coverage unknown"}</p>}
         </div>
-      )) : <p>{evidence.coverage?.status === "measured" ? "Legacy report: totals only, exact missing lines unavailable. Rerun the saved revision with the updated worker." : "Not measured. Run approved Python cases with the updated isolated worker to obtain exact missing lines."}</p>}
+      )) : <p>{evidence.coverage?.status === "measured" ? "Legacy report: totals only, exact missing lines unavailable. Rerun the saved revision with the updated worker." : "Not measured. Run approved cases with the updated isolated worker to obtain exact missing locations."}</p>}
     </section>
   );
 }

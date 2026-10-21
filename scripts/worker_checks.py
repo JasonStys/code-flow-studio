@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Evidence@L25
-# functions: __setitem__(self, key, value)@L28; main()@L38
-# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; item@L69; attack@L71; code@L82; name@L82; target@L83; cpp@L87; web_demo@L126; located@L132; measured@L149; item@L156; crashing@L158; item@L175; mapped@L177; item@L194; item@L204
-# parameters: key@L28; self@L28; value@L28
+# classes: Evidence@L26
+# functions: __setitem__(self, key, value)@L29; main()@L39
+# variables: path@L32; temporary@L34; reports@L41; language@L42; result@L43; acceptance@L47; language@L48; missing_line@L49; project@L49; unused_line@L49; result@L50; item@L56; measured_file@L59; python@L70; bad@L84; invalid@L88; item@L93; attack@L95; code@L106; name@L106; target@L107; cpp@L111; web_demo@L150; located@L156; measured@L173; item@L180; crashing@L182; item@L199; mapped@L201; item@L218; item@L228
+# parameters: key@L29; self@L29; value@L29
 # </code-map>
 
 """Real compiler, generated-test, fuzz and adversarial-container integration checks.
@@ -17,6 +17,7 @@ import asyncio
 import json
 from pathlib import Path
 
+from examples.language_locations import SAMPLES, location_fixture
 from examples.projects import fixture
 from studio.execution import run
 from studio.models import LANGUAGES, Project
@@ -43,6 +44,29 @@ async def main():
         reports[language] = result
         assert result["tool_status"] == "completed", (language, result)
         assert result["checks"]["passed"] == 1 and result["checks"]["failed"] == 0, (language, result)
+    acceptance = {}
+    for language in SAMPLES:
+        project, unused_line, missing_line = location_fixture(language)
+        result = await run(project)
+        reports[f"{language}-locations"] = result
+        assert result["tool_status"] == "completed" and result["checks"]["passed"] == 1, (language, result)
+        assert result["unused"]["status"] == "completed", (language, result)
+        assert any(
+            item["file"] == project.entry and item["line"] == unused_line and item["stage"] == "unused-code"
+            for item in result["diagnostics"]
+        ), (language, unused_line, result)
+        assert result["coverage"]["status"] == "measured", (language, result)
+        measured_file = result["coverage"]["files"][project.entry]
+        assert missing_line in measured_file["missing_lines"], (language, missing_line, result)
+        assert measured_file["executed_lines"] and measured_file["source_sha256"], (language, result)
+        acceptance[language] = {
+            "entry": project.entry,
+            "unused_line": unused_line,
+            "missing_line": missing_line,
+            "coverage": result["coverage"],
+            "unused": result["unused"]["findings"],
+        }
+        print("NATIVE_ACCEPTANCE=" + json.dumps({language: acceptance[language]}), flush=True)
     python = fixture("python").model_dump()
     python.update(
         {

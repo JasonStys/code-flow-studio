@@ -64,7 +64,7 @@
         "to": "runner",
         "filter": [
           "Dockerfile",
-          "worker.py"
+          "*.py", "*.cjs", "*.php", "*.sh", "*.xml", "tools/package*.json"
         ]
       }
     ],

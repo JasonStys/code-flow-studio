@@ -2,7 +2,7 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # functions: tool_locations(result, project)@L24; process(record, stage, failed)@L62
-# variables: LIMIT@L20; ANSI@L21; file@L26; sources@L26; name@L30; text@L30; name@L40; names@L40; path@L41; patterns@L42; details@L49; artifact@L55; name@L55; text@L55; findings@L57; unlocated@L58; seen@L59; truncated@L60; before@L65; stream@L66; output@L67; message@L68; pattern@L69; match@L70; name@L71; line@L77; column@L80; key@L85; truncated@L90; compilation@L115; case@L117; index@L117; generated@L119; fuzz@L121; finding@L122; index@L122
+# variables: LIMIT@L20; ANSI@L21; file@L26; sources@L26; name@L30; text@L30; name@L40; names@L40; path@L41; patterns@L42; details@L49; artifact@L55; name@L55; text@L55; findings@L57; unlocated@L58; seen@L59; truncated@L60; before@L65; stream@L66; output@L67; message@L68; pattern@L69; match@L70; name@L71; line@L77; column@L80; key@L85; truncated@L90; compilation@L115; case@L117; index@L117; generated@L119; fuzz@L121; finding@L122; index@L122; item@L127; line@L128; name@L128; truncated@L134
 # parameters: project@L24; result@L24; failed@L62; record@L62; stage@L62
 # </code-map>
 
@@ -123,6 +123,19 @@ def tool_locations(result: dict, project: Project) -> dict:
         process(finding.get("process", {}), f"fuzz:{index}", True)
     process(fuzz.get("build", {}), "fuzz-build", fuzz.get("build", {}).get("exit_code", 0) != 0)
     process(fuzz.get("process", {}), "fuzz-process", fuzz.get("status") == "findings")
+    # Treat worker JSON like untrusted logs: bind original paths, bounds and revision before display.
+    for item in result.get("unused", {}).get("findings", [])[: LIMIT + 1]:
+        name, line = item.get("file"), item.get("line")
+        if name not in details or type(line) is not int or not 0 < line <= details[name]["lines"]:
+            continue
+        if item.get("source_sha256") != details[name]["source_sha256"]:
+            continue
+        if len(findings) >= LIMIT:
+            truncated = True
+            break
+        findings.append(
+            {**item, "stage": "unused-code", "artifact": "source", "column_unit": "tool-reported"}
+        )
     return {
         "diagnostics": findings,
         "diagnostics_truncated": truncated,

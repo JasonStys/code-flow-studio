@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- Jason Stys: fixed PMD rules; no target-owned configuration or custom code. -->
+<ruleset name="Code Flow unused candidates" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
+  <description>Conservative unused declarations, not whole-program reachability.</description>
+  <rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
+  <rule ref="category/java/bestpractices.xml/UnusedPrivateField"/>
+  <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod"/>
+  <rule ref="category/java/bestpractices.xml/UnusedFormalParameter"/>
+</ruleset>

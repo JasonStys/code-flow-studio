@@ -36,6 +36,23 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `stopped` | 202 |
 | variable | `window` | 230 |
 
+## examples/language_locations.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `SAMPLES` | 18 |
+| function | `location_fixture(language)` | 77 |
+| parameter | `language` | 77 |
+| variable | `data` | 79 |
+| variable | `missing` | 80 |
+| variable | `source` | 80 |
+| variable | `unused` | 80 |
+| variable | `lines` | 90 |
+| variable | `i` | 93 |
+| variable | `line` | 93 |
+| variable | `i` | 94 |
+| variable | `line` | 94 |
+
 ## examples/projects.py
 
 | Kind | Declaration | Line |
@@ -62,127 +79,475 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | Kind | Declaration | Line |
 |---|---|---|
 
+## runner/language_checks.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `MAX_REPORT` | 24 |
+| variable | `SUFFIXES` | 25 |
+| function | `read_text(path)` | 43 |
+| parameter | `path` | 43 |
+| function | `read_json(path)` | 50 |
+| parameter | `path` | 50 |
+| function | `read_xml(path)` | 55 |
+| parameter | `path` | 55 |
+| variable | `text` | 59 |
+| variable | `text` | 62 |
+| class | `Evidence` | 68 |
+| function | `__init__(self, project)` | 71 |
+| parameter | `project` | 71 |
+| parameter | `self` | 71 |
+| variable | `file` | 75 |
+| function | `name(self, path)` | 84 |
+| parameter | `path` | 84 |
+| parameter | `self` | 84 |
+| variable | `value` | 86 |
+| function | `line(self, name, value)` | 89 |
+| parameter | `name` | 89 |
+| parameter | `self` | 89 |
+| parameter | `value` | 89 |
+| variable | `line` | 91 |
+| variable | `source` | 92 |
+| function | `add_lines(self, path, counts)` | 95 |
+| parameter | `counts` | 95 |
+| parameter | `path` | 95 |
+| parameter | `self` | 95 |
+| variable | `name` | 97 |
+| variable | `lines` | 100 |
+| variable | `count` | 101 |
+| variable | `value` | 101 |
+| variable | `line` | 102 |
+| function | `finding(self, path, line, column, code, message)` | 106 |
+| parameter | `code` | 106 |
+| parameter | `column` | 106 |
+| parameter | `line` | 106 |
+| parameter | `message` | 106 |
+| parameter | `path` | 106 |
+| parameter | `self` | 106 |
+| variable | `name` | 108 |
+| function | `coverage(self, tool, metric, cases, expected)` | 127 |
+| parameter | `cases` | 127 |
+| parameter | `expected` | 127 |
+| parameter | `metric` | 127 |
+| parameter | `self` | 127 |
+| parameter | `tool` | 127 |
+| variable | `files` | 129 |
+| variable | `name` | 130 |
+| variable | `text` | 130 |
+| variable | `counts` | 131 |
+| variable | `covered` | 138 |
+| variable | `value` | 138 |
+| variable | `count` | 149 |
+| variable | `line` | 149 |
+| variable | `count` | 150 |
+| variable | `line` | 150 |
+| variable | `budget` | 156 |
+| variable | `key` | 157 |
+| variable | `record` | 158 |
+| variable | `values` | 159 |
+| variable | `budget` | 161 |
+| variable | `file` | 163 |
+| variable | `measured` | 163 |
+| variable | `complete` | 164 |
+| variable | `case` | 166 |
+| variable | `file` | 176 |
+| function | `cobertura(evidence, path)` | 181 |
+| parameter | `evidence` | 181 |
+| parameter | `path` | 181 |
+| variable | `item` | 183 |
+| variable | `name` | 184 |
+| variable | `line` | 188 |
+| variable | `line` | 190 |
+| variable | `condition` | 191 |
+| function | `jacoco(evidence, path)` | 202 |
+| parameter | `evidence` | 202 |
+| parameter | `path` | 202 |
+| variable | `file` | 204 |
+| variable | `name` | 205 |
+| variable | `line` | 208 |
+| variable | `line` | 216 |
+| function | `gcov(evidence, path)` | 221 |
+| parameter | `evidence` | 221 |
+| parameter | `path` | 221 |
+| variable | `stream` | 223 |
+| variable | `text` | 224 |
+| variable | `file` | 227 |
+| variable | `name` | 228 |
+| variable | `line` | 231 |
+| variable | `line` | 234 |
+| variable | `branch` | 235 |
+| variable | `index` | 235 |
+| function | `lcov(evidence, text)` | 239 |
+| parameter | `evidence` | 239 |
+| parameter | `text` | 239 |
+| variable | `name` | 241 |
+| variable | `row` | 242 |
+| variable | `name` | 244 |
+| variable | `_` | 246 |
+| variable | `count` | 246 |
+| variable | `line` | 246 |
+| variable | `block` | 249 |
+| variable | `branch` | 249 |
+| variable | `count` | 249 |
+| variable | `line` | 249 |
+| function | `shell_lines(node)` | 260 |
+| parameter | `node` | 260 |
+| variable | `output` | 262 |
+| variable | `position` | 265 |
+| variable | `value` | 268 |
+| variable | `item` | 271 |
+| function | `assembly_symbols(evidence)` | 276 |
+| parameter | `evidence` | 276 |
+| variable | `name` | 278 |
+| variable | `text` | 278 |
+| variable | `definitions` | 279 |
+| variable | `exported` | 280 |
+| variable | `used` | 281 |
+| variable | `line` | 282 |
+| variable | `source` | 282 |
+| variable | `source` | 283 |
+| variable | `label` | 289 |
+| variable | `source` | 292 |
+| variable | `source` | 294 |
+| variable | `column` | 296 |
+| variable | `label` | 296 |
+| variable | `line` | 296 |
+| function | `native_checks(project, work, execute, command)` | 307 |
+| parameter | `command` | 307 |
+| parameter | `execute` | 307 |
+| parameter | `project` | 307 |
+| parameter | `work` | 307 |
+| variable | `evidence` | 309 |
+| variable | `root` | 310 |
+| variable | `unused` | 312 |
+| variable | `coverage` | 316 |
+| variable | `coverage` | 318 |
+| function | `unused_checks(evidence, root, execute)` | 325 |
+| parameter | `evidence` | 325 |
+| parameter | `execute` | 325 |
+| parameter | `root` | 325 |
+| variable | `project` | 327 |
+| variable | `language` | 328 |
+| variable | `entry` | 329 |
+| variable | `output` | 330 |
+| variable | `allowed` | 331 |
+| variable | `result` | 334 |
+| variable | `item` | 339 |
+| variable | `tool` | 343 |
+| variable | `result` | 345 |
+| variable | `item` | 358 |
+| variable | `location` | 361 |
+| variable | `tool` | 369 |
+| variable | `result` | 371 |
+| variable | `line` | 389 |
+| variable | `item` | 390 |
+| variable | `code` | 391 |
+| variable | `span` | 393 |
+| variable | `tool` | 402 |
+| variable | `allowed` | 404 |
+| variable | `result` | 405 |
+| variable | `file` | 422 |
+| variable | `item` | 423 |
+| variable | `tool` | 431 |
+| variable | `allowed` | 433 |
+| variable | `result` | 434 |
+| variable | `file` | 439 |
+| variable | `item` | 440 |
+| variable | `tool` | 442 |
+| variable | `allowed` | 444 |
+| variable | `result` | 445 |
+| variable | `item` | 457 |
+| variable | `tool` | 461 |
+| variable | `allowed` | 463 |
+| variable | `result` | 464 |
+| variable | `file` | 479 |
+| variable | `item` | 480 |
+| variable | `tool` | 488 |
+| variable | `result` | 490 |
+| variable | `line` | 506 |
+| variable | `match` | 507 |
+| variable | `tool` | 512 |
+| variable | `result` | 515 |
+| variable | `tool` | 516 |
+| function | `measure(evidence, root, execute, command)` | 535 |
+| parameter | `command` | 535 |
+| parameter | `evidence` | 535 |
+| parameter | `execute` | 535 |
+| parameter | `root` | 535 |
+| variable | `project` | 537 |
+| variable | `entry` | 538 |
+| variable | `language` | 538 |
+| variable | `work` | 539 |
+| variable | `build` | 540 |
+| variable | `metric` | 541 |
+| variable | `tool` | 541 |
+| variable | `run` | 542 |
+| variable | `metric` | 544 |
+| variable | `tool` | 544 |
+| variable | `build` | 545 |
+| variable | `run` | 555 |
+| variable | `metric` | 557 |
+| variable | `tool` | 557 |
+| variable | `build` | 558 |
+| variable | `run` | 573 |
+| variable | `metric` | 575 |
+| variable | `tool` | 575 |
+| variable | `classes` | 576 |
+| variable | `build` | 578 |
+| variable | `run` | 579 |
+| variable | `metric` | 588 |
+| variable | `tool` | 588 |
+| variable | `build` | 589 |
+| variable | `metric` | 591 |
+| variable | `tool` | 591 |
+| variable | `metric` | 594 |
+| variable | `tool` | 594 |
+| variable | `run` | 595 |
+| variable | `metric` | 597 |
+| variable | `tool` | 597 |
+| variable | `build` | 598 |
+| variable | `metric` | 610 |
+| variable | `tool` | 610 |
+| variable | `name` | 611 |
+| variable | `tree` | 612 |
+| variable | `result` | 613 |
+| variable | `line` | 620 |
+| variable | `metric` | 622 |
+| variable | `tool` | 622 |
+| variable | `result` | 624 |
+| variable | `cases` | 627 |
+| variable | `case` | 628 |
+| variable | `index` | 628 |
+| variable | `output` | 629 |
+| variable | `environment` | 630 |
+| variable | `run` | 638 |
+| variable | `run` | 640 |
+| variable | `run` | 651 |
+| variable | `result` | 665 |
+| variable | `lines` | 677 |
+| variable | `name` | 677 |
+| variable | `count` | 678 |
+| variable | `line` | 678 |
+| variable | `trace` | 682 |
+| variable | `match` | 683 |
+| variable | `current` | 686 |
+| variable | `row` | 687 |
+| variable | `current` | 689 |
+| variable | `_` | 691 |
+| variable | `hits` | 691 |
+| variable | `line` | 691 |
+| variable | `output` | 694 |
+| variable | `result` | 695 |
+| variable | `lines` | 701 |
+| variable | `name` | 701 |
+| variable | `note` | 704 |
+| variable | `result` | 705 |
+| variable | `file` | 708 |
+| variable | `profiles` | 711 |
+| variable | `result` | 712 |
+| variable | `output` | 718 |
+| variable | `result` | 719 |
+| variable | `output` | 734 |
+| variable | `result` | 735 |
+| variable | `result` | 756 |
+| variable | `row` | 757 |
+| variable | `match` | 758 |
+| variable | `name` | 760 |
+| variable | `existing` | 762 |
+
+## runner/node_checks.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `fs` | 12 |
+| variable | `path` | 13 |
+| variable | `{ fileURLToPath }` | 14 |
+| variable | `{ Linter }` | 15 |
+| variable | `tsParser` | 16 |
+| variable | `tsPlugin` | 17 |
+| variable | `v8toIstanbul` | 18 |
+| function | `main()` | 20 |
+| variable | `[mode, input, output, directory]` | 22 |
+| variable | `project` | 23 |
+| variable | `typed` | 24 |
+| variable | `files` | 25 |
+| variable | `linter` | 27 |
+| variable | `findings` | 28 |
+| variable | `file` | 29 |
+| variable | `config` | 30 |
+| variable | `item` | 36 |
+| variable | `collected` | 46 |
+| variable | `name` | 47 |
+| variable | `report` | 49 |
+| variable | `script` | 50 |
+| variable | `scriptPath` | 52 |
+| variable | `base` | 53 |
+| variable | `original` | 54 |
+| variable | `expectedPath` | 55 |
+| variable | `source` | 57 |
+| variable | `sources` | 58 |
+| variable | `map` | 60 |
+| variable | `converter` | 69 |
+| variable | `coverage` | 72 |
+| variable | `lines` | 73 |
+| variable | `[id, statement]` | 74 |
+| variable | `line` | 75 |
+
+## runner/sql_runtime.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `statements(text)` | 22 |
+| parameter | `text` | 22 |
+| variable | `output` | 24 |
+| variable | `start` | 25 |
+| variable | `char` | 26 |
+| variable | `index` | 26 |
+| variable | `start` | 30 |
+| variable | `item` | 35 |
+| variable | `index` | 37 |
+| variable | `source` | 38 |
+| variable | `index` | 41 |
+| variable | `end` | 43 |
+| variable | `index` | 44 |
+| variable | `end` | 46 |
+| variable | `index` | 47 |
+| variable | `item` | 54 |
+| function | `main(entry)` | 57 |
+| parameter | `entry` | 57 |
+| variable | `text` | 59 |
+| variable | `chunks` | 60 |
+| variable | `item` | 61 |
+| variable | `lines` | 61 |
+| variable | `output` | 62 |
+| variable | `connection` | 64 |
+| variable | `item` | 65 |
+| variable | `row` | 72 |
+
 ## runner/worker.py
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `DEADLINE` | 28 |
-| variable | `WORK` | 29 |
-| variable | `RUNTIME` | 30 |
-| function | `prepare_runtime()` | 33 |
-| function | `execute(argv, stdin, timeout)` | 39 |
-| parameter | `argv` | 39 |
-| parameter | `stdin` | 39 |
-| parameter | `timeout` | 39 |
-| variable | `remaining` | 41 |
-| variable | `started` | 44 |
-| variable | `errors` | 45 |
-| variable | `output` | 45 |
-| variable | `child` | 47 |
-| variable | `expired` | 54 |
-| variable | `expired` | 58 |
-| variable | `code` | 59 |
-| variable | `size` | 63 |
-| function | `adapter(language, entry)` | 77 |
-| parameter | `entry` | 77 |
-| parameter | `language` | 77 |
-| variable | `plans` | 79 |
-| function | `seeds(project)` | 122 |
-| parameter | `project` | 122 |
-| variable | `rng` | 124 |
-| variable | `case` | 125 |
-| variable | `corpus` | 125 |
-| variable | `boundaries` | 126 |
-| variable | `dictionary` | 127 |
-| variable | `enabled` | 128 |
-| variable | `method` | 130 |
-| variable | `rows` | 133 |
-| variable | `index` | 134 |
-| variable | `method` | 137 |
-| variable | `value` | 139 |
-| variable | `_` | 141 |
-| variable | `value` | 141 |
-| variable | `value` | 143 |
-| variable | `value` | 150 |
-| variable | `data` | 152 |
-| variable | `position` | 153 |
-| variable | `strategy` | 154 |
-| variable | `value` | 165 |
-| function | `coverage(command, project)` | 170 |
-| parameter | `command` | 170 |
-| parameter | `project` | 170 |
-| variable | `case` | 177 |
-| variable | `measured` | 194 |
-| variable | `data` | 197 |
-| variable | `files` | 198 |
-| variable | `measured_files` | 199 |
-| variable | `budget` | 200 |
-| variable | `file` | 201 |
-| variable | `name` | 202 |
-| variable | `measured_file` | 205 |
-| variable | `record` | 212 |
-| variable | `key` | 221 |
-| variable | `measured_file` | 222 |
-| variable | `name` | 222 |
-| variable | `values` | 223 |
-| variable | `budget` | 225 |
-| variable | `entry` | 227 |
-| variable | `file` | 234 |
-| function | `mutants(command, project)` | 239 |
-| parameter | `command` | 239 |
-| parameter | `project` | 239 |
-| variable | `path` | 248 |
-| variable | `original` | 249 |
-| variable | `tree` | 250 |
-| variable | `node` | 251 |
-| variable | `sites` | 251 |
-| variable | `outcomes` | 252 |
-| variable | `index` | 254 |
-| variable | `candidate` | 255 |
-| variable | `node` | 256 |
-| variable | `target` | 256 |
-| variable | `compile_check` | 264 |
-| variable | `killed` | 268 |
-| variable | `inconclusive` | 269 |
-| variable | `case` | 270 |
-| variable | `result` | 271 |
-| variable | `inconclusive` | 272 |
-| variable | `killed` | 273 |
-| variable | `result` | 278 |
-| variable | `inconclusive` | 279 |
-| variable | `killed` | 280 |
-| variable | `item` | 289 |
-| variable | `valid` | 289 |
-| variable | `item` | 294 |
-| function | `instrumented_fuzz(project)` | 299 |
-| parameter | `project` | 299 |
-| variable | `engine` | 301 |
-| variable | `harness` | 302 |
-| variable | `result` | 309 |
-| variable | `build` | 313 |
-| variable | `argv` | 326 |
-| variable | `build` | 328 |
-| variable | `argv` | 331 |
-| variable | `result` | 334 |
-| function | `main()` | 345 |
-| variable | `project` | 347 |
-| variable | `file` | 350 |
-| variable | `build` | 367 |
-| variable | `command` | 367 |
-| variable | `compilation` | 368 |
-| variable | `report` | 369 |
-| variable | `times` | 385 |
-| variable | `case` | 386 |
-| variable | `result` | 387 |
-| variable | `passed` | 388 |
-| variable | `_` | 396 |
-| variable | `benchmark` | 397 |
-| variable | `findings` | 430 |
-| variable | `corpus` | 431 |
-| variable | `method` | 432 |
-| variable | `value` | 432 |
-| variable | `result` | 433 |
-| variable | `method` | 459 |
+| variable | `DEADLINE` | 30 |
+| variable | `WORK` | 31 |
+| variable | `RUNTIME` | 32 |
+| function | `prepare_runtime()` | 35 |
+| function | `execute(argv, stdin, timeout, env, stdout_path, stderr_path)` | 41 |
+| parameter | `argv` | 42 |
+| parameter | `stdin` | 43 |
+| parameter | `timeout` | 44 |
+| parameter | `env` | 46 |
+| parameter | `stdout_path` | 47 |
+| parameter | `stderr_path` | 48 |
+| variable | `remaining` | 51 |
+| variable | `started` | 54 |
+| variable | `output` | 56 |
+| variable | `errors` | 57 |
+| variable | `child` | 60 |
+| variable | `expired` | 73 |
+| variable | `expired` | 77 |
+| variable | `code` | 78 |
+| variable | `size` | 82 |
+| function | `adapter(language, entry)` | 96 |
+| parameter | `entry` | 96 |
+| parameter | `language` | 96 |
+| variable | `plans` | 98 |
+| function | `seeds(project)` | 141 |
+| parameter | `project` | 141 |
+| variable | `rng` | 143 |
+| variable | `case` | 144 |
+| variable | `corpus` | 144 |
+| variable | `boundaries` | 145 |
+| variable | `dictionary` | 146 |
+| variable | `enabled` | 147 |
+| variable | `method` | 149 |
+| variable | `rows` | 152 |
+| variable | `index` | 153 |
+| variable | `method` | 156 |
+| variable | `value` | 158 |
+| variable | `_` | 160 |
+| variable | `value` | 160 |
+| variable | `value` | 162 |
+| variable | `value` | 169 |
+| variable | `data` | 171 |
+| variable | `position` | 172 |
+| variable | `strategy` | 173 |
+| variable | `value` | 184 |
+| function | `coverage(command, project)` | 189 |
+| parameter | `command` | 189 |
+| parameter | `project` | 189 |
+| variable | `case` | 196 |
+| variable | `measured` | 213 |
+| variable | `data` | 216 |
+| variable | `files` | 217 |
+| variable | `measured_files` | 218 |
+| variable | `budget` | 219 |
+| variable | `file` | 220 |
+| variable | `name` | 221 |
+| variable | `measured_file` | 224 |
+| variable | `record` | 231 |
+| variable | `key` | 240 |
+| variable | `measured_file` | 241 |
+| variable | `name` | 241 |
+| variable | `values` | 242 |
+| variable | `budget` | 244 |
+| variable | `entry` | 246 |
+| variable | `file` | 253 |
+| function | `mutants(command, project)` | 258 |
+| parameter | `command` | 258 |
+| parameter | `project` | 258 |
+| variable | `path` | 267 |
+| variable | `original` | 268 |
+| variable | `tree` | 269 |
+| variable | `node` | 270 |
+| variable | `sites` | 270 |
+| variable | `outcomes` | 271 |
+| variable | `index` | 273 |
+| variable | `candidate` | 274 |
+| variable | `node` | 275 |
+| variable | `target` | 275 |
+| variable | `compile_check` | 283 |
+| variable | `killed` | 287 |
+| variable | `inconclusive` | 288 |
+| variable | `case` | 289 |
+| variable | `result` | 290 |
+| variable | `inconclusive` | 291 |
+| variable | `killed` | 292 |
+| variable | `result` | 297 |
+| variable | `inconclusive` | 298 |
+| variable | `killed` | 299 |
+| variable | `item` | 308 |
+| variable | `valid` | 308 |
+| variable | `item` | 313 |
+| function | `instrumented_fuzz(project)` | 318 |
+| parameter | `project` | 318 |
+| variable | `engine` | 320 |
+| variable | `harness` | 321 |
+| variable | `result` | 328 |
+| variable | `build` | 332 |
+| variable | `argv` | 345 |
+| variable | `build` | 347 |
+| variable | `argv` | 350 |
+| variable | `result` | 353 |
+| function | `main()` | 364 |
+| variable | `project` | 366 |
+| variable | `file` | 369 |
+| variable | `build` | 386 |
+| variable | `command` | 386 |
+| variable | `compilation` | 387 |
+| variable | `report` | 388 |
+| variable | `times` | 404 |
+| variable | `case` | 405 |
+| variable | `result` | 406 |
+| variable | `passed` | 407 |
+| variable | `_` | 415 |
+| variable | `benchmark` | 416 |
+| variable | `findings` | 452 |
+| variable | `corpus` | 453 |
+| variable | `method` | 454 |
+| variable | `value` | 454 |
+| variable | `result` | 455 |
+| variable | `method` | 481 |
 
 ## scripts/code_index.py
 
@@ -348,35 +713,43 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| class | `Evidence` | 25 |
-| function | `__setitem__(self, key, value)` | 28 |
-| parameter | `key` | 28 |
-| parameter | `self` | 28 |
-| parameter | `value` | 28 |
-| variable | `path` | 31 |
-| variable | `temporary` | 33 |
-| function | `main()` | 38 |
-| variable | `reports` | 40 |
-| variable | `language` | 41 |
-| variable | `result` | 42 |
-| variable | `python` | 46 |
-| variable | `bad` | 60 |
-| variable | `invalid` | 64 |
-| variable | `item` | 69 |
-| variable | `attack` | 71 |
-| variable | `code` | 82 |
-| variable | `name` | 82 |
-| variable | `target` | 83 |
-| variable | `cpp` | 87 |
-| variable | `web_demo` | 126 |
-| variable | `located` | 132 |
-| variable | `measured` | 149 |
-| variable | `item` | 156 |
-| variable | `crashing` | 158 |
-| variable | `item` | 175 |
-| variable | `mapped` | 177 |
-| variable | `item` | 194 |
-| variable | `item` | 204 |
+| class | `Evidence` | 26 |
+| function | `__setitem__(self, key, value)` | 29 |
+| parameter | `key` | 29 |
+| parameter | `self` | 29 |
+| parameter | `value` | 29 |
+| variable | `path` | 32 |
+| variable | `temporary` | 34 |
+| function | `main()` | 39 |
+| variable | `reports` | 41 |
+| variable | `language` | 42 |
+| variable | `result` | 43 |
+| variable | `acceptance` | 47 |
+| variable | `language` | 48 |
+| variable | `missing_line` | 49 |
+| variable | `project` | 49 |
+| variable | `unused_line` | 49 |
+| variable | `result` | 50 |
+| variable | `item` | 56 |
+| variable | `measured_file` | 59 |
+| variable | `python` | 70 |
+| variable | `bad` | 84 |
+| variable | `invalid` | 88 |
+| variable | `item` | 93 |
+| variable | `attack` | 95 |
+| variable | `code` | 106 |
+| variable | `name` | 106 |
+| variable | `target` | 107 |
+| variable | `cpp` | 111 |
+| variable | `web_demo` | 150 |
+| variable | `located` | 156 |
+| variable | `measured` | 173 |
+| variable | `item` | 180 |
+| variable | `crashing` | 182 |
+| variable | `item` | 199 |
+| variable | `mapped` | 201 |
+| variable | `item` | 218 |
+| variable | `item` | 228 |
 
 ## studio/__init__.py
 
@@ -747,6 +1120,10 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `fuzz` | 121 |
 | variable | `finding` | 122 |
 | variable | `index` | 122 |
+| variable | `item` | 127 |
+| variable | `line` | 128 |
+| variable | `name` | 128 |
+| variable | `truncated` | 134 |
 
 ## studio/models.py
 
@@ -1190,22 +1567,24 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `value` | 34 |
 | variable | `item` | 43 |
 | variable | `coverage` | 45 |
-| variable | `data` | 63 |
-| variable | `name` | 63 |
-| variable | `unknown` | 65 |
-| variable | `item` | 67 |
+| variable | `data` | 67 |
+| variable | `name` | 67 |
 | variable | `unknown` | 69 |
-| variable | `data` | 75 |
-| variable | `name` | 75 |
-| function | `html_report(run)` | 96 |
-| parameter | `run` | 96 |
-| variable | `evidence` | 98 |
-| function | `bundle(run, revision)` | 108 |
-| parameter | `revision` | 108 |
-| parameter | `run` | 108 |
-| variable | `buffer` | 110 |
-| variable | `archive` | 111 |
-| variable | `file` | 115 |
+| variable | `item` | 71 |
+| variable | `unknown` | 73 |
+| variable | `data` | 79 |
+| variable | `name` | 79 |
+| variable | `key` | 94 |
+| variable | `key` | 97 |
+| function | `html_report(run)` | 106 |
+| parameter | `run` | 106 |
+| variable | `evidence` | 108 |
+| function | `bundle(run, revision)` | 118 |
+| parameter | `revision` | 118 |
+| parameter | `run` | 118 |
+| variable | `buffer` | 120 |
+| variable | `archive` | 121 |
+| variable | `file` | 125 |
 
 ## studio/source_checks.py
 
@@ -1745,6 +2124,56 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `project` | 326 |
 | variable | `data` | 327 |
 | variable | `result` | 333 |
+
+## tests/test_native_locations.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `evidence(language, source)` | 39 |
+| parameter | `language` | 39 |
+| parameter | `source` | 39 |
+| variable | `project` | 41 |
+| function | `test_source_binding_union_and_partial()` | 46 |
+| variable | `item` | 48 |
+| variable | `result` | 53 |
+| function | `test_unknown_and_location_budget()` | 67 |
+| variable | `item` | 69 |
+| variable | `line` | 71 |
+| variable | `result` | 72 |
+| variable | `_` | 75 |
+| function | `test_gcov_lcov_and_branch_ids(tmp_path)` | 80 |
+| parameter | `tmp_path` | 80 |
+| variable | `item` | 82 |
+| variable | `path` | 83 |
+| function | `test_xml_coverage_and_reject_entities(tmp_path)` | 106 |
+| parameter | `tmp_path` | 106 |
+| variable | `item` | 108 |
+| variable | `path` | 109 |
+| function | `test_shell_ast_and_assembly_exports()` | 129 |
+| variable | `item` | 137 |
+| variable | `finding` | 139 |
+| function | `test_sql_statement_start_anchors(text, lines)` | 154 |
+| parameter | `lines` | 154 |
+| parameter | `text` | 154 |
+| variable | `item` | 156 |
+| function | `test_bounded_tools_fail_closed(tmp_path, language)` | 160 |
+| parameter | `language` | 160 |
+| parameter | `tmp_path` | 160 |
+| variable | `_` | 162 |
+| variable | `project` | 162 |
+| variable | `work` | 163 |
+| function | `unavailable()` | 166 |
+| parameter | `args` | 166 |
+| parameter | `kwargs` | 166 |
+| variable | `coverage` | 170 |
+| variable | `unused` | 170 |
+| function | `test_controller_rebinds_native_findings_and_escapes()` | 175 |
+| variable | `_` | 177 |
+| variable | `project` | 177 |
+| variable | `item` | 178 |
+| variable | `raw` | 180 |
+| variable | `result` | 181 |
+| variable | `report` | 184 |
 
 ## tests/test_private.py
 

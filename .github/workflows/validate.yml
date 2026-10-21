@@ -53,7 +53,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -e '.[dev]'
-      - run: docker build -t code-flow-worker:0.1.0 runner
+      - run: docker build -t code-flow-worker:0.2.0 runner
       - run: python -m scripts.worker_checks
       - run: python -m scripts.private_worker_checks
       - run: python -m scripts.push_analysis

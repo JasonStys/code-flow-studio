@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: location_summary(run)@L21; escape(value)@L26; html_report(run)@L96; bundle(run, revision)@L108
-# variables: result@L23; findings@L24; rows@L30; value@L34; item@L43; coverage@L45; data@L63; name@L63; unknown@L65; item@L67; unknown@L69; data@L75; name@L75; evidence@L98; buffer@L110; archive@L111; file@L115
-# parameters: run@L21; value@L26; run@L96; revision@L108; run@L108
+# functions: location_summary(run)@L21; escape(value)@L26; html_report(run)@L106; bundle(run, revision)@L118
+# variables: result@L23; findings@L24; rows@L30; value@L34; item@L43; coverage@L45; data@L67; name@L67; unknown@L69; item@L71; unknown@L73; data@L79; name@L79; key@L94; key@L97; evidence@L108; buffer@L120; archive@L121; file@L125
+# parameters: run@L21; value@L26; run@L106; revision@L118; run@L118
 # </code-map>
 
 """Portable machine-readable and escaped HTML evidence reports.
@@ -51,6 +51,10 @@ def location_summary(run: dict) -> str:
             + escape(", ".join(map(str, data.get("missing_lines", []))) or "None recorded")
             + ". Missing branch arcs: "
             + escape(data.get("missing_branches", []))
+            + ". Native branch points: "
+            + escape(data.get("branch_points", []))
+            + ". Measurement: "
+            + escape(data.get("metric", "Python line/branch"))
             + (
                 ". Truncated: an empty retained list is not full-coverage evidence."
                 if data.get("truncated")
@@ -85,7 +89,13 @@ def location_summary(run: dict) -> str:
             else "<p>No located findings recorded; not proof of correctness.</p>"
         )
         + unknown
-        + "<h2>Uncovered Python lines</h2>"
+        + "<h2>Uncovered source locations</h2><p>Approved CLI reruns only; generated pytest excluded. Native branch IDs/counts are not destination arcs. Bash: command entry; SQL: completed statement starts; assembly: instruction-backed debug lines.</p>"
+        + "<p>"
+        + escape({key: result.get("coverage", {}).get(key) for key in ("status", "tool", "metric", "reason")})
+        + "</p>"
+        + "<p>Unused-code: "
+        + escape({key: result.get("unused", {}).get(key) for key in ("status", "tool", "reason", "scope")})
+        + "</p>"
         + (
             coverage
             or "<p>Exact missing lines unavailable/not measured in this report. Legacy totals cannot reconstruct line locations; rerun with the updated worker.</p>"

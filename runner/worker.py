@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: prepare_runtime()@L33; execute(argv, stdin, timeout)@L39; adapter(language, entry)@L77; seeds(project)@L122; coverage(command, project)@L170; mutants(command, project)@L239; instrumented_fuzz(project)@L299; main()@L345
-# variables: DEADLINE@L28; WORK@L29; RUNTIME@L30; remaining@L41; started@L44; errors@L45; output@L45; child@L47; expired@L54; expired@L58; code@L59; size@L63; plans@L79; rng@L124; case@L125; corpus@L125; boundaries@L126; dictionary@L127; enabled@L128; method@L130; rows@L133; index@L134; method@L137; value@L139; _@L141; value@L141; value@L143; value@L150; data@L152; position@L153; strategy@L154; value@L165; case@L177; measured@L194; data@L197; files@L198; measured_files@L199; budget@L200; file@L201; name@L202; measured_file@L205; record@L212; key@L221; measured_file@L222; name@L222; values@L223; budget@L225; entry@L227; file@L234; path@L248; original@L249; tree@L250; node@L251; sites@L251; outcomes@L252; index@L254; candidate@L255; node@L256; target@L256; compile_check@L264; killed@L268; inconclusive@L269; case@L270; result@L271; inconclusive@L272; killed@L273; result@L278; inconclusive@L279; killed@L280; item@L289; valid@L289; item@L294; engine@L301; harness@L302; result@L309; build@L313; argv@L326; build@L328; argv@L331; result@L334; project@L347; file@L350; build@L367; command@L367; compilation@L368; report@L369; times@L385; case@L386; result@L387; passed@L388; _@L396; benchmark@L397; findings@L430; corpus@L431; method@L432; value@L432; result@L433; method@L459
-# parameters: argv@L39; stdin@L39; timeout@L39; entry@L77; language@L77; project@L122; command@L170; project@L170; command@L239; project@L239; project@L299
+# functions: prepare_runtime()@L35; execute(argv, stdin, timeout, env, stdout_path, stderr_path)@L41; adapter(language, entry)@L96; seeds(project)@L141; coverage(command, project)@L189; mutants(command, project)@L258; instrumented_fuzz(project)@L318; main()@L364
+# variables: DEADLINE@L30; WORK@L31; RUNTIME@L32; remaining@L51; started@L54; output@L56; errors@L57; child@L60; expired@L73; expired@L77; code@L78; size@L82; plans@L98; rng@L143; case@L144; corpus@L144; boundaries@L145; dictionary@L146; enabled@L147; method@L149; rows@L152; index@L153; method@L156; value@L158; _@L160; value@L160; value@L162; value@L169; data@L171; position@L172; strategy@L173; value@L184; case@L196; measured@L213; data@L216; files@L217; measured_files@L218; budget@L219; file@L220; name@L221; measured_file@L224; record@L231; key@L240; measured_file@L241; name@L241; values@L242; budget@L244; entry@L246; file@L253; path@L267; original@L268; tree@L269; node@L270; sites@L270; outcomes@L271; index@L273; candidate@L274; node@L275; target@L275; compile_check@L283; killed@L287; inconclusive@L288; case@L289; result@L290; inconclusive@L291; killed@L292; result@L297; inconclusive@L298; killed@L299; item@L308; valid@L308; item@L313; engine@L320; harness@L321; result@L328; build@L332; argv@L345; build@L347; argv@L350; result@L353; project@L366; file@L369; build@L386; command@L386; compilation@L387; report@L388; times@L404; case@L405; result@L406; passed@L407; _@L415; benchmark@L416; findings@L452; corpus@L453; method@L454; value@L454; result@L455; method@L481
+# parameters: argv@L42; stdin@L43; timeout@L44; env@L46; stdout_path@L47; stderr_path@L48; entry@L96; language@L96; project@L141; command@L189; project@L189; command@L258; project@L258; project@L318
 # </code-map>
 
 """Container-only compiler/test/fuzz worker. Never import this module on the host.
@@ -25,6 +25,8 @@ import tempfile
 import time
 from pathlib import Path
 
+from language_checks import native_checks
+
 DEADLINE = time.monotonic() + 150
 WORK = Path("/tmp/project")  # noqa: S108 -- private, fresh, per-job container tmpfs; never host /tmp
 RUNTIME = Path("/tmp/code-flow-runtime")  # noqa: S108 -- owned 0700 directory on this job's fresh private tmpfs
@@ -36,16 +38,33 @@ def prepare_runtime() -> None:
     os.environ["XDG_RUNTIME_DIR"] = str(RUNTIME)
 
 
-def execute(argv: list[str], stdin: str | bytes = "", timeout: float = 3) -> dict:
+def execute(
+    argv: list[str],
+    stdin: str | bytes = "",
+    timeout: float = 3,
+    *,
+    env=None,
+    stdout_path=None,
+    stderr_path=None,
+) -> dict:
     """Execute argv without a shell; retain a bounded tail and real elapsed wall time."""
     remaining = DEADLINE - time.monotonic()
     if remaining <= 0:
         return {"exit_code": None, "stdout": "", "stderr": "Run budget exhausted", "timeout": True, "ms": 0}
     started = time.perf_counter()
-    with tempfile.TemporaryFile() as output, tempfile.TemporaryFile() as errors:
+    with (
+        stdout_path.open("w+b") if stdout_path else tempfile.TemporaryFile() as output,
+        stderr_path.open("w+b") if stderr_path else tempfile.TemporaryFile() as errors,
+    ):
         try:
             child = subprocess.Popen(
-                argv, cwd=WORK, stdin=subprocess.PIPE, stdout=output, stderr=errors, start_new_session=True
+                argv,
+                cwd=WORK,
+                stdin=subprocess.PIPE,
+                stdout=output,
+                stderr=errors,
+                start_new_session=True,
+                env={**os.environ, **(env or {})},
             )
             try:
                 child.communicate(
@@ -353,9 +372,9 @@ def main() -> None:
         )
     if project["language"] == "sql":
         (WORK / "sql_driver.py").write_text(
-            "import sqlite3,sys\nc=sqlite3.connect(':memory:')\nc.executescript(open("
+            "import os,sys\nos.execv(sys.executable,[sys.executable,'-I','/opt/sql_runtime.py',"
             + repr(project["entry"])
-            + ").read())\nfor row in c.execute(sys.stdin.read() or 'SELECT 1'):\n print('|'.join(map(str,row)))\n"
+            + "])\n"
         )
     if project["language"] == "csharp":
         (WORK / "App.csproj").write_text(
@@ -372,7 +391,7 @@ def main() -> None:
         "checks": {"passed": 0, "failed": 0, "cases": []},
         "oracle_hash": hashlib.sha256(json.dumps(project["cases"], sort_keys=True).encode()).hexdigest(),
         "environment": {
-            "worker": "polyglot-v2-locations",
+            "worker": "polyglot-v3-language-evidence",
             "python": sys.version.split()[0],
             "language": project["language"],
             "machine": os.uname().machine,
@@ -420,7 +439,10 @@ def main() -> None:
             "max_rss_kib": resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss,
             "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements.",
         }
-        report["coverage"] = coverage(command, project)
+        if project["language"] == "python":
+            report["coverage"] = coverage(command, project)
+        else:
+            report["coverage"], report["unused"] = native_checks(project, WORK, execute, command)
         report["mutation"] = (
             mutants(command, project)
             if report["checks"]["failed"] == 0 and report["generated_tests"].get("exit_code", 0) == 0
