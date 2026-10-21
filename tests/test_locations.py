@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: manifest(files, entry, language)@L32; test_multifile_unicode_syntax_and_no_source_execution(tmp_path)@L43; test_unused_and_unreachable_locations()@L62; test_physical_newlines_not_unicode_string_separators(separator)@L77; test_unused_false_positive_boundaries(text)@L100; test_cross_file_references_and_empty_or_unparseable_source()@L105; test_unrelated_module_names_do_not_hide_unused_imports_or_locals()@L118; test_structural_python_errors_and_other_language_offsets()@L134; test_toolchain_formats(entry, language, output)@L164; test_unmapped_failure_bounds_duplicates_ansi_and_generated_artifacts()@L176; test_tool_location_limit_and_fuzz_paths()@L195; test_api_and_exports_preserve_locations_and_escape(tmp_path)@L215; coverage_function(monkeypatch, tmp_path, data)@L254; test_coverage_exact_lists_multifile_unknown_and_generated_exclusion(monkeypatch, tmp_path)@L271; test_coverage_budget_and_missing_entry(monkeypatch, tmp_path)@L297; test_coverage_prioritizes_later_file_missing_lines(monkeypatch, tmp_path)@L309
-# variables: name@L38; text@L38; sentinel@L45; project@L46; result@L53; dynamic@L54; item@L54; item@L56; syntax@L56; text@L64; result@L65; item@L66; located@L66; item@L73; text@L79; finding@L80; item@L82; project@L107; empty@L111; invalid@L113; result@L120; item@L128; located@L128; item@L131; result@L136; other@L138; result@L143; project@L166; result@L167; project@L178; evidence@L180; result@L189; project@L197; index@L198; output@L198; result@L199; item@L212; project@L217; token@L218; headers@L219; client@L220; review@L221; store@L223; revision@L224; run@L225; result@L226; exported@L242; html@L244; archive@L247; saved@L248; worker@L256; function@L257; node@L258; namespace@L261; project@L273; data@L274; measure@L285; result@L286; project@L299; data@L300; result@L303; project@L311; data@L312; result@L318
-# parameters: entry@L32; files@L32; language@L32; tmp_path@L43; separator@L77; text@L100; entry@L164; language@L164; output@L164; tmp_path@L215; data@L254; monkeypatch@L254; tmp_path@L254; args@L265; kwargs@L265; monkeypatch@L271; tmp_path@L271; monkeypatch@L297; tmp_path@L297; monkeypatch@L309; tmp_path@L309
+# functions: manifest(files, entry, language)@L33; test_multifile_unicode_syntax_and_no_source_execution(tmp_path)@L44; test_unused_and_unreachable_locations()@L63; test_physical_newlines_not_unicode_string_separators(separator)@L78; test_unused_false_positive_boundaries(text)@L101; test_cross_file_references_and_empty_or_unparseable_source()@L106; test_unrelated_module_names_do_not_hide_unused_imports_or_locals()@L119; test_structural_python_errors_and_other_language_offsets()@L135; test_toolchain_formats(entry, language, output)@L165; test_unmapped_failure_bounds_duplicates_ansi_and_generated_artifacts()@L177; test_tool_location_limit_and_fuzz_paths()@L196; test_api_and_exports_preserve_locations_and_escape(tmp_path)@L216; coverage_function(monkeypatch, tmp_path, data)@L255; test_private_runtime_preparation(tmp_path)@L272; test_coverage_exact_lists_multifile_unknown_and_generated_exclusion(monkeypatch, tmp_path)@L286; test_coverage_budget_and_missing_entry(monkeypatch, tmp_path)@L312; test_coverage_prioritizes_later_file_missing_lines(monkeypatch, tmp_path)@L324
+# variables: name@L39; text@L39; sentinel@L46; project@L47; result@L54; dynamic@L55; item@L55; item@L57; syntax@L57; text@L65; result@L66; item@L67; located@L67; item@L74; text@L80; finding@L81; item@L83; project@L108; empty@L112; invalid@L114; result@L121; item@L129; located@L129; item@L132; result@L137; other@L139; result@L144; project@L167; result@L168; project@L179; evidence@L181; result@L190; project@L198; index@L199; output@L199; result@L200; item@L213; project@L218; token@L219; headers@L220; client@L221; review@L222; store@L224; revision@L225; run@L226; result@L227; exported@L243; html@L245; archive@L248; saved@L249; worker@L257; function@L258; node@L259; namespace@L262; tree@L274; function@L275; node@L276; environment@L278; namespace@L279; project@L288; data@L289; measure@L300; result@L301; project@L314; data@L315; result@L318; project@L326; data@L327; result@L333
+# parameters: entry@L33; files@L33; language@L33; tmp_path@L44; separator@L78; text@L101; entry@L165; language@L165; output@L165; tmp_path@L216; data@L255; monkeypatch@L255; tmp_path@L255; args@L266; kwargs@L266; tmp_path@L272; monkeypatch@L286; tmp_path@L286; monkeypatch@L312; tmp_path@L312; monkeypatch@L324; tmp_path@L324
 # </code-map>
 
 """Jason Stys: exact-location regressions, inert source only; no host target execution.
@@ -18,6 +18,7 @@ import io
 import json
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from fastapi.testclient import TestClient
@@ -266,6 +267,20 @@ def coverage_function(monkeypatch, tmp_path, data):
     }
     exec(compile(ast.Module(body=[function], type_ignores=[]), "trusted-coverage-test", "exec"), namespace)  # noqa: S102 -- trusted function only; mocked CLI, no submitted source execution
     return namespace["coverage"]
+
+
+def test_private_runtime_preparation(tmp_path):
+    """Only the trusted initializer runs with an inert environment; targets stay inside workers."""
+    tree = ast.parse(Path("runner/worker.py").read_text(encoding="utf-8"))
+    function = next(
+        node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "prepare_runtime"
+    )
+    environment = {}
+    namespace = {"RUNTIME": tmp_path / "owned-runtime", "os": SimpleNamespace(environ=environment)}
+    exec(compile(ast.Module(body=[function], type_ignores=[]), "trusted-runtime-test", "exec"), namespace)  # noqa: S102 -- reviewed initializer only, no submitted source or real environment access
+    namespace["prepare_runtime"]()
+    assert environment == {"XDG_RUNTIME_DIR": str(tmp_path / "owned-runtime")}
+    assert (tmp_path / "owned-runtime").is_dir()
 
 
 def test_coverage_exact_lists_multifile_unknown_and_generated_exclusion(monkeypatch, tmp_path):

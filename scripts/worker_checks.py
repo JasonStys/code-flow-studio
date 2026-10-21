@@ -3,7 +3,7 @@
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L25
 # functions: __setitem__(self, key, value)@L28; main()@L38
-# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; item@L69; attack@L71; code@L77; name@L77; target@L78; cpp@L82; web_demo@L121; located@L127; measured@L144; item@L151; crashing@L153; item@L170; mapped@L172; item@L189; item@L199
+# variables: path@L31; temporary@L33; reports@L40; language@L41; result@L42; python@L46; bad@L60; invalid@L64; item@L69; attack@L71; code@L82; name@L82; target@L83; cpp@L87; web_demo@L126; located@L132; measured@L149; item@L156; crashing@L158; item@L175; mapped@L177; item@L194; item@L204
 # parameters: key@L28; self@L28; value@L28
 # </code-map>
 
@@ -71,6 +71,11 @@ async def main():
     attack = fixture("python").model_dump()
     attack["files"][0]["content"] = (
         '"""Probe only this job’s security boundary."""\nimport errno,os,socket\nassert not os.environ.get("STUDIO_OPENAI_KEY")\ntry:\n open("/opt/probe.txt","w").write("blocked")\n raise AssertionError("root writable")\nexcept OSError as error:\n assert error.errno in (errno.EROFS,errno.EACCES,errno.EPERM)\ns=socket.socket();s.settimeout(.2)\ntry:\n s.connect(("1.1.1.1",443));raise AssertionError("network connected")\nexcept OSError: pass\nprint(4)\n'
+    )
+    attack["files"][0]["content"] += (
+        '\nimport stat\nruntime = os.environ["XDG_RUNTIME_DIR"]\ninfo = os.stat(runtime)\n'
+        'assert runtime == "/tmp/code-flow-runtime"\nassert info.st_uid == os.getuid()\n'
+        "assert stat.S_IMODE(info.st_mode) == 0o700\n"
     )
     reports["boundary-probes"] = await run(Project.model_validate(attack))
     assert reports["boundary-probes"]["checks"]["passed"] == 1

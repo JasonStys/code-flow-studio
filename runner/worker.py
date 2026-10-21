@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: execute(argv, stdin, timeout)@L32; adapter(language, entry)@L70; seeds(project)@L115; coverage(command, project)@L163; mutants(command, project)@L232; instrumented_fuzz(project)@L292; main()@L338
-# variables: DEADLINE@L28; WORK@L29; remaining@L34; started@L37; errors@L38; output@L38; child@L40; expired@L47; expired@L51; code@L52; size@L56; plans@L72; rng@L117; case@L118; corpus@L118; boundaries@L119; dictionary@L120; enabled@L121; method@L123; rows@L126; index@L127; method@L130; value@L132; _@L134; value@L134; value@L136; value@L143; data@L145; position@L146; strategy@L147; value@L158; case@L170; measured@L187; data@L190; files@L191; measured_files@L192; budget@L193; file@L194; name@L195; measured_file@L198; record@L205; key@L214; measured_file@L215; name@L215; values@L216; budget@L218; entry@L220; file@L227; path@L241; original@L242; tree@L243; node@L244; sites@L244; outcomes@L245; index@L247; candidate@L248; node@L249; target@L249; compile_check@L257; killed@L261; inconclusive@L262; case@L263; result@L264; inconclusive@L265; killed@L266; result@L271; inconclusive@L272; killed@L273; item@L282; valid@L282; item@L287; engine@L294; harness@L295; result@L302; build@L306; argv@L319; build@L321; argv@L324; result@L327; project@L340; file@L342; build@L359; command@L359; compilation@L360; report@L361; times@L377; case@L378; result@L379; passed@L380; _@L388; benchmark@L389; findings@L422; corpus@L423; method@L424; value@L424; result@L425; method@L451
-# parameters: argv@L32; stdin@L32; timeout@L32; entry@L70; language@L70; project@L115; command@L163; project@L163; command@L232; project@L232; project@L292
+# functions: prepare_runtime()@L33; execute(argv, stdin, timeout)@L39; adapter(language, entry)@L77; seeds(project)@L122; coverage(command, project)@L170; mutants(command, project)@L239; instrumented_fuzz(project)@L299; main()@L345
+# variables: DEADLINE@L28; WORK@L29; RUNTIME@L30; remaining@L41; started@L44; errors@L45; output@L45; child@L47; expired@L54; expired@L58; code@L59; size@L63; plans@L79; rng@L124; case@L125; corpus@L125; boundaries@L126; dictionary@L127; enabled@L128; method@L130; rows@L133; index@L134; method@L137; value@L139; _@L141; value@L141; value@L143; value@L150; data@L152; position@L153; strategy@L154; value@L165; case@L177; measured@L194; data@L197; files@L198; measured_files@L199; budget@L200; file@L201; name@L202; measured_file@L205; record@L212; key@L221; measured_file@L222; name@L222; values@L223; budget@L225; entry@L227; file@L234; path@L248; original@L249; tree@L250; node@L251; sites@L251; outcomes@L252; index@L254; candidate@L255; node@L256; target@L256; compile_check@L264; killed@L268; inconclusive@L269; case@L270; result@L271; inconclusive@L272; killed@L273; result@L278; inconclusive@L279; killed@L280; item@L289; valid@L289; item@L294; engine@L301; harness@L302; result@L309; build@L313; argv@L326; build@L328; argv@L331; result@L334; project@L347; file@L350; build@L367; command@L367; compilation@L368; report@L369; times@L385; case@L386; result@L387; passed@L388; _@L396; benchmark@L397; findings@L430; corpus@L431; method@L432; value@L432; result@L433; method@L459
+# parameters: argv@L39; stdin@L39; timeout@L39; entry@L77; language@L77; project@L122; command@L170; project@L170; command@L239; project@L239; project@L299
 # </code-map>
 
 """Container-only compiler/test/fuzz worker. Never import this module on the host.
@@ -27,6 +27,13 @@ from pathlib import Path
 
 DEADLINE = time.monotonic() + 150
 WORK = Path("/tmp/project")  # noqa: S108 -- private, fresh, per-job container tmpfs; never host /tmp
+RUNTIME = Path("/tmp/code-flow-runtime")  # noqa: S108 -- owned 0700 directory on this job's fresh private tmpfs
+
+
+def prepare_runtime() -> None:
+    """Give patched .NET named mutexes a UID-owned runtime directory, without writable root or host mounts."""
+    RUNTIME.mkdir(mode=0o700)
+    os.environ["XDG_RUNTIME_DIR"] = str(RUNTIME)
 
 
 def execute(argv: list[str], stdin: str | bytes = "", timeout: float = 3) -> dict:
@@ -338,6 +345,7 @@ def instrumented_fuzz(project: dict) -> dict:
 def main() -> None:
     """Compile, execute approved tests, benchmark, fuzz and report one bounded project."""
     project = json.loads(Path("/input/job.json").read_text())
+    prepare_runtime()
     WORK.mkdir()
     for file in project["files"]:
         (WORK / file["name"]).write_bytes(
@@ -364,7 +372,7 @@ def main() -> None:
         "checks": {"passed": 0, "failed": 0, "cases": []},
         "oracle_hash": hashlib.sha256(json.dumps(project["cases"], sort_keys=True).encode()).hexdigest(),
         "environment": {
-            "worker": "polyglot-v1",
+            "worker": "polyglot-v2-locations",
             "python": sys.version.split()[0],
             "language": project["language"],
             "machine": os.uname().machine,

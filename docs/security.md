@@ -12,6 +12,8 @@ The controller accepts bounded flat file names, retains binary fixtures without 
 
 Workers use no network, read-only root, an app-owned read-only job mount, private bounded tmpfs, non-root user, dropped Linux capabilities, no-new-privileges, memory/CPU/PID constraints and an external controller deadline/output bound. Uploaded values cannot add Docker mounts, sockets, flags, images or environment secrets. Only a broker-owned exact container name is force-removed on completion/cancellation. Never reset/delete unrelated Docker state.
 
+The worker creates its own mode-0700 `XDG_RUNTIME_DIR` on that fresh private tmpfs before starting tools. Patched .NET runtimes need a UID-owned writable location for named mutexes; this avoids an unavailable passwd home without granting root access, a shared runtime directory or a new host mount.
+
 The private tmpfs explicitly allows executable compiler output while remaining `nosuid,nodev`; Docker otherwise defaults tmpfs mounts to `noexec`, which prevents genuine C/C++/Rust/assembly and instrumented harness execution. This exception applies only inside the restricted disposable worker, not the host or any shared directory.
 
 **Limitations:** containers share the host/VM kernel. Compiler and runtime vulnerabilities remain possible. Arbitrary target programs can interfere with same-user instrumentation inside their job; self-reported worker measurements are not cryptographic proof against actively malicious targets. Runtime/RSS and syntax warnings are evidence for reviewed development code, not security certification. Run hostile internet workloads in dedicated disposable VMs with stronger isolation, independent supervisors and security review.
