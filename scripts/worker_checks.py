@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L26
-# functions: __setitem__(self, key, value)@L29; main()@L39
-# variables: path@L32; temporary@L34; reports@L41; language@L42; result@L43; acceptance@L47; language@L48; missing_line@L49; project@L49; unused_line@L49; result@L50; item@L56; measured_file@L59; python@L70; bad@L84; invalid@L88; item@L93; attack@L95; code@L106; name@L106; target@L107; cpp@L111; web_demo@L150; located@L156; measured@L173; item@L180; crashing@L182; item@L199; mapped@L201; item@L218; item@L228
-# parameters: key@L29; self@L29; value@L29
+# functions: __setitem__(self, key, value)@L29; main()@L39; assert_native_locations(language, result, project, unused_line, missing_line)@L82; original_scenarios(reports)@L96
+# variables: path@L32; temporary@L34; reports@L41; language@L42; result@L43; acceptance@L47; native_errors@L48; language@L49; missing_line@L50; project@L50; unused_line@L50; result@L51; key@L58; item@L88; measured_file@L91; python@L98; bad@L112; invalid@L116; item@L121; attack@L123; code@L134; name@L134; target@L135; cpp@L139; web_demo@L178; located@L184; measured@L201; item@L208; crashing@L210; item@L227; mapped@L229; item@L246; item@L256
+# parameters: key@L29; self@L29; value@L29; language@L82; missing_line@L82; project@L82; result@L82; unused_line@L82; reports@L96
 # </code-map>
 
 """Real compiler, generated-test, fuzz and adversarial-container integration checks.
@@ -45,20 +45,27 @@ async def main():
         assert result["tool_status"] == "completed", (language, result)
         assert result["checks"]["passed"] == 1 and result["checks"]["failed"] == 0, (language, result)
     acceptance = {}
+    native_errors = []
     for language in SAMPLES:
         project, unused_line, missing_line = location_fixture(language)
         result = await run(project)
         reports[f"{language}-locations"] = result
-        assert result["tool_status"] == "completed" and result["checks"]["passed"] == 1, (language, result)
-        assert result["unused"]["status"] == "completed", (language, result)
-        assert any(
-            item["file"] == project.entry and item["line"] == unused_line and item["stage"] == "unused-code"
-            for item in result["diagnostics"]
-        ), (language, unused_line, result)
-        assert result["coverage"]["status"] == "measured", (language, result)
-        measured_file = result["coverage"]["files"][project.entry]
-        assert missing_line in measured_file["missing_lines"], (language, missing_line, result)
-        assert measured_file["executed_lines"] and measured_file["source_sha256"], (language, result)
+        print(
+            "NATIVE_RESULT="
+            + json.dumps(
+                {
+                    language: {
+                        key: result.get(key) for key in ("tool_status", "coverage", "unused", "diagnostics")
+                    }
+                }
+            ),
+            flush=True,
+        )
+        try:
+            assert_native_locations(language, result, project, unused_line, missing_line)
+        except (AssertionError, KeyError):
+            native_errors.append(language)
+            continue
         acceptance[language] = {
             "entry": project.entry,
             "unused_line": unused_line,
@@ -67,6 +74,27 @@ async def main():
             "unused": result["unused"]["findings"],
         }
         print("NATIVE_ACCEPTANCE=" + json.dumps({language: acceptance[language]}), flush=True)
+    assert not native_errors, ("Native location contract failures", native_errors)
+
+    await original_scenarios(reports)
+
+
+def assert_native_locations(language, result, project, unused_line, missing_line):
+    """Require independently authored exact anchors; no missing tool or empty report counts as a pass."""
+    assert result["tool_status"] == "completed" and result["checks"]["passed"] == 1, (language, result)
+    assert result["unused"]["status"] == "completed", (language, result)
+    assert any(
+        item["file"] == project.entry and item["line"] == unused_line and item["stage"] == "unused-code"
+        for item in result["diagnostics"]
+    ), (language, unused_line, result)
+    assert result["coverage"]["status"] == "measured", (language, result)
+    measured_file = result["coverage"]["files"][project.entry]
+    assert missing_line in measured_file["missing_lines"], (language, missing_line, result)
+    assert measured_file["executed_lines"] and measured_file["source_sha256"], (language, result)
+
+
+async def original_scenarios(reports):
+    """Retain Python, fuzz, generated-test, source-map and sandbox acceptance without weakening prior gates."""
     python = fixture("python").model_dump()
     python.update(
         {

@@ -2,21 +2,21 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Version 0.2.1: real private local accounts and located diagnostics.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+**Version 0.3.0: polyglot coverage and located unused-code evidence.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
-Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-locations.md), [historical account validation](docs/validation-v0.2.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
+Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-polyglot.md), [historical Python-location validation](docs/validation-locations.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
 ## The development loop
 
 1. Upload flat source/data files or edit code in the offline Monaco editor. Select a compiler adapter and entry point. Write requirements and approve independent stdin/stdout cases.
 2. Optionally ask a configured model to generate code, tests, improvements or live suggestions. Source transmission is opt-in. Responses are schema-validated **unverified proposals**, not executed results.
-3. Save an immutable revision and run it through the container broker. Compilation, approved cases, supplied pytest harnesses, Python coverage/mutation, bounded fuzzing and exploratory benchmarks produce separate evidence.
+3. Save an immutable revision and run it through the container broker. Compilation, approved cases, supplied pytest harnesses, native unused checks/coverage, Python mutation, bounded fuzzing and exploratory benchmarks produce separate evidence.
 4. Review findings and add a candidate revision. Baseline expectations and existing tests cannot be removed. Compare results under the same environment and adjustable runtime/memory/readability/footprint preferences.
 5. Download escaped HTML, machine-readable JSON and a source/test/harness/report ZIP. Reopen saved revisions and replay them.
 
 ## Features and limits
 
-**Located diagnostics:** static review and execution evidence now list original filenames and local line locations, with snapshot hashes. Python checks include auxiliary-file syntax, possibly unused imports/locals/functions and directly unreachable statements. Real Python coverage retains per-file uncovered-line and missing-branch lists; tool-output references have a readable UI/HTML table. Unsupported locations and wrong-answer failures without a source reference are explicitly unlocated. See [file/line diagnostics](docs/located-diagnostics.md) and [validation](docs/validation-locations.md). No tool can guarantee discovery or root-cause localization of every bug.
+**Located diagnostics:** static review and execution evidence list original filenames and local line locations, with snapshot hashes. Python checks include auxiliary-file syntax, possibly unused imports/locals/functions and directly unreachable statements. Every other supported execution language now has native unused-code candidates and actual language-specific coverage. UI/HTML show missed source lines, genuine branch arcs or native branch IDs/counts, and explicit partial/unknown states. SQL measures completed statement starts, Bash command-entry lines and assembly instruction-backed debug lines—not universal statement/branch coverage. Unsupported locations and wrong-answer failures without source references stay unlocated. See the [language-by-language tools and limits](docs/polyglot-locations.md), [file/line contract](docs/located-diagnostics.md) and [validation](docs/validation-polyglot.md). No tool guarantees discovery or root-cause localization of every bug.
 
 | Feature | Implemented contract |
 |---|---|
@@ -25,7 +25,7 @@ Download OS-specific installers/portable packages from [Releases](https://github
 | Web application | Same responsive editor/API served on loopback. Narrow-screen browser support; not a native Android/iOS installer or public hosted service. |
 | Polyglot execution | Fixed CLI adapters for Python, JavaScript, TypeScript, C/C++, Java, C#, Rust, PHP, Bash, SQLite SQL and GNU x86-64 assembly. Actual toolchains live inside the worker image. |
 | Testing | Approved CLI oracles and reviewed pytest harnesses, including subprocess harnesses for non-Python targets. 48-category applicability catalog; human, hardware, cloud/load and specialized tool checks need independent integrations. |
-| Coverage/mutation | Per-supplied-file Python line/branch coverage with exact missing lines/arcs under approved CLI cases; up to eight operator mutants. Generated pytest tests are outside that coverage run. No fabricated condition/MC/DC, function, edge or universal mutation scores. |
+| Coverage/mutation | Exact original source locations from native collectors for all twelve adapters; per-file hashes, missed/executed lines, language-specific metric labels and honest unknown/partial states. Separate from baseline timing/RSS. Python additionally supports up to eight operator mutants. Approved CLI coverage excludes generated pytest; no fabricated MC/DC, universal dead-code or universal mutation scores. |
 | Fuzzing | Seeded black-box generation, mutation, dictionary, boundaries and CSV/SQL grammar; instrumented libFuzzer/AFL++ for reviewed C/C++ harnesses and Atheris for Python harnesses. Differential/metamorphic/stateful relations require custom oracles. |
 | AI routing | Account-owned OpenAI-compatible, Anthropic and Ollama endpoints/keys, four task routes and destination-version-bound consent. Keys stay server-side after explicit settings submission, outside histories/exports/workers. Protocol tests use mocks, not a claim of live model quality. |
 | Metrics/ranking | Repeated process wall times, peak child RSS, source bytes and transparent long-line proxy. Passing independent cases is mandatory. No syntax-based Big-O claims or automatic “best” model claims. |
@@ -60,6 +60,9 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `studio/reports.py` | Escaped, inert HTML/JSON/ZIP evidence exports. |
 | `studio/cli.py` | Shared web launcher and manifest-to-report CI command. |
 | `runner/Dockerfile`, `runner/worker.py` | Trusted compiler image and isolated compile/test/coverage/mutation/fuzz/benchmark execution. |
+| `runner/language_checks.py`, `runner/node_checks.cjs` | Bounded native tool adapters, source binding, fixed ESLint configuration and V8 source-map conversion. |
+| `runner/sql_runtime.py`, `runner/php_coverage.php`, `runner/bash_coverage.sh`, `runner/java-unused.xml` | SQLite statement anchors, pre-compilation Xdebug hook, transient Bash trace collector and fixed PMD unused rules. |
+| `runner/tools/package.json`, `runner/tools/package-lock.json` | Pinned/audited worker-only JS analyzer dependencies; not desktop runtime dependencies. |
 | `ui/App.tsx` | Workspace, cases, priorities, live suggestions, proposal approval, evidence and history views. |
 | `ui/main.tsx`, `ui/api.ts` | Offline editor worker registry and authenticated same-origin client/downloads. |
 | `ui/demo.ts`, `ui/types.ts` | Synthetic CSV example and renderer contracts. |
@@ -67,6 +70,7 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `desktop/main.cjs` | Sandboxed Electron renderer and private bundled-service lifecycle. |
 | `training/dataset.py`, `training/train.py`, `training/serve.py` | Provenance/split validation, parameterized real training, local model API. |
 | `examples/projects.py`, `examples/web-demo.project.json` | Compiler-contract fixtures and the exact synthetic CSV source/manifest used by the UI, checked in CI. |
+| `examples/language_locations.py`, `tests/test_native_locations.py` | Independent polyglot unused/missed-line oracles and pure native-report parser/security regressions. |
 | `examples/training.json`, `examples/training.jsonl` | Tiny rights-owned training smoke parameters and data; no quality claims. |
 | `scripts/frozen_entry.py` | Frozen-service entry point for installers. |
 | `scripts/worker_checks.py` | Actual isolated compiler/fuzz/security-boundary integration scenarios. |

@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: main()@L20
- * variables: fs@L12; path@L13; { fileURLToPath }@L14; { Linter }@L15; tsParser@L16; tsPlugin@L17; v8toIstanbul@L18; [mode, input, output, directory]@L22; project@L23; typed@L24; files@L25; linter@L27; findings@L28; file@L29; config@L30; item@L36; collected@L46; name@L47; report@L49; script@L50; scriptPath@L52; base@L53; original@L54; expectedPath@L55; source@L57; sources@L58; map@L60; converter@L69; coverage@L72; lines@L73; [id, statement]@L74; line@L75
+ * functions: main()@L21
+ * variables: fs@L12; path@L13; { fileURLToPath }@L14; toolRequire@L15; { Linter }@L16; tsParser@L17; tsPlugin@L18; v8toIstanbul@L19; [mode, input, output, directory]@L23; project@L24; typed@L25; files@L26; linter@L28; findings@L29; file@L30; config@L31; item@L37; collected@L47; name@L48; report@L50; script@L51; scriptPath@L53; base@L54; original@L55; expectedPath@L56; source@L58; sources@L59; map@L61; converter@L70; coverage@L73; lines@L74; [id, statement]@L75; line@L76
  * </code-map> */
 
 /** Jason Stys: fixed ESLint and V8-to-Istanbul bridge; never import a target module/config/plugin.
@@ -12,10 +12,11 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { fileURLToPath } = require("node:url");
-const { Linter } = require("/opt/tools/node_modules/eslint");
-const tsParser = require("/opt/tools/node_modules/@typescript-eslint/parser");
-const tsPlugin = require("/opt/tools/node_modules/@typescript-eslint/eslint-plugin");
-const v8toIstanbul = require("/opt/tools/node_modules/v8-to-istanbul");
+const toolRequire = require("node:module").createRequire("/opt/tools/package.json");
+const { Linter } = toolRequire("eslint");
+const tsParser = toolRequire("@typescript-eslint/parser");
+const tsPlugin = toolRequire("@typescript-eslint/eslint-plugin");
+const v8toIstanbul = toolRequire("v8-to-istanbul");
 
 async function main() {
   /** Inspect original source or translate native V8 ranges; only supplied paths may enter reports. */

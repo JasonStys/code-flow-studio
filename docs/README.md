@@ -1,5 +1,7 @@
 # Documentation
 
+- [Polyglot coverage and unused-code measurements](polyglot-locations.md), [current validation](validation-polyglot.md) and [0.3.0 release notes](releases/v0.3.0.md).
+
 - [Exact file/line diagnostics, unused checks and uncovered lines](located-diagnostics.md), with [current location validation](validation-locations.md).
 
 - [Private accounts and end-user operation](private-accounts.md): installation, privacy, backups/recovery and provider setup.

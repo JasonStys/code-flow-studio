@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: errors@L23; download@L74; locations@L98; unreachable@L100; locations@L119
+ * variables: errors@L23; download@L74; locations@L98; unreachable@L100; locations@L119; locations@L140
  * </code-map> */
 
 /** Real browser flows; controller success does not substitute for isolated worker evidence.
@@ -125,4 +125,23 @@ test("coverage and unknown failures render accurately from report contract", asy
   await expect(locations.locator("script")).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("native coverage semantics and blocked unused tools stay visible", async ({ page }) => {
+  /** UI fixture only; native collector accuracy is asserted independently by real worker scenarios. */
+  await page.route("**/api/review", async route => route.fulfill({ json: {
+    diagnostics: [{ file: "Main.java", line: 6, column: 9, code: "UnusedLocalVariable", stage: "unused-code", message: "Review leftover" }],
+    unused: { status: "blocked", tool: "Fixture unavailable tool", reason: "Timeout is not a pass" },
+    coverage: { status: "partial", tool: "JaCoCo", metric: "jacoco-instruction-backed-line", files: {
+      "Main.java": { status: "measured", metric: "jacoco-instruction-backed-line", missing_lines: [3], branch_points: [{ line: 7, missing: 1, covered: 1, kind: "jacoco-branch-count" }] },
+    } },
+  } }));
+  await page.getByRole("button", { name: "Static review · no execution", exact: true }).click();
+  const locations = page.getByRole("region", { name: "Located diagnostics" });
+  await expect(locations.getByRole("row").filter({hasText: "UnusedLocalVariable"}).getByRole("cell").nth(1)).toHaveText("6");
+  await expect(locations).toContainText("Timeout is not a pass");
+  await expect(locations).toContainText("partial");
+  await expect(locations).toContainText("Uncovered lines: 3");
+  await expect(locations).toContainText("jacoco-branch-count");
+  await expect(locations).toContainText("not destination lines");
 });

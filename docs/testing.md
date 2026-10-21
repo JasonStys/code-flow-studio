@@ -12,7 +12,7 @@ The supplied 48-category document is represented one-to-one in the capability ca
 - Provider contracts: all three protocol envelopes, explicit consent, private key headers, endpoint restrictions and unverified proposal schemas. These are mocks, not live paid-provider quality evidence.
 - Browser tests: actual editor rendering, catalog, controls, consent, unavailable-provider error, history persistence, evidence downloads and narrow-screen overflow in Chromium/Firefox/WebKit.
 - Native tests: bundled-service launch, offline editor rendering, absence of Node access in renderer and catalog interaction. Package-build success is not equivalent to a clean-machine installation test or app-store acceptance.
-- Real worker tests: every compiler adapter, approved cases, wrong oracle, syntax error, custom generated harness, real Python coverage/mutation, deterministic raw-byte fuzz corpus, libFuzzer/AFL++/Atheris instrumentation, timeout/output limits, no worker key, read-only root and blocked outbound connection.
+- Real worker tests: every compiler adapter, approved cases, wrong oracle, syntax error, custom generated harness, real Python coverage/mutation, native unused/missed/executed-line oracles for all eleven non-Python languages, deterministic raw-byte fuzz corpus, libFuzzer/AFL++/Atheris instrumentation, timeout/output limits, no worker key, read-only root and blocked outbound connection. [Polyglot tests](validation-polyglot.md) retain separate unit/mock and genuine native measurement claims.
 - Training smoke: an actual tiny new causal model, saved safe-tensors, project-disjoint held-out loss. This proves pipeline mechanics, not coding performance.
 
 ## Fuzz semantics

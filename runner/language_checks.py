@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L68
-# functions: read_text(path)@L43; read_json(path)@L50; read_xml(path)@L55; __init__(self, project)@L71; name(self, path)@L84; line(self, name, value)@L89; add_lines(self, path, counts)@L95; finding(self, path, line, column, code, message)@L106; coverage(self, tool, metric, cases, expected)@L127; cobertura(evidence, path)@L181; jacoco(evidence, path)@L202; gcov(evidence, path)@L221; lcov(evidence, text)@L239; shell_lines(node)@L260; assembly_symbols(evidence)@L276; native_checks(project, work, execute, command)@L307; unused_checks(evidence, root, execute)@L325; measure(evidence, root, execute, command)@L535
-# variables: MAX_REPORT@L24; SUFFIXES@L25; text@L59; text@L62; file@L75; value@L86; line@L91; source@L92; name@L97; lines@L100; count@L101; value@L101; line@L102; name@L108; files@L129; name@L130; text@L130; counts@L131; covered@L138; value@L138; count@L149; line@L149; count@L150; line@L150; budget@L156; key@L157; record@L158; values@L159; budget@L161; file@L163; measured@L163; complete@L164; case@L166; file@L176; item@L183; name@L184; line@L188; line@L190; condition@L191; file@L204; name@L205; line@L208; line@L216; stream@L223; text@L224; file@L227; name@L228; line@L231; line@L234; branch@L235; index@L235; name@L241; row@L242; name@L244; _@L246; count@L246; line@L246; block@L249; branch@L249; count@L249; line@L249; output@L262; position@L265; value@L268; item@L271; name@L278; text@L278; definitions@L279; exported@L280; used@L281; line@L282; source@L282; source@L283; label@L289; source@L292; source@L294; column@L296; label@L296; line@L296; evidence@L309; root@L310; unused@L312; coverage@L316; coverage@L318; project@L327; language@L328; entry@L329; output@L330; allowed@L331; result@L334; item@L339; tool@L343; result@L345; item@L358; location@L361; tool@L369; result@L371; line@L389; item@L390; code@L391; span@L393; tool@L402; allowed@L404; result@L405; file@L422; item@L423; tool@L431; allowed@L433; result@L434; file@L439; item@L440; tool@L442; allowed@L444; result@L445; item@L457; tool@L461; allowed@L463; result@L464; file@L479; item@L480; tool@L488; result@L490; line@L506; match@L507; tool@L512; result@L515; tool@L516; project@L537; entry@L538; language@L538; work@L539; build@L540; metric@L541; tool@L541; run@L542; metric@L544; tool@L544; build@L545; run@L555; metric@L557; tool@L557; build@L558; run@L573; metric@L575; tool@L575; classes@L576; build@L578; run@L579; metric@L588; tool@L588; build@L589; metric@L591; tool@L591; metric@L594; tool@L594; run@L595; metric@L597; tool@L597; build@L598; metric@L610; tool@L610; name@L611; tree@L612; result@L613; line@L620; metric@L622; tool@L622; result@L624; cases@L627; case@L628; index@L628; output@L629; environment@L630; run@L638; run@L640; run@L651; result@L665; lines@L677; name@L677; count@L678; line@L678; trace@L682; match@L683; current@L686; row@L687; current@L689; _@L691; hits@L691; line@L691; output@L694; result@L695; lines@L701; name@L701; note@L704; result@L705; file@L708; profiles@L711; result@L712; output@L718; result@L719; output@L734; result@L735; result@L756; row@L757; match@L758; name@L760; existing@L762
-# parameters: path@L43; path@L50; path@L55; project@L71; self@L71; path@L84; self@L84; name@L89; self@L89; value@L89; counts@L95; path@L95; self@L95; code@L106; column@L106; line@L106; message@L106; path@L106; self@L106; cases@L127; expected@L127; metric@L127; self@L127; tool@L127; evidence@L181; path@L181; evidence@L202; path@L202; evidence@L221; path@L221; evidence@L239; text@L239; node@L260; evidence@L276; command@L307; execute@L307; project@L307; work@L307; evidence@L325; execute@L325; root@L325; command@L535; evidence@L535; execute@L535; root@L535
+# functions: read_text(path)@L43; read_json(path)@L50; read_xml(path)@L55; __init__(self, project)@L71; name(self, path)@L89; line(self, name, value)@L94; add_lines(self, path, counts)@L99; finding(self, path, line, column, code, message)@L110; coverage(self, tool, metric, cases, expected)@L131; cobertura(evidence, path)@L185; jacoco(evidence, path)@L206; gcov(evidence, path)@L225; lcov(evidence, text)@L243; shell_lines(node)@L264; assembly_symbols(evidence)@L280; native_checks(project, work, execute, command)@L311; unused_checks(evidence, root, execute)@L329; measure(evidence, root, execute, command)@L539
+# variables: MAX_REPORT@L24; SUFFIXES@L25; text@L59; text@L62; file@L75; name@L82; text@L82; name@L84; text@L84; value@L91; line@L96; name@L101; lines@L104; count@L105; value@L105; line@L106; name@L112; files@L133; name@L134; text@L134; counts@L135; covered@L142; value@L142; count@L153; line@L153; count@L154; line@L154; budget@L160; key@L161; record@L162; values@L163; budget@L165; file@L167; measured@L167; complete@L168; case@L170; file@L180; item@L187; name@L188; line@L192; line@L194; condition@L195; file@L208; name@L209; line@L212; line@L220; stream@L227; text@L228; file@L231; name@L232; line@L235; line@L238; branch@L239; index@L239; name@L245; row@L246; name@L248; _@L250; count@L250; line@L250; block@L253; branch@L253; count@L253; line@L253; output@L266; position@L269; value@L272; item@L275; name@L282; text@L282; definitions@L283; exported@L284; used@L285; line@L286; source@L286; source@L287; label@L293; source@L296; source@L298; column@L300; label@L300; line@L300; evidence@L313; root@L314; unused@L316; coverage@L320; coverage@L322; project@L331; language@L332; entry@L333; output@L334; allowed@L335; result@L338; item@L343; tool@L347; result@L349; item@L362; location@L365; tool@L373; result@L375; line@L393; item@L394; code@L395; span@L397; tool@L406; allowed@L408; result@L409; file@L426; item@L427; tool@L435; allowed@L437; result@L438; file@L443; item@L444; tool@L446; allowed@L448; result@L449; item@L461; tool@L465; allowed@L467; result@L468; file@L483; item@L484; tool@L492; result@L494; line@L510; match@L511; tool@L516; result@L519; tool@L520; project@L541; entry@L542; language@L542; work@L543; build@L544; metric@L545; tool@L545; run@L546; metric@L548; tool@L548; build@L549; run@L559; metric@L561; tool@L561; build@L562; run@L577; metric@L579; tool@L579; classes@L580; build@L582; run@L583; metric@L592; tool@L592; build@L593; metric@L595; tool@L595; metric@L598; tool@L598; run@L599; metric@L601; tool@L601; build@L602; metric@L614; tool@L614; name@L615; tree@L616; result@L617; line@L624; metric@L626; tool@L626; result@L628; cases@L631; case@L632; index@L632; output@L633; environment@L634; run@L642; run@L644; run@L655; result@L669; lines@L681; name@L681; count@L682; line@L682; trace@L686; match@L687; current@L690; row@L691; current@L693; _@L695; hits@L695; line@L695; output@L698; result@L699; lines@L705; name@L705; note@L708; result@L709; file@L712; profiles@L715; result@L716; output@L722; result@L723; output@L738; result@L739; result@L760; row@L761; match@L762; name@L764; existing@L766
+# parameters: path@L43; path@L50; path@L55; project@L71; self@L71; path@L89; self@L89; name@L94; self@L94; value@L94; counts@L99; path@L99; self@L99; code@L110; column@L110; line@L110; message@L110; path@L110; self@L110; cases@L131; expected@L131; metric@L131; self@L131; tool@L131; evidence@L185; path@L185; evidence@L206; path@L206; evidence@L225; path@L225; evidence@L243; text@L243; node@L264; evidence@L280; command@L311; execute@L311; project@L311; work@L311; evidence@L329; execute@L329; root@L329; command@L539; evidence@L539; execute@L539; root@L539
 # </code-map>
 
 """Jason Stys: real polyglot coverage and unused-code adapters, container execution only.
@@ -77,6 +77,11 @@ class Evidence:
             and (file["name"].endswith(SUFFIXES[project["language"]]) or file["name"] == project["entry"])
         }
         self.counts = {}
+        self.line_counts = {
+            name: len(text.replace("\r\n", "\n").replace("\r", "\n").split("\n"))
+            for name, text in self.sources.items()
+        }
+        self.hashes = {name: hashlib.sha256(text.encode()).hexdigest() for name, text in self.sources.items()}
         self.branches = {}
         self.findings = []
         self.findings_truncated = False
@@ -89,8 +94,7 @@ class Evidence:
     def line(self, name: str, value) -> int | None:
         """Retain only real one-based physical source lines (including an EOF anchor)."""
         line = int(value)
-        source = self.sources[name].replace("\r\n", "\n").replace("\r", "\n")
-        return line if 0 < line <= len(source.split("\n")) else None
+        return line if 0 < line <= self.line_counts[name] else None
 
     def add_lines(self, path: str, counts: dict) -> None:
         """Union measurements across approved cases, retaining zero-count executable lines."""
@@ -120,7 +124,7 @@ class Evidence:
                 "message": str(message)[:500],
                 "severity": "review",
                 "origin": "native-unused",
-                "source_sha256": hashlib.sha256(self.sources[name].encode()).hexdigest(),
+                "source_sha256": self.hashes[name],
             }
         )
 
@@ -386,7 +390,7 @@ def unused_checks(evidence: Evidence, root: Path, execute) -> dict:
                 timeout=25,
                 stderr_path=output,
             )
-            for line in output.read_text().splitlines():
+            for line in read_text(output).splitlines():
                 item = json.loads(line)
                 code = (item.get("code") or {}).get("code", "")
                 if code == "dead_code" or code.startswith("unused"):

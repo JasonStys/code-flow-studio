@@ -318,7 +318,7 @@ def create_private_app(
 
     app = FastAPI(
         title="Code Flow Studio — Jason Stys",
-        version="0.2.1",
+        version="0.3.0",
         lifespan=lifespan,
         docs_url=None,
         redoc_url=None,
@@ -374,7 +374,7 @@ def create_private_app(
         return {
             "status": "ready",
             "mode": "private-local-accounts",
-            "version": "0.2.1",
+            "version": "0.3.0",
             "author": "Jason Stys",
             "launcher_nonce": nonce,
         }
