@@ -34,7 +34,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `allowed` | 114 |
 | variable | `window` | 122 |
 | variable | `stopped` | 202 |
-| variable | `window` | 230 |
+| variable | `window` | 238 |
 
 ## examples/language_locations.py
 
@@ -73,6 +73,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
+| variable | `port` | 10 |
 
 ## playwright.desktop.config.ts
 
@@ -83,6 +84,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
+| variable | `port` | 9 |
 
 ## runner/language_checks.py
 
@@ -423,6 +425,48 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `[id, statement]` | 81 |
 | variable | `line` | 82 |
 
+## runner/sanitizer_probe.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `BENIGN` | 24 |
+| variable | `FAULT` | 31 |
+| variable | `STARTUPS` | 38 |
+| function | `process(argv, directory)` | 41 |
+| parameter | `argv` | 41 |
+| parameter | `directory` | 41 |
+| variable | `result` | 43 |
+| variable | `raw` | 50 |
+| variable | `retained` | 51 |
+| function | `compile_probe(compiler, source, directory, name)` | 59 |
+| parameter | `compiler` | 59 |
+| parameter | `directory` | 59 |
+| parameter | `name` | 59 |
+| parameter | `source` | 59 |
+| variable | `file` | 61 |
+| variable | `binary` | 63 |
+| variable | `built` | 64 |
+| function | `optional_metadata(path)` | 82 |
+| parameter | `path` | 82 |
+| function | `main()` | 90 |
+| variable | `report` | 92 |
+| variable | `file` | 93 |
+| variable | `name` | 93 |
+| variable | `path` | 98 |
+| variable | `temporary` | 100 |
+| variable | `directory` | 101 |
+| variable | `corpus` | 102 |
+| variable | `compiler` | 105 |
+| variable | `key` | 105 |
+| variable | `version` | 106 |
+| variable | `binary` | 107 |
+| variable | `attempts` | 108 |
+| variable | `_` | 110 |
+| variable | `item` | 115 |
+| variable | `binary` | 117 |
+| variable | `finding` | 118 |
+| variable | `detected` | 120 |
+
 ## runner/sql_runtime.py
 
 | Kind | Declaration | Line |
@@ -560,25 +604,25 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `build` | 347 |
 | variable | `argv` | 350 |
 | variable | `result` | 353 |
-| function | `main()` | 364 |
-| variable | `project` | 366 |
-| variable | `file` | 369 |
-| variable | `build` | 386 |
-| variable | `command` | 386 |
-| variable | `compilation` | 387 |
-| variable | `report` | 388 |
-| variable | `times` | 413 |
-| variable | `case` | 414 |
-| variable | `result` | 415 |
-| variable | `passed` | 416 |
-| variable | `_` | 424 |
-| variable | `benchmark` | 425 |
-| variable | `findings` | 461 |
-| variable | `corpus` | 462 |
-| variable | `method` | 463 |
-| variable | `value` | 463 |
-| variable | `result` | 464 |
-| variable | `method` | 490 |
+| function | `main()` | 368 |
+| variable | `project` | 370 |
+| variable | `file` | 373 |
+| variable | `build` | 390 |
+| variable | `command` | 390 |
+| variable | `compilation` | 391 |
+| variable | `report` | 392 |
+| variable | `times` | 417 |
+| variable | `case` | 418 |
+| variable | `result` | 419 |
+| variable | `passed` | 420 |
+| variable | `_` | 428 |
+| variable | `benchmark` | 429 |
+| variable | `findings` | 465 |
+| variable | `corpus` | 466 |
+| variable | `method` | 467 |
+| variable | `value` | 467 |
+| variable | `result` | 468 |
+| variable | `method` | 494 |
 
 ## scripts/code_index.py
 
@@ -740,69 +784,117 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `response` | 30 |
 | variable | `result` | 33 |
 
+## scripts/verify_electron.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `fs` | 13 |
+| variable | `path` | 14 |
+| variable | `{ execFileSync }` | 15 |
+| function | `verifyElectron(root = path.resolve(__dirname, "..")` | 18 |
+| variable | `expected` | 19 |
+| variable | `sdk` | 28 |
+| variable | `installed` | 30 |
+| variable | `selected` | 33 |
+| variable | `directory` | 34 |
+| variable | `executable` | 35 |
+| variable | `relative` | 36 |
+| variable | `environment` | 51 |
+| variable | `key` | 52 |
+| variable | `actual` | 54 |
+
+## scripts/worker_analyzer_checks.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `assert` | 14 |
+| variable | `path` | 15 |
+| variable | `toolRequire` | 16 |
+| variable | `{ Linter }` | 19 |
+| variable | `parser` | 20 |
+| variable | `plugin` | 21 |
+| variable | `fixtures` | 22 |
+| function | `orphan()` | 27 |
+| type | `Orphan` | 34 |
+| variable | `fixture` | 51 |
+| variable | `rule` | 52 |
+| variable | `config` | 55 |
+| variable | `findings` | 74 |
+
 ## scripts/worker_checks.py
 
 | Kind | Declaration | Line |
 |---|---|---|
-| class | `Evidence` | 26 |
-| function | `__setitem__(self, key, value)` | 29 |
-| parameter | `key` | 29 |
-| parameter | `self` | 29 |
-| parameter | `value` | 29 |
-| variable | `path` | 32 |
-| variable | `temporary` | 34 |
-| function | `main()` | 39 |
-| variable | `reports` | 41 |
-| variable | `baseline_errors` | 42 |
-| variable | `language` | 43 |
-| variable | `result` | 44 |
-| variable | `key` | 55 |
-| variable | `acceptance` | 58 |
-| variable | `native_errors` | 59 |
-| variable | `language` | 60 |
-| variable | `missing_line` | 61 |
-| variable | `project` | 61 |
-| variable | `unused_line` | 61 |
-| variable | `result` | 62 |
-| variable | `key` | 69 |
-| variable | `language` | 90 |
-| variable | `project` | 91 |
-| variable | `result` | 92 |
-| variable | `suffix` | 94 |
-| variable | `item` | 100 |
-| function | `assert_native_locations(language, result, project, unused_line, missing_line)` | 111 |
-| parameter | `language` | 111 |
-| parameter | `missing_line` | 111 |
-| parameter | `project` | 111 |
-| parameter | `result` | 111 |
-| parameter | `unused_line` | 111 |
-| variable | `item` | 117 |
-| variable | `measured_file` | 120 |
-| function | `original_scenarios(reports)` | 125 |
-| parameter | `reports` | 125 |
-| variable | `python` | 127 |
-| variable | `bad` | 141 |
-| variable | `invalid` | 145 |
-| variable | `item` | 150 |
-| variable | `attack` | 152 |
-| variable | `code` | 163 |
-| variable | `name` | 163 |
-| variable | `target` | 164 |
-| variable | `cpp` | 168 |
-| variable | `web_demo` | 207 |
-| variable | `located` | 213 |
-| variable | `measured` | 230 |
-| variable | `item` | 237 |
-| variable | `crashing` | 239 |
-| variable | `item` | 256 |
-| variable | `mapped` | 258 |
-| variable | `item` | 275 |
-| variable | `item` | 285 |
+| class | `Evidence` | 29 |
+| function | `__setitem__(self, key, value)` | 32 |
+| parameter | `key` | 32 |
+| parameter | `self` | 32 |
+| parameter | `value` | 32 |
+| variable | `path` | 35 |
+| variable | `temporary` | 37 |
+| function | `main()` | 42 |
+| variable | `reports` | 44 |
+| variable | `baseline_errors` | 47 |
+| variable | `language` | 48 |
+| variable | `result` | 49 |
+| variable | `key` | 60 |
+| variable | `acceptance` | 63 |
+| variable | `native_errors` | 64 |
+| variable | `language` | 65 |
+| variable | `missing_line` | 66 |
+| variable | `project` | 66 |
+| variable | `unused_line` | 66 |
+| variable | `result` | 67 |
+| variable | `key` | 74 |
+| variable | `language` | 95 |
+| variable | `project` | 96 |
+| variable | `result` | 97 |
+| variable | `suffix` | 99 |
+| variable | `item` | 105 |
+| function | `sanitizer_startup_checks()` | 116 |
+| variable | `name` | 118 |
+| variable | `temporary` | 119 |
+| variable | `directory` | 120 |
+| variable | `argv` | 122 |
+| variable | `code` | 126 |
+| variable | `output` | 126 |
+| variable | `records` | 127 |
+| variable | `line` | 129 |
+| variable | `report` | 138 |
+| function | `assert_native_locations(language, result, project, unused_line, missing_line)` | 148 |
+| parameter | `language` | 148 |
+| parameter | `missing_line` | 148 |
+| parameter | `project` | 148 |
+| parameter | `result` | 148 |
+| parameter | `unused_line` | 148 |
+| variable | `item` | 154 |
+| variable | `measured_file` | 157 |
+| function | `original_scenarios(reports)` | 162 |
+| parameter | `reports` | 162 |
+| variable | `python` | 164 |
+| variable | `bad` | 178 |
+| variable | `invalid` | 182 |
+| variable | `item` | 187 |
+| variable | `attack` | 189 |
+| variable | `code` | 200 |
+| variable | `name` | 200 |
+| variable | `target` | 201 |
+| variable | `cpp` | 205 |
+| variable | `web_demo` | 244 |
+| variable | `located` | 250 |
+| variable | `measured` | 267 |
+| variable | `item` | 274 |
+| variable | `crashing` | 276 |
+| variable | `item` | 293 |
+| variable | `mapped` | 295 |
+| variable | `item` | 312 |
+| variable | `item` | 322 |
 
 ## studio/__init__.py
 
 | Kind | Declaration | Line |
 |---|---|---|
+| variable | `__version__` | 9 |
 
 ## studio/accounts.py
 
@@ -1259,199 +1351,199 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `CSP` | 36 |
-| variable | `HISTORY_STOP_BYTES` | 37 |
-| class | `Boundary` | 40 |
-| function | `__init__(self, app, manager, port)` | 43 |
-| parameter | `app` | 43 |
-| parameter | `manager` | 43 |
-| parameter | `port` | 43 |
-| parameter | `self` | 43 |
-| function | `__call__(self, scope, receive, send)` | 49 |
-| parameter | `receive` | 49 |
-| parameter | `scope` | 49 |
-| parameter | `self` | 49 |
-| parameter | `send` | 49 |
-| variable | `raw` | 53 |
-| variable | `headers` | 54 |
-| variable | `k` | 54 |
-| variable | `v` | 54 |
-| function | `guarded(message)` | 56 |
-| parameter | `message` | 56 |
-| variable | `k` | 61 |
-| variable | `v` | 61 |
-| function | `deny(status, detail)` | 77 |
-| parameter | `detail` | 77 |
-| parameter | `status` | 77 |
-| variable | `_` | 83 |
-| variable | `k` | 83 |
-| variable | `cookies` | 101 |
-| variable | `token` | 106 |
-| variable | `account` | 107 |
-| variable | `chunks` | 115 |
-| variable | `length` | 115 |
-| variable | `message` | 117 |
-| variable | `data` | 120 |
-| variable | `length` | 121 |
-| variable | `delivered` | 127 |
-| function | `replay()` | 129 |
-| variable | `delivered` | 133 |
-| class | `Closed` | 140 |
-| variable | `model_config` | 143 |
-| class | `Credentials` | 146 |
-| variable | `alias` | 149 |
-| variable | `password` | 150 |
-| class | `Recovery` | 153 |
-| variable | `recovery` | 156 |
-| class | `Unlock` | 159 |
-| variable | `key` | 162 |
-| variable | `salt` | 163 |
-| class | `Activity` | 166 |
-| variable | `idle_seconds` | 169 |
-| class | `Delete` | 172 |
-| variable | `password` | 175 |
-| variable | `confirm` | 176 |
-| class | `Provider` | 179 |
-| variable | `id` | 182 |
-| variable | `kind` | 183 |
-| variable | `url` | 184 |
-| variable | `model` | 185 |
-| variable | `key` | 186 |
-| variable | `retain_key` | 187 |
-| variable | `token_parameter` | 188 |
-| variable | `temperature` | 189 |
-| class | `Settings` | 192 |
-| variable | `providers` | 195 |
-| variable | `routes` | 196 |
-| function | `coherent(self)` | 201 |
-| parameter | `self` | 201 |
-| variable | `ids` | 203 |
-| variable | `p` | 203 |
-| variable | `value` | 204 |
-| variable | `p` | 207 |
-| function | `public_settings(manager)` | 213 |
-| parameter | `manager` | 213 |
-| variable | `keys` | 215 |
-| variable | `settings` | 215 |
-| variable | `data` | 216 |
-| variable | `p` | 218 |
-| class | `Proxy` | 226 |
-| function | `__init__(self, manager)` | 229 |
-| parameter | `manager` | 229 |
-| parameter | `self` | 229 |
-| function | `__call__(self, scope, receive, send)` | 233 |
-| parameter | `receive` | 233 |
-| parameter | `scope` | 233 |
-| parameter | `self` | 233 |
-| parameter | `send` | 233 |
-| variable | `manager` | 237 |
-| variable | `app` | 240 |
-| variable | `path` | 245 |
-| variable | `db` | 251 |
-| variable | `count` | 252 |
-| variable | `headers` | 264 |
-| variable | `forwarded` | 273 |
-| variable | `k` | 274 |
-| variable | `v` | 274 |
-| function | `create_private_app(root, port, ui, launcher_token, nonce)` | 284 |
-| parameter | `launcher_token` | 285 |
-| parameter | `nonce` | 285 |
-| parameter | `port` | 285 |
-| parameter | `root` | 285 |
-| parameter | `ui` | 285 |
-| variable | `manager` | 288 |
-| function | `lifespan(app)` | 292 |
-| parameter | `app` | 292 |
-| function | `idle()` | 295 |
-| variable | `task` | 309 |
-| variable | `app` | 319 |
-| function | `invalid(request, error)` | 331 |
-| parameter | `error` | 331 |
-| parameter | `request` | 331 |
-| function | `bad_value(request, error)` | 336 |
-| parameter | `error` | 336 |
-| parameter | `request` | 336 |
-| function | `bad_disk(request, error)` | 341 |
-| parameter | `error` | 341 |
-| parameter | `request` | 341 |
-| function | `identify(request)` | 347 |
-| parameter | `request` | 347 |
-| function | `signed(owner, data)` | 351 |
-| parameter | `data` | 351 |
-| parameter | `owner` | 351 |
-| variable | `response` | 353 |
-| function | `auth_limit(alias)` | 364 |
-| parameter | `alias` | 364 |
-| function | `health()` | 372 |
-| function | `shutdown(request)` | 383 |
-| parameter | `request` | 383 |
-| variable | `callback` | 389 |
-| function | `register(data)` | 396 |
-| parameter | `data` | 396 |
-| variable | `owner` | 400 |
-| variable | `recovery` | 400 |
-| function | `login(data)` | 406 |
-| parameter | `data` | 406 |
-| variable | `owner` | 409 |
-| function | `reset(data)` | 415 |
-| parameter | `data` | 415 |
-| variable | `db` | 419 |
-| variable | `row` | 420 |
-| variable | `fresh` | 426 |
-| function | `account(request)` | 432 |
-| parameter | `request` | 432 |
-| variable | `owner` | 434 |
-| variable | `session` | 434 |
-| function | `unlock(request, data)` | 442 |
-| parameter | `data` | 442 |
-| parameter | `request` | 442 |
-| variable | `owner` | 444 |
-| variable | `session` | 444 |
-| function | `activity(request, data)` | 453 |
-| parameter | `data` | 453 |
-| parameter | `request` | 453 |
-| function | `save(request)` | 461 |
-| parameter | `request` | 461 |
-| function | `lock(request)` | 468 |
-| parameter | `request` | 468 |
-| variable | `owner` | 471 |
-| variable | `session` | 471 |
-| function | `logout(request)` | 476 |
-| parameter | `request` | 476 |
-| variable | `owner` | 479 |
-| variable | `session` | 479 |
-| variable | `response` | 483 |
-| function | `delete(request, data)` | 488 |
-| parameter | `data` | 488 |
-| parameter | `request` | 488 |
-| variable | `_` | 491 |
-| variable | `owner` | 491 |
-| variable | `db` | 492 |
-| variable | `row` | 493 |
-| variable | `response` | 499 |
-| function | `backup(request)` | 504 |
-| parameter | `request` | 504 |
-| variable | `_` | 506 |
-| variable | `owner` | 506 |
-| variable | `path` | 507 |
-| function | `get_providers(request)` | 515 |
-| parameter | `request` | 515 |
-| function | `providers(request, data)` | 522 |
-| parameter | `data` | 522 |
-| parameter | `request` | 522 |
-| variable | `keys` | 526 |
-| variable | `old` | 526 |
-| variable | `rows` | 527 |
-| variable | `provider` | 528 |
-| variable | `row` | 529 |
-| variable | `p` | 531 |
-| variable | `previous` | 531 |
-| variable | `config` | 536 |
-| variable | `router` | 537 |
-| variable | `k` | 539 |
-| variable | `p` | 539 |
-| variable | `v` | 539 |
-| variable | `p` | 542 |
+| variable | `CSP` | 37 |
+| variable | `HISTORY_STOP_BYTES` | 38 |
+| class | `Boundary` | 41 |
+| function | `__init__(self, app, manager, port)` | 44 |
+| parameter | `app` | 44 |
+| parameter | `manager` | 44 |
+| parameter | `port` | 44 |
+| parameter | `self` | 44 |
+| function | `__call__(self, scope, receive, send)` | 50 |
+| parameter | `receive` | 50 |
+| parameter | `scope` | 50 |
+| parameter | `self` | 50 |
+| parameter | `send` | 50 |
+| variable | `raw` | 54 |
+| variable | `headers` | 55 |
+| variable | `k` | 55 |
+| variable | `v` | 55 |
+| function | `guarded(message)` | 57 |
+| parameter | `message` | 57 |
+| variable | `k` | 62 |
+| variable | `v` | 62 |
+| function | `deny(status, detail)` | 78 |
+| parameter | `detail` | 78 |
+| parameter | `status` | 78 |
+| variable | `_` | 84 |
+| variable | `k` | 84 |
+| variable | `cookies` | 102 |
+| variable | `token` | 107 |
+| variable | `account` | 108 |
+| variable | `chunks` | 116 |
+| variable | `length` | 116 |
+| variable | `message` | 118 |
+| variable | `data` | 121 |
+| variable | `length` | 122 |
+| variable | `delivered` | 128 |
+| function | `replay()` | 130 |
+| variable | `delivered` | 134 |
+| class | `Closed` | 141 |
+| variable | `model_config` | 144 |
+| class | `Credentials` | 147 |
+| variable | `alias` | 150 |
+| variable | `password` | 151 |
+| class | `Recovery` | 154 |
+| variable | `recovery` | 157 |
+| class | `Unlock` | 160 |
+| variable | `key` | 163 |
+| variable | `salt` | 164 |
+| class | `Activity` | 167 |
+| variable | `idle_seconds` | 170 |
+| class | `Delete` | 173 |
+| variable | `password` | 176 |
+| variable | `confirm` | 177 |
+| class | `Provider` | 180 |
+| variable | `id` | 183 |
+| variable | `kind` | 184 |
+| variable | `url` | 185 |
+| variable | `model` | 186 |
+| variable | `key` | 187 |
+| variable | `retain_key` | 188 |
+| variable | `token_parameter` | 189 |
+| variable | `temperature` | 190 |
+| class | `Settings` | 193 |
+| variable | `providers` | 196 |
+| variable | `routes` | 197 |
+| function | `coherent(self)` | 202 |
+| parameter | `self` | 202 |
+| variable | `ids` | 204 |
+| variable | `p` | 204 |
+| variable | `value` | 205 |
+| variable | `p` | 208 |
+| function | `public_settings(manager)` | 214 |
+| parameter | `manager` | 214 |
+| variable | `keys` | 216 |
+| variable | `settings` | 216 |
+| variable | `data` | 217 |
+| variable | `p` | 219 |
+| class | `Proxy` | 227 |
+| function | `__init__(self, manager)` | 230 |
+| parameter | `manager` | 230 |
+| parameter | `self` | 230 |
+| function | `__call__(self, scope, receive, send)` | 234 |
+| parameter | `receive` | 234 |
+| parameter | `scope` | 234 |
+| parameter | `self` | 234 |
+| parameter | `send` | 234 |
+| variable | `manager` | 238 |
+| variable | `app` | 241 |
+| variable | `path` | 246 |
+| variable | `db` | 252 |
+| variable | `count` | 253 |
+| variable | `headers` | 265 |
+| variable | `forwarded` | 274 |
+| variable | `k` | 275 |
+| variable | `v` | 275 |
+| function | `create_private_app(root, port, ui, launcher_token, nonce)` | 285 |
+| parameter | `launcher_token` | 286 |
+| parameter | `nonce` | 286 |
+| parameter | `port` | 286 |
+| parameter | `root` | 286 |
+| parameter | `ui` | 286 |
+| variable | `manager` | 289 |
+| function | `lifespan(app)` | 293 |
+| parameter | `app` | 293 |
+| function | `idle()` | 296 |
+| variable | `task` | 310 |
+| variable | `app` | 320 |
+| function | `invalid(request, error)` | 332 |
+| parameter | `error` | 332 |
+| parameter | `request` | 332 |
+| function | `bad_value(request, error)` | 337 |
+| parameter | `error` | 337 |
+| parameter | `request` | 337 |
+| function | `bad_disk(request, error)` | 342 |
+| parameter | `error` | 342 |
+| parameter | `request` | 342 |
+| function | `identify(request)` | 348 |
+| parameter | `request` | 348 |
+| function | `signed(owner, data)` | 352 |
+| parameter | `data` | 352 |
+| parameter | `owner` | 352 |
+| variable | `response` | 354 |
+| function | `auth_limit(alias)` | 365 |
+| parameter | `alias` | 365 |
+| function | `health()` | 373 |
+| function | `shutdown(request)` | 384 |
+| parameter | `request` | 384 |
+| variable | `callback` | 390 |
+| function | `register(data)` | 397 |
+| parameter | `data` | 397 |
+| variable | `owner` | 401 |
+| variable | `recovery` | 401 |
+| function | `login(data)` | 407 |
+| parameter | `data` | 407 |
+| variable | `owner` | 410 |
+| function | `reset(data)` | 416 |
+| parameter | `data` | 416 |
+| variable | `db` | 420 |
+| variable | `row` | 421 |
+| variable | `fresh` | 427 |
+| function | `account(request)` | 433 |
+| parameter | `request` | 433 |
+| variable | `owner` | 435 |
+| variable | `session` | 435 |
+| function | `unlock(request, data)` | 443 |
+| parameter | `data` | 443 |
+| parameter | `request` | 443 |
+| variable | `owner` | 445 |
+| variable | `session` | 445 |
+| function | `activity(request, data)` | 454 |
+| parameter | `data` | 454 |
+| parameter | `request` | 454 |
+| function | `save(request)` | 462 |
+| parameter | `request` | 462 |
+| function | `lock(request)` | 469 |
+| parameter | `request` | 469 |
+| variable | `owner` | 472 |
+| variable | `session` | 472 |
+| function | `logout(request)` | 477 |
+| parameter | `request` | 477 |
+| variable | `owner` | 480 |
+| variable | `session` | 480 |
+| variable | `response` | 484 |
+| function | `delete(request, data)` | 489 |
+| parameter | `data` | 489 |
+| parameter | `request` | 489 |
+| variable | `_` | 492 |
+| variable | `owner` | 492 |
+| variable | `db` | 493 |
+| variable | `row` | 494 |
+| variable | `response` | 500 |
+| function | `backup(request)` | 505 |
+| parameter | `request` | 505 |
+| variable | `_` | 507 |
+| variable | `owner` | 507 |
+| variable | `path` | 508 |
+| function | `get_providers(request)` | 516 |
+| parameter | `request` | 516 |
+| function | `providers(request, data)` | 523 |
+| parameter | `data` | 523 |
+| parameter | `request` | 523 |
+| variable | `keys` | 527 |
+| variable | `old` | 527 |
+| variable | `rows` | 528 |
+| variable | `provider` | 529 |
+| variable | `row` | 530 |
+| variable | `p` | 532 |
+| variable | `previous` | 532 |
+| variable | `config` | 537 |
+| variable | `router` | 538 |
+| variable | `k` | 540 |
+| variable | `p` | 540 |
+| variable | `v` | 540 |
+| variable | `p` | 543 |
 
 ## studio/private_cli.py
 
@@ -1889,18 +1981,69 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `app` | 18 |
-| variable | `resources` | 30 |
-| variable | `file` | 31 |
-| variable | `page` | 37 |
+| variable | `{ verifyElectron }` | 17 |
+| variable | `executable` | 23 |
+| variable | `app` | 25 |
+| variable | `resources` | 40 |
+| variable | `file` | 41 |
+| variable | `page` | 65 |
+| variable | `health` | 66 |
+
+## tests/electron-readiness.test.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `test` | 12 |
+| variable | `assert` | 13 |
+| variable | `fs` | 14 |
+| variable | `os` | 15 |
+| variable | `path` | 16 |
+| variable | `{ verifyElectron }` | 17 |
+| variable | `directory` | 20 |
 
 ## tests/private.spec.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `external` | 14 |
-| variable | `url` | 16 |
-| variable | `downloaded` | 33 |
+| variable | `external` | 15 |
+| variable | `origin` | 16 |
+| variable | `url` | 20 |
+| variable | `downloaded` | 37 |
+| variable | `external` | 109 |
+| variable | `origin` | 110 |
+
+## tests/source-journey.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| type | `Page` | 14 |
+| variable | `inertHelper` | 16 |
+| function | `inspectHelper(page: Page)` | 20 |
+| variable | `locations` | 31 |
+| variable | `inspector` | 52 |
+| variable | `source` | 57 |
+
+## tests/source-navigation.spec.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `hash` | 24 |
+| variable | `source` | 26 |
+| function | `project()` | 28 |
+| function | `reference(overrides: Partial<SourceLocation> = {})` | 34 |
+| variable | `normalized` | 49 |
+| variable | `rows` | 50 |
+| variable | `line` | 51 |
+| variable | `[start, end]` | 52 |
+| variable | `invalid` | 60 |
+| variable | `language` | 71 |
+| variable | `candidate` | 85 |
+| variable | `candidate` | 92 |
+| variable | `line` | 103 |
+| variable | `candidate` | 143 |
+| variable | `candidate` | 160 |
+| variable | `generated` | 167 |
+| variable | `candidate` | 214 |
 
 ## tests/test_api.py
 
@@ -2405,22 +2548,83 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `test_checksum_download_filename(tmp_path, name)` | 27 |
-| parameter | `name` | 27 |
-| parameter | `tmp_path` | 27 |
-| variable | `path` | 29 |
-| variable | `expected` | 32 |
+| function | `test_checksum_download_filename(tmp_path, name)` | 32 |
+| parameter | `name` | 32 |
+| parameter | `tmp_path` | 32 |
+| variable | `path` | 34 |
+| variable | `expected` | 37 |
+| function | `test_product_and_worker_release_versions_remain_coherent()` | 41 |
+| variable | `root` | 43 |
+| variable | `relative` | 45 |
+| variable | `data` | 51 |
+
+## tests/test_sanitizer_probe.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_probe_retains_every_existing_container_boundary_and_exact_owned_cleanup(monkeypatch)` | 24 |
+| parameter | `monkeypatch` | 24 |
+| variable | `observed` | 26 |
+| function | `command(argv)` | 28 |
+| parameter | `argv` | 28 |
+| parameter | `kwargs` | 28 |
+| variable | `required` | 32 |
+| variable | `item` | 46 |
+| variable | `item` | 47 |
+| variable | `result` | 52 |
+| variable | `name` | 54 |
+| function | `test_missing_or_failed_probe_is_not_accepted(monkeypatch, code, output)` | 59 |
+| parameter | `code` | 59 |
+| parameter | `monkeypatch` | 59 |
+| parameter | `output` | 59 |
+| function | `command(argv)` | 62 |
+| parameter | `argv` | 62 |
+| parameter | `kwargs` | 62 |
+| function | `test_optional_metadata_never_requires_elevating_container_permissions(monkeypatch, tmp_path, failure)` | 71 |
+| parameter | `failure` | 71 |
+| parameter | `monkeypatch` | 71 |
+| parameter | `tmp_path` | 71 |
+| function | `denied()` | 74 |
+| parameter | `args` | 74 |
+| parameter | `kwargs` | 74 |
+| function | `test_readable_metadata_is_retained(tmp_path)` | 82 |
+| parameter | `tmp_path` | 82 |
+| variable | `file` | 84 |
 
 ## tests/web.spec.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `errors` | 23 |
-| variable | `download` | 74 |
-| variable | `locations` | 98 |
-| variable | `unreachable` | 100 |
-| variable | `locations` | 119 |
-| variable | `locations` | 140 |
+| type | `Page` | 11 |
+| variable | `browserEvidence` | 16 |
+| variable | `evidence` | 22 |
+| variable | `evidence` | 40 |
+| variable | `timer` | 43 |
+| variable | `state` | 44 |
+| variable | `errors` | 88 |
+| variable | `download` | 139 |
+| variable | `locations` | 173 |
+| variable | `unreachable` | 177 |
+| variable | `locations` | 231 |
+| variable | `locations` | 294 |
+| variable | `inspector` | 312 |
+| variable | `sourceInput` | 313 |
+| variable | `editor` | 341 |
+| variable | `invalid` | 369 |
+| variable | `digest` | 370 |
+| variable | `locations` | 398 |
+| variable | `inspector` | 403 |
+| variable | `legacy` | 443 |
+| variable | `project` | 445 |
+| variable | `locations` | 468 |
+| variable | `inspector` | 475 |
+| variable | `source` | 515 |
+| variable | `generated` | 516 |
+| variable | `project` | 518 |
+| variable | `inspector` | 547 |
+| variable | `cycle` | 550 |
+| variable | `artifact` | 551 |
+| variable | `view` | 561 |
 
 ## training/__init__.py
 
@@ -2597,61 +2801,107 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `languages` | 25 |
-| variable | `cloneDemo` | 39 |
-| variable | `[project, setProject]` | 47 |
-| variable | `[revision, setRevision]` | 48 |
-| variable | `[historyRows, setHistory]` | 49 |
-| variable | `[run, setRun]` | 50 |
-| variable | `[status, setStatus]` | 51 |
-| variable | `[capabilities, setCapabilities]` | 52 |
-| variable | `[tab, setTab]` | 53 |
-| variable | `[fileName, setFileName]` | 54 |
-| variable | `[error, setError]` | 55 |
-| variable | `[busy, setBusy]` | 56 |
-| variable | `[prompt, setPrompt]` | 57 |
-| variable | `[consent, setConsent]` | 58 |
-| variable | `[live, setLive]` | 59 |
-| variable | `[proposal, setProposal]` | 60 |
-| variable | `[caseText, setCaseText]` | 61 |
-| variable | `[comparison, setComparison]` | 64 |
-| variable | `[baseline, setBaseline]` | 65 |
-| variable | `[review, setReview]` | 66 |
-| variable | `generation` | 67 |
-| variable | `selected` | 68 |
-| function | `refresh()` | 71 |
-| variable | `changed` | 81 |
-| variable | `timer` | 93 |
-| variable | `timer` | 102 |
-| variable | `requestGeneration` | 117 |
-| variable | `result` | 120 |
-| variable | `timer` | 136 |
-| function | `saveAndRun(execute = true)` | 145 |
-| variable | `cases` | 150 |
-| variable | `payload` | 151 |
-| variable | `saved` | 152 |
-| variable | `job` | 165 |
-| function | `staticReview()` | 184 |
-| function | `openRevision(id: string)` | 202 |
-| variable | `saved` | 205 |
-| function | `upload(files: FileList / null)` | 218 |
-| variable | `additions` | 222 |
-| variable | `bytes` | 226 |
-| function | `acceptProposal()` | 259 |
-| variable | `updates` | 262 |
-| variable | `files` | 263 |
-| variable | `checks` | 282 |
-| variable | `metrics` | 283 |
+| variable | `languages` | 36 |
+| variable | `cloneDemo` | 50 |
+| variable | `[project, setProject]` | 58 |
+| variable | `[revision, setRevision]` | 59 |
+| variable | `[historyRows, setHistory]` | 60 |
+| variable | `[run, setRun]` | 61 |
+| variable | `[status, setStatus]` | 62 |
+| variable | `[capabilities, setCapabilities]` | 63 |
+| variable | `[tab, setTab]` | 64 |
+| variable | `[fileName, setFileName]` | 65 |
+| variable | `[error, setError]` | 66 |
+| variable | `[busy, setBusy]` | 67 |
+| variable | `[prompt, setPrompt]` | 68 |
+| variable | `[consent, setConsent]` | 69 |
+| variable | `[live, setLive]` | 70 |
+| variable | `[proposal, setProposal]` | 71 |
+| variable | `[caseText, setCaseText]` | 72 |
+| variable | `[comparison, setComparison]` | 75 |
+| variable | `[baseline, setBaseline]` | 76 |
+| variable | `[review, setReview]` | 77 |
+| variable | `[reviewSnapshot, setReviewSnapshot]` | 78 |
+| variable | `[runSnapshot, setRunSnapshot]` | 79 |
+| variable | `[sourceLocation, setSourceLocation]` | 80 |
+| variable | `[navigationStatus, setNavigationStatus]` | 83 |
+| variable | `projectRef` | 84 |
+| variable | `draftDecorations` | 85 |
+| variable | `draftTarget` | 88 |
+| variable | `navigationGeneration` | 89 |
+| variable | `generation` | 90 |
+| variable | `selected` | 91 |
+| variable | `updateDraftSource` | 98 |
+| variable | `editedFile` | 102 |
+| function | `editMatchingDraft(location: SourceLocation)` | 117 |
+| variable | `request` | 119 |
+| variable | `candidate` | 120 |
+| variable | `result` | 121 |
+| function | `focusDraftTarget(instance: editor.IStandaloneCodeEditor)` | 140 |
+| variable | `target` | 141 |
+| function | `refresh()` | 160 |
+| variable | `changed` | 170 |
+| variable | `timer` | 182 |
+| variable | `active` | 191 |
+| variable | `timer` | 192 |
+| variable | `requestGeneration` | 214 |
+| variable | `result` | 217 |
+| variable | `timer` | 233 |
+| function | `saveAndRun(execute = true)` | 242 |
+| variable | `cases` | 247 |
+| variable | `payload` | 248 |
+| variable | `snapshot` | 249 |
+| variable | `saved` | 250 |
+| variable | `job` | 268 |
+| function | `staticReview()` | 287 |
+| variable | `snapshot` | 291 |
+| variable | `result` | 295 |
+| function | `openRevision(id: string)` | 307 |
+| variable | `saved` | 310 |
+| function | `upload(files: FileList / null)` | 326 |
+| variable | `additions` | 330 |
+| variable | `bytes` | 334 |
+| function | `acceptProposal()` | 367 |
+| variable | `updates` | 370 |
+| variable | `files` | 371 |
+| variable | `checks` | 390 |
+| variable | `metrics` | 391 |
 
 ## ui/Locations.tsx
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `Locations({ evidence }: { evidence: Record<string, any> })` | 13 |
-| variable | `findings` | 15 |
-| variable | `files` | 19 |
-| variable | `unlocated` | 20 |
-| variable | `parserLimits` | 21 |
+| variable | `[selectedFile, setSelectedFile]` | 71 |
+| variable | `[category, setCategory]` | 72 |
+| variable | `findings` | 77 |
+| variable | `files` | 81 |
+| variable | `unlocated` | 85 |
+| variable | `parserLimits` | 87 |
+| variable | `names` | 90 |
+| variable | `filtered` | 100 |
+| variable | `unused` | 101 |
+| variable | `coverageFiles` | 108 |
+| variable | `missing` | 244 |
+
+## ui/SourceInspector.tsx
+
+| Kind | Declaration | Line |
+|---|---|---|
+| type | `SourceVerification` | 19 |
+| variable | `[verification, setVerification]` | 35 |
+| variable | `contextMatches` | 42 |
+| variable | `verified` | 46 |
+| variable | `draftMatches` | 47 |
+| variable | `[line, setLine]` | 48 |
+| variable | `[jump, setJump]` | 49 |
+| variable | `[notice, setNotice]` | 50 |
+| variable | `sourceRef` | 51 |
+| variable | `heading` | 52 |
+| variable | `generation` | 53 |
+| variable | `request` | 56 |
+| variable | `target` | 83 |
+| variable | `[start, end]` | 85 |
+| variable | `target` | 139 |
 
 ## ui/api.ts
 
@@ -2688,6 +2938,31 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `health` | 41 |
 | variable | `screen` | 44 |
 
+## ui/source-navigation.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `MAX_SOURCE_BYTES` | 17 |
+| type | `SourceVerification` | 19 |
+| function | `sourceFingerprint(content: string)` | 24 |
+| variable | `character` | 28 |
+| variable | `point` | 29 |
+| variable | `bytes` | 33 |
+| variable | `digest` | 40 |
+| function | `sourceLineCount(content: string)` | 47 |
+| variable | `lines` | 48 |
+| variable | `index` | 49 |
+| variable | `displayed` | 65 |
+| variable | `start` | 66 |
+| variable | `current` | 67 |
+| variable | `boundary` | 68 |
+| variable | `boundary` | 73 |
+| variable | `content` | 102 |
+| variable | `harnessName` | 106 |
+| variable | `file` | 113 |
+| variable | `digest` | 127 |
+| variable | `lines` | 140 |
+
 ## ui/types.ts
 
 | Kind | Declaration | Line |
@@ -2699,8 +2974,9 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | type | `Revision` | 43 |
 | type | `Run` | 50 |
 | type | `Finding` | 57 |
-| type | `Capability` | 66 |
-| type | `AIResult` | 72 |
+| type | `SourceLocation` | 70 |
+| type | `Capability` | 78 |
+| type | `AIResult` | 84 |
 
 ## vite.config.ts
 

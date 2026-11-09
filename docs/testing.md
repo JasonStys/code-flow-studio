@@ -6,6 +6,8 @@ The supplied 48-category document is represented one-to-one in the capability ca
 
 ## Risk-based layers
 
+- Source-navigation acceptance: an actual auxiliary-file static review, exact line and single-line highlighting, read-only snapshot, nearby-line validation, matching-draft focus, rapid typing retention, stale-draft preservation, encrypted-account lock and actual packaged Windows app. Independent SHA-256 oracles cover all twelve manifest languages, Unicode/newlines, generated artifacts, invalid hashes/lines, binary inputs and size limits. Coverage UI fixtures test presentation contracts; they do not replace real worker coverage collection. See [observed results](reports/practical-workflows-2026-11-09.md).
+
 - Exact-location regressions: auxiliary-file/Unicode/syntax checks, conservative Python unused/unreachable candidates, toolchain reference parsing, unlocated failures, immutable source hashes, bounded per-file coverage lists, escaped UI/HTML/JSON/ZIP and legacy-report behavior. See [the detailed contract](located-diagnostics.md). Real worker acceptance is separate from mocked coverage-function and UI tests.
 
 - Controller unit/API tests: filename traversal/device aliases, malformed and oversized requests, base64, duplicate names, zero/invalid preferences, token/origin/host checks, source side-effect avoidance, SQL transactions, history recovery, immutable baseline oracles and candidate gates.

@@ -23,7 +23,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
-from studio import execution
+from studio import __version__, execution
 from studio.analysis import compare, inspect_source
 from studio.catalog import catalog
 from studio.models import AIRequest, Project
@@ -70,7 +70,7 @@ def create_app(
 
     app = FastAPI(
         title="Code Flow Studio",
-        version="0.1.0",
+        version=__version__,
         lifespan=lifespan,
         docs_url=None,
         redoc_url=None,

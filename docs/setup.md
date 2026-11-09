@@ -8,7 +8,7 @@ Windows: launch the single `Code Flow Studio Setup … .exe` artifact. It instal
 
 Linux uses an AppImage; macOS uses a DMG. Native packages are architecture/OS specific. Mobile devices use the responsive browser interface; native Android/iOS packaging is not implemented.
 
-Execution prerequisites are separate from UI installation: Docker must be running, and the trusted `code-flow-worker:0.2.0` image must exist. Build the image from the reviewed `runner` directory. This can download compilers and libraries during trusted image installation; target jobs have no network. If unavailable, the UI remains usable but execution is explicitly blocked. The new tag is required for [polyglot coverage and unused checks](polyglot-locations.md).
+Execution prerequisites are separate from UI installation: Docker must be running, and the trusted `code-flow-worker:0.4.0` image must exist. Build the image from the reviewed `runner` directory. This can download compilers and libraries during trusted image installation; target jobs have no network. If unavailable, the UI remains usable but execution is explicitly blocked. The new tag is required for [polyglot coverage and unused checks](polyglot-locations.md).
 
 ## Source developers
 
@@ -20,7 +20,7 @@ python -m venv .venv
 pip install -e '.[dev]'
 npm ci
 npm run build
-docker build -t code-flow-worker:0.2.0 runner
+docker build -t code-flow-worker:0.4.0 runner
 python -m studio.cli serve --port 8012
 ```
 
@@ -43,4 +43,14 @@ Exports include bounded revision timelines (latest 50 revisions, latest ten atte
 ## Diagnostics and recovery
 
 “Docker unavailable” is not a code failure and is not a passed test. A missing image is a separate setup issue. Interrupted controller jobs become `interrupted` after restart. Stop the controller before moving/backing up the entire app data directory including SQLite/WAL companions. Do not reset Docker or delete existing containers/images to troubleshoot this application without explicit approval.
+
+# Development native-test prerequisite
+
+After `npm ci`, run `npm run setup:electron` before `npm run test:desktop`. This separately
+downloads the exact pinned official SDK and verifies its executable path and embedded version.
+Missing SDK files fail fast rather than starting Electron's lazy downloader inside the 60-second
+application journey. CI gives SDK setup its own five-minute build step; the actual native journey
+keeps its 60-second timeout. `npm run test:electron-readiness` proves a missing SDK cannot trigger
+a download through the verifier. End-user installers already bundle the runtime and do not require
+these development commands.
 

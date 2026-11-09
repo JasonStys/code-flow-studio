@@ -2,7 +2,7 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Version 0.3.0: polyglot coverage and located unused-code evidence.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+**Version 0.4.0: polyglot evidence and verified source review.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
 Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-polyglot.md), [historical Python-location validation](docs/validation-locations.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
@@ -11,7 +11,7 @@ Download OS-specific installers/portable packages from [Releases](https://github
 1. Upload flat source/data files or edit code in the offline Monaco editor. Select a compiler adapter and entry point. Write requirements and approve independent stdin/stdout cases.
 2. Optionally ask a configured model to generate code, tests, improvements or live suggestions. Source transmission is opt-in. Responses are schema-validated **unverified proposals**, not executed results.
 3. Save an immutable revision and run it through the container broker. Compilation, approved cases, supplied pytest harnesses, native unused checks/coverage, Python mutation, bounded fuzzing and exploratory benchmarks produce separate evidence.
-4. Review findings and add a candidate revision. Baseline expectations and existing tests cannot be removed. Compare results under the same environment and adjustable runtime/memory/readability/footprint preferences.
+4. Review findings and add a candidate revision. In **Evidence**, filter by file/category and select a diagnostic or missing-coverage line. The inspector verifies the retained source fingerprint before displaying it. Browse nearby lines or open a matching current draft; changed drafts are never overwritten. Baseline expectations and existing tests cannot be removed. Compare results under the same environment and adjustable runtime/memory/readability/footprint preferences.
 5. Download escaped HTML, machine-readable JSON and a source/test/harness/report ZIP. Reopen saved revisions and replay them.
 
 ## Features and limits
@@ -34,6 +34,8 @@ Download OS-specific installers/portable packages from [Releases](https://github
 
 Binary formats can be retained as fixtures. There is no promise to understand every document, image, encrypted archive or binary. Supply text requirements and explicit harnesses for formats without a parser; unsupported extraction must not silently succeed.
 
+The [source inspection workflow](docs/source-navigation.md) explains stale/legacy references, generated artifacts, bounds and review steps. [Observed local validation](docs/reports/practical-workflows-2026-11-09.md) separates actual browser/native journeys from UI report-contract fixtures and compiler checks that require isolated CI workers.
+
 ## Run and install
 
 For end users, use the checksummed OS-specific packages in Releases. The UI runtime is bundled. Open the app's **Code Flow → Open local website** menu for browser use; no login token appears in the URL. Compiler jobs require an isolated local Unix/named-pipe Docker engine and the trusted worker image. Missing isolation is blocked, never passed; there is no host-execution fallback. Save/edit/static review/history/help remain usable without Docker.
@@ -54,7 +56,8 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `studio/store.py` | SQLite transactions, append-only revisions, immutable baseline oracles and interrupted-job recovery. |
 | `studio/execution.py` | Fixed container flags, readiness checks, output/deadline bounds and exact owned-container cleanup. |
 | `studio/analysis.py` | Non-executing source heuristics and correctness-gated weighted comparisons. |
-| `studio/source_checks.py`, `studio/locations.py`, `ui/Locations.tsx` | Python syntax/unused/unreachable candidates, bounded tool-output source references and readable exact-location/coverage evidence views. |
+| `studio/source_checks.py`, `studio/locations.py`, `ui/Locations.tsx` | Python syntax/unused/unreachable candidates, bounded tool-output source references, file/category filters and clickable exact-location/coverage evidence views. |
+| `ui/source-navigation.ts`, `ui/SourceInspector.tsx` | Exact UTF-8 SHA-256 verification, bounded immutable source inspection, nearby-line browsing and guarded navigation to an unchanged current draft. |
 | `studio/providers.py` | Private provider configuration, task routes, consent, bounded requests and proposal schema validation. |
 | `studio/catalog.py` | All 48 supplied test categories with applicability/integration requirements. |
 | `studio/reports.py` | Escaped, inert HTML/JSON/ZIP evidence exports. |
@@ -73,7 +76,9 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `examples/language_locations.py`, `tests/test_native_locations.py` | Independent polyglot unused/missed-line oracles and pure native-report parser/security regressions. |
 | `examples/training.json`, `examples/training.jsonl` | Tiny rights-owned training smoke parameters and data; no quality claims. |
 | `scripts/frozen_entry.py` | Frozen-service entry point for installers. |
+| `scripts/verify_electron.cjs` | Fail-fast pinned Electron path/embedded-version verification; official SDK installation happens before timed native tests. |
 | `scripts/worker_checks.py` | Actual isolated compiler/fuzz/security-boundary integration scenarios. |
+| `runner/sanitizer_probe.py`, `scripts/worker_analyzer_checks.cjs` | Trusted same-container sanitizer-startup/fault controls and independent exact-line JS/TS checks against the separately audited worker dependency graph. |
 | `scripts/private_worker_checks.py` | Real twelve-adapter execution through authenticated account API and encrypted-history reopen. |
 | `scripts/license_bundle.py`, `scripts/release_archive.py` | Generated third-party notices, portable app packages and SHA-256 checksums; never package user accounts. |
 | `scripts/push_analysis.py` | Push generation/test/candidate workflow without automatic source promotion. |
@@ -82,6 +87,10 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `pyproject.toml`, `package.json`, lockfile, TypeScript/Vite/Playwright configs | Dependency and reproducible build/test definitions. |
 
 Indexed Python/TypeScript/JavaScript headers point to the checked symbol/variable line map; the small Bash/PHP hooks describe their local variables inline. [Architecture](docs/architecture.md) and the [polyglot decision](docs/adr-polyglot-evidence.md) explain trade-offs; [testing](docs/testing.md) separates test claims from evidence.
+
+[Worker compatibility](docs/worker-toolchain.md) explains the explicit libFuzzer runtime, bounded
+startup comparison, deliberate ASan fault control and separate worker npm audit. Compiler/runner
+problems remain visible as failures until the actual isolated acceptance checks pass.
 
 Historical 0.1 bearer-token CLI mode remains explicitly opt-in for existing automation; it is not account mode. No automatic import of legacy plaintext projects or global AI keys occurs.
 

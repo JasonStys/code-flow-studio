@@ -1,16 +1,26 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: refresh()@L71; saveAndRun(execute = true)@L145; staticReview()@L184; openRevision(id: string)@L202; upload(files: FileList | null)@L218; acceptProposal()@L259
- * variables: languages@L25; cloneDemo@L39; [project, setProject]@L47; [revision, setRevision]@L48; [historyRows, setHistory]@L49; [run, setRun]@L50; [status, setStatus]@L51; [capabilities, setCapabilities]@L52; [tab, setTab]@L53; [fileName, setFileName]@L54; [error, setError]@L55; [busy, setBusy]@L56; [prompt, setPrompt]@L57; [consent, setConsent]@L58; [live, setLive]@L59; [proposal, setProposal]@L60; [caseText, setCaseText]@L61; [comparison, setComparison]@L64; [baseline, setBaseline]@L65; [review, setReview]@L66; generation@L67; selected@L68; changed@L81; timer@L93; timer@L102; requestGeneration@L117; result@L120; timer@L136; cases@L150; payload@L151; saved@L152; job@L165; saved@L205; additions@L222; bytes@L226; updates@L262; files@L263; checks@L282; metrics@L283
+ * functions: editMatchingDraft(location: SourceLocation)@L117; focusDraftTarget(instance: editor.IStandaloneCodeEditor)@L140; refresh()@L160; saveAndRun(execute = true)@L242; staticReview()@L287; openRevision(id: string)@L307; upload(files: FileList | null)@L326; acceptProposal()@L367
+ * variables: languages@L36; cloneDemo@L50; [project, setProject]@L58; [revision, setRevision]@L59; [historyRows, setHistory]@L60; [run, setRun]@L61; [status, setStatus]@L62; [capabilities, setCapabilities]@L63; [tab, setTab]@L64; [fileName, setFileName]@L65; [error, setError]@L66; [busy, setBusy]@L67; [prompt, setPrompt]@L68; [consent, setConsent]@L69; [live, setLive]@L70; [proposal, setProposal]@L71; [caseText, setCaseText]@L72; [comparison, setComparison]@L75; [baseline, setBaseline]@L76; [review, setReview]@L77; [reviewSnapshot, setReviewSnapshot]@L78; [runSnapshot, setRunSnapshot]@L79; [sourceLocation, setSourceLocation]@L80; [navigationStatus, setNavigationStatus]@L83; projectRef@L84; draftDecorations@L85; draftTarget@L88; navigationGeneration@L89; generation@L90; selected@L91; updateDraftSource@L98; editedFile@L102; request@L119; candidate@L120; result@L121; target@L141; changed@L170; timer@L182; active@L191; timer@L192; requestGeneration@L214; result@L217; timer@L233; cases@L247; payload@L248; snapshot@L249; saved@L250; job@L268; snapshot@L291; result@L295; saved@L310; additions@L330; bytes@L334; updates@L370; files@L371; checks@L390; metrics@L391
  * </code-map> */
 
 /** Evidence-first editor, runner and history UI. Symbols/variables: docs/code-index.md.
  * Sources are inert editor text. Proposals require approval; no silent oracle edits.
  */
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { flushSync } from "react-dom";
 import Editor from "@monaco-editor/react";
+import type { editor } from "monaco-editor";
 import Locations from "./Locations";
+import SourceInspector from "./SourceInspector";
+import { verifySourceLocation } from "./source-navigation";
 import { api, download } from "./api";
 import { demo } from "./demo";
 import type {
@@ -20,6 +30,7 @@ import type {
   Project,
   Revision,
   Run,
+  SourceLocation,
 } from "./types";
 
 const languages = [
@@ -64,9 +75,87 @@ export default function App({
   const [comparison, setComparison] = useState<any>(null);
   const [baseline, setBaseline] = useState<Run | null>(null);
   const [review, setReview] = useState<any>(null);
+  const [reviewSnapshot, setReviewSnapshot] = useState<Project | null>(null);
+  const [runSnapshot, setRunSnapshot] = useState<Project | null>(null);
+  const [sourceLocation, setSourceLocation] = useState<SourceLocation | null>(
+    null,
+  );
+  const [navigationStatus, setNavigationStatus] = useState("");
+  const projectRef = useRef(project);
+  const draftDecorations = useRef<editor.IEditorDecorationsCollection | null>(
+    null,
+  );
+  const draftTarget = useRef<SourceLocation | null>(null);
+  const navigationGeneration = useRef(0);
   const generation = useRef(0);
   const selected =
     project.files.find((file) => file.name === fileName) ?? project.files[0];
+  useLayoutEffect(() => {
+    projectRef.current = project;
+  }, [project]);
+
+  /** Keep the external Monaco model and draft atomic; delayed controlled updates can drop rapid typing. */
+  const updateDraftSource = useCallback(
+    (value: string | undefined) => {
+      draftDecorations.current?.clear();
+      draftTarget.current = null;
+      const editedFile = selected.name;
+      // Monaco emits native model events outside React; finish this small update before the next key.
+      flushSync(() =>
+        setProject((current) => ({
+          ...current,
+          files: current.files.map((file) =>
+            file.name === editedFile ? { ...file, content: value ?? "" } : file,
+          ),
+        })),
+      );
+    },
+    [selected.name],
+  );
+
+  /** Recheck the live draft after asynchronous hashing; never replace it with a historical snapshot. */
+  async function editMatchingDraft(location: SourceLocation) {
+    if (location.artifact !== "source") return;
+    const request = ++navigationGeneration.current;
+    const candidate = projectRef.current;
+    const result = await verifySourceLocation(location, candidate);
+    if (request !== navigationGeneration.current) return;
+    if (!result.ok || candidate !== projectRef.current) {
+      setNavigationStatus(
+        result.ok
+          ? "Draft changed during verification. Inspect the snapshot or try again."
+          : result.reason,
+      );
+      return;
+    }
+    draftTarget.current = location;
+    setFileName(location.file);
+    setNavigationStatus(
+      `Opened matching draft ${location.file}:${location.line}. Further edits invalidate this evidence location.`,
+    );
+    setTab("workspace");
+  }
+
+  /** Highlight one verified physical line; reported compiler column units are not guessed. */
+  function focusDraftTarget(instance: editor.IStandaloneCodeEditor) {
+    const target = draftTarget.current;
+    if (!target || target.file !== selected.name) return;
+    instance.setPosition({ lineNumber: target.line, column: 1 });
+    instance.revealLineInCenter(target.line);
+    draftDecorations.current?.clear();
+    draftDecorations.current = instance.createDecorationsCollection([
+      {
+        range: {
+          startLineNumber: target.line,
+          startColumn: 1,
+          endLineNumber: target.line,
+          endColumn: instance.getModel()?.getLineMaxColumn(target.line) ?? 1,
+        },
+        options: { isWholeLine: true, className: "evidence-source-line" },
+      },
+    ]);
+    instance.focus();
+  }
 
   async function refresh() {
     /** Refresh non-secret metadata and durable revision history. */
@@ -99,14 +188,22 @@ export default function App({
   }, [privateAccounts]);
   useEffect(() => {
     if (!run || !["queued", "running"].includes(run.status)) return;
+    let active = true;
     const timer = setInterval(
       () =>
         api<Run>(`runs/${run.id}`)
-          .then(setRun)
-          .catch((reason) => setError(reason.message)),
+          .then((result) => {
+            if (active) setRun(result);
+          })
+          .catch((reason) => {
+            if (active) setError(reason.message);
+          }),
       1000,
     );
-    return () => clearInterval(timer);
+    return () => {
+      active = false;
+      clearInterval(timer);
+    };
   }, [run?.id, run?.status]);
 
   async function ask(
@@ -149,19 +246,25 @@ export default function App({
     try {
       const cases = JSON.parse(caseText) as Case[];
       const payload = { ...project, cases };
+      const snapshot = structuredClone(payload);
       const saved = await api<Revision>(
         `revisions${revision ? `?parent=${revision}` : ""}`,
         "POST",
         payload,
       );
-      setProject(payload);
+      if (projectRef.current === project) setProject(payload);
       setRevision(saved.id);
       setReview(null);
+      setReviewSnapshot(null);
+      setSourceLocation(null);
       if (!execute) {
+        setRun(null);
+        setRunSnapshot(null);
         setError("");
         await refresh();
         return;
       }
+      setRunSnapshot(snapshot);
       const job = await api<{ id: string; status: string }>(
         `revisions/${saved.id}/run`,
         "POST",
@@ -185,12 +288,14 @@ export default function App({
     /** Inspect bounded source without executing it; findings are not test results. */
     setBusy(true);
     try {
-      setReview(
-        await api("review", "POST", {
-          ...project,
-          cases: JSON.parse(caseText),
-        }),
-      );
+      const snapshot = structuredClone({
+        ...project,
+        cases: JSON.parse(caseText),
+      });
+      const result = await api("review", "POST", snapshot);
+      setReviewSnapshot(snapshot);
+      setReview(result);
+      setSourceLocation(null);
       setTab("evidence");
     } catch (reason) {
       setError((reason as Error).message);
@@ -208,7 +313,10 @@ export default function App({
       setFileName(saved.project.entry);
       setCaseText(JSON.stringify(saved.project.cases, null, 2));
       setRun(saved.runs?.at(-1) ?? null);
+      setRunSnapshot(saved.project);
       setReview(null);
+      setReviewSnapshot(null);
+      setSourceLocation(null);
       setTab("workspace");
     } catch (reason) {
       setError((reason as Error).message);
@@ -331,7 +439,7 @@ export default function App({
       <main>
         <header>
           <div>
-            <span className="eyebrow">ENGINEERING WORKBENCH / v0.2</span>
+            <span className="eyebrow">ENGINEERING WORKBENCH / v0.4</span>
             <h2>
               {tab === "workspace"
                 ? "Make your next iteration count."
@@ -377,6 +485,10 @@ export default function App({
                   setCaseText(JSON.stringify(demo.cases, null, 2));
                   setRevision(null);
                   setRun(null);
+                  setRunSnapshot(null);
+                  setReview(null);
+                  setReviewSnapshot(null);
+                  setSourceLocation(null);
                   setFileName(demo.entry);
                 }}
               >
@@ -415,7 +527,12 @@ export default function App({
                     <button
                       key={file.name}
                       className={selected.name === file.name ? "selected" : ""}
-                      onClick={() => setFileName(file.name)}
+                      onClick={() => {
+                        draftDecorations.current?.clear();
+                        draftDecorations.current = null;
+                        draftTarget.current = null;
+                        setFileName(file.name);
+                      }}
                     >
                       {file.name}
                     </button>
@@ -439,17 +556,13 @@ export default function App({
                     }
                     theme="vs-dark"
                     value={selected.content}
-                    onChange={(value) =>
-                      setProject({
-                        ...project,
-                        files: project.files.map((file) =>
-                          file.name === selected.name
-                            ? { ...file, content: value ?? "" }
-                            : file,
-                        ),
-                      })
-                    }
+                    onMount={(instance) => {
+                      draftDecorations.current = null;
+                      focusDraftTarget(instance);
+                    }}
+                    onChange={updateDraftSource}
                     options={{
+                      ariaLabel: "Project source editor",
                       minimap: { enabled: false },
                       fontSize: 14,
                       padding: { top: 18 },
@@ -461,6 +574,11 @@ export default function App({
                   <p className="binary">
                     Binary attachment retained as a fixture. No unsupported
                     content extraction is claimed.
+                  </p>
+                )}
+                {navigationStatus && (
+                  <p role="status" className="note">
+                    {navigationStatus}
                   </p>
                 )}
                 <div className="editor-footer">
@@ -650,7 +768,29 @@ export default function App({
         )}
         {tab === "evidence" && (
           <>
-            {(review || run) && <Locations evidence={review ?? run?.result ?? {}} />}
+            {sourceLocation && (
+              <SourceInspector
+                location={sourceLocation}
+                snapshot={review ? reviewSnapshot : runSnapshot}
+                draft={project}
+                onClose={() => setSourceLocation(null)}
+                onEditDraft={editMatchingDraft}
+              />
+            )}
+            {navigationStatus && (
+              <p role="status" className="note">
+                {navigationStatus}
+              </p>
+            )}
+            {(review || run) && (
+              <Locations
+                evidence={review ?? run?.result ?? {}}
+                onNavigate={(location) => {
+                  setNavigationStatus("");
+                  setSourceLocation(location);
+                }}
+              />
+            )}
             {review && (
               <section className="panel">
                 <h3>Static review — code was not executed</h3>

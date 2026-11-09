@@ -30,10 +30,19 @@ jobs:
       - run: python scripts/code_index.py --check
       - run: python -m pytest --cov=studio --cov=training.dataset --cov-fail-under=80 --cov-report=xml:artifacts/coverage.xml --junitxml=artifacts/tests.xml
       - run: npm ci
+      - run: npm run test:electron-readiness
       - run: npm audit --audit-level=high
+      - name: Audit and exercise the separately locked worker analyzers
+        run: |
+          npm ci --prefix runner/tools --ignore-scripts
+          npm audit --prefix runner/tools --omit=dev --audit-level=moderate
+          node scripts/worker_analyzer_checks.cjs
       - run: npm run build
       - run: npx playwright install --with-deps
       - run: npm run test:browser
+        env:
+          # Retain native renderer exit evidence in job logs even when optional artifacts are off.
+          DEBUG: pw:browser
       - run: npm run test:private
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always() && vars.CODE_FLOW_UPLOAD_CI_ARTIFACTS == 'true'
@@ -53,7 +62,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -e '.[dev]'
-      - run: docker build -t code-flow-worker:0.2.0 runner
+      - run: docker build -t code-flow-worker:0.4.0 runner
       - run: python -m scripts.worker_checks
       - run: python -m scripts.private_worker_checks
       - run: python -m scripts.push_analysis

@@ -1,8 +1,8 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: prepare_runtime()@L35; execute(argv, stdin, timeout, env, stdout_path, stderr_path)@L41; adapter(language, entry)@L96; seeds(project)@L141; coverage(command, project)@L189; mutants(command, project)@L258; instrumented_fuzz(project)@L318; main()@L364
-# variables: DEADLINE@L30; WORK@L31; RUNTIME@L32; remaining@L51; started@L54; output@L56; errors@L57; child@L60; expired@L73; expired@L77; code@L78; size@L82; plans@L98; rng@L143; case@L144; corpus@L144; boundaries@L145; dictionary@L146; enabled@L147; method@L149; rows@L152; index@L153; method@L156; value@L158; _@L160; value@L160; value@L162; value@L169; data@L171; position@L172; strategy@L173; value@L184; case@L196; measured@L213; data@L216; files@L217; measured_files@L218; budget@L219; file@L220; name@L221; measured_file@L224; record@L231; key@L240; measured_file@L241; name@L241; values@L242; budget@L244; entry@L246; file@L253; path@L267; original@L268; tree@L269; node@L270; sites@L270; outcomes@L271; index@L273; candidate@L274; node@L275; target@L275; compile_check@L283; killed@L287; inconclusive@L288; case@L289; result@L290; inconclusive@L291; killed@L292; result@L297; inconclusive@L298; killed@L299; item@L308; valid@L308; item@L313; engine@L320; harness@L321; result@L328; build@L332; argv@L345; build@L347; argv@L350; result@L353; project@L366; file@L369; build@L386; command@L386; compilation@L387; report@L388; times@L413; case@L414; result@L415; passed@L416; _@L424; benchmark@L425; findings@L461; corpus@L462; method@L463; value@L463; result@L464; method@L490
+# functions: prepare_runtime()@L35; execute(argv, stdin, timeout, env, stdout_path, stderr_path)@L41; adapter(language, entry)@L96; seeds(project)@L141; coverage(command, project)@L189; mutants(command, project)@L258; instrumented_fuzz(project)@L318; main()@L368
+# variables: DEADLINE@L30; WORK@L31; RUNTIME@L32; remaining@L51; started@L54; output@L56; errors@L57; child@L60; expired@L73; expired@L77; code@L78; size@L82; plans@L98; rng@L143; case@L144; corpus@L144; boundaries@L145; dictionary@L146; enabled@L147; method@L149; rows@L152; index@L153; method@L156; value@L158; _@L160; value@L160; value@L162; value@L169; data@L171; position@L172; strategy@L173; value@L184; case@L196; measured@L213; data@L216; files@L217; measured_files@L218; budget@L219; file@L220; name@L221; measured_file@L224; record@L231; key@L240; measured_file@L241; name@L241; values@L242; budget@L244; entry@L246; file@L253; path@L267; original@L268; tree@L269; node@L270; sites@L270; outcomes@L271; index@L273; candidate@L274; node@L275; target@L275; compile_check@L283; killed@L287; inconclusive@L288; case@L289; result@L290; inconclusive@L291; killed@L292; result@L297; inconclusive@L298; killed@L299; item@L308; valid@L308; item@L313; engine@L320; harness@L321; result@L328; build@L332; argv@L345; build@L347; argv@L350; result@L353; project@L370; file@L373; build@L390; command@L390; compilation@L391; report@L392; times@L417; case@L418; result@L419; passed@L420; _@L428; benchmark@L429; findings@L465; corpus@L466; method@L467; value@L467; result@L468; method@L494
 # parameters: argv@L42; stdin@L43; timeout@L44; env@L46; stdout_path@L47; stderr_path@L48; entry@L96; language@L96; project@L141; command@L189; project@L189; command@L258; project@L258; project@L318
 # </code-map>
 
@@ -331,7 +331,7 @@ def instrumented_fuzz(project: dict) -> dict:
         if engine == "libfuzzer":
             build = execute(
                 [
-                    "clang++",
+                    "clang++-19",
                     "-std=c++20",
                     "-g",
                     "-O1",
@@ -350,7 +350,11 @@ def instrumented_fuzz(project: dict) -> dict:
             argv = ["afl-fuzz", "-i", "corpus", "-o", "afl-results", "-V", "8", "--", "./fuzz_target"]
         if build["exit_code"] != 0:
             return {"status": "blocked", "engine": engine, "build": build}
-        result = execute(argv, timeout=20)
+        result = execute(
+            argv,
+            timeout=20,
+            env={"ASAN_SYMBOLIZER_PATH": "/usr/bin/llvm-symbolizer-19"} if engine == "libfuzzer" else None,
+        )
     else:
         return {"status": "blocked", "engine": engine, "reason": "Unsupported language/engine combination"}
     return {

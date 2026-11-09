@@ -43,7 +43,7 @@ jobs:
             test "$(jq -r '.isDraft' /tmp/cfs-release.json)" = true
             test "$(jq -r '.targetCommitish' /tmp/cfs-release.json)" = "$sha"
           else
-            gh release create "$tag" --draft --target "$sha" --title "Code Flow Studio $version — located diagnostics" --notes-file "docs/releases/$tag.md"
+            gh release create "$tag" --draft --target "$sha" --title "Code Flow Studio $version — verified source review" --notes-file "docs/releases/$tag.md"
           fi
   build:
     needs: prepare
@@ -73,6 +73,10 @@ jobs:
       - run: pip install -e '.[dev]'
       - run: pip check
       - run: npm ci
+      - name: Install and verify pinned Electron before packaging and native tests
+        timeout-minutes: 5
+        run: npm run setup:electron
+      - run: npm run test:electron-readiness
       - run: npm audit --audit-level=high
       - run: npm run build
       - run: python scripts/license_bundle.py

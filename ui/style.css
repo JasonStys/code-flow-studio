@@ -804,8 +804,89 @@ footer span {
     display: block;
   }
 }
-.location-table { overflow-x: auto; max-height: 28rem; }
-.location-table table { width: 100%; border-collapse: collapse; text-align: left; }
-.location-table th, .location-table td { padding: .65rem; border-bottom: 1px solid #c8d3df; vertical-align: top; }
-.location-table td { overflow-wrap: anywhere; }
-.coverage-file { border-top: 1px solid #c8d3df; overflow-wrap: anywhere; }
+.location-table {
+  overflow-x: auto;
+  max-height: 28rem;
+}
+.location-table table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.location-table th,
+.location-table td {
+  padding: 0.65rem;
+  border-bottom: 1px solid #c8d3df;
+  vertical-align: top;
+}
+.location-table td {
+  overflow-wrap: anywhere;
+}
+.coverage-file {
+  border-top: 1px solid #c8d3df;
+  overflow-wrap: anywhere;
+}
+
+/* Content-bound evidence navigation is local-only; controls remain usable on narrow screens. */
+.location-filters,
+.source-jump {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+  margin-block: 1rem;
+}
+.location-filters label,
+.source-jump label {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.source-jump input {
+  max-width: 10rem;
+}
+.source-location-link {
+  display: inline-block;
+  min-width: 2rem;
+  padding: 0.2rem 0.45rem;
+  font: inherit;
+  text-decoration: underline;
+  border: 1px solid #157f81;
+  border-radius: 0.3rem;
+  background: #eaf7f5;
+  color: #0c6263;
+  cursor: pointer;
+}
+.source-location-link:focus-visible {
+  outline: 3px solid #6b4eff;
+  outline-offset: 2px;
+}
+.source-inspector {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.source-inspector details {
+  margin-block: 0.75rem;
+}
+.monaco-editor .evidence-source-line {
+  background: rgba(75, 190, 218, 0.22);
+  border-left: 3px solid #69cddf;
+}
+.source-inspector .verified-source {
+  width: 100%;
+  min-width: 0;
+  height: 370px;
+  resize: vertical;
+  font:
+    13px/20px Consolas,
+    "Liberation Mono",
+    monospace;
+  white-space: pre;
+  tab-size: 4;
+  background: #172332;
+  color: #eef4fa;
+}
+.verified-source::selection {
+  background: #24688a;
+  color: #ffffff;
+}

@@ -1,6 +1,6 @@
 {
   "name": "code-flow-worker-analyzers",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Fixed, offline worker analyzers; never load target configuration or plugins",
   "license": "MIT",
@@ -10,5 +10,8 @@
     "@typescript-eslint/eslint-plugin": "8.72.0",
     "typescript": "5.9.3",
     "v8-to-istanbul": "9.3.0"
+  },
+  "overrides": {
+    "minimatch@>=7 <11.0.1": "11.0.1"
   }
 }

@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Boundary@L40; Closed@L140; Credentials@L146; Recovery@L153; Unlock@L159; Activity@L166; Delete@L172; Provider@L179; Settings@L192; Proxy@L226
-# functions: __init__(self, app, manager, port)@L43; __call__(self, scope, receive, send)@L49; guarded(message)@L56; deny(status, detail)@L77; replay()@L129; coherent(self)@L201; public_settings(manager)@L213; __init__(self, manager)@L229; __call__(self, scope, receive, send)@L233; create_private_app(root, port, ui, launcher_token, nonce)@L284; lifespan(app)@L292; idle()@L295; invalid(request, error)@L331; bad_value(request, error)@L336; bad_disk(request, error)@L341; identify(request)@L347; signed(owner, data)@L351; auth_limit(alias)@L364; health()@L372; shutdown(request)@L383; register(data)@L396; login(data)@L406; reset(data)@L415; account(request)@L432; unlock(request, data)@L442; activity(request, data)@L453; save(request)@L461; lock(request)@L468; logout(request)@L476; delete(request, data)@L488; backup(request)@L504; get_providers(request)@L515; providers(request, data)@L522
-# variables: CSP@L36; HISTORY_STOP_BYTES@L37; raw@L53; headers@L54; k@L54; v@L54; k@L61; v@L61; _@L83; k@L83; cookies@L101; token@L106; account@L107; chunks@L115; length@L115; message@L117; data@L120; length@L121; delivered@L127; delivered@L133; model_config@L143; alias@L149; password@L150; recovery@L156; key@L162; salt@L163; idle_seconds@L169; password@L175; confirm@L176; id@L182; kind@L183; url@L184; model@L185; key@L186; retain_key@L187; token_parameter@L188; temperature@L189; providers@L195; routes@L196; ids@L203; p@L203; value@L204; p@L207; keys@L215; settings@L215; data@L216; p@L218; manager@L237; app@L240; path@L245; db@L251; count@L252; headers@L264; forwarded@L273; k@L274; v@L274; manager@L288; task@L309; app@L319; response@L353; callback@L389; owner@L400; recovery@L400; owner@L409; db@L419; row@L420; fresh@L426; owner@L434; session@L434; owner@L444; session@L444; owner@L471; session@L471; owner@L479; session@L479; response@L483; _@L491; owner@L491; db@L492; row@L493; response@L499; _@L506; owner@L506; path@L507; keys@L526; old@L526; rows@L527; provider@L528; row@L529; p@L531; previous@L531; config@L536; router@L537; k@L539; p@L539; v@L539; p@L542
-# parameters: app@L43; manager@L43; port@L43; self@L43; receive@L49; scope@L49; self@L49; send@L49; message@L56; detail@L77; status@L77; self@L201; manager@L213; manager@L229; self@L229; receive@L233; scope@L233; self@L233; send@L233; launcher_token@L285; nonce@L285; port@L285; root@L285; ui@L285; app@L292; error@L331; request@L331; error@L336; request@L336; error@L341; request@L341; request@L347; data@L351; owner@L351; alias@L364; request@L383; data@L396; data@L406; data@L415; request@L432; data@L442; request@L442; data@L453; request@L453; request@L461; request@L468; request@L476; data@L488; request@L488; request@L504; request@L515; data@L522; request@L522
+# classes: Boundary@L41; Closed@L141; Credentials@L147; Recovery@L154; Unlock@L160; Activity@L167; Delete@L173; Provider@L180; Settings@L193; Proxy@L227
+# functions: __init__(self, app, manager, port)@L44; __call__(self, scope, receive, send)@L50; guarded(message)@L57; deny(status, detail)@L78; replay()@L130; coherent(self)@L202; public_settings(manager)@L214; __init__(self, manager)@L230; __call__(self, scope, receive, send)@L234; create_private_app(root, port, ui, launcher_token, nonce)@L285; lifespan(app)@L293; idle()@L296; invalid(request, error)@L332; bad_value(request, error)@L337; bad_disk(request, error)@L342; identify(request)@L348; signed(owner, data)@L352; auth_limit(alias)@L365; health()@L373; shutdown(request)@L384; register(data)@L397; login(data)@L407; reset(data)@L416; account(request)@L433; unlock(request, data)@L443; activity(request, data)@L454; save(request)@L462; lock(request)@L469; logout(request)@L477; delete(request, data)@L489; backup(request)@L505; get_providers(request)@L516; providers(request, data)@L523
+# variables: CSP@L37; HISTORY_STOP_BYTES@L38; raw@L54; headers@L55; k@L55; v@L55; k@L62; v@L62; _@L84; k@L84; cookies@L102; token@L107; account@L108; chunks@L116; length@L116; message@L118; data@L121; length@L122; delivered@L128; delivered@L134; model_config@L144; alias@L150; password@L151; recovery@L157; key@L163; salt@L164; idle_seconds@L170; password@L176; confirm@L177; id@L183; kind@L184; url@L185; model@L186; key@L187; retain_key@L188; token_parameter@L189; temperature@L190; providers@L196; routes@L197; ids@L204; p@L204; value@L205; p@L208; keys@L216; settings@L216; data@L217; p@L219; manager@L238; app@L241; path@L246; db@L252; count@L253; headers@L265; forwarded@L274; k@L275; v@L275; manager@L289; task@L310; app@L320; response@L354; callback@L390; owner@L401; recovery@L401; owner@L410; db@L420; row@L421; fresh@L427; owner@L435; session@L435; owner@L445; session@L445; owner@L472; session@L472; owner@L480; session@L480; response@L484; _@L492; owner@L492; db@L493; row@L494; response@L500; _@L507; owner@L507; path@L508; keys@L527; old@L527; rows@L528; provider@L529; row@L530; p@L532; previous@L532; config@L537; router@L538; k@L540; p@L540; v@L540; p@L543
+# parameters: app@L44; manager@L44; port@L44; self@L44; receive@L50; scope@L50; self@L50; send@L50; message@L57; detail@L78; status@L78; self@L202; manager@L214; manager@L230; self@L230; receive@L234; scope@L234; self@L234; send@L234; launcher_token@L286; nonce@L286; port@L286; root@L286; ui@L286; app@L293; error@L332; request@L332; error@L337; request@L337; error@L342; request@L342; request@L348; data@L352; owner@L352; alias@L365; request@L384; data@L397; data@L407; data@L416; request@L433; data@L443; request@L443; data@L454; request@L454; request@L462; request@L469; request@L477; data@L489; request@L489; request@L505; request@L516; data@L523; request@L523
 # </code-map>
 
 """Jason Stys: loopback-only real accounts, session-proven vaults, private AI settings and scoped controller.
@@ -29,6 +29,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from starlette.concurrency import run_in_threadpool
 
+from studio import __version__
 from studio.accounts import digest, password_matches
 from studio.private_workspace import Workspaces, atomic_json
 from studio.providers import Providers
@@ -318,7 +319,7 @@ def create_private_app(
 
     app = FastAPI(
         title="Code Flow Studio — Jason Stys",
-        version="0.3.0",
+        version=__version__,
         lifespan=lifespan,
         docs_url=None,
         redoc_url=None,
@@ -374,7 +375,7 @@ def create_private_app(
         return {
             "status": "ready",
             "mode": "private-local-accounts",
-            "version": "0.3.0",
+            "version": __version__,
             "author": "Jason Stys",
             "launcher_nonce": nonce,
         }

@@ -2,7 +2,7 @@
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
  * functions: port()@L26; launch()@L37
- * variables: { spawn }@L17; { randomBytes }@L18; { join }@L19; net@L20; fs@L21; service@L22; closing@L23; server@L27; selected@L31; selected@L38; nonce@L40; resources@L41; executable@L44; ui@L51; log@L55; env@L60; exited@L76; origin@L84; ready@L86; attempt@L87; response@L89; health@L92; isolated@L106; allowed@L114; window@L122; stopped@L202; window@L230
+ * variables: { spawn }@L17; { randomBytes }@L18; { join }@L19; net@L20; fs@L21; service@L22; closing@L23; server@L27; selected@L31; selected@L38; nonce@L40; resources@L41; executable@L44; ui@L51; log@L55; env@L60; exited@L76; origin@L84; ready@L86; attempt@L87; response@L89; health@L92; isolated@L106; allowed@L114; window@L122; stopped@L202; window@L238
  * </code-map> */
 
 /** Jason Stys: native private-account launcher. No renderer secrets, privileged preload or host code execution. */
@@ -223,7 +223,15 @@ app.on("before-quit", (event) => {
   })();
 });
 app.on("window-all-closed", () => app.quit());
-app.setPath("userData", join(app.getPath("appData"), "CodeFlowStudioLauncher"));
+// Native regression runs own a disposable launcher profile as well as a disposable account store.
+app.setPath(
+  "userData",
+  process.env.STUDIO_DESKTOP_TEST === "1"
+    ? fs.mkdtempSync(
+        join(require("node:os").tmpdir(), "code-flow-launcher-test-"),
+      )
+    : join(app.getPath("appData"), "CodeFlowStudioLauncher"),
+);
 if (!app.requestSingleInstanceLock()) app.quit();
 else {
   app.on("second-instance", () => {
