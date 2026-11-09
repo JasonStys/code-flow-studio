@@ -34,7 +34,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `allowed` | 114 |
 | variable | `window` | 122 |
 | variable | `stopped` | 202 |
-| variable | `window` | 230 |
+| variable | `window` | 238 |
 
 ## examples/language_locations.py
 
@@ -73,6 +73,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
+| variable | `port` | 10 |
 
 ## playwright.desktop.config.ts
 
@@ -83,6 +84,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
+| variable | `port` | 9 |
 
 ## runner/language_checks.py
 
@@ -1889,18 +1891,48 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `app` | 18 |
-| variable | `resources` | 30 |
-| variable | `file` | 31 |
-| variable | `page` | 37 |
+| variable | `app` | 19 |
+| variable | `resources` | 34 |
+| variable | `file` | 35 |
+| variable | `page` | 59 |
 
 ## tests/private.spec.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `external` | 14 |
-| variable | `url` | 16 |
-| variable | `downloaded` | 33 |
+| variable | `external` | 15 |
+| variable | `origin` | 16 |
+| variable | `url` | 20 |
+| variable | `downloaded` | 37 |
+| variable | `external` | 109 |
+| variable | `origin` | 110 |
+
+## tests/source-journey.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| type | `Page` | 14 |
+| variable | `inertHelper` | 16 |
+| function | `inspectHelper(page: Page)` | 20 |
+| variable | `locations` | 33 |
+| variable | `inspector` | 54 |
+
+## tests/source-navigation.spec.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `hash` | 23 |
+| variable | `source` | 25 |
+| function | `project()` | 27 |
+| function | `reference(overrides: Partial<SourceLocation> = {})` | 33 |
+| variable | `language` | 57 |
+| variable | `candidate` | 71 |
+| variable | `candidate` | 78 |
+| variable | `line` | 89 |
+| variable | `candidate` | 129 |
+| variable | `candidate` | 146 |
+| variable | `generated` | 153 |
+| variable | `candidate` | 200 |
 
 ## tests/test_api.py
 
@@ -2415,12 +2447,23 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `errors` | 23 |
-| variable | `download` | 74 |
-| variable | `locations` | 98 |
-| variable | `unreachable` | 100 |
-| variable | `locations` | 119 |
-| variable | `locations` | 140 |
+| variable | `errors` | 25 |
+| variable | `download` | 76 |
+| variable | `locations` | 112 |
+| variable | `unreachable` | 116 |
+| variable | `locations` | 170 |
+| variable | `locations` | 233 |
+| variable | `inspector` | 251 |
+| variable | `sourceInput` | 252 |
+| variable | `editor` | 277 |
+| variable | `invalid` | 307 |
+| variable | `digest` | 308 |
+| variable | `locations` | 338 |
+| variable | `inspector` | 343 |
+| variable | `legacy` | 383 |
+| variable | `project` | 385 |
+| variable | `locations` | 408 |
+| variable | `inspector` | 415 |
 
 ## training/__init__.py
 
@@ -2597,61 +2640,107 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `languages` | 25 |
-| variable | `cloneDemo` | 39 |
-| variable | `[project, setProject]` | 47 |
-| variable | `[revision, setRevision]` | 48 |
-| variable | `[historyRows, setHistory]` | 49 |
-| variable | `[run, setRun]` | 50 |
-| variable | `[status, setStatus]` | 51 |
-| variable | `[capabilities, setCapabilities]` | 52 |
-| variable | `[tab, setTab]` | 53 |
-| variable | `[fileName, setFileName]` | 54 |
-| variable | `[error, setError]` | 55 |
-| variable | `[busy, setBusy]` | 56 |
-| variable | `[prompt, setPrompt]` | 57 |
-| variable | `[consent, setConsent]` | 58 |
-| variable | `[live, setLive]` | 59 |
-| variable | `[proposal, setProposal]` | 60 |
-| variable | `[caseText, setCaseText]` | 61 |
-| variable | `[comparison, setComparison]` | 64 |
-| variable | `[baseline, setBaseline]` | 65 |
-| variable | `[review, setReview]` | 66 |
-| variable | `generation` | 67 |
-| variable | `selected` | 68 |
-| function | `refresh()` | 71 |
-| variable | `changed` | 81 |
-| variable | `timer` | 93 |
-| variable | `timer` | 102 |
-| variable | `requestGeneration` | 117 |
-| variable | `result` | 120 |
-| variable | `timer` | 136 |
-| function | `saveAndRun(execute = true)` | 145 |
-| variable | `cases` | 150 |
-| variable | `payload` | 151 |
-| variable | `saved` | 152 |
-| variable | `job` | 165 |
-| function | `staticReview()` | 184 |
-| function | `openRevision(id: string)` | 202 |
-| variable | `saved` | 205 |
-| function | `upload(files: FileList / null)` | 218 |
-| variable | `additions` | 222 |
-| variable | `bytes` | 226 |
-| function | `acceptProposal()` | 259 |
-| variable | `updates` | 262 |
-| variable | `files` | 263 |
-| variable | `checks` | 282 |
-| variable | `metrics` | 283 |
+| variable | `languages` | 36 |
+| variable | `cloneDemo` | 50 |
+| variable | `[project, setProject]` | 58 |
+| variable | `[revision, setRevision]` | 59 |
+| variable | `[historyRows, setHistory]` | 60 |
+| variable | `[run, setRun]` | 61 |
+| variable | `[status, setStatus]` | 62 |
+| variable | `[capabilities, setCapabilities]` | 63 |
+| variable | `[tab, setTab]` | 64 |
+| variable | `[fileName, setFileName]` | 65 |
+| variable | `[error, setError]` | 66 |
+| variable | `[busy, setBusy]` | 67 |
+| variable | `[prompt, setPrompt]` | 68 |
+| variable | `[consent, setConsent]` | 69 |
+| variable | `[live, setLive]` | 70 |
+| variable | `[proposal, setProposal]` | 71 |
+| variable | `[caseText, setCaseText]` | 72 |
+| variable | `[comparison, setComparison]` | 75 |
+| variable | `[baseline, setBaseline]` | 76 |
+| variable | `[review, setReview]` | 77 |
+| variable | `[reviewSnapshot, setReviewSnapshot]` | 78 |
+| variable | `[runSnapshot, setRunSnapshot]` | 79 |
+| variable | `[sourceLocation, setSourceLocation]` | 80 |
+| variable | `[navigationStatus, setNavigationStatus]` | 83 |
+| variable | `projectRef` | 84 |
+| variable | `draftDecorations` | 85 |
+| variable | `draftTarget` | 88 |
+| variable | `navigationGeneration` | 89 |
+| variable | `generation` | 90 |
+| variable | `selected` | 91 |
+| variable | `updateDraftSource` | 98 |
+| variable | `editedFile` | 102 |
+| function | `editMatchingDraft(location: SourceLocation)` | 117 |
+| variable | `request` | 119 |
+| variable | `candidate` | 120 |
+| variable | `result` | 121 |
+| function | `focusDraftTarget(instance: editor.IStandaloneCodeEditor)` | 140 |
+| variable | `target` | 141 |
+| function | `refresh()` | 160 |
+| variable | `changed` | 170 |
+| variable | `timer` | 182 |
+| variable | `active` | 191 |
+| variable | `timer` | 192 |
+| variable | `requestGeneration` | 214 |
+| variable | `result` | 217 |
+| variable | `timer` | 233 |
+| function | `saveAndRun(execute = true)` | 242 |
+| variable | `cases` | 247 |
+| variable | `payload` | 248 |
+| variable | `snapshot` | 249 |
+| variable | `saved` | 250 |
+| variable | `job` | 268 |
+| function | `staticReview()` | 287 |
+| variable | `snapshot` | 291 |
+| variable | `result` | 295 |
+| function | `openRevision(id: string)` | 307 |
+| variable | `saved` | 310 |
+| function | `upload(files: FileList / null)` | 326 |
+| variable | `additions` | 330 |
+| variable | `bytes` | 334 |
+| function | `acceptProposal()` | 367 |
+| variable | `updates` | 370 |
+| variable | `files` | 371 |
+| variable | `checks` | 390 |
+| variable | `metrics` | 391 |
 
 ## ui/Locations.tsx
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `Locations({ evidence }: { evidence: Record<string, any> })` | 13 |
-| variable | `findings` | 15 |
-| variable | `files` | 19 |
-| variable | `unlocated` | 20 |
-| variable | `parserLimits` | 21 |
+| variable | `[selectedFile, setSelectedFile]` | 71 |
+| variable | `[category, setCategory]` | 72 |
+| variable | `findings` | 77 |
+| variable | `files` | 81 |
+| variable | `unlocated` | 85 |
+| variable | `parserLimits` | 87 |
+| variable | `names` | 90 |
+| variable | `filtered` | 100 |
+| variable | `unused` | 101 |
+| variable | `coverageFiles` | 108 |
+| variable | `missing` | 244 |
+
+## ui/SourceInspector.tsx
+
+| Kind | Declaration | Line |
+|---|---|---|
+| type | `SourceVerification` | 21 |
+| variable | `[verification, setVerification]` | 37 |
+| variable | `contextMatches` | 44 |
+| variable | `verified` | 48 |
+| variable | `draftMatches` | 49 |
+| variable | `[line, setLine]` | 50 |
+| variable | `[jump, setJump]` | 51 |
+| variable | `[notice, setNotice]` | 52 |
+| variable | `editorRef` | 53 |
+| variable | `decorations` | 54 |
+| variable | `heading` | 55 |
+| variable | `generation` | 56 |
+| variable | `request` | 59 |
+| function | `reveal(target: editor.IStandaloneCodeEditor, selectedLine: number)` | 87 |
+| variable | `target` | 156 |
 
 ## ui/api.ts
 
@@ -2688,6 +2777,26 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `health` | 41 |
 | variable | `screen` | 44 |
 
+## ui/source-navigation.ts
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `MAX_SOURCE_BYTES` | 17 |
+| type | `SourceVerification` | 19 |
+| function | `sourceFingerprint(content: string)` | 24 |
+| variable | `character` | 28 |
+| variable | `point` | 29 |
+| variable | `bytes` | 33 |
+| variable | `digest` | 40 |
+| function | `sourceLineCount(content: string)` | 47 |
+| variable | `lines` | 48 |
+| variable | `index` | 49 |
+| variable | `content` | 83 |
+| variable | `harnessName` | 87 |
+| variable | `file` | 94 |
+| variable | `digest` | 108 |
+| variable | `lines` | 121 |
+
 ## ui/types.ts
 
 | Kind | Declaration | Line |
@@ -2699,8 +2808,9 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | type | `Revision` | 43 |
 | type | `Run` | 50 |
 | type | `Finding` | 57 |
-| type | `Capability` | 66 |
-| type | `AIResult` | 72 |
+| type | `SourceLocation` | 70 |
+| type | `Capability` | 78 |
+| type | `AIResult` | 84 |
 
 ## vite.config.ts
 

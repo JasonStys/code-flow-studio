@@ -1,0 +1,14 @@
+{
+  "report_version": 1,
+  "date": "2026-11-09",
+  "repository": "code-flow-studio",
+  "scope": "Local practical source-navigation and application validation; hosted Actions not run by this worker",
+  "controller": { "passed": 148, "covered_lines": 1446, "measured_lines": 1712, "line_coverage": 0.8446, "required_line_coverage": 0.8 },
+  "web": { "engines": ["chromium", "firefox", "webkit"], "passed": 45, "actual_browser_journeys": 27, "repeated_pure_checks": 18 },
+  "private_accounts": { "passed": 9, "external_requests_during_inspection": 0 },
+  "final_fingerprint_subset": { "passed": 11 },
+  "native": { "platform": "Windows x64", "packaged_app": true, "bundled_service": true, "passed": 1, "installed_into_user_profile": false, "disposable_launcher_profile": true },
+  "quality": { "typescript": "passed", "vite": "passed", "ruff": "passed", "code_maps": 65, "pip_check": "passed", "pip_audit_known_vulnerabilities": 0, "npm_audit_vulnerabilities": 0 },
+  "dependencies": { "electron": "44.10.2", "minimatch_override": "minimatch@>=7 <11.0.1 -> 11.0.1", "isolated_test_pip": "26.2" },
+  "limitations": ["Vite still reports the pre-existing large Monaco bundle warning", "No local isolated-worker execution or Docker repair", "No new model training or live provider call", "Coverage UI fixtures are not real collector evidence", "Hosted worker, training and cross-platform package checks remain coordinated CI gates", "Unsigned unpacked native validation does not establish clean-machine installation or app-store acceptance"]
+}

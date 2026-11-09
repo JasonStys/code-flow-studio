@@ -1,20 +1,24 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: external@L14; url@L16; downloaded@L33
+ * variables: external@L15; origin@L16; url@L20; downloaded@L37; external@L109; origin@L110
  * </code-map> */
 
 /** Jason Stys: private website journeys, owner isolation, downloads and no unsolicited external requests. */
 import { test, expect } from "@playwright/test";
 import { createSession, editorJourney } from "./account-session";
+import { inspectHelper } from "./source-journey";
 
 test("real account editor locks, reopens history and downloads encrypted bytes", async ({
   page,
 }) => {
   const external: string[] = [];
+  const origin = new URL(
+    test.info().project.use.baseURL ?? "http://127.0.0.1:8077",
+  ).origin;
   page.on("request", (request) => {
     const url = request.url();
-    if (/^https?:/.test(url) && !url.startsWith("http://127.0.0.1:8077/"))
+    if (/^https?:/.test(url) && new URL(url).origin !== origin)
       external.push(url);
   });
   await page.goto("/");
@@ -97,4 +101,36 @@ test("separate account starts empty and mobile help remains usable", async ({
   await expect(
     page.getByRole("heading", { name: "Sign in to your local studio" }),
   ).toBeVisible();
+});
+
+test("private exact-source inspection sends no external requests and disappears on lock", async ({
+  page,
+}) => {
+  const external: string[] = [];
+  const origin = new URL(
+    test.info().project.use.baseURL ?? "http://127.0.0.1:8077",
+  ).origin;
+  page.on("request", (request) => {
+    if (
+      /^https?:/.test(request.url()) &&
+      new URL(request.url()).origin !== origin
+    )
+      external.push(request.url());
+  });
+  await page.goto("/");
+  await createSession(
+    page,
+    "navigate_" + test.info().project.name.replace(/-/g, "_"),
+  );
+  await inspectHelper(page);
+  await page
+    .getByRole("button", { name: "Lock workspace", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Unlock your private code workspace" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Evidence source inspector" }),
+  ).toHaveCount(0);
+  expect(external).toEqual([]);
 });

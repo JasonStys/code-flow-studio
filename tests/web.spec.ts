@@ -1,13 +1,15 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: errors@L23; download@L74; locations@L98; unreachable@L100; locations@L119; locations@L140
+ * variables: errors@L25; download@L76; locations@L112; unreachable@L116; locations@L170; locations@L233; inspector@L251; sourceInput@L252; editor@L277; invalid@L307; digest@L308; locations@L338; inspector@L343; legacy@L383; project@L385; locations@L408; inspector@L415
  * </code-map> */
 
 /** Real browser flows; controller success does not substitute for isolated worker evidence.
  * Symbols/variables: docs/code-index.md.
  */
 import { test, expect } from "@playwright/test";
+import { createHash } from "node:crypto";
+import { inspectHelper, inertHelper } from "./source-journey";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/#token=browser-test-token-not-production-000000000000");
@@ -51,9 +53,9 @@ test("editor, catalog, priorities and source-consent boundaries", async ({
   await page
     .getByRole("button", { name: "Generate code", exact: true })
     .click();
-  await expect(page.getByRole("alert", {name: "Workspace error"})).toContainText(
-    "No AI provider configured",
-  );
+  await expect(
+    page.getByRole("alert", { name: "Workspace error" }),
+  ).toContainText("No AI provider configured");
   expect(errors).toEqual([]);
 });
 
@@ -89,33 +91,82 @@ test("mobile layout fits without page overflow", async ({ page }) => {
   ).toBe(true);
 });
 
-test("real static review lists auxiliary-file locations and unused code", async ({ page }) => {
+test("real static review lists auxiliary-file locations and unused code", async ({
+  page,
+}) => {
   /** Real API, inert upload; this is not a mocked worker/coverage acceptance test. */
-  await page.locator('input[type="file"]').setInputFiles([
-    { name: "helper.py", mimeType: "text/plain", buffer: Buffer.from("import math\ndef unused():\n    leftover = 1\n    return 7\n    print('never')\n") },
-  ]);
-  await page.getByRole("button", { name: "Static review · no execution", exact: true }).click();
+  await page
+    .locator('input[type="file"]')
+    .setInputFiles([
+      {
+        name: "helper.py",
+        mimeType: "text/plain",
+        buffer: Buffer.from(
+          "import math\ndef unused():\n    leftover = 1\n    return 7\n    print('never')\n",
+        ),
+      },
+    ]);
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
   const locations = page.getByRole("region", { name: "Located diagnostics" });
-  await expect(locations.getByRole("row").filter({ hasText: "PY-UNUSED-IMPORT" })).toContainText("helper.py");
-  const unreachable = locations.getByRole("row").filter({ hasText: "PY-UNREACHABLE" });
+  await expect(
+    locations.getByRole("row").filter({ hasText: "PY-UNUSED-IMPORT" }),
+  ).toContainText("helper.py");
+  const unreachable = locations
+    .getByRole("row")
+    .filter({ hasText: "PY-UNREACHABLE" });
   await expect(unreachable.getByRole("cell").nth(0)).toHaveText("helper.py");
   await expect(unreachable.getByRole("cell").nth(1)).toHaveText("5");
   await expect(locations).toContainText("Not measured");
 });
 
-test("coverage and unknown failures render accurately from report contract", async ({ page }) => {
+test("coverage and unknown failures render accurately from report contract", async ({
+  page,
+}) => {
   /** UI-only fixture; genuine coverage/runtime acceptance is separately verified by isolated workers. */
-  await page.route("**/api/review", async (route) => route.fulfill({
-    json: {
-      static: { findings: [{ file: "helper.py", line: 2, message: "<script>inert</script>", code: "FIXTURE" }] },
-      unlocated_failures: [{ stage: "case:wrong-answer", reason: "No root-cause line inferred." }],
-      coverage: { status: "measured", files: {
-        "helper.py": { status: "measured", missing_lines: [3, 7], missing_branches: [[2, 3], [7, -1]] },
-        "unknown.py": { status: "not-measured", reason: "No coverage record" },
-      } },
-    },
-  }));
-  await page.getByRole("button", { name: "Static review · no execution", exact: true }).click();
+  await page.route("**/api/review", async (route) =>
+    route.fulfill({
+      json: {
+        static: {
+          findings: [
+            {
+              file: "helper.py",
+              line: 2,
+              message: "<script>inert</script>",
+              code: "FIXTURE",
+            },
+          ],
+        },
+        unlocated_failures: [
+          {
+            stage: "case:wrong-answer",
+            reason: "No root-cause line inferred.",
+          },
+        ],
+        coverage: {
+          status: "measured",
+          files: {
+            "helper.py": {
+              status: "measured",
+              missing_lines: [3, 7],
+              missing_branches: [
+                [2, 3],
+                [7, -1],
+              ],
+            },
+            "unknown.py": {
+              status: "not-measured",
+              reason: "No coverage record",
+            },
+          },
+        },
+      },
+    }),
+  );
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
   const locations = page.getByRole("region", { name: "Located diagnostics" });
   await expect(locations).toContainText("Uncovered lines: 3, 7");
   await expect(locations).toContainText("2 → 3, 7 → exit(-1)");
@@ -124,24 +175,275 @@ test("coverage and unknown failures render accurately from report contract", asy
   await expect(locations).toContainText("<script>inert</script>");
   await expect(locations.locator("script")).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
 });
 
-test("native coverage semantics and blocked unused tools stay visible", async ({ page }) => {
+test("native coverage semantics and blocked unused tools stay visible", async ({
+  page,
+}) => {
   /** UI fixture only; native collector accuracy is asserted independently by real worker scenarios. */
-  await page.route("**/api/review", async route => route.fulfill({ json: {
-    diagnostics: [{ file: "Main.java", line: 6, column: 9, code: "UnusedLocalVariable", stage: "unused-code", message: "Review leftover" }],
-    unused: { status: "blocked", tool: "Fixture unavailable tool", reason: "Timeout is not a pass" },
-    coverage: { status: "partial", tool: "JaCoCo", metric: "jacoco-instruction-backed-line", files: {
-      "Main.java": { status: "measured", metric: "jacoco-instruction-backed-line", missing_lines: [3], branch_points: [{ line: 7, missing: 1, covered: 1, kind: "jacoco-branch-count" }] },
-    } },
-  } }));
-  await page.getByRole("button", { name: "Static review · no execution", exact: true }).click();
+  await page.route("**/api/review", async (route) =>
+    route.fulfill({
+      json: {
+        diagnostics: [
+          {
+            file: "Main.java",
+            line: 6,
+            column: 9,
+            code: "UnusedLocalVariable",
+            stage: "unused-code",
+            message: "Review leftover",
+          },
+        ],
+        unused: {
+          status: "blocked",
+          tool: "Fixture unavailable tool",
+          reason: "Timeout is not a pass",
+        },
+        coverage: {
+          status: "partial",
+          tool: "JaCoCo",
+          metric: "jacoco-instruction-backed-line",
+          files: {
+            "Main.java": {
+              status: "measured",
+              metric: "jacoco-instruction-backed-line",
+              missing_lines: [3],
+              branch_points: [
+                {
+                  line: 7,
+                  missing: 1,
+                  covered: 1,
+                  kind: "jacoco-branch-count",
+                },
+              ],
+            },
+          },
+        },
+      },
+    }),
+  );
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
   const locations = page.getByRole("region", { name: "Located diagnostics" });
-  await expect(locations.getByRole("row").filter({hasText: "UnusedLocalVariable"}).getByRole("cell").nth(1)).toHaveText("6");
+  await expect(
+    locations
+      .getByRole("row")
+      .filter({ hasText: "UnusedLocalVariable" })
+      .getByRole("cell")
+      .nth(1),
+  ).toHaveText("6");
   await expect(locations).toContainText("Timeout is not a pass");
   await expect(locations).toContainText("partial");
   await expect(locations).toContainText("Uncovered lines: 3");
   await expect(locations).toContainText("jacoco-branch-count");
   await expect(locations).toContainText("not destination lines");
+});
+
+test("developer inspects exact source, edits only a matching draft and retains the historical snapshot", async ({
+  page,
+}) => {
+  const inspector = await inspectHelper(page);
+  const sourceInput = inspector.getByRole("textbox", {
+    name: "Verified evidence source",
+    exact: true,
+  });
+  await sourceInput.focus();
+  await sourceInput.press("ControlOrMeta+Home");
+  await page.keyboard.type("SHOULD_NOT_APPEAR");
+  await expect(inspector.locator(".monaco-editor")).not.toContainText(
+    "SHOULD_NOT_APPEAR",
+  );
+  await inspector
+    .getByLabel("Browse snapshot line", { exact: true })
+    .fill("999");
+  await inspector
+    .getByRole("button", { name: "Go to snapshot line", exact: true })
+    .click();
+  await expect(inspector.getByRole("alert")).toContainText("physical line");
+  await inspector.getByLabel("Browse snapshot line", { exact: true }).fill("6");
+  await inspector
+    .getByRole("button", { name: "Go to snapshot line", exact: true })
+    .click();
+  await expect(inspector.getByRole("alert")).toHaveCount(0);
+  await inspector
+    .getByRole("button", { name: "Edit matching draft at line 6", exact: true })
+    .click();
+  const editor = page.getByRole("textbox", {
+    name: "Project source editor",
+    exact: true,
+  });
+  await expect(editor).toBeFocused();
+  await expect(
+    page.getByRole("button", { name: "helper.py", exact: true }),
+  ).toHaveClass("selected");
+  await editor.press("ControlOrMeta+Home");
+  await page.keyboard.type("# newer draft\n");
+  await expect(page.locator(".monaco-editor")).toContainText("newer draft");
+  await page.getByRole("button", { name: "Run evidence", exact: true }).click();
+  await expect(inspector).toContainText("Current draft differs");
+  await expect(
+    inspector.getByRole("button", {
+      name: "Edit matching draft at line 6",
+      exact: true,
+    }),
+  ).toBeDisabled();
+  await expect(inspector.locator(".monaco-editor")).not.toContainText(
+    "newer draft",
+  );
+  await page.getByRole("button", { name: "Workspace", exact: true }).click();
+  await expect(page.locator(".monaco-editor")).toContainText("newer draft");
+});
+
+test("coverage links verify bytes while mismatched and out-of-range references fail closed", async ({
+  page,
+}) => {
+  /** UI-contract fixture only; real collector/toolchain accuracy remains in isolated-worker acceptance. */
+  let invalid: "none" | "hash" | "line" = "none";
+  const digest = createHash("sha256").update(inertHelper).digest("hex");
+  await page
+    .locator('input[type="file"]')
+    .setInputFiles([
+      {
+        name: "helper.py",
+        mimeType: "text/plain",
+        buffer: Buffer.from(inertHelper),
+      },
+    ]);
+  await page.route("**/api/review", async (route) =>
+    route.fulfill({
+      json: {
+        coverage: {
+          status: "measured",
+          tool: "UI fixture",
+          files: {
+            "helper.py": {
+              status: "measured",
+              source_sha256: invalid === "hash" ? "0".repeat(64) : digest,
+              missing_lines: [invalid === "line" ? 999 : 4],
+            },
+          },
+        },
+      },
+    }),
+  );
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
+  const locations = page.getByRole("region", { name: "Located diagnostics" });
+  await locations
+    .locator(".coverage-file")
+    .getByRole("button", { name: "Inspect source helper.py:4", exact: true })
+    .click();
+  const inspector = page.getByRole("region", {
+    name: "Evidence source inspector",
+  });
+  await expect(inspector).toContainText("helper.py:4");
+  await expect(inspector).toContainText("Current draft matches");
+  await inspector
+    .getByRole("button", { name: "Close source inspector", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Workspace", exact: true }).click();
+  invalid = "hash";
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
+  await locations
+    .locator(".coverage-file")
+    .getByRole("button", { name: "Inspect source helper.py:4", exact: true })
+    .click();
+  await expect(inspector.getByRole("alert")).toContainText(
+    "fingerprint mismatch",
+  );
+  await expect(inspector.locator(".monaco-editor")).toHaveCount(0);
+  await inspector
+    .getByRole("button", { name: "Close source inspector", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Workspace", exact: true }).click();
+  invalid = "line";
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
+  await locations
+    .locator(".coverage-file")
+    .getByRole("button", { name: "Inspect source helper.py:999", exact: true })
+    .click();
+  await expect(inspector.getByRole("alert")).toContainText("outside");
+});
+
+test("generated artifacts remain distinct and legacy locations never gain guessed links", async ({
+  page,
+}) => {
+  /** Generated text comes only from the reviewed manifest; no arbitrary artifact path is fetched. */
+  let legacy = false;
+  await page.route("**/api/review", async (route) => {
+    const project = route.request().postDataJSON();
+    await route.fulfill({
+      json: {
+        diagnostics: legacy
+          ? [{ file: "main.py", line: 1, message: "Legacy reference" }]
+          : [
+              {
+                file: "test_generated.py",
+                line: 2,
+                source_sha256: createHash("sha256")
+                  .update(project.tests)
+                  .digest("hex"),
+                artifact: "generated",
+                stage: "generated-tests",
+                message: "Generated test fixture",
+              },
+            ],
+      },
+    });
+  });
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
+  const locations = page.getByRole("region", { name: "Located diagnostics" });
+  await locations
+    .getByRole("button", {
+      name: "Inspect generated test_generated.py:2",
+      exact: true,
+    })
+    .click();
+  const inspector = page.getByRole("region", {
+    name: "Evidence source inspector",
+  });
+  await expect(inspector).toContainText("Generated harness/test artifact");
+  await expect(
+    inspector.getByRole("button", {
+      name: "Edit matching draft at line 2",
+      exact: true,
+    }),
+  ).toBeDisabled();
+  await inspector
+    .getByRole("button", { name: "Close source inspector", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Workspace", exact: true }).click();
+  legacy = true;
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
+  await expect(
+    locations
+      .getByRole("row")
+      .filter({ hasText: "Legacy reference" })
+      .getByRole("cell")
+      .nth(1),
+  ).toHaveText("1");
+  await expect(
+    locations.getByRole("button", { name: /Inspect source/ }),
+  ).toHaveCount(0);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
 });

@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: SourceFile@L8; Case@L13; Priorities@L19; Project@L26; Revision@L43; Run@L50; Finding@L57; Capability@L66; AIResult@L72
+ * types: SourceFile@L8; Case@L13; Priorities@L19; Project@L26; Revision@L43; Run@L50; Finding@L57; SourceLocation@L70; Capability@L78; AIResult@L84
  * </code-map> */
 
 /** Shared renderer contracts. Server validation is authoritative. Symbols: docs/code-index.md. */
@@ -62,6 +62,18 @@ export interface Finding {
   code?: string;
   stage?: string;
   source_sha256?: string;
+  artifact?: "source" | "generated";
+  column_unit?: string;
+}
+
+/** A content-bound location; column remains tool-reported and navigation highlights the whole line. */
+export interface SourceLocation {
+  file: string;
+  line: number;
+  source_sha256: string;
+  artifact: "source" | "generated";
+  column?: number;
+  column_unit?: string;
 }
 export interface Capability {
   id: number;

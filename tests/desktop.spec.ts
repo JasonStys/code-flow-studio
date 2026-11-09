@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: app@L18; resources@L30; file@L31; page@L37
+ * variables: app@L19; resources@L34; file@L35; page@L59
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -12,6 +12,7 @@ import { mkdtempSync, existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createSession, editorJourney } from "./account-session";
+import { inspectHelper } from "./source-journey";
 
 test("bundled desktop authenticates, seals history and provides a sandboxed editor", async () => {
   /** Native renderer and bundled service both start without a separately installed Python runtime. */
@@ -25,18 +26,41 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     },
   });
   try {
+    expect(await app.evaluate(({ app }) => app.getPath("userData"))).toContain(
+      "code-flow-launcher-test-",
+    );
     if (process.env.STUDIO_INSTALLED_APP) {
       // Inspect the actual packaged resources, not the repository or mocked build configuration.
       const resources = await app.evaluate(() => process.resourcesPath);
-      for (const file of ["Dockerfile", "worker.py", "language_checks.py", "node_checks.cjs", "sql_runtime.py", "php_coverage.php", "bash_coverage.sh", "java-unused.xml", "tools/package.json", "tools/package-lock.json"]) {
-        expect(existsSync(join(resources, "runner", file)), `Bundled worker resource: ${file}`).toBe(true);
+      for (const file of [
+        "Dockerfile",
+        "worker.py",
+        "language_checks.py",
+        "node_checks.cjs",
+        "sql_runtime.py",
+        "php_coverage.php",
+        "bash_coverage.sh",
+        "java-unused.xml",
+        "tools/package.json",
+        "tools/package-lock.json",
+      ]) {
+        expect(
+          existsSync(join(resources, "runner", file)),
+          `Bundled worker resource: ${file}`,
+        ).toBe(true);
       }
-      expect(readFileSync(join(resources, "runner", "bash_coverage.sh"), "utf8")).not.toContain("\r");
-      expect(existsSync(join(resources, "runner", "tools", "node_modules"))).toBe(false);
+      expect(
+        readFileSync(join(resources, "runner", "bash_coverage.sh"), "utf8"),
+      ).not.toContain("\r");
+      expect(
+        existsSync(join(resources, "runner", "tools", "node_modules")),
+      ).toBe(false);
     }
     const page = await app.firstWindow();
     await createSession(page, "native_fictional");
     await editorJourney(page);
+    await inspectHelper(page);
+    await page.getByRole("button", { name: "Workspace", exact: true }).click();
     await expect(
       page.getByRole("heading", { name: "Make your next iteration count." }),
     ).toBeVisible();
