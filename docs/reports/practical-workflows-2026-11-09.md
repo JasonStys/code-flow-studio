@@ -52,6 +52,24 @@ selection now commits in a layout effect, and the assertion waits for the actual
 condition rather than sampling a transient DOM state. No fixed sleeps or retry setting was added.
 Type/build, Ruff and all 65 source maps passed again.
 
+## Worker runtime and separate dependency graph correction
+
+The next hosted controller/browser job passed. Its isolated-worker job then exposed a benign
+libFuzzer startup SIGSEGV with empty logs under the image's default Clang14 sanitizer. The
+[worker compatibility analysis](../worker-toolchain.md) records the upstream ASLR allocator
+issue, explicit Clang19/runtime correction, unchanged isolation and a new same-container
+old/new startup comparison plus deliberate ASan heap-overflow control. Those actual Linux
+probes require the coordinated hosted run; no local sanitizer success is claimed.
+
+The separate `runner/tools` graph had eight moderate minimatch-related advisories despite the
+desktop graph auditing clean. Its own narrow tested override/lockfile now audits **0**. Four
+actual JS/TS analyzer fixtures passed with exact line oracles, ignored target inline-disable
+comments and inert target text. The controller and image build now gate that separate graph
+at moderate severity. **151 local Python tests passed**, with unchanged **84.46%** measured
+controller/data coverage; Ruff and **68** source maps passed. Protocol regressions verify
+the probe retains every fixed container restriction and exact-owned cleanup, and never
+accepts missing/failed evidence. Docker Desktop was left unchanged.
+
 ## Reproduction
 
 Use the declared isolated development dependencies, then run:

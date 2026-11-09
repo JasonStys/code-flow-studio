@@ -77,6 +77,7 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `examples/training.json`, `examples/training.jsonl` | Tiny rights-owned training smoke parameters and data; no quality claims. |
 | `scripts/frozen_entry.py` | Frozen-service entry point for installers. |
 | `scripts/worker_checks.py` | Actual isolated compiler/fuzz/security-boundary integration scenarios. |
+| `runner/sanitizer_probe.py`, `scripts/worker_analyzer_checks.cjs` | Trusted same-container sanitizer-startup/fault controls and independent exact-line JS/TS checks against the separately audited worker dependency graph. |
 | `scripts/private_worker_checks.py` | Real twelve-adapter execution through authenticated account API and encrypted-history reopen. |
 | `scripts/license_bundle.py`, `scripts/release_archive.py` | Generated third-party notices, portable app packages and SHA-256 checksums; never package user accounts. |
 | `scripts/push_analysis.py` | Push generation/test/candidate workflow without automatic source promotion. |
@@ -85,6 +86,10 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `pyproject.toml`, `package.json`, lockfile, TypeScript/Vite/Playwright configs | Dependency and reproducible build/test definitions. |
 
 Indexed Python/TypeScript/JavaScript headers point to the checked symbol/variable line map; the small Bash/PHP hooks describe their local variables inline. [Architecture](docs/architecture.md) and the [polyglot decision](docs/adr-polyglot-evidence.md) explain trade-offs; [testing](docs/testing.md) separates test claims from evidence.
+
+[Worker compatibility](docs/worker-toolchain.md) explains the explicit libFuzzer runtime, bounded
+startup comparison, deliberate ASan fault control and separate worker npm audit. Compiler/runner
+problems remain visible as failures until the actual isolated acceptance checks pass.
 
 Historical 0.1 bearer-token CLI mode remains explicitly opt-in for existing automation; it is not account mode. No automatic import of legacy plaintext projects or global AI keys occurs.
 

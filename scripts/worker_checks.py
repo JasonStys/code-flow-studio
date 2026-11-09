@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Evidence@L26
-# functions: __setitem__(self, key, value)@L29; main()@L39; assert_native_locations(language, result, project, unused_line, missing_line)@L111; original_scenarios(reports)@L125
-# variables: path@L32; temporary@L34; reports@L41; baseline_errors@L42; language@L43; result@L44; key@L55; acceptance@L58; native_errors@L59; language@L60; missing_line@L61; project@L61; unused_line@L61; result@L62; key@L69; language@L90; project@L91; result@L92; suffix@L94; item@L100; item@L117; measured_file@L120; python@L127; bad@L141; invalid@L145; item@L150; attack@L152; code@L163; name@L163; target@L164; cpp@L168; web_demo@L207; located@L213; measured@L230; item@L237; crashing@L239; item@L256; mapped@L258; item@L275; item@L285
-# parameters: key@L29; self@L29; value@L29; language@L111; missing_line@L111; project@L111; result@L111; unused_line@L111; reports@L125
+# classes: Evidence@L29
+# functions: __setitem__(self, key, value)@L32; main()@L42; sanitizer_startup_checks()@L116; assert_native_locations(language, result, project, unused_line, missing_line)@L148; original_scenarios(reports)@L162
+# variables: path@L35; temporary@L37; reports@L44; baseline_errors@L47; language@L48; result@L49; key@L60; acceptance@L63; native_errors@L64; language@L65; missing_line@L66; project@L66; unused_line@L66; result@L67; key@L74; language@L95; project@L96; result@L97; suffix@L99; item@L105; name@L118; temporary@L119; directory@L120; argv@L122; code@L126; output@L126; records@L127; line@L129; report@L138; item@L154; measured_file@L157; python@L164; bad@L178; invalid@L182; item@L187; attack@L189; code@L200; name@L200; target@L201; cpp@L205; web_demo@L244; located@L250; measured@L267; item@L274; crashing@L276; item@L293; mapped@L295; item@L312; item@L322
+# parameters: key@L32; self@L32; value@L32; language@L148; missing_line@L148; project@L148; result@L148; unused_line@L148; reports@L162
 # </code-map>
 
 """Real compiler, generated-test, fuzz and adversarial-container integration checks.
@@ -14,12 +14,15 @@ image. Failure evidence is exported even when a target intentionally fails.
 """
 
 import asyncio
+import contextlib
 import json
+import tempfile
 from pathlib import Path
+from uuid import uuid4
 
 from examples.language_locations import SAMPLES, location_fixture, module_fixture
 from examples.projects import fixture
-from studio.execution import run
+from studio.execution import DOCKER, command, container_arguments, run
 from studio.models import LANGUAGES, Project
 
 
@@ -39,6 +42,8 @@ class Evidence(dict):
 async def main():
     """Exercise each adapter and verify failures, output limits, isolation and instrumentation."""
     reports = Evidence()
+    reports["sanitizer-startup"] = await sanitizer_startup_checks()
+    assert reports["sanitizer-startup"]["status"] == "passed", reports["sanitizer-startup"]
     baseline_errors = []
     for language in LANGUAGES:
         result = await run(fixture(language))
@@ -106,6 +111,38 @@ async def main():
         )
 
     await original_scenarios(reports)
+
+
+async def sanitizer_startup_checks():
+    """Run trusted old/new startup probes with the exact existing worker restrictions and owned cleanup."""
+    name = "code-flow-sanitizer-" + uuid4().hex
+    with tempfile.TemporaryDirectory(prefix="code-flow-sanitizer-") as temporary:
+        directory = Path(temporary)
+        (directory / "job.json").write_text("{}", encoding="utf-8")
+        argv = container_arguments(directory, name)
+        argv.insert(-1, "--entrypoint=python")
+        argv.append("/opt/sanitizer_probe.py")
+        try:
+            code, output = await command(argv, timeout=90, output_limit=196608)
+            records = [
+                line.removeprefix("SANITIZER_PROBE=")
+                for line in output.splitlines()
+                if line.startswith("SANITIZER_PROBE=")
+            ]
+            if len(records) != 1:
+                return {
+                    "status": "failed",
+                    "reason": "Probe did not return one evidence record",
+                    "log": output[-8192:],
+                }
+            report = json.loads(records[0])
+            print("SANITIZER_STARTUP=" + json.dumps(report), flush=True)
+            if code or report.get("status") != "passed":
+                report["status"] = "failed"
+            return report
+        finally:
+            with contextlib.suppress(OSError, TimeoutError, ValueError):
+                await command([DOCKER, "rm", "--force", name], timeout=10, output_limit=4096)
 
 
 def assert_native_locations(language, result, project, unused_line, missing_line):

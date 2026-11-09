@@ -31,6 +31,11 @@ jobs:
       - run: python -m pytest --cov=studio --cov=training.dataset --cov-fail-under=80 --cov-report=xml:artifacts/coverage.xml --junitxml=artifacts/tests.xml
       - run: npm ci
       - run: npm audit --audit-level=high
+      - name: Audit and exercise the separately locked worker analyzers
+        run: |
+          npm ci --prefix runner/tools --ignore-scripts
+          npm audit --prefix runner/tools --omit=dev --audit-level=moderate
+          node scripts/worker_analyzer_checks.cjs
       - run: npm run build
       - run: npx playwright install --with-deps
       - run: npm run test:browser

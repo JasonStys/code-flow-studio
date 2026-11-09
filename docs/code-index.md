@@ -425,6 +425,46 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `[id, statement]` | 81 |
 | variable | `line` | 82 |
 
+## runner/sanitizer_probe.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `BENIGN` | 24 |
+| variable | `FAULT` | 31 |
+| variable | `STARTUPS` | 38 |
+| function | `process(argv, directory)` | 41 |
+| parameter | `argv` | 41 |
+| parameter | `directory` | 41 |
+| variable | `result` | 43 |
+| variable | `raw` | 50 |
+| variable | `retained` | 51 |
+| function | `compile_probe(compiler, source, directory, name)` | 59 |
+| parameter | `compiler` | 59 |
+| parameter | `directory` | 59 |
+| parameter | `name` | 59 |
+| parameter | `source` | 59 |
+| variable | `file` | 61 |
+| variable | `binary` | 63 |
+| variable | `built` | 64 |
+| function | `main()` | 82 |
+| variable | `report` | 84 |
+| variable | `file` | 85 |
+| variable | `name` | 85 |
+| variable | `path` | 90 |
+| variable | `temporary` | 92 |
+| variable | `directory` | 93 |
+| variable | `corpus` | 94 |
+| variable | `compiler` | 97 |
+| variable | `key` | 97 |
+| variable | `version` | 98 |
+| variable | `binary` | 99 |
+| variable | `attempts` | 100 |
+| variable | `_` | 102 |
+| variable | `item` | 107 |
+| variable | `binary` | 109 |
+| variable | `finding` | 110 |
+| variable | `detected` | 112 |
+
 ## runner/sql_runtime.py
 
 | Kind | Declaration | Line |
@@ -562,25 +602,25 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `build` | 347 |
 | variable | `argv` | 350 |
 | variable | `result` | 353 |
-| function | `main()` | 364 |
-| variable | `project` | 366 |
-| variable | `file` | 369 |
-| variable | `build` | 386 |
-| variable | `command` | 386 |
-| variable | `compilation` | 387 |
-| variable | `report` | 388 |
-| variable | `times` | 413 |
-| variable | `case` | 414 |
-| variable | `result` | 415 |
-| variable | `passed` | 416 |
-| variable | `_` | 424 |
-| variable | `benchmark` | 425 |
-| variable | `findings` | 461 |
-| variable | `corpus` | 462 |
-| variable | `method` | 463 |
-| variable | `value` | 463 |
-| variable | `result` | 464 |
-| variable | `method` | 490 |
+| function | `main()` | 368 |
+| variable | `project` | 370 |
+| variable | `file` | 373 |
+| variable | `build` | 390 |
+| variable | `command` | 390 |
+| variable | `compilation` | 391 |
+| variable | `report` | 392 |
+| variable | `times` | 417 |
+| variable | `case` | 418 |
+| variable | `result` | 419 |
+| variable | `passed` | 420 |
+| variable | `_` | 428 |
+| variable | `benchmark` | 429 |
+| variable | `findings` | 465 |
+| variable | `corpus` | 466 |
+| variable | `method` | 467 |
+| variable | `value` | 467 |
+| variable | `result` | 468 |
+| variable | `method` | 494 |
 
 ## scripts/code_index.py
 
@@ -742,64 +782,92 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `response` | 30 |
 | variable | `result` | 33 |
 
+## scripts/worker_analyzer_checks.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `assert` | 14 |
+| variable | `path` | 15 |
+| variable | `toolRequire` | 16 |
+| variable | `{ Linter }` | 19 |
+| variable | `parser` | 20 |
+| variable | `plugin` | 21 |
+| variable | `fixtures` | 22 |
+| function | `orphan()` | 27 |
+| type | `Orphan` | 34 |
+| variable | `fixture` | 51 |
+| variable | `rule` | 52 |
+| variable | `config` | 55 |
+| variable | `findings` | 74 |
+
 ## scripts/worker_checks.py
 
 | Kind | Declaration | Line |
 |---|---|---|
-| class | `Evidence` | 26 |
-| function | `__setitem__(self, key, value)` | 29 |
-| parameter | `key` | 29 |
-| parameter | `self` | 29 |
-| parameter | `value` | 29 |
-| variable | `path` | 32 |
-| variable | `temporary` | 34 |
-| function | `main()` | 39 |
-| variable | `reports` | 41 |
-| variable | `baseline_errors` | 42 |
-| variable | `language` | 43 |
-| variable | `result` | 44 |
-| variable | `key` | 55 |
-| variable | `acceptance` | 58 |
-| variable | `native_errors` | 59 |
-| variable | `language` | 60 |
-| variable | `missing_line` | 61 |
-| variable | `project` | 61 |
-| variable | `unused_line` | 61 |
-| variable | `result` | 62 |
-| variable | `key` | 69 |
-| variable | `language` | 90 |
-| variable | `project` | 91 |
-| variable | `result` | 92 |
-| variable | `suffix` | 94 |
-| variable | `item` | 100 |
-| function | `assert_native_locations(language, result, project, unused_line, missing_line)` | 111 |
-| parameter | `language` | 111 |
-| parameter | `missing_line` | 111 |
-| parameter | `project` | 111 |
-| parameter | `result` | 111 |
-| parameter | `unused_line` | 111 |
-| variable | `item` | 117 |
-| variable | `measured_file` | 120 |
-| function | `original_scenarios(reports)` | 125 |
-| parameter | `reports` | 125 |
-| variable | `python` | 127 |
-| variable | `bad` | 141 |
-| variable | `invalid` | 145 |
-| variable | `item` | 150 |
-| variable | `attack` | 152 |
-| variable | `code` | 163 |
-| variable | `name` | 163 |
-| variable | `target` | 164 |
-| variable | `cpp` | 168 |
-| variable | `web_demo` | 207 |
-| variable | `located` | 213 |
-| variable | `measured` | 230 |
-| variable | `item` | 237 |
-| variable | `crashing` | 239 |
-| variable | `item` | 256 |
-| variable | `mapped` | 258 |
-| variable | `item` | 275 |
-| variable | `item` | 285 |
+| class | `Evidence` | 29 |
+| function | `__setitem__(self, key, value)` | 32 |
+| parameter | `key` | 32 |
+| parameter | `self` | 32 |
+| parameter | `value` | 32 |
+| variable | `path` | 35 |
+| variable | `temporary` | 37 |
+| function | `main()` | 42 |
+| variable | `reports` | 44 |
+| variable | `baseline_errors` | 47 |
+| variable | `language` | 48 |
+| variable | `result` | 49 |
+| variable | `key` | 60 |
+| variable | `acceptance` | 63 |
+| variable | `native_errors` | 64 |
+| variable | `language` | 65 |
+| variable | `missing_line` | 66 |
+| variable | `project` | 66 |
+| variable | `unused_line` | 66 |
+| variable | `result` | 67 |
+| variable | `key` | 74 |
+| variable | `language` | 95 |
+| variable | `project` | 96 |
+| variable | `result` | 97 |
+| variable | `suffix` | 99 |
+| variable | `item` | 105 |
+| function | `sanitizer_startup_checks()` | 116 |
+| variable | `name` | 118 |
+| variable | `temporary` | 119 |
+| variable | `directory` | 120 |
+| variable | `argv` | 122 |
+| variable | `code` | 126 |
+| variable | `output` | 126 |
+| variable | `records` | 127 |
+| variable | `line` | 129 |
+| variable | `report` | 138 |
+| function | `assert_native_locations(language, result, project, unused_line, missing_line)` | 148 |
+| parameter | `language` | 148 |
+| parameter | `missing_line` | 148 |
+| parameter | `project` | 148 |
+| parameter | `result` | 148 |
+| parameter | `unused_line` | 148 |
+| variable | `item` | 154 |
+| variable | `measured_file` | 157 |
+| function | `original_scenarios(reports)` | 162 |
+| parameter | `reports` | 162 |
+| variable | `python` | 164 |
+| variable | `bad` | 178 |
+| variable | `invalid` | 182 |
+| variable | `item` | 187 |
+| variable | `attack` | 189 |
+| variable | `code` | 200 |
+| variable | `name` | 200 |
+| variable | `target` | 201 |
+| variable | `cpp` | 205 |
+| variable | `web_demo` | 244 |
+| variable | `located` | 250 |
+| variable | `measured` | 267 |
+| variable | `item` | 274 |
+| variable | `crashing` | 276 |
+| variable | `item` | 293 |
+| variable | `mapped` | 295 |
+| variable | `item` | 312 |
+| variable | `item` | 322 |
 
 ## studio/__init__.py
 
@@ -2448,6 +2516,29 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `tmp_path` | 27 |
 | variable | `path` | 29 |
 | variable | `expected` | 32 |
+
+## tests/test_sanitizer_probe.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_probe_retains_every_existing_container_boundary_and_exact_owned_cleanup(monkeypatch)` | 23 |
+| parameter | `monkeypatch` | 23 |
+| variable | `observed` | 25 |
+| function | `command(argv)` | 27 |
+| parameter | `argv` | 27 |
+| parameter | `kwargs` | 27 |
+| variable | `required` | 31 |
+| variable | `item` | 45 |
+| variable | `item` | 46 |
+| variable | `result` | 51 |
+| variable | `name` | 53 |
+| function | `test_missing_or_failed_probe_is_not_accepted(monkeypatch, code, output)` | 58 |
+| parameter | `code` | 58 |
+| parameter | `monkeypatch` | 58 |
+| parameter | `output` | 58 |
+| function | `command(argv)` | 61 |
+| parameter | `argv` | 61 |
+| parameter | `kwargs` | 61 |
 
 ## tests/web.spec.ts
 
