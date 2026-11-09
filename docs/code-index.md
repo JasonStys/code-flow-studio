@@ -2595,30 +2595,36 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `errors` | 25 |
-| variable | `download` | 76 |
-| variable | `locations` | 110 |
-| variable | `unreachable` | 114 |
-| variable | `locations` | 168 |
+| type | `Page` | 11 |
+| variable | `browserEvidence` | 16 |
+| variable | `evidence` | 22 |
+| variable | `evidence` | 40 |
+| variable | `timer` | 43 |
+| variable | `state` | 44 |
+| variable | `errors` | 88 |
+| variable | `download` | 139 |
+| variable | `locations` | 173 |
+| variable | `unreachable` | 177 |
 | variable | `locations` | 231 |
-| variable | `inspector` | 249 |
-| variable | `sourceInput` | 250 |
-| variable | `editor` | 278 |
-| variable | `invalid` | 306 |
-| variable | `digest` | 307 |
-| variable | `locations` | 335 |
-| variable | `inspector` | 340 |
-| variable | `legacy` | 380 |
-| variable | `project` | 382 |
-| variable | `locations` | 405 |
-| variable | `inspector` | 412 |
-| variable | `source` | 452 |
-| variable | `generated` | 453 |
-| variable | `project` | 455 |
-| variable | `inspector` | 484 |
-| variable | `cycle` | 487 |
-| variable | `artifact` | 488 |
-| variable | `view` | 498 |
+| variable | `locations` | 294 |
+| variable | `inspector` | 312 |
+| variable | `sourceInput` | 313 |
+| variable | `editor` | 341 |
+| variable | `invalid` | 369 |
+| variable | `digest` | 370 |
+| variable | `locations` | 398 |
+| variable | `inspector` | 403 |
+| variable | `legacy` | 443 |
+| variable | `project` | 445 |
+| variable | `locations` | 468 |
+| variable | `inspector` | 475 |
+| variable | `source` | 515 |
+| variable | `generated` | 516 |
+| variable | `project` | 518 |
+| variable | `inspector` | 547 |
+| variable | `cycle` | 550 |
+| variable | `artifact` | 551 |
+| variable | `view` | 561 |
 
 ## training/__init__.py
 

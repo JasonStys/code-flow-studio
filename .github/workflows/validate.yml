@@ -40,6 +40,9 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps
       - run: npm run test:browser
+        env:
+          # Retain native renderer exit evidence in job logs even when optional artifacts are off.
+          DEBUG: pw:browser
       - run: npm run test:private
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always() && vars.CODE_FLOW_UPLOAD_CI_ARTIFACTS == 'true'

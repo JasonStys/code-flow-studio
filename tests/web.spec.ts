@@ -1,21 +1,84 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: errors@L25; download@L76; locations@L110; unreachable@L114; locations@L168; locations@L231; inspector@L249; sourceInput@L250; editor@L278; invalid@L306; digest@L307; locations@L335; inspector@L340; legacy@L380; project@L382; locations@L405; inspector@L412; source@L452; generated@L453; project@L455; inspector@L484; cycle@L487; artifact@L488; view@L498
+ * types: Page@L11
+ * variables: browserEvidence@L16; evidence@L22; evidence@L40; timer@L43; state@L44; errors@L88; download@L139; locations@L173; unreachable@L177; locations@L231; locations@L294; inspector@L312; sourceInput@L313; editor@L341; invalid@L369; digest@L370; locations@L398; inspector@L403; legacy@L443; project@L445; locations@L468; inspector@L475; source@L515; generated@L516; project@L518; inspector@L547; cycle@L550; artifact@L551; view@L561
  * </code-map> */
 
 /** Real browser flows; controller success does not substitute for isolated worker evidence.
  * Symbols/variables: docs/code-index.md.
  */
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import { createHash } from "node:crypto";
 import { inspectHelper, inertHelper } from "./source-journey";
 
+/** Keep bounded synthetic-journey failures readable even when optional CI artifact uploads are off. */
+const browserEvidence = new WeakMap<
+  Page,
+  { errors: string[]; events: string[] }
+>();
+
 test.beforeEach(async ({ page }) => {
+  const evidence = { errors: [] as string[], events: [] as string[] };
+  browserEvidence.set(page, evidence);
+  page.on("pageerror", (error) => {
+    if (evidence.errors.length < 8)
+      evidence.errors.push(error.message.slice(0, 512));
+  });
+  page.on("crash", () => evidence.events.push("renderer crashed"));
+  page.on("framenavigated", (frame) => {
+    if (frame === page.mainFrame() && evidence.events.length < 12)
+      evidence.events.push(`main frame: ${new URL(frame.url()).pathname}`);
+  });
   await page.goto("/#token=browser-test-token-not-production-000000000000");
   await expect(
     page.getByRole("heading", { name: "Make your next iteration count." }),
   ).toBeVisible();
+});
+
+test.afterEach(async ({ page }, testInfo) => {
+  const evidence = browserEvidence.get(page);
+  if (testInfo.status !== testInfo.expectedStatus) {
+    // Log only bounded state from these synthetic fixtures, never account tokens or source contents.
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const state = await Promise.race([
+      page
+        .evaluate(() => ({
+          title: document.title,
+          heading: document
+            .querySelector("main h2")
+            ?.textContent?.slice(0, 160),
+          locatedRegions: document.querySelectorAll(
+            '[aria-label="Located diagnostics"]',
+          ).length,
+          locatedText: document
+            .querySelector('[aria-label="Located diagnostics"]')
+            ?.textContent?.slice(0, 2000),
+          rootChildren: document.getElementById("root")?.childElementCount,
+        }))
+        .catch((error: Error) => ({
+          unavailable: error.message.slice(0, 160),
+        })),
+      new Promise((resolve) => {
+        timer = setTimeout(
+          () =>
+            resolve({
+              unavailable: "renderer did not answer bounded diagnostic probe",
+            }),
+          1000,
+        );
+      }),
+    ]);
+    clearTimeout(timer);
+    console.error(
+      "BROWSER_FAILURE_STATE",
+      JSON.stringify({ ...evidence, state }),
+    );
+  }
+  expect(
+    evidence?.errors ?? [],
+    "The complete user journey must not raise unhandled browser errors",
+  ).toEqual([]);
 });
 
 test("editor, catalog, priorities and source-consent boundaries", async ({
