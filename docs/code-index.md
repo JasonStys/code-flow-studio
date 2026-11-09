@@ -446,24 +446,26 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `file` | 61 |
 | variable | `binary` | 63 |
 | variable | `built` | 64 |
-| function | `main()` | 82 |
-| variable | `report` | 84 |
-| variable | `file` | 85 |
-| variable | `name` | 85 |
-| variable | `path` | 90 |
-| variable | `temporary` | 92 |
-| variable | `directory` | 93 |
-| variable | `corpus` | 94 |
-| variable | `compiler` | 97 |
-| variable | `key` | 97 |
-| variable | `version` | 98 |
-| variable | `binary` | 99 |
-| variable | `attempts` | 100 |
-| variable | `_` | 102 |
-| variable | `item` | 107 |
-| variable | `binary` | 109 |
-| variable | `finding` | 110 |
-| variable | `detected` | 112 |
+| function | `optional_metadata(path)` | 82 |
+| parameter | `path` | 82 |
+| function | `main()` | 90 |
+| variable | `report` | 92 |
+| variable | `file` | 93 |
+| variable | `name` | 93 |
+| variable | `path` | 98 |
+| variable | `temporary` | 100 |
+| variable | `directory` | 101 |
+| variable | `corpus` | 102 |
+| variable | `compiler` | 105 |
+| variable | `key` | 105 |
+| variable | `version` | 106 |
+| variable | `binary` | 107 |
+| variable | `attempts` | 108 |
+| variable | `_` | 110 |
+| variable | `item` | 115 |
+| variable | `binary` | 117 |
+| variable | `finding` | 118 |
+| variable | `detected` | 120 |
 
 ## runner/sql_runtime.py
 
@@ -782,6 +784,25 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `response` | 30 |
 | variable | `result` | 33 |
 
+## scripts/verify_electron.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `fs` | 13 |
+| variable | `path` | 14 |
+| variable | `{ execFileSync }` | 15 |
+| function | `verifyElectron(root = path.resolve(__dirname, "..")` | 18 |
+| variable | `expected` | 19 |
+| variable | `sdk` | 28 |
+| variable | `installed` | 30 |
+| variable | `selected` | 33 |
+| variable | `directory` | 34 |
+| variable | `executable` | 35 |
+| variable | `relative` | 36 |
+| variable | `environment` | 51 |
+| variable | `key` | 52 |
+| variable | `actual` | 54 |
+
 ## scripts/worker_analyzer_checks.cjs
 
 | Kind | Declaration | Line |
@@ -873,6 +894,7 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
+| variable | `__version__` | 9 |
 
 ## studio/accounts.py
 
@@ -1329,199 +1351,199 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `CSP` | 36 |
-| variable | `HISTORY_STOP_BYTES` | 37 |
-| class | `Boundary` | 40 |
-| function | `__init__(self, app, manager, port)` | 43 |
-| parameter | `app` | 43 |
-| parameter | `manager` | 43 |
-| parameter | `port` | 43 |
-| parameter | `self` | 43 |
-| function | `__call__(self, scope, receive, send)` | 49 |
-| parameter | `receive` | 49 |
-| parameter | `scope` | 49 |
-| parameter | `self` | 49 |
-| parameter | `send` | 49 |
-| variable | `raw` | 53 |
-| variable | `headers` | 54 |
-| variable | `k` | 54 |
-| variable | `v` | 54 |
-| function | `guarded(message)` | 56 |
-| parameter | `message` | 56 |
-| variable | `k` | 61 |
-| variable | `v` | 61 |
-| function | `deny(status, detail)` | 77 |
-| parameter | `detail` | 77 |
-| parameter | `status` | 77 |
-| variable | `_` | 83 |
-| variable | `k` | 83 |
-| variable | `cookies` | 101 |
-| variable | `token` | 106 |
-| variable | `account` | 107 |
-| variable | `chunks` | 115 |
-| variable | `length` | 115 |
-| variable | `message` | 117 |
-| variable | `data` | 120 |
-| variable | `length` | 121 |
-| variable | `delivered` | 127 |
-| function | `replay()` | 129 |
-| variable | `delivered` | 133 |
-| class | `Closed` | 140 |
-| variable | `model_config` | 143 |
-| class | `Credentials` | 146 |
-| variable | `alias` | 149 |
-| variable | `password` | 150 |
-| class | `Recovery` | 153 |
-| variable | `recovery` | 156 |
-| class | `Unlock` | 159 |
-| variable | `key` | 162 |
-| variable | `salt` | 163 |
-| class | `Activity` | 166 |
-| variable | `idle_seconds` | 169 |
-| class | `Delete` | 172 |
-| variable | `password` | 175 |
-| variable | `confirm` | 176 |
-| class | `Provider` | 179 |
-| variable | `id` | 182 |
-| variable | `kind` | 183 |
-| variable | `url` | 184 |
-| variable | `model` | 185 |
-| variable | `key` | 186 |
-| variable | `retain_key` | 187 |
-| variable | `token_parameter` | 188 |
-| variable | `temperature` | 189 |
-| class | `Settings` | 192 |
-| variable | `providers` | 195 |
-| variable | `routes` | 196 |
-| function | `coherent(self)` | 201 |
-| parameter | `self` | 201 |
-| variable | `ids` | 203 |
-| variable | `p` | 203 |
-| variable | `value` | 204 |
-| variable | `p` | 207 |
-| function | `public_settings(manager)` | 213 |
-| parameter | `manager` | 213 |
-| variable | `keys` | 215 |
-| variable | `settings` | 215 |
-| variable | `data` | 216 |
-| variable | `p` | 218 |
-| class | `Proxy` | 226 |
-| function | `__init__(self, manager)` | 229 |
-| parameter | `manager` | 229 |
-| parameter | `self` | 229 |
-| function | `__call__(self, scope, receive, send)` | 233 |
-| parameter | `receive` | 233 |
-| parameter | `scope` | 233 |
-| parameter | `self` | 233 |
-| parameter | `send` | 233 |
-| variable | `manager` | 237 |
-| variable | `app` | 240 |
-| variable | `path` | 245 |
-| variable | `db` | 251 |
-| variable | `count` | 252 |
-| variable | `headers` | 264 |
-| variable | `forwarded` | 273 |
-| variable | `k` | 274 |
-| variable | `v` | 274 |
-| function | `create_private_app(root, port, ui, launcher_token, nonce)` | 284 |
-| parameter | `launcher_token` | 285 |
-| parameter | `nonce` | 285 |
-| parameter | `port` | 285 |
-| parameter | `root` | 285 |
-| parameter | `ui` | 285 |
-| variable | `manager` | 288 |
-| function | `lifespan(app)` | 292 |
-| parameter | `app` | 292 |
-| function | `idle()` | 295 |
-| variable | `task` | 309 |
-| variable | `app` | 319 |
-| function | `invalid(request, error)` | 331 |
-| parameter | `error` | 331 |
-| parameter | `request` | 331 |
-| function | `bad_value(request, error)` | 336 |
-| parameter | `error` | 336 |
-| parameter | `request` | 336 |
-| function | `bad_disk(request, error)` | 341 |
-| parameter | `error` | 341 |
-| parameter | `request` | 341 |
-| function | `identify(request)` | 347 |
-| parameter | `request` | 347 |
-| function | `signed(owner, data)` | 351 |
-| parameter | `data` | 351 |
-| parameter | `owner` | 351 |
-| variable | `response` | 353 |
-| function | `auth_limit(alias)` | 364 |
-| parameter | `alias` | 364 |
-| function | `health()` | 372 |
-| function | `shutdown(request)` | 383 |
-| parameter | `request` | 383 |
-| variable | `callback` | 389 |
-| function | `register(data)` | 396 |
-| parameter | `data` | 396 |
-| variable | `owner` | 400 |
-| variable | `recovery` | 400 |
-| function | `login(data)` | 406 |
-| parameter | `data` | 406 |
-| variable | `owner` | 409 |
-| function | `reset(data)` | 415 |
-| parameter | `data` | 415 |
-| variable | `db` | 419 |
-| variable | `row` | 420 |
-| variable | `fresh` | 426 |
-| function | `account(request)` | 432 |
-| parameter | `request` | 432 |
-| variable | `owner` | 434 |
-| variable | `session` | 434 |
-| function | `unlock(request, data)` | 442 |
-| parameter | `data` | 442 |
-| parameter | `request` | 442 |
-| variable | `owner` | 444 |
-| variable | `session` | 444 |
-| function | `activity(request, data)` | 453 |
-| parameter | `data` | 453 |
-| parameter | `request` | 453 |
-| function | `save(request)` | 461 |
-| parameter | `request` | 461 |
-| function | `lock(request)` | 468 |
-| parameter | `request` | 468 |
-| variable | `owner` | 471 |
-| variable | `session` | 471 |
-| function | `logout(request)` | 476 |
-| parameter | `request` | 476 |
-| variable | `owner` | 479 |
-| variable | `session` | 479 |
-| variable | `response` | 483 |
-| function | `delete(request, data)` | 488 |
-| parameter | `data` | 488 |
-| parameter | `request` | 488 |
-| variable | `_` | 491 |
-| variable | `owner` | 491 |
-| variable | `db` | 492 |
-| variable | `row` | 493 |
-| variable | `response` | 499 |
-| function | `backup(request)` | 504 |
-| parameter | `request` | 504 |
-| variable | `_` | 506 |
-| variable | `owner` | 506 |
-| variable | `path` | 507 |
-| function | `get_providers(request)` | 515 |
-| parameter | `request` | 515 |
-| function | `providers(request, data)` | 522 |
-| parameter | `data` | 522 |
-| parameter | `request` | 522 |
-| variable | `keys` | 526 |
-| variable | `old` | 526 |
-| variable | `rows` | 527 |
-| variable | `provider` | 528 |
-| variable | `row` | 529 |
-| variable | `p` | 531 |
-| variable | `previous` | 531 |
-| variable | `config` | 536 |
-| variable | `router` | 537 |
-| variable | `k` | 539 |
-| variable | `p` | 539 |
-| variable | `v` | 539 |
-| variable | `p` | 542 |
+| variable | `CSP` | 37 |
+| variable | `HISTORY_STOP_BYTES` | 38 |
+| class | `Boundary` | 41 |
+| function | `__init__(self, app, manager, port)` | 44 |
+| parameter | `app` | 44 |
+| parameter | `manager` | 44 |
+| parameter | `port` | 44 |
+| parameter | `self` | 44 |
+| function | `__call__(self, scope, receive, send)` | 50 |
+| parameter | `receive` | 50 |
+| parameter | `scope` | 50 |
+| parameter | `self` | 50 |
+| parameter | `send` | 50 |
+| variable | `raw` | 54 |
+| variable | `headers` | 55 |
+| variable | `k` | 55 |
+| variable | `v` | 55 |
+| function | `guarded(message)` | 57 |
+| parameter | `message` | 57 |
+| variable | `k` | 62 |
+| variable | `v` | 62 |
+| function | `deny(status, detail)` | 78 |
+| parameter | `detail` | 78 |
+| parameter | `status` | 78 |
+| variable | `_` | 84 |
+| variable | `k` | 84 |
+| variable | `cookies` | 102 |
+| variable | `token` | 107 |
+| variable | `account` | 108 |
+| variable | `chunks` | 116 |
+| variable | `length` | 116 |
+| variable | `message` | 118 |
+| variable | `data` | 121 |
+| variable | `length` | 122 |
+| variable | `delivered` | 128 |
+| function | `replay()` | 130 |
+| variable | `delivered` | 134 |
+| class | `Closed` | 141 |
+| variable | `model_config` | 144 |
+| class | `Credentials` | 147 |
+| variable | `alias` | 150 |
+| variable | `password` | 151 |
+| class | `Recovery` | 154 |
+| variable | `recovery` | 157 |
+| class | `Unlock` | 160 |
+| variable | `key` | 163 |
+| variable | `salt` | 164 |
+| class | `Activity` | 167 |
+| variable | `idle_seconds` | 170 |
+| class | `Delete` | 173 |
+| variable | `password` | 176 |
+| variable | `confirm` | 177 |
+| class | `Provider` | 180 |
+| variable | `id` | 183 |
+| variable | `kind` | 184 |
+| variable | `url` | 185 |
+| variable | `model` | 186 |
+| variable | `key` | 187 |
+| variable | `retain_key` | 188 |
+| variable | `token_parameter` | 189 |
+| variable | `temperature` | 190 |
+| class | `Settings` | 193 |
+| variable | `providers` | 196 |
+| variable | `routes` | 197 |
+| function | `coherent(self)` | 202 |
+| parameter | `self` | 202 |
+| variable | `ids` | 204 |
+| variable | `p` | 204 |
+| variable | `value` | 205 |
+| variable | `p` | 208 |
+| function | `public_settings(manager)` | 214 |
+| parameter | `manager` | 214 |
+| variable | `keys` | 216 |
+| variable | `settings` | 216 |
+| variable | `data` | 217 |
+| variable | `p` | 219 |
+| class | `Proxy` | 227 |
+| function | `__init__(self, manager)` | 230 |
+| parameter | `manager` | 230 |
+| parameter | `self` | 230 |
+| function | `__call__(self, scope, receive, send)` | 234 |
+| parameter | `receive` | 234 |
+| parameter | `scope` | 234 |
+| parameter | `self` | 234 |
+| parameter | `send` | 234 |
+| variable | `manager` | 238 |
+| variable | `app` | 241 |
+| variable | `path` | 246 |
+| variable | `db` | 252 |
+| variable | `count` | 253 |
+| variable | `headers` | 265 |
+| variable | `forwarded` | 274 |
+| variable | `k` | 275 |
+| variable | `v` | 275 |
+| function | `create_private_app(root, port, ui, launcher_token, nonce)` | 285 |
+| parameter | `launcher_token` | 286 |
+| parameter | `nonce` | 286 |
+| parameter | `port` | 286 |
+| parameter | `root` | 286 |
+| parameter | `ui` | 286 |
+| variable | `manager` | 289 |
+| function | `lifespan(app)` | 293 |
+| parameter | `app` | 293 |
+| function | `idle()` | 296 |
+| variable | `task` | 310 |
+| variable | `app` | 320 |
+| function | `invalid(request, error)` | 332 |
+| parameter | `error` | 332 |
+| parameter | `request` | 332 |
+| function | `bad_value(request, error)` | 337 |
+| parameter | `error` | 337 |
+| parameter | `request` | 337 |
+| function | `bad_disk(request, error)` | 342 |
+| parameter | `error` | 342 |
+| parameter | `request` | 342 |
+| function | `identify(request)` | 348 |
+| parameter | `request` | 348 |
+| function | `signed(owner, data)` | 352 |
+| parameter | `data` | 352 |
+| parameter | `owner` | 352 |
+| variable | `response` | 354 |
+| function | `auth_limit(alias)` | 365 |
+| parameter | `alias` | 365 |
+| function | `health()` | 373 |
+| function | `shutdown(request)` | 384 |
+| parameter | `request` | 384 |
+| variable | `callback` | 390 |
+| function | `register(data)` | 397 |
+| parameter | `data` | 397 |
+| variable | `owner` | 401 |
+| variable | `recovery` | 401 |
+| function | `login(data)` | 407 |
+| parameter | `data` | 407 |
+| variable | `owner` | 410 |
+| function | `reset(data)` | 416 |
+| parameter | `data` | 416 |
+| variable | `db` | 420 |
+| variable | `row` | 421 |
+| variable | `fresh` | 427 |
+| function | `account(request)` | 433 |
+| parameter | `request` | 433 |
+| variable | `owner` | 435 |
+| variable | `session` | 435 |
+| function | `unlock(request, data)` | 443 |
+| parameter | `data` | 443 |
+| parameter | `request` | 443 |
+| variable | `owner` | 445 |
+| variable | `session` | 445 |
+| function | `activity(request, data)` | 454 |
+| parameter | `data` | 454 |
+| parameter | `request` | 454 |
+| function | `save(request)` | 462 |
+| parameter | `request` | 462 |
+| function | `lock(request)` | 469 |
+| parameter | `request` | 469 |
+| variable | `owner` | 472 |
+| variable | `session` | 472 |
+| function | `logout(request)` | 477 |
+| parameter | `request` | 477 |
+| variable | `owner` | 480 |
+| variable | `session` | 480 |
+| variable | `response` | 484 |
+| function | `delete(request, data)` | 489 |
+| parameter | `data` | 489 |
+| parameter | `request` | 489 |
+| variable | `_` | 492 |
+| variable | `owner` | 492 |
+| variable | `db` | 493 |
+| variable | `row` | 494 |
+| variable | `response` | 500 |
+| function | `backup(request)` | 505 |
+| parameter | `request` | 505 |
+| variable | `_` | 507 |
+| variable | `owner` | 507 |
+| variable | `path` | 508 |
+| function | `get_providers(request)` | 516 |
+| parameter | `request` | 516 |
+| function | `providers(request, data)` | 523 |
+| parameter | `data` | 523 |
+| parameter | `request` | 523 |
+| variable | `keys` | 527 |
+| variable | `old` | 527 |
+| variable | `rows` | 528 |
+| variable | `provider` | 529 |
+| variable | `row` | 530 |
+| variable | `p` | 532 |
+| variable | `previous` | 532 |
+| variable | `config` | 537 |
+| variable | `router` | 538 |
+| variable | `k` | 540 |
+| variable | `p` | 540 |
+| variable | `v` | 540 |
+| variable | `p` | 543 |
 
 ## studio/private_cli.py
 
@@ -1959,10 +1981,25 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `app` | 19 |
-| variable | `resources` | 34 |
-| variable | `file` | 35 |
-| variable | `page` | 59 |
+| variable | `{ verifyElectron }` | 17 |
+| variable | `executable` | 23 |
+| variable | `app` | 25 |
+| variable | `resources` | 40 |
+| variable | `file` | 41 |
+| variable | `page` | 65 |
+| variable | `health` | 66 |
+
+## tests/electron-readiness.test.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `test` | 12 |
+| variable | `assert` | 13 |
+| variable | `fs` | 14 |
+| variable | `os` | 15 |
+| variable | `path` | 16 |
+| variable | `{ verifyElectron }` | 17 |
+| variable | `directory` | 20 |
 
 ## tests/private.spec.ts
 
@@ -2511,34 +2548,48 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `test_checksum_download_filename(tmp_path, name)` | 27 |
-| parameter | `name` | 27 |
-| parameter | `tmp_path` | 27 |
-| variable | `path` | 29 |
-| variable | `expected` | 32 |
+| function | `test_checksum_download_filename(tmp_path, name)` | 32 |
+| parameter | `name` | 32 |
+| parameter | `tmp_path` | 32 |
+| variable | `path` | 34 |
+| variable | `expected` | 37 |
+| function | `test_product_and_worker_release_versions_remain_coherent()` | 41 |
+| variable | `root` | 43 |
+| variable | `relative` | 45 |
+| variable | `data` | 51 |
 
 ## tests/test_sanitizer_probe.py
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `test_probe_retains_every_existing_container_boundary_and_exact_owned_cleanup(monkeypatch)` | 23 |
-| parameter | `monkeypatch` | 23 |
-| variable | `observed` | 25 |
-| function | `command(argv)` | 27 |
-| parameter | `argv` | 27 |
-| parameter | `kwargs` | 27 |
-| variable | `required` | 31 |
-| variable | `item` | 45 |
+| function | `test_probe_retains_every_existing_container_boundary_and_exact_owned_cleanup(monkeypatch)` | 24 |
+| parameter | `monkeypatch` | 24 |
+| variable | `observed` | 26 |
+| function | `command(argv)` | 28 |
+| parameter | `argv` | 28 |
+| parameter | `kwargs` | 28 |
+| variable | `required` | 32 |
 | variable | `item` | 46 |
-| variable | `result` | 51 |
-| variable | `name` | 53 |
-| function | `test_missing_or_failed_probe_is_not_accepted(monkeypatch, code, output)` | 58 |
-| parameter | `code` | 58 |
-| parameter | `monkeypatch` | 58 |
-| parameter | `output` | 58 |
-| function | `command(argv)` | 61 |
-| parameter | `argv` | 61 |
-| parameter | `kwargs` | 61 |
+| variable | `item` | 47 |
+| variable | `result` | 52 |
+| variable | `name` | 54 |
+| function | `test_missing_or_failed_probe_is_not_accepted(monkeypatch, code, output)` | 59 |
+| parameter | `code` | 59 |
+| parameter | `monkeypatch` | 59 |
+| parameter | `output` | 59 |
+| function | `command(argv)` | 62 |
+| parameter | `argv` | 62 |
+| parameter | `kwargs` | 62 |
+| function | `test_optional_metadata_never_requires_elevating_container_permissions(monkeypatch, tmp_path, failure)` | 71 |
+| parameter | `failure` | 71 |
+| parameter | `monkeypatch` | 71 |
+| parameter | `tmp_path` | 71 |
+| function | `denied()` | 74 |
+| parameter | `args` | 74 |
+| parameter | `kwargs` | 74 |
+| function | `test_readable_metadata_is_retained(tmp_path)` | 82 |
+| parameter | `tmp_path` | 82 |
+| variable | `file` | 84 |
 
 ## tests/web.spec.ts
 

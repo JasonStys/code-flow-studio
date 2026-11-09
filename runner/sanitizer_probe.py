@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: process(argv, directory)@L41; compile_probe(compiler, source, directory, name)@L59; main()@L82
-# variables: BENIGN@L24; FAULT@L31; STARTUPS@L38; result@L43; raw@L50; retained@L51; file@L61; binary@L63; built@L64; report@L84; file@L85; name@L85; path@L90; temporary@L92; directory@L93; corpus@L94; compiler@L97; key@L97; version@L98; binary@L99; attempts@L100; _@L102; item@L107; binary@L109; finding@L110; detected@L112
-# parameters: argv@L41; directory@L41; compiler@L59; directory@L59; name@L59; source@L59
+# functions: process(argv, directory)@L41; compile_probe(compiler, source, directory, name)@L59; optional_metadata(path)@L82; main()@L90
+# variables: BENIGN@L24; FAULT@L31; STARTUPS@L38; result@L43; raw@L50; retained@L51; file@L61; binary@L63; built@L64; report@L92; file@L93; name@L93; path@L98; temporary@L100; directory@L101; corpus@L102; compiler@L105; key@L105; version@L106; binary@L107; attempts@L108; _@L110; item@L115; binary@L117; finding@L118; detected@L120
+# parameters: argv@L41; directory@L41; compiler@L59; directory@L59; name@L59; source@L59; path@L82
 # </code-map>
 
 """Container-only trusted sanitizer startup diagnosis by Jason Stys.
@@ -79,6 +79,14 @@ def compile_probe(compiler, source, directory, name):
     return binary
 
 
+def optional_metadata(path):
+    """Record unavailable proc/cgroup metadata without relaxing the container to read it."""
+    try:
+        return path.read_text().strip()
+    except OSError as error:
+        return "unavailable (" + type(error).__name__ + ")"
+
+
 def main():
     """Emit old/new startup evidence and require both a clean candidate and a real ASan finding."""
     report = {"probe_version": 1, "kernel": platform.release(), "uid": os.getuid()}
@@ -88,7 +96,7 @@ def main():
         ("memory_max", "/sys/fs/cgroup/memory.max"),
     ]:
         path = Path(file)
-        report[name] = path.read_text().strip() if path.exists() else "unavailable"
+        report[name] = optional_metadata(path)
     with tempfile.TemporaryDirectory(prefix="cfs-sanitizer-probe-") as temporary:
         directory = Path(temporary)
         corpus = directory / "corpus"

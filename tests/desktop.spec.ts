@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: app@L19; resources@L34; file@L35; page@L59
+ * variables: { verifyElectron }@L17; executable@L23; app@L25; resources@L40; file@L41; page@L65; health@L66
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -11,13 +11,19 @@ import { test, expect, _electron as electron } from "@playwright/test";
 import { mkdtempSync, existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { createRequire } from "node:module";
 import { createSession, editorJourney } from "./account-session";
 import { inspectHelper } from "./source-journey";
+const { verifyElectron } = createRequire(import.meta.url)(
+  "../scripts/verify_electron.cjs",
+);
 
 test("bundled desktop authenticates, seals history and provides a sandboxed editor", async () => {
   /** Native renderer and bundled service both start without a separately installed Python runtime. */
+  const executable =
+    process.env.STUDIO_INSTALLED_APP ?? verifyElectron().executable;
   const app = await electron.launch({
-    executablePath: process.env.STUDIO_INSTALLED_APP,
+    executablePath: executable,
     args: process.env.STUDIO_INSTALLED_APP ? [] : ["."],
     env: {
       ...process.env,
@@ -57,6 +63,8 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       ).toBe(false);
     }
     const page = await app.firstWindow();
+    const health = await page.request.get(new URL("/health", page.url()).href);
+    expect((await health.json()).version).toBe("0.4.0");
     await createSession(page, "native_fictional");
     await editorJourney(page);
     await inspectHelper(page);

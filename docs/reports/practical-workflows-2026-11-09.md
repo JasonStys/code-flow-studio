@@ -12,12 +12,12 @@ Actual typing exposed a pre-existing controlled-editor race: rapid model changes
 
 | Check | Observed result |
 |---|---|
-| Controller/privacy/provider/parser regressions | 148 passed; 1,446/1,712 measured lines covered (84.46%), above the existing 80% threshold. No target code executed on the host. |
-| Three-engine web suite | 45 passed: 27 actual browser journeys and 18 repeated pure source-binding checks across Chromium, Firefox and WebKit. |
+| Controller/privacy/provider/parser/release regressions | Final 0.4.0 source: 155 passed; 1,448/1,714 measured lines covered (84.48%), above the existing 80% threshold. No target code executed on the host. |
+| Three-engine web suite | 48 passed: 30 actual browser journeys and 18 repeated pure source-binding checks across Chromium, Firefox and WebKit. |
 | Three-engine private accounts | 9 passed, including a real static-review source inspection and no external request, then account locking. |
 | Final strict fingerprint/browser subset | 11 passed, including newline-tainted hash, exact bytes, generated distinction, stale draft and real static-review navigation. |
 | Packaged Windows app | Actual frozen Python service and electron-builder unpacked application launched; 1 end-to-end native test passed. Registration/unlock, source inspection, catalog, lock, no renderer Node access and packaged worker-resource boundaries were asserted. Both launcher profile and accounts used disposable test directories. |
-| Type/build/style/index | TypeScript and Vite build passed; Ruff passed; all 65 source maps current. |
+| Type/build/style/index | TypeScript and Vite build passed; Ruff passed; all 70 source maps current. |
 | Dependencies | `pip check` passed; isolated Python audit found no known vulnerabilities; npm audit found 0. The editable project itself is not published on PyPI and is audited through its dependencies/source tests. |
 | Packaging | PyInstaller and `electron-builder --dir --publish never` passed. Output stayed under ignored build/release directories; no installer installed or release published. |
 
@@ -69,6 +69,29 @@ at moderate severity. **151 local Python tests passed**, with unchanged **84.46%
 controller/data coverage; Ruff and **68** source maps passed. Protocol regressions verify
 the probe retains every fixed container restriction and exact-owned cleanup, and never
 accepts missing/failed evidence. Docker Desktop was left unchanged.
+
+## 0.4.0 setup corrections and release preparation
+
+The following hosted probe correctly remained unprivileged but could not read a masked
+`/proc/sys/vm/mmap_rnd_bits`. Optional proc/cgroup metadata now records an unavailable/error-type
+value on `OSError`; the candidate-startup and real ASan fault controls remain mandatory.
+Permission/missing-file regressions pass without adding any container access.
+
+The Windows native job logged Electron's lazy binary download inside its timed application
+launch and timed out. Native build/release workflows now install the pinned official SDK in a
+separate bounded five-minute build step. The verifier constrains the executable to that SDK,
+checks its metadata and actual embedded version, and cannot download anything. A missing-SDK
+regression proves fail-fast behavior. Native tests pass the verified SDK path explicitly and
+retain the existing 60-second journey limit.
+
+Final local **0.4.0** validation passed **155 Python tests / 84.48%** coverage, the SDK readiness
+regression, TypeScript/build, Ruff and **70** source maps. PyInstaller rebuilt the service; the
+actual SDK shell and repackaged Windows executable each passed the native account/source
+journey in about 10 seconds, including health version `0.4.0`. Metadata, checksums fixtures and
+the required worker tag are coherent at `0.4.0`. Account/vault/database schemas are unchanged;
+no data migration or existing release retargeting is introduced. The new release notes are
+prepared, but publication and actual hosted probe/cross-platform acceptance remain gated by
+the coordinator's exact-source workflows.
 
 ## Reproduction
 

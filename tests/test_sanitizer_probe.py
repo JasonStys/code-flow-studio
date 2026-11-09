@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: test_probe_retains_every_existing_container_boundary_and_exact_owned_cleanup(monkeypatch)@L23; command(argv)@L27; test_missing_or_failed_probe_is_not_accepted(monkeypatch, code, output)@L58; command(argv)@L61
-# variables: observed@L25; required@L31; item@L45; item@L46; result@L51; name@L53
-# parameters: monkeypatch@L23; argv@L27; kwargs@L27; code@L58; monkeypatch@L58; output@L58; argv@L61; kwargs@L61
+# functions: test_probe_retains_every_existing_container_boundary_and_exact_owned_cleanup(monkeypatch)@L24; command(argv)@L28; test_missing_or_failed_probe_is_not_accepted(monkeypatch, code, output)@L59; command(argv)@L62; test_optional_metadata_never_requires_elevating_container_permissions(monkeypatch, tmp_path, failure)@L71; denied()@L74; test_readable_metadata_is_retained(tmp_path)@L82
+# variables: observed@L26; required@L32; item@L46; item@L47; result@L52; name@L54; file@L84
+# parameters: monkeypatch@L24; argv@L28; kwargs@L28; code@L59; monkeypatch@L59; output@L59; argv@L62; kwargs@L62; failure@L71; monkeypatch@L71; tmp_path@L71; args@L74; kwargs@L74; tmp_path@L82
 # </code-map>
 
 """Test the trusted CI probe's unchanged container restrictions without running targets on the host.
@@ -17,6 +17,7 @@ import json
 
 import pytest
 
+from runner.sanitizer_probe import optional_metadata
 from scripts import worker_checks
 
 
@@ -64,3 +65,22 @@ def test_missing_or_failed_probe_is_not_accepted(monkeypatch, code, output):
 
     monkeypatch.setattr(worker_checks, "command", command)
     assert asyncio.run(worker_checks.sanitizer_startup_checks())["status"] == "failed"
+
+
+@pytest.mark.parametrize("failure", [PermissionError, FileNotFoundError])
+def test_optional_metadata_never_requires_elevating_container_permissions(monkeypatch, tmp_path, failure):
+    """Only environmental metadata may be unavailable; compiler/fault controls remain required."""
+
+    def denied(*args, **kwargs):
+        """Model a masked proc or absent cgroup path without touching system permissions."""
+        raise failure("synthetic unavailable metadata")
+
+    monkeypatch.setattr(type(tmp_path), "read_text", denied)
+    assert optional_metadata(tmp_path / "metadata") == "unavailable (" + failure.__name__ + ")"
+
+
+def test_readable_metadata_is_retained(tmp_path):
+    """Normal environment values remain observable without special privileges."""
+    file = tmp_path / "metadata"
+    file.write_text("32\n", encoding="utf-8")
+    assert optional_metadata(file) == "32"

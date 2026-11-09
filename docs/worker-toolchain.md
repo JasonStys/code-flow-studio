@@ -41,6 +41,9 @@ write must produce an actual nonzero ASan heap-buffer-overflow diagnostic. That 
 proves instrumentation has not simply been disabled to make a benign program pass.
 
 The probe records compiler versions, kernel, ASLR settings, UID and available cgroup memory limit.
+Masked proc/cgroup values are optional metadata: `PermissionError` or an absent file is recorded
+as unavailable. This does not skip any compiler startup or deliberate-fault check and never adds
+permissions merely to read diagnostics.
 Each compiler/run has a 10-second process deadline; the broker caps the owned probe at 90 seconds
 and 192 KiB of output, then removes only its exact owned container. No fixture source is supplied
 by an application user. Normal user-harness failures still remain findings; a silent crash is

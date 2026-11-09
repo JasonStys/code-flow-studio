@@ -2,7 +2,7 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Polyglot coverage, located unused-code evidence and verified source navigation.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+**Version 0.4.0: polyglot evidence and verified source review.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
 Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-polyglot.md), [historical Python-location validation](docs/validation-locations.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
@@ -76,6 +76,7 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `examples/language_locations.py`, `tests/test_native_locations.py` | Independent polyglot unused/missed-line oracles and pure native-report parser/security regressions. |
 | `examples/training.json`, `examples/training.jsonl` | Tiny rights-owned training smoke parameters and data; no quality claims. |
 | `scripts/frozen_entry.py` | Frozen-service entry point for installers. |
+| `scripts/verify_electron.cjs` | Fail-fast pinned Electron path/embedded-version verification; official SDK installation happens before timed native tests. |
 | `scripts/worker_checks.py` | Actual isolated compiler/fuzz/security-boundary integration scenarios. |
 | `runner/sanitizer_probe.py`, `scripts/worker_analyzer_checks.cjs` | Trusted same-container sanitizer-startup/fault controls and independent exact-line JS/TS checks against the separately audited worker dependency graph. |
 | `scripts/private_worker_checks.py` | Real twelve-adapter execution through authenticated account API and encrypted-history reopen. |

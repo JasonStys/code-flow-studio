@@ -1,6 +1,6 @@
 {
   "name": "code-flow-studio",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Isolated polyglot testing and evidence-first AI development studio",
   "author": "Jason Stys",
   "license": "MIT",
@@ -21,7 +21,9 @@
     "package": "electron-builder",
     "test:browser": "playwright test",
     "test:private": "playwright test --config playwright.private.config.ts",
-    "test:desktop": "playwright test --config playwright.desktop.config.ts"
+    "test:desktop": "playwright test --config playwright.desktop.config.ts",
+    "setup:electron": "node node_modules/electron/install.js && node scripts/verify_electron.cjs",
+    "test:electron-readiness": "node --test tests/electron-readiness.test.cjs"
   },
   "dependencies": {
     "@monaco-editor/react": "4.7.0",
