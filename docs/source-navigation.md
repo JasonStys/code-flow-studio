@@ -26,6 +26,15 @@ A current draft that differs remains editable in Workspace, but its old evidence
 
 Physical lines use CRLF, CR or LF boundaries, preserving their original bytes for the hash. Unicode line-separator characters remain literal source content. Invalid lone surrogates are rejected because UTF-8 replacement would destroy exact identity.
 
+The read-only inspector uses one native textarea rather than constructing another Monaco editor,
+language worker or editor model. It selects the exact physical line with the browser's native
+selection API and allows normal keyboard selection/copy. Displayed newlines are normalized by
+the control; hashing and the existing source/report ZIP retain original bytes. This view has no
+syntax highlighting or inline line-number gutter; its status and validated browse control give
+the exact physical line. The editable draft continues to use Monaco. See the browser contracts
+for [read-only selection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/readOnly)
+and [selection ranges](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setSelectionRange).
+
 ## Bounds and trust
 
 Navigation hashes at most 1 MiB per source. The view renders at most 200 finding rows, 32 coverage files and 200 missed-line links per file, with truncation notices; complete retained records remain available in reports. File filters reflect at most 64 names. These are rendering bounds, not assertions that an unshown issue was resolved. The manifest/backend input limits and existing collector bounds still apply.

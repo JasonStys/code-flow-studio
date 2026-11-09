@@ -1914,25 +1914,31 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | type | `Page` | 14 |
 | variable | `inertHelper` | 16 |
 | function | `inspectHelper(page: Page)` | 20 |
-| variable | `locations` | 33 |
-| variable | `inspector` | 54 |
+| variable | `locations` | 31 |
+| variable | `inspector` | 52 |
+| variable | `source` | 57 |
 
 ## tests/source-navigation.spec.ts
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `hash` | 23 |
-| variable | `source` | 25 |
-| function | `project()` | 27 |
-| function | `reference(overrides: Partial<SourceLocation> = {})` | 33 |
-| variable | `language` | 57 |
-| variable | `candidate` | 71 |
-| variable | `candidate` | 78 |
-| variable | `line` | 89 |
-| variable | `candidate` | 129 |
-| variable | `candidate` | 146 |
-| variable | `generated` | 153 |
-| variable | `candidate` | 200 |
+| variable | `hash` | 24 |
+| variable | `source` | 26 |
+| function | `project()` | 28 |
+| function | `reference(overrides: Partial<SourceLocation> = {})` | 34 |
+| variable | `normalized` | 49 |
+| variable | `rows` | 50 |
+| variable | `line` | 51 |
+| variable | `[start, end]` | 52 |
+| variable | `invalid` | 60 |
+| variable | `language` | 71 |
+| variable | `candidate` | 85 |
+| variable | `candidate` | 92 |
+| variable | `line` | 103 |
+| variable | `candidate` | 143 |
+| variable | `candidate` | 160 |
+| variable | `generated` | 167 |
+| variable | `candidate` | 214 |
 
 ## tests/test_api.py
 
@@ -2449,21 +2455,28 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 |---|---|---|
 | variable | `errors` | 25 |
 | variable | `download` | 76 |
-| variable | `locations` | 112 |
-| variable | `unreachable` | 116 |
-| variable | `locations` | 170 |
-| variable | `locations` | 233 |
-| variable | `inspector` | 251 |
-| variable | `sourceInput` | 252 |
-| variable | `editor` | 277 |
-| variable | `invalid` | 307 |
-| variable | `digest` | 308 |
-| variable | `locations` | 338 |
-| variable | `inspector` | 343 |
-| variable | `legacy` | 383 |
-| variable | `project` | 385 |
-| variable | `locations` | 408 |
-| variable | `inspector` | 415 |
+| variable | `locations` | 110 |
+| variable | `unreachable` | 114 |
+| variable | `locations` | 168 |
+| variable | `locations` | 231 |
+| variable | `inspector` | 249 |
+| variable | `sourceInput` | 250 |
+| variable | `editor` | 278 |
+| variable | `invalid` | 306 |
+| variable | `digest` | 307 |
+| variable | `locations` | 335 |
+| variable | `inspector` | 340 |
+| variable | `legacy` | 380 |
+| variable | `project` | 382 |
+| variable | `locations` | 405 |
+| variable | `inspector` | 412 |
+| variable | `source` | 452 |
+| variable | `generated` | 453 |
+| variable | `project` | 455 |
+| variable | `inspector` | 484 |
+| variable | `cycle` | 487 |
+| variable | `artifact` | 488 |
+| variable | `view` | 498 |
 
 ## training/__init__.py
 
@@ -2726,21 +2739,21 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `SourceVerification` | 21 |
-| variable | `[verification, setVerification]` | 37 |
-| variable | `contextMatches` | 44 |
-| variable | `verified` | 48 |
-| variable | `draftMatches` | 49 |
-| variable | `[line, setLine]` | 50 |
-| variable | `[jump, setJump]` | 51 |
-| variable | `[notice, setNotice]` | 52 |
-| variable | `editorRef` | 53 |
-| variable | `decorations` | 54 |
-| variable | `heading` | 55 |
-| variable | `generation` | 56 |
-| variable | `request` | 59 |
-| function | `reveal(target: editor.IStandaloneCodeEditor, selectedLine: number)` | 87 |
-| variable | `target` | 156 |
+| type | `SourceVerification` | 19 |
+| variable | `[verification, setVerification]` | 35 |
+| variable | `contextMatches` | 42 |
+| variable | `verified` | 46 |
+| variable | `draftMatches` | 47 |
+| variable | `[line, setLine]` | 48 |
+| variable | `[jump, setJump]` | 49 |
+| variable | `[notice, setNotice]` | 50 |
+| variable | `sourceRef` | 51 |
+| variable | `heading` | 52 |
+| variable | `generation` | 53 |
+| variable | `request` | 56 |
+| variable | `target` | 83 |
+| variable | `[start, end]` | 85 |
+| variable | `target` | 139 |
 
 ## ui/api.ts
 
@@ -2791,11 +2804,16 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | function | `sourceLineCount(content: string)` | 47 |
 | variable | `lines` | 48 |
 | variable | `index` | 49 |
-| variable | `content` | 83 |
-| variable | `harnessName` | 87 |
-| variable | `file` | 94 |
-| variable | `digest` | 108 |
-| variable | `lines` | 121 |
+| variable | `displayed` | 65 |
+| variable | `start` | 66 |
+| variable | `current` | 67 |
+| variable | `boundary` | 68 |
+| variable | `boundary` | 73 |
+| variable | `content` | 102 |
+| variable | `harnessName` | 106 |
+| variable | `file` | 113 |
+| variable | `digest` | 127 |
+| variable | `lines` | 140 |
 
 ## ui/types.ts
 

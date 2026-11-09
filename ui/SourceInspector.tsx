@@ -1,9 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: SourceVerification@L21
- * functions: reveal(target: editor.IStandaloneCodeEditor, selectedLine: number)@L87
- * variables: [verification, setVerification]@L37; contextMatches@L44; verified@L48; draftMatches@L49; [line, setLine]@L50; [jump, setJump]@L51; [notice, setNotice]@L52; editorRef@L53; decorations@L54; heading@L55; generation@L56; request@L59; target@L156
+ * types: SourceVerification@L19
+ * variables: [verification, setVerification]@L35; contextMatches@L42; verified@L46; draftMatches@L47; [line, setLine]@L48; [jump, setJump]@L49; [notice, setNotice]@L50; sourceRef@L51; heading@L52; generation@L53; request@L56; target@L83; [start, end]@L85; target@L139
  * </code-map> */
 
 /**
@@ -12,12 +11,11 @@
  * Parameters/state are private in-memory text only; no target code runs and no provider receives it.
  * Exact symbol/variable locations are generated in docs/code-index.md.
  */
-import { useEffect, useRef, useState } from "react";
-import Editor from "@monaco-editor/react";
-import type { editor } from "monaco-editor";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Project, SourceLocation } from "./types";
 import {
   verifySourceLocation,
+  sourceLineSelection,
   type SourceVerification,
 } from "./source-navigation";
 
@@ -50,16 +48,13 @@ export default function SourceInspector({
   const [line, setLine] = useState(location.line);
   const [jump, setJump] = useState(String(location.line));
   const [notice, setNotice] = useState("");
-  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const decorations = useRef<editor.IEditorDecorationsCollection | null>(null);
+  const sourceRef = useRef<HTMLTextAreaElement | null>(null);
   const heading = useRef<HTMLHeadingElement | null>(null);
   const generation = useRef(0);
 
   useEffect(() => {
     const request = ++generation.current;
     setVerification(null);
-    editorRef.current = null;
-    decorations.current = null;
     setLine(location.line);
     setJump(String(location.line));
     setNotice("");
@@ -83,26 +78,14 @@ export default function SourceInspector({
     };
   }, [location, snapshot, draft]);
 
-  /** Focus a line only after its containing source fingerprint and bounds were verified. */
-  function reveal(target: editor.IStandaloneCodeEditor, selectedLine: number) {
-    target.setPosition({ lineNumber: selectedLine, column: 1 });
-    target.revealLineInCenter(selectedLine);
-    if (decorations.current === null)
-      decorations.current = target.createDecorationsCollection();
-    decorations.current.set([
-      {
-        range: {
-          startLineNumber: selectedLine,
-          startColumn: 1,
-          endLineNumber: selectedLine,
-          endColumn: target.getModel()?.getLineMaxColumn(selectedLine) ?? 1,
-        },
-        options: { isWholeLine: true, className: "evidence-source-line" },
-      },
-    ]);
-  }
-  useEffect(() => {
-    if (verified?.ok && editorRef.current) reveal(editorRef.current, line);
+  /** Select the verified physical line in one native read-only control, without another editor model. */
+  useLayoutEffect(() => {
+    const target = sourceRef.current;
+    if (!verified?.ok || target === null) return;
+    const [start, end] = sourceLineSelection(verified.content, line);
+    target.focus({ preventScroll: true });
+    target.setSelectionRange(start, end);
+    target.scrollTop = Math.max(0, (line - 1) * 20 - target.clientHeight / 2);
   }, [verified, line]);
 
   return (
@@ -184,33 +167,21 @@ export default function SourceInspector({
             </button>
           </form>
           {notice && <p role="alert">{notice}</p>}
-          <Editor
-            height="370px"
-            path={`inmemory://cfs-evidence/${verified.sha256}/${encodeURIComponent(location.file)}`}
-            language={
-              location.artifact === "generated"
-                ? location.file.endsWith(".py")
-                  ? "python"
-                  : "cpp"
-                : snapshot?.language === "assembly"
-                  ? "plaintext"
-                  : snapshot?.language
-            }
-            theme="vs-dark"
+          <textarea
+            ref={sourceRef}
+            className="verified-source"
+            aria-label="Verified evidence source"
+            readOnly
+            spellCheck={false}
+            wrap="off"
             value={verified.content}
-            onMount={(instance) => {
-              editorRef.current = instance;
-              reveal(instance, line);
-            }}
-            options={{
-              readOnly: true,
-              ariaLabel: "Verified evidence source",
-              minimap: { enabled: false },
-              automaticLayout: true,
-              scrollBeyondLastLine: false,
-              lineNumbersMinChars: 3,
-            }}
           />
+          <p className="note">
+            The native read-only view selects physical line {line}. Displayed
+            line endings are normalized by the browser; hashing retains the
+            original bytes. Copy source text here or download the full
+            source/report ZIP for original bytes.
+          </p>
           <button
             className="secondary"
             disabled={!draftMatches}

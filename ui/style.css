@@ -872,3 +872,21 @@ footer span {
   background: rgba(75, 190, 218, 0.22);
   border-left: 3px solid #69cddf;
 }
+.source-inspector .verified-source {
+  width: 100%;
+  min-width: 0;
+  height: 370px;
+  resize: vertical;
+  font:
+    13px/20px Consolas,
+    "Liberation Mono",
+    monospace;
+  white-space: pre;
+  tab-size: 4;
+  background: #172332;
+  color: #eef4fa;
+}
+.verified-source::selection {
+  background: #24688a;
+  color: #ffffff;
+}

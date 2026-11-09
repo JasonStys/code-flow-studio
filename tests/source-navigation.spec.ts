@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: project()@L27; reference(overrides: Partial<SourceLocation> = {})@L33
- * variables: hash@L23; source@L25; language@L57; candidate@L71; candidate@L78; line@L89; candidate@L129; candidate@L146; generated@L153; candidate@L200
+ * functions: project()@L28; reference(overrides: Partial<SourceLocation> = {})@L34
+ * variables: hash@L24; source@L26; normalized@L49; rows@L50; line@L51; [start, end]@L52; invalid@L60; language@L71; candidate@L85; candidate@L92; line@L103; candidate@L143; candidate@L160; generated@L167; candidate@L214
  * </code-map> */
 
 /**
@@ -17,6 +17,7 @@ import type { Project, SourceLocation } from "../ui/types";
 import {
   sourceFingerprint,
   sourceLineCount,
+  sourceLineSelection,
   verifySourceLocation,
 } from "../ui/source-navigation";
 
@@ -45,6 +46,19 @@ test("exact UTF-8 bytes and physical lines match the independent oracle", async 
   expect(sourceLineCount(source)).toBe(5);
   expect(sourceLineCount("")).toBe(1);
   expect(sourceLineCount("a\r\nb\nc\rd")).toBe(4);
+  const normalized = source.replace(/\r\n?/g, "\n");
+  const rows = source.split(/\r\n|\r|\n/);
+  for (let line = 1; line <= rows.length; line += 1) {
+    const [start, end] = sourceLineSelection(source, line);
+    expect(normalized.slice(start, end)).toBe(rows[line - 1]);
+    expect(start).toBe(
+      rows.slice(0, line - 1).reduce((size, row) => size + row.length + 1, 0),
+    );
+  }
+  expect(sourceLineSelection("", 1)).toEqual([0, 0]);
+  expect(() => sourceLineSelection(source, 6)).toThrow("outside");
+  for (const invalid of [0, -1, 1.5, Number.NaN])
+    expect(() => sourceLineSelection(source, invalid)).toThrow("positive");
   expect(await verifySourceLocation(reference(), project())).toEqual({
     ok: true,
     content: source,

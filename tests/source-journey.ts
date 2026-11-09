@@ -3,7 +3,7 @@
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
  * types: Page@L14
  * functions: inspectHelper(page: Page)@L20
- * variables: inertHelper@L16; locations@L33; inspector@L54
+ * variables: inertHelper@L16; locations@L31; inspector@L52; source@L57
  * </code-map> */
 
 /**
@@ -18,15 +18,13 @@ export const inertHelper =
 
 /** Upload an auxiliary source and inspect a real independently located unreachable statement. */
 export async function inspectHelper(page: Page) {
-  await page
-    .locator('input[type="file"]')
-    .setInputFiles([
-      {
-        name: "helper.py",
-        mimeType: "text/plain",
-        buffer: Buffer.from(inertHelper),
-      },
-    ]);
+  await page.locator('input[type="file"]').setInputFiles([
+    {
+      name: "helper.py",
+      mimeType: "text/plain",
+      buffer: Buffer.from(inertHelper),
+    },
+  ]);
   await page
     .getByRole("button", { name: "Static review · no execution", exact: true })
     .click();
@@ -56,7 +54,19 @@ export async function inspectHelper(page: Page) {
   });
   await expect(inspector).toContainText("helper.py:6");
   await expect(inspector).toContainText("Current draft matches");
-  await expect(inspector.locator(".monaco-editor")).toBeVisible();
-  await expect(inspector.locator(".evidence-source-line")).toHaveCount(1);
+  const source = inspector.getByRole("textbox", {
+    name: "Verified evidence source",
+    exact: true,
+  });
+  await expect(source).toBeVisible();
+  await expect(source).toHaveValue(inertHelper);
+  await expect
+    .poll(() =>
+      source.evaluate((target: HTMLTextAreaElement) =>
+        target.value.slice(target.selectionStart, target.selectionEnd),
+      ),
+    )
+    .toBe("    print('never')");
+  await expect(inspector.locator(".monaco-editor")).toHaveCount(0);
   return inspector;
 }

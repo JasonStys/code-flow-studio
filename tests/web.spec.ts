@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: errors@L25; download@L76; locations@L112; unreachable@L116; locations@L170; locations@L233; inspector@L251; sourceInput@L252; editor@L277; invalid@L307; digest@L308; locations@L338; inspector@L343; legacy@L383; project@L385; locations@L408; inspector@L415
+ * variables: errors@L25; download@L76; locations@L110; unreachable@L114; locations@L168; locations@L231; inspector@L249; sourceInput@L250; editor@L278; invalid@L306; digest@L307; locations@L335; inspector@L340; legacy@L380; project@L382; locations@L405; inspector@L412; source@L452; generated@L453; project@L455; inspector@L484; cycle@L487; artifact@L488; view@L498
  * </code-map> */
 
 /** Real browser flows; controller success does not substitute for isolated worker evidence.
@@ -95,17 +95,15 @@ test("real static review lists auxiliary-file locations and unused code", async 
   page,
 }) => {
   /** Real API, inert upload; this is not a mocked worker/coverage acceptance test. */
-  await page
-    .locator('input[type="file"]')
-    .setInputFiles([
-      {
-        name: "helper.py",
-        mimeType: "text/plain",
-        buffer: Buffer.from(
-          "import math\ndef unused():\n    leftover = 1\n    return 7\n    print('never')\n",
-        ),
-      },
-    ]);
+  await page.locator('input[type="file"]').setInputFiles([
+    {
+      name: "helper.py",
+      mimeType: "text/plain",
+      buffer: Buffer.from(
+        "import math\ndef unused():\n    leftover = 1\n    return 7\n    print('never')\n",
+      ),
+    },
+  ]);
   await page
     .getByRole("button", { name: "Static review · no execution", exact: true })
     .click();
@@ -256,9 +254,12 @@ test("developer inspects exact source, edits only a matching draft and retains t
   await sourceInput.focus();
   await sourceInput.press("ControlOrMeta+Home");
   await page.keyboard.type("SHOULD_NOT_APPEAR");
-  await expect(inspector.locator(".monaco-editor")).not.toContainText(
-    "SHOULD_NOT_APPEAR",
-  );
+  await expect(sourceInput).toHaveValue(inertHelper);
+  expect(
+    await sourceInput.evaluate(
+      (target: HTMLTextAreaElement) => target.readOnly,
+    ),
+  ).toBe(true);
   await inspector
     .getByLabel("Browse snapshot line", { exact: true })
     .fill("999");
@@ -293,9 +294,7 @@ test("developer inspects exact source, edits only a matching draft and retains t
       exact: true,
     }),
   ).toBeDisabled();
-  await expect(inspector.locator(".monaco-editor")).not.toContainText(
-    "newer draft",
-  );
+  await expect(sourceInput).toHaveValue(inertHelper);
   await page.getByRole("button", { name: "Workspace", exact: true }).click();
   await expect(page.locator(".monaco-editor")).toContainText("newer draft");
 });
@@ -306,15 +305,13 @@ test("coverage links verify bytes while mismatched and out-of-range references f
   /** UI-contract fixture only; real collector/toolchain accuracy remains in isolated-worker acceptance. */
   let invalid: "none" | "hash" | "line" = "none";
   const digest = createHash("sha256").update(inertHelper).digest("hex");
-  await page
-    .locator('input[type="file"]')
-    .setInputFiles([
-      {
-        name: "helper.py",
-        mimeType: "text/plain",
-        buffer: Buffer.from(inertHelper),
-      },
-    ]);
+  await page.locator('input[type="file"]').setInputFiles([
+    {
+      name: "helper.py",
+      mimeType: "text/plain",
+      buffer: Buffer.from(inertHelper),
+    },
+  ]);
   await page.route("**/api/review", async (route) =>
     route.fulfill({
       json: {
@@ -446,4 +443,88 @@ test("generated artifacts remain distinct and legacy locations never gain guesse
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+});
+
+test("repeated generated and source inspection releases the read-only view without editor models", async ({
+  page,
+}) => {
+  /** Exercise 32 real mount/close cycles; no retries or browser-process restart hides a lifecycle failure. */
+  let source = "";
+  let generated = "";
+  await page.route("**/api/review", async (route) => {
+    const project = route.request().postDataJSON();
+    source = project.files.find(
+      (file: { name: string }) => file.name === project.entry,
+    ).content;
+    generated = project.tests;
+    await route.fulfill({
+      json: {
+        diagnostics: [
+          {
+            file: project.entry,
+            line: 1,
+            source_sha256: createHash("sha256").update(source).digest("hex"),
+            artifact: "source",
+            message: "Original source fixture",
+          },
+          {
+            file: "test_generated.py",
+            line: 2,
+            source_sha256: createHash("sha256").update(generated).digest("hex"),
+            artifact: "generated",
+            message: "Generated fixture",
+          },
+        ],
+      },
+    });
+  });
+  await page
+    .getByRole("button", { name: "Static review · no execution", exact: true })
+    .click();
+  const inspector = page.getByRole("region", {
+    name: "Evidence source inspector",
+  });
+  for (let cycle = 0; cycle < 16; cycle += 1) {
+    for (const artifact of ["source", "generated"]) {
+      await page
+        .getByRole("button", {
+          name:
+            artifact === "source"
+              ? "Inspect source main.py:1"
+              : "Inspect generated test_generated.py:2",
+          exact: true,
+        })
+        .click();
+      const view = inspector.getByRole("textbox", {
+        name: "Verified evidence source",
+        exact: true,
+      });
+      await expect(view).toHaveValue(
+        artifact === "source" ? source : generated,
+      );
+      await expect
+        .poll(() =>
+          view.evaluate((input: HTMLTextAreaElement) =>
+            input.value.slice(input.selectionStart, input.selectionEnd),
+          ),
+        )
+        .toBe(
+          (artifact === "source" ? source : generated).split("\n")[
+            artifact === "source" ? 0 : 1
+          ],
+        );
+      await expect(page.locator(".monaco-editor")).toHaveCount(0);
+      await expect(view).toHaveCount(1);
+      await inspector
+        .getByRole("button", { name: "Close source inspector", exact: true })
+        .click();
+      await expect(inspector).toHaveCount(0);
+      await expect(
+        page.getByRole("textbox", {
+          name: "Verified evidence source",
+          exact: true,
+        }),
+      ).toHaveCount(0);
+    }
+  }
 });

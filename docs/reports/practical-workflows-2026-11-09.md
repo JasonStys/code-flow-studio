@@ -23,6 +23,35 @@ Actual typing exposed a pre-existing controlled-editor race: rapid model changes
 
 Coverage UI fixtures intentionally simulate report contracts for mismatch/out-of-range/partial/native-metric display. They do **not** claim a new compiler/coverage collector run. The auxiliary Python static-review journey uses the real API. Source-binding unit oracles use independent Node SHA-256 and cover all twelve manifest languages; this does not establish compiler acceptance.
 
+## Hosted Firefox finding and viewer lifecycle correction
+
+The first coordinated hosted controller run (42709864299, job 129476223053) passed 44 of 45 web
+checks but reported Firefox `Target crashed` while opening generated-source inspection. Its log
+does not establish a JavaScript exception, kernel OOM or a proven engine/root cause. Two complete
+local suites had passed; that does not invalidate the hosted failure.
+
+The read-only inspector was simplified to a native read-only textarea. It now creates no Monaco
+editor, model, language service or worker lifecycle of its own. Exact physical-line selection,
+byte hashes, stale-draft guards, copy/browse and generated/source distinction remain. Native
+textarea newline display normalization is explicit and separate from the original-byte hash.
+Independent selection-offset oracles include CR/LF/CRLF, emoji, literal Unicode separators and
+empty/final lines. The actual typing-blocked check asserts the entire retained source value.
+
+The expanded final web suite checks 32 generated/source open-close cycles in the same page per
+engine, asserting exact content/selected line, zero Monaco editor instances while inspecting,
+and removal of the source control after close. This is a product lifecycle regression, with no
+blind retry, assertion removal, browser restart inside the journey or weaker isolation. The
+private-account suite and actual packaged native journey were rerun after this change. Hosted
+validation of the corrective revision is still required; no unproven crash cause is claimed.
+
+Corrective local results: **48/48 final web checks passed** (30 browser journeys and 18 pure
+checks, three engines), including 96 total open/close cycles; **9/9 private journeys passed**;
+the repackaged Windows application again passed its native account/source-inspection journey.
+The new stress check initially exposed WebKit observing the value before post-paint selection;
+selection now commits in a layout effect, and the assertion waits for the actual selected-text
+condition rather than sampling a transient DOM state. No fixed sleeps or retry setting was added.
+Type/build, Ruff and all 65 source maps passed again.
+
 ## Reproduction
 
 Use the declared isolated development dependencies, then run:

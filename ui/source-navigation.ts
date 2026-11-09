@@ -3,7 +3,7 @@
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
  * types: SourceVerification@L19
  * functions: sourceFingerprint(content: string)@L24; sourceLineCount(content: string)@L47
- * variables: MAX_SOURCE_BYTES@L17; character@L28; point@L29; bytes@L33; digest@L40; lines@L48; index@L49; content@L83; harnessName@L87; file@L94; digest@L108; lines@L121
+ * variables: MAX_SOURCE_BYTES@L17; character@L28; point@L29; bytes@L33; digest@L40; lines@L48; index@L49; displayed@L65; start@L66; current@L67; boundary@L68; boundary@L73; content@L102; harnessName@L106; file@L113; digest@L127; lines@L140
  * </code-map> */
 
 /**
@@ -53,6 +53,25 @@ export function sourceLineCount(content: string): number {
     } else if (content[index] === "\n") lines += 1;
   }
   return lines;
+}
+
+/** Find the exact physical line in a native textarea's normalized LF view, preserving UTF-16 offsets. */
+export function sourceLineSelection(
+  content: string,
+  line: number,
+): [number, number] {
+  if (!Number.isSafeInteger(line) || line < 1)
+    throw new Error("Choose a positive physical source line.");
+  const displayed = content.replace(/\r\n?/g, "\n");
+  let start = 0;
+  for (let current = 1; current < line; current += 1) {
+    const boundary = displayed.indexOf("\n", start);
+    if (boundary < 0)
+      throw new Error("Source line is outside the verified content.");
+    start = boundary + 1;
+  }
+  const boundary = displayed.indexOf("\n", start);
+  return [start, boundary < 0 ? displayed.length : boundary];
 }
 
 /** Verify source identity and bounds against one immutable manifest; never infer missing evidence. */
