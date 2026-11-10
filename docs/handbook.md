@@ -2,6 +2,13 @@
 
 By Jason Stys.
 
+Current source is the 0.4.2 delivery candidate. Read its [release notes](releases/v0.4.2.md)
+and the [observed draft-verification CI correction](reports/draft-release-visibility-2026-11-10.md)
+before interpreting release availability. The unchanged Word/Excel editions below
+remain explicit historical snapshots of accepted runtime source
+`7d2158a57bb49e8f837fffbfe23b301902465412`; they are not regenerated or relabeled as
+0.4.2 acceptance. The 0.4.1 draft and its assets remain preserved and unpublished.
+
 Filter diagnostics, unused-code candidates and missed coverage; inspect hash-verified source and navigate safely to unchanged drafts. Fixed rapid typing, worker compatibility and native launch preparation.
 
 Turns report findings into a reproducible developer triage workflow while preserving source identity and isolated execution.

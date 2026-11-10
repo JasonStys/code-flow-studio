@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: strict_object(source)@L43; pairs(items)@L46; invalid_constant(value)@L52; valid_metadata(value)@L61; command(arguments, data, missing)@L88; api(endpoint, body)@L121; no_tag(tag)@L130; product_version()@L142; metadata()@L171; workflow_policy(text)@L185; context()@L217; complete_list(endpoint)@L233; require_source(value)@L245; draft(identifier, value)@L297; names(version, system)@L311; attached(record, version, complete)@L322; archive_metadata(file, system)@L352; upload_bytes(identifier, file, name, expected_digest)@L399; upload(value, identifier)@L451; main()@L509
-# variables: ROOT@L35; REPOSITORY@L36; BASE@L37; WORKFLOWS@L38; CATEGORIES@L39; MAX_ASSET@L40; result@L48; value@L56; executable@L101; result@L104; arguments@L124; arguments@L126; version@L144; name@L150; value@L156; assignments@L160; runtime@L161; node@L163; t@L165; source@L173; operation@L196; value@L219; rows@L235; page@L236; current@L237; source@L247; workflow@L249; envelope@L250; rows@L251; row@L256; row@L266; analyses@L269; current@L270; row@L270; row@L272; row@L275; record@L299; values@L313; name@L319; payload@L319; expected@L324; name@L325; system@L325; result@L327; identifiers@L328; row@L329; name@L330; prefix@L358; expected@L359; found@L360; archive@L362; member@L365; member@L368; archive@L379; expanded@L380; index@L381; member@L381; expanded@L383; name@L385; stream@L391; value@L394; token@L401; connection@L403; started@L404; stream@L406; size@L407; key@L412; value@L412; remaining@L422; uploaded_digest@L423; block@L426; remaining@L430; response@L435; content@L437; result@L439; system@L453; name@L454; paths@L454; receipt@L455; archive@L469; archive_value@L470; worker@L470; payload@L475; sidecar@L475; stream@L484; digest@L485; existing@L490; file@L492; file@L495; current@L496; name@L497; stream@L499; digest@L500; observed@L502; parser@L511; operation@L513; target@L515; value@L519; tag@L522; created@L527; record@L538; output@L540; raw@L543; identifier@L545; record@L550
-# parameters: source@L43; items@L46; value@L52; value@L61; arguments@L88; data@L88; missing@L88; body@L121; endpoint@L121; tag@L130; text@L185; endpoint@L233; value@L245; identifier@L297; value@L297; system@L311; version@L311; complete@L322; record@L322; version@L322; file@L352; system@L352; expected_digest@L399; file@L399; identifier@L399; name@L399; identifier@L451; value@L451
+# functions: strict_object(source)@L43; pairs(items)@L46; invalid_constant(value)@L52; valid_metadata(value)@L61; command(arguments, data, missing)@L88; api(endpoint, body)@L121; no_tag(tag)@L130; product_version()@L142; metadata()@L171; workflow_policy(text)@L185; context()@L244; complete_list(endpoint)@L260; require_source(value)@L272; draft(identifier, value)@L324; names(version, system)@L338; attached(record, version, complete)@L349; archive_metadata(file, system)@L379; upload_bytes(identifier, file, name, expected_digest)@L426; upload(value, identifier)@L478; main()@L536
+# variables: ROOT@L35; REPOSITORY@L36; BASE@L37; WORKFLOWS@L38; CATEGORIES@L39; MAX_ASSET@L40; result@L48; value@L56; executable@L101; result@L104; arguments@L124; arguments@L126; version@L144; name@L150; value@L156; assignments@L160; runtime@L161; node@L163; t@L165; source@L173; operation@L196; verifier@L209; fields@L210; line@L211; field@L214; permissions@L221; scopes@L222; line@L224; scope@L227; _@L232; name@L232; value@L246; rows@L262; page@L263; current@L264; source@L274; workflow@L276; envelope@L277; rows@L278; row@L283; row@L293; analyses@L296; current@L297; row@L297; row@L299; row@L302; record@L326; values@L340; name@L346; payload@L346; expected@L351; name@L352; system@L352; result@L354; identifiers@L355; row@L356; name@L357; prefix@L385; expected@L386; found@L387; archive@L389; member@L392; member@L395; archive@L406; expanded@L407; index@L408; member@L408; expanded@L410; name@L412; stream@L418; value@L421; token@L428; connection@L430; started@L431; stream@L433; size@L434; key@L439; value@L439; remaining@L449; uploaded_digest@L450; block@L453; remaining@L457; response@L462; content@L464; result@L466; system@L480; name@L481; paths@L481; receipt@L482; archive@L496; archive_value@L497; worker@L497; payload@L502; sidecar@L502; stream@L511; digest@L512; existing@L517; file@L519; file@L522; current@L523; name@L524; stream@L526; digest@L527; observed@L529; parser@L538; operation@L540; target@L542; value@L546; tag@L549; created@L554; record@L565; output@L567; raw@L570; identifier@L572; record@L577
+# parameters: source@L43; items@L46; value@L52; value@L61; arguments@L88; data@L88; missing@L88; body@L121; endpoint@L121; tag@L130; text@L185; endpoint@L260; value@L272; identifier@L324; value@L324; system@L338; version@L338; complete@L349; record@L349; version@L349; file@L379; system@L379; expected_digest@L426; file@L426; identifier@L426; name@L426; identifier@L478; value@L478
 # </code-map>
 
 """Jason Stys: exact-main CodeQL-gated, numeric-ID-bound draft preparation and uploads.
@@ -206,6 +206,33 @@ def workflow_policy(text: str) -> None:
         "Build source/prepared release binding missing",
     )
     require("max-parallel: 1" in text, "Release build/uploads must be serialized")
+    verifier = text.split("\n  verify-draft:", 1)[1]
+    fields = []
+    for line in verifier.splitlines():
+        if not re.match(r"^    [^ \t#]", line):
+            continue
+        field = re.match(r"^    ([a-z][a-z_-]*):(?:[ \t]|$)", line)
+        require(field is not None, "Unparsed final verification job field")
+        fields.append(field[1])
+    require(
+        fields == ["if", "needs", "runs-on", "timeout-minutes", "permissions", "steps"],
+        "Duplicate or unknown final verification job field",
+    )
+    permissions = re.search(r"(?ms)^    permissions:\n(.*?)(?=^    [a-z][a-z_-]*:|\Z)", verifier)
+    scopes = []
+    require(permissions is not None, "Explicit draft verification permissions required")
+    for line in permissions[1].splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        scope = re.fullmatch(r"      ([a-z-]+): (read|write|none)(?:[ \t]+#[^\r\n]*)?[ \t]*", line)
+        require(scope is not None, "Unparsed draft verification permission line")
+        scopes.append(scope.groups())
+    require(
+        len(scopes) == 3
+        and len({name for name, _ in scopes}) == len(scopes)
+        and dict(scopes) == {"contents": "write", "actions": "read", "security-events": "read"},
+        "Draft verification needs push-capable contents visibility and only read actions/security scopes",
+    )
     require(
         "STUDIO_INSTALLED_APP" in text
         and "npm run test:desktop" in text

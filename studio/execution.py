@@ -25,7 +25,7 @@ from studio.analysis import inspect_source
 from studio.locations import tool_locations
 from studio.models import Project
 
-IMAGE = "code-flow-worker:0.4.1"
+IMAGE = "code-flow-worker:0.4.2"
 DOCKER = os.environ.get("STUDIO_DOCKER", shutil.which("docker") or "docker")
 
 

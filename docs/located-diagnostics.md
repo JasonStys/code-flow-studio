@@ -7,7 +7,7 @@ Version 0.3 extends the original Python contract with [native coverage and unuse
 ## Use it
 
 1. Upload the flat source files or edit them in Workspace. Select **Static review · no execution**. The Evidence view lists original filename, one-based line/column, check code and explanation. This works without Docker or a configured AI provider.
-2. Approve independent stdin/stdout cases, save the revision and run checks with the updated isolated worker. Evidence adds compiler/runtime references, native unused candidates and **Uncovered source locations** with a language-specific metric. Rebuild the worker after updating source: `docker build -t code-flow-worker:0.4.1 runner`. This command is for an already working, authorized Docker engine; the application never repairs Docker or falls back to executing targets on the host.
+2. Approve independent stdin/stdout cases, save the revision and run checks with the updated isolated worker. Evidence adds compiler/runtime references, native unused candidates and **Uncovered source locations** with a language-specific metric. Rebuild the worker after updating source: `docker build -t code-flow-worker:0.4.2 runner`. This command is for an already working, authorized Docker engine; the application never repairs Docker or falls back to executing targets on the host.
 3. Download JSON, HTML or ZIP. HTML now includes a readable location table and per-file missing-line lists before raw evidence. JSON and ZIP retain the same structured fields and source/test snapshots. Check a file's `source_sha256` against that snapshot before applying a finding to another version.
 
 ## What is checked

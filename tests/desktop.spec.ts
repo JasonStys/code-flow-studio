@@ -103,7 +103,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       );
       expect(metadata.schema).toBe(1);
       expect(metadata.product).toBe("code-flow-studio");
-      expect(metadata.version).toBe("0.4.1");
+      expect(metadata.version).toBe("0.4.2");
       expect(metadata.source).toMatch(/^[a-f0-9]{40}$/);
       expect(typeof metadata.source_dirty).toBe("boolean");
       expect(metadata.worker_sha256).toBe(
@@ -150,7 +150,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       if (browserErrors.length < 8) browserErrors.push(error.name);
     });
     const health = await page.request.get(new URL("/health", page.url()).href);
-    expect((await health.json()).version).toBe("0.4.1");
+    expect((await health.json()).version).toBe("0.4.2");
     try {
       console.info("NATIVE_JOURNEY_STAGE", "account:start");
       await createSession(page, "native_fictional");
@@ -332,7 +332,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       "artifacts/native-resource-acceptance.json",
       JSON.stringify({
         schema: 1,
-        version: "0.4.1",
+        version: "0.4.2",
         source: acceptedPackage.source,
         worker_sha256: acceptedPackage.worker_sha256,
         compiled_app: true,

@@ -2,7 +2,9 @@
 
 - [Verified source inspection and draft navigation](source-navigation.md), with [observed practical-workflow validation](reports/practical-workflows-2026-11-09.md).
 - [Worker sanitizer compatibility and separate analyzer audit](worker-toolchain.md).
-- [0.4.1 hotfix preparation](releases/v0.4.1.md): descriptor-bound worker JSON reads; full-main CodeQL fixes and pending native acceptance.
+- [0.4.2 delivery correction](releases/v0.4.2.md): required draft visibility for the read-only final verifier; coherent new product/worker metadata and preserved prior assets.
+- [Draft-verification CI report](reports/draft-release-visibility-2026-11-10.md): actual failed final job, official visibility rule, narrow permission/policy regression and separate pending delivery gates.
+- [0.4.1 historical hotfix](releases/v0.4.1.md): descriptor-bound worker reads and safe shutdown; native builds passed but final draft metadata visibility failed.
 - [0.4.1 finding and release-guard validation](reports/codeql-main-fixes-2026-11-09.md): exact original alerts, independent negative cases, local compiled package provenance and required hosted acceptance.
 - [0.4.0 release notes](releases/v0.4.0.md): exact-source publication gate, unchanged data formats and matching worker-image update.
 
@@ -26,4 +28,3 @@
 - [Research and provenance](research.md): source review and primary technical references.
 - [Remaining scope](remaining-scope.md): implemented contracts, missing integrations and acceptance milestones.
 - [Evidence files](evidence/worker-evidence.json): genuine isolated worker reports; training and inference reports are in the same directory and linked from the validation report.
-

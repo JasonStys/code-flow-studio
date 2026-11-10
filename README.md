@@ -2,7 +2,7 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Version 0.4.1: bounded worker reports and verified source review.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+**Version 0.4.2: bounded reports, safe shutdown and corrected draft verification.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
 Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-polyglot.md), [historical Python-location validation](docs/validation-locations.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
@@ -38,10 +38,15 @@ The [source inspection workflow](docs/source-navigation.md) explains stale/legac
 
 ## Run and install
 
-Version 0.4.1 includes bounded worker-report reads and verified source review. Its [release notes](docs/releases/v0.4.1.md)
+Version 0.4.2 retains bounded worker-report reads, verified source review and safe
+local shutdown, and corrects the final draft-verification job's required metadata
+visibility. Its [release notes](docs/releases/v0.4.2.md)
 and [full-main finding/validation report](docs/reports/codeql-main-fixes-2026-11-09.md)
 describe the bounded worker reader and the fresh native/download checks required
-before release promotion. Check Releases for the currently published downloads; a source version alone does not replace one.
+before release promotion. The 0.4.1 draft passed native builds but its final
+metadata check lacked GitHub's required draft visibility; that draft and all its
+assets are preserved. See the [observed CI fault and narrow correction](docs/reports/draft-release-visibility-2026-11-10.md).
+Check Releases for the currently published downloads; a source version alone does not replace one.
 
 For end users, use the checksummed OS-specific packages in Releases. The UI runtime is bundled. Open the app's **Code Flow → Open local website** menu for browser use; no login token appears in the URL. Compiler jobs require an isolated local Unix/named-pipe Docker engine and the trusted worker image. Missing isolation is blocked, never passed; there is no host-execution fallback. Save/edit/static review/history/help remain usable without Docker.
 

@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Connection@L412
-# functions: source_responses()@L41; strict_reader(responses)@L81; read(endpoint)@L84; release_record()@L92; test_real_source_response_contract_passes(monkeypatch)@L110; test_zero_unknown_or_noninteger_codeql_rule_counts_never_authorize_release(monkeypatch, count)@L117; test_source_failures_cannot_authorize_release(monkeypatch, defect)@L149; test_unknown_or_full_scan_pages_fail_closed(monkeypatch)@L193; test_prepared_numeric_id_cannot_be_public_or_swapped(monkeypatch, change)@L210; test_actual_workflow_policy_rejects_security_mutants(before, after)@L234; test_package_schema_is_strict(value)@L245; test_metadata_duplicates_nonfinite_and_nonobjects_are_errors(source)@L253; portable(file, value, worker, system, symlink)@L259; test_actual_platform_archive_metadata(tmp_path, system, suffix)@L283; test_archive_metadata_link_is_never_followed(tmp_path)@L290; staged(tmp_path, monkeypatch)@L298; test_invalid_local_or_remote_package_cannot_reach_upload(tmp_path, monkeypatch, defect)@L339; test_exact_staged_files_upload_to_prepared_id_without_overwrite(tmp_path, monkeypatch)@L370; send(identifier, file, name, digest)@L375; test_fixed_https_transport_id_digest_and_redirect_refusal(tmp_path, monkeypatch, status, digest_ok)@L405; __init__(self, host, timeout)@L415; putrequest(self, method, url)@L418; putheader(self, key, value)@L421; endheaders(self)@L425; send(self, block)@L428; getresponse(self)@L431; close(self)@L447; test_cli_command_allowlist_precedes_execution(monkeypatch)@L462; test_tag_absence_distinguishes_real404_from_permission_errors(monkeypatch)@L477; prepared_context(tmp_path, monkeypatch)@L500; test_actual_prepare_orders_all_checks_before_the_only_write(tmp_path, monkeypatch, defect)@L524; transport(endpoint, body)@L545; test_untrusted_context_never_reaches_github(tmp_path, monkeypatch, field, value)@L586; test_final_verification_rechecks_security_but_keeps_release_draft(tmp_path, monkeypatch, capsys)@L595; test_dirty_source_and_publish_operation_are_refused_before_network(tmp_path, monkeypatch)@L623; test_actual_checked_in_product_version_and_worker_metadata()@L636; test_api_structured_body_and_fixed_namespace(monkeypatch)@L641; execute(arguments, data)@L645
-# variables: SOURCE@L30; VALUE@L31; result@L43; workflow@L44; category@L73; index@L73; prefix@L94; responses@L119; row@L120; responses@L151; key@L152; row@L153; field@L155; value@L155; analyses@L177; original@L236; changed@L238; bad@L247; prefix@L261; members@L262; archive@L267; content@L268; name@L268; archive@L271; content@L272; name@L272; entry@L273; file@L285; file@L292; directory@L302; installer@L304; archive@L306; file@L308; digest@L309; record@L324; changes@L341; directory@L348; record@L348; _@L372; record@L372; writes@L373; row@L378; row@L380; file@L407; digest@L409; events@L410; key@L459; value@L459; arguments@L467; accepted@L480; code@L480; error@L480; output@L480; workflow@L502; key@L509; value@L509; responses@L527; listing@L528; record@L540; reads@L543; writes@L543; record@L600; system@L601; name@L602; responses@L612; result@L617; error@L631; calls@L643; body@L651
-# parameters: responses@L81; endpoint@L84; kwargs@L84; changes@L92; monkeypatch@L110; count@L117; monkeypatch@L117; defect@L149; monkeypatch@L149; monkeypatch@L193; endpoint@L195; change@L210; monkeypatch@L210; tag@L213; after@L234; before@L234; value@L245; source@L253; file@L259; symlink@L259; system@L259; value@L259; worker@L259; suffix@L283; system@L283; tmp_path@L283; tmp_path@L290; metadata_changes@L298; monkeypatch@L298; tmp_path@L298; tag@L325; endpoint@L329; defect@L339; monkeypatch@L339; tmp_path@L339; args@L364; monkeypatch@L370; tmp_path@L370; digest@L375; file@L375; identifier@L375; name@L375; digest_ok@L405; monkeypatch@L405; status@L405; tmp_path@L405; host@L415; self@L415; timeout@L415; method@L418; self@L418; url@L418; key@L421; self@L421; value@L421; self@L425; block@L428; self@L428; self@L431; limit@L437; self@L437; self@L447; monkeypatch@L462; args@L465; kwargs@L465; monkeypatch@L477; name@L479; args@L489; code@L489; error@L489; kwargs@L489; output@L489; monkeypatch@L500; tmp_path@L500; defect@L524; monkeypatch@L524; tmp_path@L524; body@L545; endpoint@L545; tag@L565; field@L586; monkeypatch@L586; tmp_path@L586; value@L586; args@L590; kwargs@L590; capsys@L595; monkeypatch@L595; tmp_path@L595; tag@L615; monkeypatch@L623; tmp_path@L623; args@L627; kwargs@L627; monkeypatch@L641; arguments@L645; data@L645
+# classes: Connection@L472
+# functions: source_responses()@L41; strict_reader(responses)@L81; read(endpoint)@L84; release_record()@L92; test_real_source_response_contract_passes(monkeypatch)@L110; test_zero_unknown_or_noninteger_codeql_rule_counts_never_authorize_release(monkeypatch, count)@L117; test_source_failures_cannot_authorize_release(monkeypatch, defect)@L149; test_unknown_or_full_scan_pages_fail_closed(monkeypatch)@L193; test_prepared_numeric_id_cannot_be_public_or_swapped(monkeypatch, change)@L210; test_actual_workflow_policy_rejects_security_mutants(before, after)@L234; test_real_final_job_permission_mutations_cannot_authorize_draft(scope, before, after)@L250; test_commented_duplicate_or_unparsed_final_permissions_fail_closed(extra)@L266; test_legitimate_final_scope_comments_are_parsed_not_ignored()@L276; test_duplicate_whole_final_permission_blocks_fail_closed(position, field)@L290; test_package_schema_is_strict(value)@L305; test_metadata_duplicates_nonfinite_and_nonobjects_are_errors(source)@L313; portable(file, value, worker, system, symlink)@L319; test_actual_platform_archive_metadata(tmp_path, system, suffix)@L343; test_archive_metadata_link_is_never_followed(tmp_path)@L350; staged(tmp_path, monkeypatch)@L358; test_invalid_local_or_remote_package_cannot_reach_upload(tmp_path, monkeypatch, defect)@L399; test_exact_staged_files_upload_to_prepared_id_without_overwrite(tmp_path, monkeypatch)@L430; send(identifier, file, name, digest)@L435; test_fixed_https_transport_id_digest_and_redirect_refusal(tmp_path, monkeypatch, status, digest_ok)@L465; __init__(self, host, timeout)@L475; putrequest(self, method, url)@L478; putheader(self, key, value)@L481; endheaders(self)@L485; send(self, block)@L488; getresponse(self)@L491; close(self)@L507; test_cli_command_allowlist_precedes_execution(monkeypatch)@L522; test_tag_absence_distinguishes_real404_from_permission_errors(monkeypatch)@L537; prepared_context(tmp_path, monkeypatch)@L560; test_actual_prepare_orders_all_checks_before_the_only_write(tmp_path, monkeypatch, defect)@L584; transport(endpoint, body)@L605; test_untrusted_context_never_reaches_github(tmp_path, monkeypatch, field, value)@L646; test_final_verification_rechecks_security_but_keeps_release_draft(tmp_path, monkeypatch, capsys)@L655; test_dirty_source_and_publish_operation_are_refused_before_network(tmp_path, monkeypatch)@L683; test_actual_checked_in_product_version_and_worker_metadata()@L696; test_api_structured_body_and_fixed_namespace(monkeypatch)@L701; execute(arguments, data)@L705
+# variables: SOURCE@L30; VALUE@L31; result@L43; workflow@L44; category@L73; index@L73; prefix@L94; responses@L119; row@L120; responses@L151; key@L152; row@L153; field@L155; value@L155; analyses@L177; original@L236; changed@L238; original@L252; prefix@L254; separator@L254; verifier@L254; changed@L256; original@L268; prefix@L269; separator@L269; verifier@L269; changed@L271; original@L278; prefix@L279; separator@L279; verifier@L279; changed@L281; original@L292; prefix@L293; separator@L293; verifier@L293; extra@L295; changed@L297; changed@L299; bad@L307; prefix@L321; members@L322; archive@L327; content@L328; name@L328; archive@L331; content@L332; name@L332; entry@L333; file@L345; file@L352; directory@L362; installer@L364; archive@L366; file@L368; digest@L369; record@L384; changes@L401; directory@L408; record@L408; _@L432; record@L432; writes@L433; row@L438; row@L440; file@L467; digest@L469; events@L470; key@L519; value@L519; arguments@L527; accepted@L540; code@L540; error@L540; output@L540; workflow@L562; key@L569; value@L569; responses@L587; listing@L588; record@L600; reads@L603; writes@L603; record@L660; system@L661; name@L662; responses@L672; result@L677; error@L691; calls@L703; body@L711
+# parameters: responses@L81; endpoint@L84; kwargs@L84; changes@L92; monkeypatch@L110; count@L117; monkeypatch@L117; defect@L149; monkeypatch@L149; monkeypatch@L193; endpoint@L195; change@L210; monkeypatch@L210; tag@L213; after@L234; before@L234; after@L250; before@L250; scope@L250; extra@L266; field@L290; position@L290; value@L305; source@L313; file@L319; symlink@L319; system@L319; value@L319; worker@L319; suffix@L343; system@L343; tmp_path@L343; tmp_path@L350; metadata_changes@L358; monkeypatch@L358; tmp_path@L358; tag@L385; endpoint@L389; defect@L399; monkeypatch@L399; tmp_path@L399; args@L424; monkeypatch@L430; tmp_path@L430; digest@L435; file@L435; identifier@L435; name@L435; digest_ok@L465; monkeypatch@L465; status@L465; tmp_path@L465; host@L475; self@L475; timeout@L475; method@L478; self@L478; url@L478; key@L481; self@L481; value@L481; self@L485; block@L488; self@L488; self@L491; limit@L497; self@L497; self@L507; monkeypatch@L522; args@L525; kwargs@L525; monkeypatch@L537; name@L539; args@L549; code@L549; error@L549; kwargs@L549; output@L549; monkeypatch@L560; tmp_path@L560; defect@L584; monkeypatch@L584; tmp_path@L584; body@L605; endpoint@L605; tag@L625; field@L646; monkeypatch@L646; tmp_path@L646; value@L646; args@L650; kwargs@L650; capsys@L655; monkeypatch@L655; tmp_path@L655; tag@L675; monkeypatch@L683; tmp_path@L683; args@L687; kwargs@L687; monkeypatch@L701; arguments@L705; data@L705
 # </code-map>
 
 """Jason Stys: independent real-shape main/security/draft fixtures and actual archive/transport oracles.
@@ -31,7 +31,7 @@ SOURCE = "a" * 40
 VALUE = {
     "schema": 1,
     "product": "code-flow-studio",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "source": SOURCE,
     "source_dirty": False,
     "worker_sha256": hashlib.sha256(b"fixed worker fixture").hexdigest(),
@@ -94,7 +94,7 @@ def release_record(**changes):
     prefix = gate.BASE + "/releases/123"
     return {
         "id": 123,
-        "tag_name": "v0.4.1",
+        "tag_name": "v0.4.2",
         "target_commitish": SOURCE,
         "draft": True,
         "prerelease": False,
@@ -241,6 +241,66 @@ def test_actual_workflow_policy_rejects_security_mutants(before, after):
         gate.workflow_policy(changed)
 
 
+@pytest.mark.parametrize("scope,before,after", [
+    ("contents", "write", "read"),
+    ("contents", "write", "none"),
+    ("actions", "read", "write"),
+    ("security-events", "read", "write"),
+])
+def test_real_final_job_permission_mutations_cannot_authorize_draft(scope, before, after):
+    """The actual final job needs draft visibility; unrelated API privileges cannot silently expand."""
+    original = (gate.ROOT / ".github/workflows/release-native.yml").read_text(encoding="utf-8")
+    gate.workflow_policy(original)
+    prefix, separator, verifier = original.partition("\n  verify-draft:")
+    assert separator and verifier.count(f"      {scope}: {before}") == 1
+    changed = prefix + separator + verifier.replace(f"      {scope}: {before}", f"      {scope}: {after}", 1)
+    with pytest.raises(ValueError):
+        gate.workflow_policy(changed)
+
+
+@pytest.mark.parametrize("extra", [
+    "      packages: write # extra privilege\n",
+    "      contents: read # later actual override\n",
+    "      packages: ${{ github.token }}\n",
+])
+def test_commented_duplicate_or_unparsed_final_permissions_fail_closed(extra):
+    """Extra scopes cannot hide in comments or duplicate keys that GitHub could interpret differently."""
+    original = (gate.ROOT / ".github/workflows/release-native.yml").read_text(encoding="utf-8")
+    prefix, separator, verifier = original.partition("\n  verify-draft:")
+    assert separator and verifier.count("    steps:\n") == 1
+    changed = prefix + separator + verifier.replace("    steps:\n", extra + "    steps:\n", 1)
+    with pytest.raises(ValueError):
+        gate.workflow_policy(changed)
+
+
+def test_legitimate_final_scope_comments_are_parsed_not_ignored():
+    """An inline explanation preserves its permission value, with no ignored mapping lines."""
+    original = (gate.ROOT / ".github/workflows/release-native.yml").read_text(encoding="utf-8")
+    prefix, separator, verifier = original.partition("\n  verify-draft:")
+    assert separator
+    changed = prefix + separator + verifier.replace("      contents: write", "      contents: write # draft visibility", 1)
+    gate.workflow_policy(changed)
+
+
+@pytest.mark.parametrize("position,field", [
+    ("before-steps", "permissions"),
+    ("after-steps", "permissions"),
+    ("after-steps", '"permissions"'),
+])
+def test_duplicate_whole_final_permission_blocks_fail_closed(position, field):
+    """A later YAML mapping must not override the already validated final-job permissions."""
+    original = (gate.ROOT / ".github/workflows/release-native.yml").read_text(encoding="utf-8")
+    prefix, separator, verifier = original.partition("\n  verify-draft:")
+    assert separator
+    extra = f"    {field}:\n      contents: read\n"
+    if position == "before-steps":
+        changed = prefix + separator + verifier.replace("    steps:\n", extra + "    steps:\n", 1)
+    else:
+        changed = original + extra
+    with pytest.raises(ValueError):
+        gate.workflow_policy(changed)
+
+
 @pytest.mark.parametrize("value", [True, "1", 2])
 def test_package_schema_is_strict(value):
     """Python boolean/integer equality must not authorize malformed package provenance."""
@@ -301,9 +361,9 @@ def staged(tmp_path, monkeypatch, **metadata_changes):
     monkeypatch.setenv("RUNNER_OS", "Windows")
     directory = tmp_path / "release/installers"
     directory.mkdir(parents=True)
-    installer = directory / "Code Flow Studio Setup 0.4.1.exe"
+    installer = directory / "Code Flow Studio Setup 0.4.2.exe"
     installer.write_bytes(b"inert fixture, never executable")
-    archive = directory / "CodeFlowStudio-0.4.1-windows-x64.zip"
+    archive = directory / "CodeFlowStudio-0.4.2-windows-x64.zip"
     portable(archive, {**VALUE, **metadata_changes})
     for file in (installer, archive):
         digest = hashlib.sha256(file.read_bytes()).hexdigest()
@@ -313,7 +373,7 @@ def staged(tmp_path, monkeypatch, **metadata_changes):
         json.dumps(
             {
                 "schema": 1,
-                "version": "0.4.1",
+                "version": "0.4.2",
                 "source": SOURCE,
                 "worker_sha256": VALUE["worker_sha256"],
                 "compiled_app": True,
@@ -347,14 +407,14 @@ def test_invalid_local_or_remote_package_cannot_reach_upload(tmp_path, monkeypat
     )
     record, directory = staged(tmp_path, monkeypatch, **changes)
     if defect == "bad-sidecar":
-        (directory / "Code Flow Studio Setup 0.4.1.exe.sha256").write_text("wrong")
+        (directory / "Code Flow Studio Setup 0.4.2.exe.sha256").write_text("wrong")
     elif defect == "missing-receipt":
         (tmp_path / "artifacts/native-resource-acceptance.json").unlink()
     elif defect == "colliding-asset":
         record["assets"] = [
             {
                 "id": 77,
-                "name": "Code.Flow.Studio.Setup.0.4.1.exe",
+                "name": "Code.Flow.Studio.Setup.0.4.2.exe",
                 "size": 12,
                 "state": "uploaded",
                 "digest": "sha256:" + "c" * 64,
@@ -391,10 +451,10 @@ def test_exact_staged_files_upload_to_prepared_id_without_overwrite(tmp_path, mo
     monkeypatch.setattr(gate, "upload_bytes", send)
     gate.upload(VALUE, 123)
     assert set(writes) == {
-        "Code.Flow.Studio.Setup.0.4.1.exe",
-        "Code.Flow.Studio.Setup.0.4.1.exe.sha256",
-        "CodeFlowStudio-0.4.1-windows-x64.zip",
-        "CodeFlowStudio-0.4.1-windows-x64.zip.sha256",
+        "Code.Flow.Studio.Setup.0.4.2.exe",
+        "Code.Flow.Studio.Setup.0.4.2.exe.sha256",
+        "CodeFlowStudio-0.4.2-windows-x64.zip",
+        "CodeFlowStudio-0.4.2-windows-x64.zip.sha256",
     }
     with pytest.raises(ValueError, match="collision"):
         gate.upload(VALUE, 123)
@@ -491,10 +551,10 @@ def test_tag_absence_distinguishes_real404_from_permission_errors(monkeypatch):
             ),
         )
         if accepted:
-            gate.no_tag("v0.4.1")
+            gate.no_tag("v0.4.2")
         else:
             with pytest.raises((ValueError, RuntimeError)):
-                gate.no_tag("v0.4.1")
+                gate.no_tag("v0.4.2")
 
 
 def prepared_context(tmp_path, monkeypatch):
@@ -503,7 +563,7 @@ def prepared_context(tmp_path, monkeypatch):
     (tmp_path / ".github/workflows").mkdir(parents=True)
     (tmp_path / ".github/workflows/release-native.yml").write_text(workflow)
     (tmp_path / "docs/releases").mkdir(parents=True)
-    (tmp_path / "docs/releases/v0.4.1.md").write_text("Owned synthetic release notes")
+    (tmp_path / "docs/releases/v0.4.2.md").write_text("Owned synthetic release notes")
     monkeypatch.setattr(gate, "ROOT", tmp_path)
     monkeypatch.setattr(gate, "metadata", lambda: copy.deepcopy(VALUE))
     for key, value in {
@@ -547,11 +607,11 @@ def test_actual_prepare_orders_all_checks_before_the_only_write(tmp_path, monkey
         if body is not None:
             assert endpoint == gate.BASE + "/releases"
             assert body == {
-                "tag_name": "v0.4.1",
+                "tag_name": "v0.4.2",
                 "target_commitish": SOURCE,
                 "draft": True,
                 "prerelease": False,
-                "name": "Code Flow Studio 0.4.1",
+                "name": "Code Flow Studio 0.4.2",
                 "body": "Owned synthetic release notes",
             }
             assert listing in reads and len(reads) >= 6
@@ -566,7 +626,7 @@ def test_actual_prepare_orders_all_checks_before_the_only_write(tmp_path, monkey
     if defect == "none":
         gate.main()
         assert len(writes) == 1
-        assert (tmp_path / "outputs").read_text() == f"sha={SOURCE}\ntag=v0.4.1\nrelease_id=123\n"
+        assert (tmp_path / "outputs").read_text() == f"sha={SOURCE}\ntag=v0.4.2\nrelease_id=123\n"
     else:
         with pytest.raises(ValueError):
             gate.main()
@@ -599,7 +659,7 @@ def test_final_verification_rechecks_security_but_keeps_release_draft(tmp_path, 
     monkeypatch.setenv("EXPECTED_RELEASE_ID", "123")
     record = release_record()
     for system in ("Windows", "Linux", "macOS"):
-        for name in gate.names("0.4.1", system):
+        for name in gate.names("0.4.2", system):
             record["assets"].append(
                 {
                     "id": 100 + len(record["assets"]),
@@ -635,7 +695,7 @@ def test_dirty_source_and_publish_operation_are_refused_before_network(tmp_path,
 
 def test_actual_checked_in_product_version_and_worker_metadata():
     """Exercise the production data-only coherence reader independently of prepared-context fixtures."""
-    assert gate.product_version() == "0.4.1"
+    assert gate.product_version() == "0.4.2"
 
 
 def test_api_structured_body_and_fixed_namespace(monkeypatch):
@@ -648,7 +708,7 @@ def test_api_structured_body_and_fixed_namespace(monkeypatch):
         return '{"id":123}'
 
     monkeypatch.setattr(gate, "command", execute)
-    body = {"draft": True, "tag_name": "v0.4.1", "target_commitish": SOURCE}
+    body = {"draft": True, "tag_name": "v0.4.2", "target_commitish": SOURCE}
     assert gate.api(gate.BASE + "/releases", body=body) == {"id": 123}
     assert calls[0][0] == ["gh", "api", gate.BASE + "/releases", "--method", "POST", "--input", "-"]
     assert json.loads(calls[0][1]) == body
