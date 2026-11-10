@@ -75,6 +75,25 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `suffix` | 101 |
 | variable | `data` | 102 |
 
+## examples/practical_projects.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `_source(text)` | 25 |
+| parameter | `text` | 25 |
+| variable | `PROGRAMS` | 30 |
+| variable | `CASES` | 321 |
+| variable | `SYNTAX_FAILURES` | 437 |
+| variable | `RUNTIME_FAILURES` | 458 |
+| function | `practical_project(language)` | 477 |
+| parameter | `language` | 477 |
+| variable | `content` | 486 |
+| variable | `entry` | 486 |
+| variable | `exit_code` | 494 |
+| variable | `name` | 494 |
+| variable | `stdin` | 494 |
+| variable | `stdout` | 494 |
+
 ## examples/projects.py
 
 | Kind | Declaration | Line |
@@ -715,6 +734,181 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `expected` | 139 |
 | variable | `output` | 140 |
 
+## scripts/compiler_acceptance.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `RELEASE_SOURCE` | 40 |
+| variable | `RELEASE_WORKER_SHA256` | 41 |
+| function | `require(condition, message)` | 44 |
+| parameter | `condition` | 44 |
+| parameter | `message` | 44 |
+| function | `source_digest(text)` | 50 |
+| parameter | `text` | 50 |
+| function | `source_line_count(text)` | 55 |
+| parameter | `text` | 55 |
+| function | `validate_coverage_completion(coverage, project)` | 60 |
+| parameter | `coverage` | 60 |
+| parameter | `project` | 60 |
+| variable | `wrapped` | 62 |
+| variable | `cases` | 64 |
+| variable | `actual` | 69 |
+| variable | `expected` | 69 |
+| variable | `wrapped` | 85 |
+| variable | `expected_status` | 86 |
+| function | `validate_locations(result, project)` | 93 |
+| parameter | `project` | 93 |
+| parameter | `result` | 93 |
+| variable | `file` | 95 |
+| variable | `sources` | 95 |
+| variable | `item` | 97 |
+| variable | `line` | 98 |
+| variable | `name` | 98 |
+| function | `validate_positive(result, project)` | 106 |
+| parameter | `project` | 106 |
+| parameter | `result` | 106 |
+| variable | `compilation` | 109 |
+| variable | `checks` | 116 |
+| variable | `observed` | 118 |
+| variable | `actual` | 120 |
+| variable | `expected` | 120 |
+| variable | `oracle` | 130 |
+| variable | `case` | 131 |
+| variable | `benchmark` | 135 |
+| variable | `samples` | 136 |
+| variable | `value` | 139 |
+| variable | `coverage` | 145 |
+| variable | `entry` | 148 |
+| variable | `content` | 149 |
+| variable | `file` | 149 |
+| variable | `measured` | 155 |
+| variable | `name` | 155 |
+| variable | `file` | 158 |
+| variable | `source` | 158 |
+| variable | `line` | 163 |
+| variable | `executed` | 165 |
+| variable | `missing` | 165 |
+| variable | `summary` | 171 |
+| variable | `covered` | 172 |
+| variable | `extra` | 180 |
+| variable | `first` | 184 |
+| function | `negative_project(project, kind)` | 207 |
+| parameter | `kind` | 207 |
+| parameter | `project` | 207 |
+| variable | `data` | 209 |
+| variable | `replacement` | 215 |
+| function | `validate_negative(result, project, kind)` | 226 |
+| parameter | `kind` | 226 |
+| parameter | `project` | 226 |
+| parameter | `result` | 226 |
+| variable | `expected_oracle` | 237 |
+| variable | `case` | 238 |
+| variable | `checks` | 241 |
+| variable | `line` | 259 |
+| variable | `item` | 265 |
+| variable | `case` | 276 |
+| variable | `exit_code` | 283 |
+| variable | `marker` | 288 |
+| class | `Evidence` | 305 |
+| function | `__init__(self, output, provenance)` | 308 |
+| parameter | `output` | 308 |
+| parameter | `provenance` | 308 |
+| parameter | `self` | 308 |
+| function | `record(self, language, kind, project, result, error)` | 315 |
+| parameter | `error` | 316 |
+| parameter | `kind` | 316 |
+| parameter | `language` | 316 |
+| parameter | `project` | 316 |
+| parameter | `result` | 316 |
+| parameter | `self` | 316 |
+| variable | `row` | 319 |
+| variable | `key` | 333 |
+| function | `save(self)` | 337 |
+| parameter | `self` | 337 |
+| variable | `record` | 339 |
+| variable | `temporary` | 340 |
+| variable | `lines` | 343 |
+| variable | `row` | 351 |
+| variable | `checks` | 352 |
+| variable | `lines` | 356 |
+| function | `broker_scenarios(evidence)` | 364 |
+| parameter | `evidence` | 364 |
+| variable | `language` | 366 |
+| variable | `baseline` | 367 |
+| variable | `kind` | 368 |
+| variable | `project` | 371 |
+| variable | `result` | 372 |
+| variable | `error` | 373 |
+| variable | `result` | 375 |
+| variable | `error` | 381 |
+| function | `anchor_scenarios(evidence)` | 385 |
+| parameter | `evidence` | 385 |
+| variable | `language` | 387 |
+| variable | `missing_line` | 388 |
+| variable | `project` | 388 |
+| variable | `unused_line` | 388 |
+| variable | `result` | 389 |
+| variable | `error` | 390 |
+| variable | `result` | 392 |
+| variable | `item` | 403 |
+| variable | `error` | 408 |
+| function | `private_scenarios(evidence)` | 412 |
+| parameter | `evidence` | 412 |
+| variable | `credentials` | 414 |
+| variable | `key` | 415 |
+| variable | `directory` | 416 |
+| variable | `app` | 417 |
+| variable | `client` | 422 |
+| variable | `jobs` | 430 |
+| variable | `language` | 431 |
+| variable | `project` | 432 |
+| variable | `result` | 433 |
+| variable | `error` | 434 |
+| variable | `response` | 436 |
+| variable | `revision` | 438 |
+| variable | `response` | 439 |
+| variable | `job` | 441 |
+| variable | `deadline` | 442 |
+| variable | `response` | 444 |
+| variable | `report` | 446 |
+| variable | `result` | 451 |
+| variable | `exported` | 453 |
+| variable | `html` | 458 |
+| variable | `error` | 465 |
+| variable | `archives` | 469 |
+| variable | `response` | 484 |
+| variable | `job` | 490 |
+| variable | `result_sha256` | 490 |
+| variable | `response` | 491 |
+| variable | `exported` | 498 |
+| function | `provenance(runtime, expected_source, lane)` | 516 |
+| parameter | `expected_source` | 516 |
+| parameter | `lane` | 516 |
+| parameter | `runtime` | 516 |
+| variable | `runtime` | 524 |
+| variable | `source` | 529 |
+| variable | `dirty` | 531 |
+| variable | `worker` | 540 |
+| variable | `command` | 545 |
+| variable | `image` | 546 |
+| function | `toolchain_versions()` | 570 |
+| variable | `commands` | 572 |
+| variable | `program` | 586 |
+| variable | `name` | 591 |
+| variable | `directory` | 592 |
+| variable | `root` | 593 |
+| variable | `argv` | 595 |
+| variable | `argv` | 597 |
+| variable | `code` | 599 |
+| variable | `output` | 599 |
+| variable | `versions` | 601 |
+| variable | `value` | 607 |
+| function | `main()` | 615 |
+| variable | `parser` | 617 |
+| variable | `args` | 622 |
+| variable | `evidence` | 623 |
+| variable | `language` | 644 |
+
 ## scripts/draft_lookup.py
 
 | Kind | Declaration | Line |
@@ -1012,6 +1206,235 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `raw` | 570 |
 | variable | `identifier` | 572 |
 | variable | `record` | 577 |
+
+## scripts/released_service_probe.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `SOURCE` | 42 |
+| variable | `WORKER_SHA256` | 43 |
+| variable | `VERSION` | 44 |
+| variable | `RELEASE_ID` | 45 |
+| variable | `REPOSITORY` | 46 |
+| variable | `API` | 47 |
+| variable | `PAYLOAD` | 48 |
+| variable | `PAYLOAD_ID` | 49 |
+| variable | `PAYLOAD_BYTES` | 50 |
+| variable | `PAYLOAD_SHA256` | 51 |
+| variable | `MAX_ARCHIVE` | 52 |
+| variable | `MAX_EXPANDED` | 53 |
+| variable | `MAX_MEMBER` | 54 |
+| variable | `MAX_RESPONSE` | 55 |
+| variable | `EXPECTED_LANGUAGES` | 56 |
+| function | `require(condition, message)` | 72 |
+| parameter | `condition` | 72 |
+| parameter | `message` | 72 |
+| function | `strict_json(body)` | 78 |
+| parameter | `body` | 78 |
+| function | `pairs(items)` | 81 |
+| parameter | `items` | 81 |
+| variable | `result` | 82 |
+| function | `constant(_value)` | 86 |
+| parameter | `_value` | 86 |
+| function | `hosted_output(output)` | 92 |
+| parameter | `output` | 92 |
+| variable | `workspace` | 102 |
+| variable | `selected` | 104 |
+| class | `Evidence` | 117 |
+| function | `__init__(self, output)` | 120 |
+| parameter | `output` | 120 |
+| parameter | `self` | 120 |
+| function | `save(self)` | 134 |
+| parameter | `self` | 134 |
+| variable | `temporary` | 135 |
+| function | `stage(self, stage)` | 141 |
+| parameter | `public` | 141 |
+| parameter | `self` | 141 |
+| parameter | `stage` | 141 |
+| function | `bounded_body(response, maximum)` | 147 |
+| parameter | `maximum` | 147 |
+| parameter | `response` | 147 |
+| variable | `body` | 149 |
+| variable | `chunk` | 150 |
+| function | `api_json(client, path)` | 156 |
+| parameter | `client` | 156 |
+| parameter | `path` | 156 |
+| variable | `response` | 159 |
+| function | `release_assets(release, tag)` | 164 |
+| parameter | `release` | 164 |
+| parameter | `tag` | 164 |
+| variable | `rows` | 182 |
+| variable | `row` | 184 |
+| variable | `row` | 188 |
+| variable | `row` | 189 |
+| variable | `row` | 190 |
+| variable | `found` | 193 |
+| variable | `row` | 193 |
+| variable | `maximum` | 201 |
+| variable | `name` | 201 |
+| variable | `row` | 202 |
+| variable | `expected` | 211 |
+| function | `download_url(url, initial)` | 216 |
+| parameter | `initial` | 216 |
+| parameter | `url` | 216 |
+| variable | `prefix` | 219 |
+| variable | `parsed` | 221 |
+| function | `download(client, row, target)` | 240 |
+| parameter | `client` | 240 |
+| parameter | `row` | 240 |
+| parameter | `target` | 240 |
+| variable | `initial` | 242 |
+| variable | `url` | 251 |
+| variable | `started` | 252 |
+| variable | `_` | 253 |
+| variable | `response` | 256 |
+| variable | `url` | 258 |
+| variable | `digest` | 262 |
+| variable | `measured` | 262 |
+| variable | `stream` | 263 |
+| variable | `chunk` | 264 |
+| variable | `measured` | 265 |
+| function | `preflight_tar(stream)` | 280 |
+| parameter | `stream` | 280 |
+| variable | `expanded` | 282 |
+| variable | `headers` | 282 |
+| variable | `raw` | 283 |
+| variable | `header` | 285 |
+| variable | `expanded` | 286 |
+| variable | `expanded` | 290 |
+| variable | `chunk` | 292 |
+| variable | `expanded` | 293 |
+| variable | `headers` | 296 |
+| variable | `number` | 298 |
+| variable | `size` | 300 |
+| variable | `kind` | 301 |
+| variable | `limit` | 303 |
+| variable | `remaining` | 305 |
+| variable | `chunk` | 307 |
+| variable | `remaining` | 311 |
+| variable | `expanded` | 312 |
+| function | `unpack(archive, destination)` | 316 |
+| parameter | `archive` | 316 |
+| parameter | `destination` | 316 |
+| variable | `expanded` | 319 |
+| variable | `seen` | 319 |
+| variable | `stream` | 320 |
+| variable | `package` | 324 |
+| variable | `index` | 325 |
+| variable | `member` | 325 |
+| variable | `name` | 326 |
+| variable | `parts` | 329 |
+| variable | `c` | 337 |
+| variable | `part` | 338 |
+| variable | `key` | 341 |
+| variable | `expanded` | 346 |
+| variable | `selected` | 348 |
+| variable | `source` | 353 |
+| variable | `measured` | 355 |
+| variable | `output` | 356 |
+| variable | `chunk` | 357 |
+| variable | `measured` | 358 |
+| variable | `resources` | 363 |
+| variable | `metadata` | 364 |
+| variable | `value` | 366 |
+| variable | `worker` | 382 |
+| variable | `service` | 387 |
+| function | `service_environment(home, token, nonce)` | 392 |
+| parameter | `home` | 392 |
+| parameter | `nonce` | 392 |
+| parameter | `token` | 392 |
+| variable | `config` | 394 |
+| function | `request_json(client, method, path, data)` | 410 |
+| parameter | `client` | 410 |
+| parameter | `data` | 410 |
+| parameter | `method` | 410 |
+| parameter | `path` | 410 |
+| variable | `response` | 416 |
+| class | `Service` | 421 |
+| function | `__init__(self, executable, data, home)` | 424 |
+| parameter | `data` | 424 |
+| parameter | `executable` | 424 |
+| parameter | `home` | 424 |
+| parameter | `self` | 424 |
+| variable | `output` | 428 |
+| function | `ready(self)` | 437 |
+| parameter | `self` | 437 |
+| variable | `deadline` | 439 |
+| variable | `source` | 441 |
+| variable | `body` | 442 |
+| variable | `matches` | 444 |
+| variable | `origin` | 447 |
+| variable | `candidate` | 448 |
+| variable | `health` | 456 |
+| function | `stop(self)` | 471 |
+| parameter | `self` | 471 |
+| function | `validate_export(exported, result, revision)` | 484 |
+| parameter | `exported` | 484 |
+| parameter | `result` | 484 |
+| parameter | `revision` | 484 |
+| variable | `key` | 488 |
+| variable | `value` | 488 |
+| variable | `history` | 491 |
+| variable | `snapshot` | 504 |
+| variable | `attempt` | 518 |
+| variable | `actual` | 519 |
+| variable | `key` | 526 |
+| function | `exercise(service, data, evidence)` | 536 |
+| parameter | `data` | 536 |
+| parameter | `evidence` | 536 |
+| parameter | `service` | 536 |
+| variable | `alias` | 539 |
+| variable | `password` | 539 |
+| variable | `key` | 540 |
+| variable | `client` | 544 |
+| variable | `stored` | 549 |
+| variable | `language` | 550 |
+| variable | `project` | 552 |
+| variable | `revision` | 556 |
+| variable | `identifier` | 557 |
+| variable | `job` | 563 |
+| variable | `deadline` | 565 |
+| variable | `result` | 567 |
+| variable | `exported` | 574 |
+| variable | `digest` | 580 |
+| function | `restored(service, data, private)` | 607 |
+| parameter | `data` | 607 |
+| parameter | `private` | 607 |
+| parameter | `service` | 607 |
+| variable | `client` | 609 |
+| variable | `history` | 617 |
+| variable | `row` | 620 |
+| variable | `row` | 623 |
+| variable | `result` | 624 |
+| variable | `exported` | 625 |
+| function | `canonical_digest(value)` | 640 |
+| parameter | `value` | 640 |
+| function | `cleanup_owned(services, temporary)` | 647 |
+| parameter | `services` | 647 |
+| parameter | `temporary` | 647 |
+| variable | `failed` | 649 |
+| variable | `service` | 650 |
+| variable | `failed` | 660 |
+| variable | `service` | 661 |
+| function | `main()` | 670 |
+| variable | `parser` | 672 |
+| variable | `args` | 676 |
+| variable | `output` | 677 |
+| variable | `evidence` | 678 |
+| variable | `temporary` | 679 |
+| variable | `services` | 681 |
+| variable | `client` | 683 |
+| variable | `payload` | 684 |
+| variable | `sidecar` | 684 |
+| variable | `archive` | 688 |
+| variable | `checksum` | 688 |
+| variable | `digest` | 689 |
+| variable | `executable` | 696 |
+| variable | `data` | 698 |
+| variable | `first` | 700 |
+| variable | `private` | 703 |
+| variable | `second` | 706 |
+| variable | `row` | 715 |
 
 ## scripts/training_checks.py
 
@@ -2512,6 +2935,46 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `_` | 107 |
 | variable | `saved` | 108 |
 
+## tests/test_compiler_acceptance.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `complete_result(project)` | 24 |
+| parameter | `project` | 24 |
+| variable | `content` | 26 |
+| variable | `case` | 42 |
+| variable | `case` | 46 |
+| variable | `case` | 63 |
+| function | `test_practical_matrix_is_complete_and_independent()` | 80 |
+| variable | `language` | 84 |
+| variable | `project` | 85 |
+| variable | `case` | 87 |
+| variable | `duplicate` | 91 |
+| function | `test_positive_validator_rejects_incomplete_or_fabricated_evidence(defect)` | 124 |
+| parameter | `defect` | 124 |
+| variable | `project` | 126 |
+| variable | `result` | 127 |
+| function | `test_exact_compiler_location_and_nonexecution_are_required()` | 178 |
+| variable | `project` | 180 |
+| variable | `result` | 181 |
+| variable | `defect` | 199 |
+| variable | `changed` | 200 |
+| function | `test_runtime_failure_is_distinct_from_incorrect_oracle()` | 211 |
+| variable | `project` | 213 |
+| variable | `result` | 214 |
+| variable | `wrong` | 236 |
+| function | `test_real_execution_guard_refuses_this_pc_before_subprocess(monkeypatch)` | 247 |
+| parameter | `monkeypatch` | 247 |
+| function | `test_actual_first_hosted_reports_retain_their_real_tool_semantics(language, kind)` | 258 |
+| parameter | `kind` | 258 |
+| parameter | `language` | 258 |
+| variable | `observed` | 262 |
+| variable | `item` | 265 |
+| variable | `row` | 265 |
+| variable | `project` | 266 |
+| variable | `changed` | 271 |
+| variable | `changed` | 275 |
+
 ## tests/test_completed_offload.py
 
 | Kind | Declaration | Line |
@@ -3626,6 +4089,114 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `arguments` | 705 |
 | parameter | `data` | 705 |
 | variable | `body` | 711 |
+
+## tests/test_released_service_probe.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_hosted_guard_refuses_user_pc_before_any_work(monkeypatch, tmp_path)` | 27 |
+| parameter | `monkeypatch` | 27 |
+| parameter | `tmp_path` | 27 |
+| function | `test_hosted_output_is_confined_and_verifier_source_explicit(monkeypatch, tmp_path)` | 36 |
+| parameter | `monkeypatch` | 36 |
+| parameter | `tmp_path` | 36 |
+| variable | `name` | 39 |
+| variable | `value` | 39 |
+| function | `metadata()` | 56 |
+| variable | `prefix` | 58 |
+| variable | `rows` | 59 |
+| variable | `i` | 77 |
+| variable | `rows` | 77 |
+| function | `test_publication_or_replaced_asset_never_authorizes_execution(defect)` | 95 |
+| parameter | `defect` | 95 |
+| variable | `release` | 97 |
+| variable | `tag` | 97 |
+| function | `test_download_binds_canonical_hosts_actual_bytes_and_digest(tmp_path)` | 117 |
+| parameter | `tmp_path` | 117 |
+| variable | `body` | 119 |
+| variable | `initial` | 120 |
+| variable | `row` | 121 |
+| variable | `seen` | 127 |
+| function | `transport(request)` | 129 |
+| parameter | `request` | 129 |
+| variable | `client` | 143 |
+| variable | `digest` | 144 |
+| function | `archive(path, monkeypatch, extra, bad_schema)` | 153 |
+| parameter | `bad_schema` | 153 |
+| parameter | `extra` | 153 |
+| parameter | `monkeypatch` | 153 |
+| parameter | `path` | 153 |
+| variable | `worker` | 155 |
+| variable | `value` | 157 |
+| variable | `output` | 165 |
+| variable | `body` | 166 |
+| variable | `name` | 166 |
+| variable | `member` | 171 |
+| variable | `content` | 176 |
+| variable | `member` | 176 |
+| function | `test_real_tar_provenance_and_no_setuid_preservation(monkeypatch, tmp_path)` | 180 |
+| parameter | `monkeypatch` | 180 |
+| parameter | `tmp_path` | 180 |
+| variable | `source` | 181 |
+| variable | `service` | 183 |
+| function | `test_actual_tar_negative_members_fail_closed(monkeypatch, tmp_path, kind)` | 194 |
+| parameter | `kind` | 194 |
+| parameter | `monkeypatch` | 194 |
+| parameter | `tmp_path` | 194 |
+| variable | `source` | 195 |
+| variable | `member` | 196 |
+| variable | `content` | 199 |
+| variable | `content` | 204 |
+| function | `test_service_environment_cannot_inherit_provider_cloud_or_github_keys(monkeypatch, tmp_path)` | 219 |
+| parameter | `monkeypatch` | 219 |
+| parameter | `tmp_path` | 219 |
+| variable | `result` | 223 |
+| variable | `key` | 225 |
+| function | `test_failed_startup_cleanup_targets_only_owned_child_and_preserves_live_recovery(tmp_path, can_exit)` | 230 |
+| parameter | `can_exit` | 230 |
+| parameter | `tmp_path` | 230 |
+| variable | `temporary` | 232 |
+| variable | `calls` | 235 |
+| variable | `state` | 236 |
+| function | `terminate()` | 238 |
+| function | `wait(timeout)` | 241 |
+| parameter | `timeout` | 241 |
+| variable | `process` | 248 |
+| function | `test_actual_store_timeline_identity_and_shape_fail_closed(tmp_path, defect)` | 255 |
+| parameter | `defect` | 255 |
+| parameter | `tmp_path` | 255 |
+| variable | `store` | 257 |
+| variable | `revision` | 258 |
+| variable | `identifier` | 259 |
+| variable | `result` | 263 |
+| variable | `exported` | 264 |
+| variable | `timeline` | 266 |
+| function | `test_incremental_receipt_and_full_restored_export_equality(monkeypatch, tmp_path)` | 283 |
+| parameter | `monkeypatch` | 283 |
+| parameter | `tmp_path` | 283 |
+| variable | `data` | 285 |
+| variable | `store` | 287 |
+| variable | `validations` | 288 |
+| variable | `tamper` | 289 |
+| function | `request(_client, method, path, body)` | 291 |
+| parameter | `_client` | 291 |
+| parameter | `body` | 291 |
+| parameter | `method` | 291 |
+| parameter | `path` | 291 |
+| variable | `revision` | 300 |
+| variable | `identifier` | 301 |
+| variable | `project` | 302 |
+| variable | `result` | 303 |
+| variable | `identifier` | 311 |
+| variable | `result` | 312 |
+| function | `validate(result, project)` | 331 |
+| parameter | `project` | 331 |
+| parameter | `result` | 331 |
+| variable | `evidence` | 337 |
+| variable | `service` | 338 |
+| variable | `private` | 339 |
+| variable | `row` | 341 |
+| variable | `text` | 342 |
 
 ## tests/test_sanitizer_probe.py
 

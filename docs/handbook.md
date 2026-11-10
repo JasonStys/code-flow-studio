@@ -2,9 +2,11 @@
 
 By Jason Stys.
 
-Current source is the 0.4.2 delivery candidate. Read its [release notes](releases/v0.4.2.md)
-and the [observed draft-verification CI correction](reports/draft-release-visibility-2026-11-10.md)
-before interpreting release availability. The unchanged Word/Excel editions below
+Version [0.4.2 is published](https://github.com/JasonStys/code-flow-studio/releases/tag/v0.4.2).
+Read its [release notes](releases/v0.4.2.md), the
+[observed draft-verification CI correction](reports/draft-release-visibility-2026-11-10.md)
+and the [realistic hosted compiler validation](compiler-execution.md).
+The unchanged Word/Excel editions below
 remain explicit historical snapshots of accepted runtime source
 `7d2158a57bb49e8f837fffbfe23b301902465412`; they are not regenerated or relabeled as
 0.4.2 acceptance. The 0.4.1 draft and its assets remain preserved and unpublished.
