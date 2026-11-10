@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L17; executable@L23; app@L25; resources@L40; file@L41; page@L65; browserErrors@L66; health@L70; state@L76; directory@L91; serviceLog@L94; statuses@L95
+ * variables: { verifyElectron }@L17; executable@L23; app@L26; resources@L45; file@L46; page@L70; browserErrors@L73; health@L77; state@L85; directory@L100; serviceLog@L103; statuses@L104
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -22,6 +22,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
   /** Native renderer and bundled service both start without a separately installed Python runtime. */
   const executable =
     process.env.STUDIO_INSTALLED_APP ?? verifyElectron().executable;
+  console.info("NATIVE_JOURNEY_STAGE", "launch:start");
   const app = await electron.launch({
     executablePath: executable,
     args: process.env.STUDIO_INSTALLED_APP ? [] : ["."],
@@ -30,6 +31,10 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       STUDIO_DESKTOP_TEST: "1",
       CFS_ACCOUNT_DATA: mkdtempSync(join(tmpdir(), "code-flow-native-test-")),
     },
+  });
+  console.info("NATIVE_JOURNEY_STAGE", "launch:complete");
+  app.process().once("exit", (code, signal) => {
+    console.info("NATIVE_PROCESS_EXIT", JSON.stringify({ code, signal }));
   });
   try {
     expect(await app.evaluate(({ app }) => app.getPath("userData"))).toContain(
@@ -63,6 +68,8 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       ).toBe(false);
     }
     const page = await app.firstWindow();
+    page.once("crash", () => console.error("NATIVE_RENDERER_EVENT", "crashed"));
+    page.once("close", () => console.info("NATIVE_RENDERER_EVENT", "closed"));
     const browserErrors: string[] = [];
     page.on("pageerror", (error) => {
       if (browserErrors.length < 8) browserErrors.push(error.name);
@@ -70,7 +77,9 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     const health = await page.request.get(new URL("/health", page.url()).href);
     expect((await health.json()).version).toBe("0.4.0");
     try {
+      console.info("NATIVE_JOURNEY_STAGE", "account:start");
       await createSession(page, "native_fictional");
+      console.info("NATIVE_JOURNEY_STAGE", "account:complete");
     } catch (error) {
       // Only synthetic test-window state and fixed-route status codes; no keys, request bodies or cookies.
       const state = await page
@@ -111,8 +120,13 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       );
       throw error;
     }
+    console.info("NATIVE_JOURNEY_STAGE", "editor:start");
     await editorJourney(page);
+    console.info("NATIVE_JOURNEY_STAGE", "editor:complete");
+    console.info("NATIVE_JOURNEY_STAGE", "source-inspection:start");
     await inspectHelper(page);
+    console.info("NATIVE_JOURNEY_STAGE", "source-inspection:complete");
+    console.info("NATIVE_JOURNEY_STAGE", "workspace-security:start");
     await page.getByRole("button", { name: "Workspace", exact: true }).click();
     await expect(
       page.getByRole("heading", { name: "Make your next iteration count." }),
@@ -131,17 +145,28 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     expect(
       await page.evaluate(() => localStorage.length + sessionStorage.length),
     ).toBe(0);
+    console.info("NATIVE_JOURNEY_STAGE", "workspace-security:complete");
+    console.info("NATIVE_JOURNEY_STAGE", "screenshot:start");
     await page.screenshot({
       path: "artifacts/desktop-workspace.png",
       fullPage: true,
     });
+    console.info("NATIVE_JOURNEY_STAGE", "screenshot:complete");
+    console.info("NATIVE_JOURNEY_STAGE", "lock:start");
     await page
       .getByRole("button", { name: "Lock workspace", exact: true })
       .click();
     await expect(
       page.getByRole("heading", { name: "Unlock your private code workspace" }),
     ).toBeVisible();
+    console.info("NATIVE_JOURNEY_STAGE", "lock:complete");
+    expect(
+      browserErrors,
+      "native renderer must not emit JavaScript errors",
+    ).toEqual([]);
   } finally {
+    console.info("NATIVE_JOURNEY_STAGE", "owned-close:start");
     await app.close();
+    console.info("NATIVE_JOURNEY_STAGE", "owned-close:complete");
   }
 });

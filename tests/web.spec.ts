@@ -2,7 +2,7 @@
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
  * types: Page@L11
- * variables: browserEvidence@L16; evidence@L22; evidence@L40; timer@L43; state@L44; errors@L88; download@L139; locations@L173; unreachable@L177; locations@L231; locations@L294; inspector@L312; sourceInput@L313; editor@L341; invalid@L369; digest@L370; locations@L398; inspector@L403; legacy@L443; project@L445; locations@L468; inspector@L475; source@L515; generated@L516; project@L518; inspector@L547; cycle@L550; artifact@L551; view@L561
+ * variables: browserEvidence@L16; evidence@L22; evidence@L40; timer@L43; state@L44; errors@L92; download@L143; locations@L177; unreachable@L181; locations@L235; locations@L298; inspector@L316; sourceInput@L317; editor@L345; invalid@L373; digest@L374; locations@L402; inspector@L407; legacy@L447; project@L449; locations@L472; inspector@L479; source@L519; generated@L520; project@L522; inspector@L551; cycle@L554; artifact@L555; view@L565
  * </code-map> */
 
 /** Real browser flows; controller success does not substitute for isolated worker evidence.
@@ -79,6 +79,10 @@ test.afterEach(async ({ page }, testInfo) => {
     evidence?.errors ?? [],
     "The complete user journey must not raise unhandled browser errors",
   ).toEqual([]);
+  expect(
+    evidence?.events ?? [],
+    "The complete user journey must retain its browser renderer",
+  ).not.toContain("renderer crashed");
 });
 
 test("editor, catalog, priorities and source-consent boundaries", async ({

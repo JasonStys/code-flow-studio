@@ -29,3 +29,19 @@ Coverage thresholds apply to explicitly named controller/data-validation modules
 
 Benchmark repetitions must also match the approved oracle; a mismatching repeat records a failure rather than an attractive timing sample. Mutation scores exclude invalid and inconclusive timed-out mutants; supplied pytest checks run against each evaluated mutant only after the original baseline passes.
 
+
+## CodeQL security analysis
+
+The [three-language scan guide](codeql.md) explains Python, JavaScript/TypeScript
+and GitHub Actions security-extended analysis. The [dated scan report](reports/codeql-2026-11-09.md)
+records actual scan/extraction state and exact-location alert triage separately from
+configuration checks. Existing runtime, privacy, performance and platform gates remain
+required; a passing static-analysis job alone is not a zero-alert or safety claim.
+
+## Browser toolchain regression
+
+The locked Playwright 1.64.1 update follows a genuine Firefox1543 native signal11
+failure and the official worker-compilation/teardown browser roll. Original UI
+assertions and deadlines remain; a recorded renderer crash now explicitly fails
+the journey. The [dated CodeQL/CI report](reports/codeql-2026-11-09.md) separates
+that test-engine correction from static findings and full-main scan requirements.

@@ -1986,16 +1986,16 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 |---|---|---|
 | variable | `{ verifyElectron }` | 17 |
 | variable | `executable` | 23 |
-| variable | `app` | 25 |
-| variable | `resources` | 40 |
-| variable | `file` | 41 |
-| variable | `page` | 65 |
-| variable | `browserErrors` | 66 |
-| variable | `health` | 70 |
-| variable | `state` | 76 |
-| variable | `directory` | 91 |
-| variable | `serviceLog` | 94 |
-| variable | `statuses` | 95 |
+| variable | `app` | 26 |
+| variable | `resources` | 45 |
+| variable | `file` | 46 |
+| variable | `page` | 70 |
+| variable | `browserErrors` | 73 |
+| variable | `health` | 77 |
+| variable | `state` | 85 |
+| variable | `directory` | 100 |
+| variable | `serviceLog` | 103 |
+| variable | `statuses` | 104 |
 
 ## tests/electron-readiness.test.cjs
 
@@ -2615,30 +2615,30 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `evidence` | 40 |
 | variable | `timer` | 43 |
 | variable | `state` | 44 |
-| variable | `errors` | 88 |
-| variable | `download` | 139 |
-| variable | `locations` | 173 |
-| variable | `unreachable` | 177 |
-| variable | `locations` | 231 |
-| variable | `locations` | 294 |
-| variable | `inspector` | 312 |
-| variable | `sourceInput` | 313 |
-| variable | `editor` | 341 |
-| variable | `invalid` | 369 |
-| variable | `digest` | 370 |
-| variable | `locations` | 398 |
-| variable | `inspector` | 403 |
-| variable | `legacy` | 443 |
-| variable | `project` | 445 |
-| variable | `locations` | 468 |
-| variable | `inspector` | 475 |
-| variable | `source` | 515 |
-| variable | `generated` | 516 |
-| variable | `project` | 518 |
-| variable | `inspector` | 547 |
-| variable | `cycle` | 550 |
-| variable | `artifact` | 551 |
-| variable | `view` | 561 |
+| variable | `errors` | 92 |
+| variable | `download` | 143 |
+| variable | `locations` | 177 |
+| variable | `unreachable` | 181 |
+| variable | `locations` | 235 |
+| variable | `locations` | 298 |
+| variable | `inspector` | 316 |
+| variable | `sourceInput` | 317 |
+| variable | `editor` | 345 |
+| variable | `invalid` | 373 |
+| variable | `digest` | 374 |
+| variable | `locations` | 402 |
+| variable | `inspector` | 407 |
+| variable | `legacy` | 447 |
+| variable | `project` | 449 |
+| variable | `locations` | 472 |
+| variable | `inspector` | 479 |
+| variable | `source` | 519 |
+| variable | `generated` | 520 |
+| variable | `project` | 522 |
+| variable | `inspector` | 551 |
+| variable | `cycle` | 554 |
+| variable | `artifact` | 555 |
+| variable | `view` | 565 |
 
 ## training/__init__.py
 
