@@ -37,3 +37,11 @@ and GitHub Actions security-extended analysis. The [dated scan report](reports/c
 records actual scan/extraction state and exact-location alert triage separately from
 configuration checks. Existing runtime, privacy, performance and platform gates remain
 required; a passing static-analysis job alone is not a zero-alert or safety claim.
+
+## Browser toolchain regression
+
+The locked Playwright 1.64.1 update follows a genuine Firefox1543 native signal11
+failure and the official worker-compilation/teardown browser roll. Original UI
+assertions and deadlines remain; a recorded renderer crash now explicitly fails
+the journey. The [dated CodeQL/CI report](reports/codeql-2026-11-09.md) separates
+that test-engine correction from static findings and full-main scan requirements.

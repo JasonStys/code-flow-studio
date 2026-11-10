@@ -38,6 +38,14 @@ source, rather than claiming the unsigned annotated tag independently authentica
 publisher. No local/private account data or ignored datasets are sent by this workflow;
 its inputs are the repository checkout already available on GitHub.
 
+## Automatic PR optimization
+
+GitHub automatically applies diff-informed analysis to pull requests. Successful
+whole-file extraction does not change that changed-line alert scope. Default-branch
+pushes supply the separate full scan; inspect those actual results before claiming
+that pre-existing code has been assessed. Scheduled/manual non-PR scans supplement
+that baseline. We add no internal override, exclusion or fabricated empty result.
+
 ## Read and act on a result
 
 Open **Security → Code scanning** or the CodeQL check on the pull request. Confirm the

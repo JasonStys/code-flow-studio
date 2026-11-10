@@ -58,5 +58,7 @@
     "Language-specific extracted paths are not line/branch coverage or universal support for dynamic source.",
     "Zero results/open alerts at this exact ref does not prove absence of vulnerabilities.",
     "Existing runtime/browser/native/ML/isolation gates remain separate requirements."
-  ]
+  ],
+  "queryScope": "pull-request-diff-informed changed-line results; not whole-main clearance",
+  "fullMainScanRequired": true
 }
