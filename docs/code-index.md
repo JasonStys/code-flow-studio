@@ -392,38 +392,45 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `fs` | 12 |
 | variable | `path` | 13 |
 | variable | `{ fileURLToPath }` | 14 |
-| variable | `toolRequire` | 15 |
-| variable | `{ Linter }` | 16 |
-| variable | `tsParser` | 17 |
-| variable | `tsPlugin` | 18 |
-| variable | `v8toIstanbul` | 19 |
-| function | `reportJson(file)` | 21 |
-| function | `main()` | 27 |
-| variable | `[mode, input, output, directory]` | 29 |
-| variable | `project` | 30 |
-| variable | `typed` | 31 |
-| variable | `files` | 32 |
-| variable | `linter` | 34 |
-| variable | `findings` | 35 |
-| variable | `file` | 36 |
-| variable | `config` | 37 |
-| variable | `item` | 43 |
-| variable | `collected` | 53 |
-| variable | `name` | 54 |
-| variable | `report` | 56 |
-| variable | `script` | 57 |
-| variable | `scriptPath` | 59 |
-| variable | `base` | 60 |
-| variable | `original` | 61 |
-| variable | `expectedPath` | 62 |
-| variable | `source` | 64 |
-| variable | `sources` | 65 |
-| variable | `map` | 67 |
-| variable | `converter` | 76 |
-| variable | `coverage` | 79 |
-| variable | `lines` | 80 |
-| variable | `[id, statement]` | 81 |
-| variable | `line` | 82 |
+| variable | `MAX_REPORT_BYTES` | 15 |
+| function | `reportJson(file)` | 17 |
+| variable | `descriptor` | 19 |
+| variable | `status` | 21 |
+| variable | `chunks` | 24 |
+| variable | `size` | 25 |
+| variable | `content` | 27 |
+| variable | `count` | 28 |
+| function | `main()` | 40 |
+| variable | `toolRequire` | 42 |
+| variable | `{ Linter }` | 43 |
+| variable | `tsParser` | 44 |
+| variable | `tsPlugin` | 45 |
+| variable | `v8toIstanbul` | 46 |
+| variable | `[mode, input, output, directory]` | 47 |
+| variable | `project` | 48 |
+| variable | `typed` | 49 |
+| variable | `files` | 50 |
+| variable | `linter` | 52 |
+| variable | `findings` | 53 |
+| variable | `file` | 54 |
+| variable | `config` | 55 |
+| variable | `item` | 61 |
+| variable | `collected` | 71 |
+| variable | `name` | 72 |
+| variable | `report` | 74 |
+| variable | `script` | 75 |
+| variable | `scriptPath` | 77 |
+| variable | `base` | 78 |
+| variable | `original` | 79 |
+| variable | `expectedPath` | 80 |
+| variable | `source` | 82 |
+| variable | `sources` | 83 |
+| variable | `map` | 85 |
+| variable | `converter` | 94 |
+| variable | `coverage` | 97 |
+| variable | `lines` | 98 |
+| variable | `[id, statement]` | 99 |
+| variable | `line` | 100 |
 
 ## runner/sanitizer_probe.py
 
@@ -691,6 +698,55 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `expected` | 139 |
 | variable | `output` | 140 |
 
+## scripts/draft_lookup.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `Reader` | 20 |
+| variable | `PER_PAGE` | 21 |
+| variable | `MAX_PAGES` | 22 |
+| variable | `MAX_ID` | 23 |
+| function | `require(condition, message)` | 26 |
+| parameter | `condition` | 26 |
+| parameter | `message` | 26 |
+| function | `namespace(repository)` | 32 |
+| parameter | `repository` | 32 |
+| function | `release_id(value)` | 42 |
+| parameter | `value` | 42 |
+| function | `identity(record, repository)` | 48 |
+| parameter | `record` | 48 |
+| parameter | `repository` | 48 |
+| variable | `identifier` | 51 |
+| variable | `tag` | 52 |
+| variable | `target` | 58 |
+| function | `read_by_id(read, repository, identifier)` | 67 |
+| parameter | `identifier` | 67 |
+| parameter | `read` | 67 |
+| parameter | `repository` | 67 |
+| variable | `identifier` | 69 |
+| variable | `record` | 70 |
+| function | `find_release(read, repository, tag, missing)` | 86 |
+| parameter | `missing` | 86 |
+| parameter | `read` | 86 |
+| parameter | `repository` | 86 |
+| parameter | `tag` | 86 |
+| variable | `base` | 88 |
+| variable | `matches` | 94 |
+| variable | `seen` | 95 |
+| variable | `page` | 96 |
+| variable | `records` | 97 |
+| variable | `record` | 99 |
+| variable | `current` | 100 |
+| variable | `candidate` | 113 |
+| variable | `record` | 114 |
+| function | `require_draft(read, repository, version, source, expected_id)` | 122 |
+| parameter | `expected_id` | 123 |
+| parameter | `read` | 123 |
+| parameter | `repository` | 123 |
+| parameter | `source` | 123 |
+| parameter | `version` | 123 |
+| variable | `record` | 130 |
+
 ## scripts/frozen_entry.py
 
 | Kind | Declaration | Line |
@@ -771,6 +827,164 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `version` | 40 |
 | variable | `base` | 41 |
 | variable | `path` | 43 |
+
+## scripts/release_gate.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `ROOT` | 35 |
+| variable | `REPOSITORY` | 36 |
+| variable | `BASE` | 37 |
+| variable | `WORKFLOWS` | 38 |
+| variable | `CATEGORIES` | 39 |
+| variable | `MAX_ASSET` | 40 |
+| function | `strict_object(source)` | 43 |
+| parameter | `source` | 43 |
+| function | `pairs(items)` | 46 |
+| parameter | `items` | 46 |
+| variable | `result` | 48 |
+| function | `invalid_constant(value)` | 52 |
+| parameter | `value` | 52 |
+| variable | `value` | 56 |
+| function | `valid_metadata(value)` | 61 |
+| parameter | `value` | 61 |
+| function | `command(arguments, data, missing)` | 88 |
+| parameter | `arguments` | 88 |
+| parameter | `data` | 88 |
+| parameter | `missing` | 88 |
+| variable | `executable` | 101 |
+| variable | `result` | 104 |
+| function | `api(endpoint, body)` | 121 |
+| parameter | `body` | 121 |
+| parameter | `endpoint` | 121 |
+| variable | `arguments` | 124 |
+| variable | `arguments` | 126 |
+| function | `no_tag(tag)` | 130 |
+| parameter | `tag` | 130 |
+| function | `product_version()` | 142 |
+| variable | `version` | 144 |
+| variable | `name` | 150 |
+| variable | `value` | 156 |
+| variable | `assignments` | 160 |
+| variable | `runtime` | 161 |
+| variable | `node` | 163 |
+| variable | `t` | 165 |
+| function | `metadata()` | 171 |
+| variable | `source` | 173 |
+| function | `workflow_policy(text)` | 185 |
+| parameter | `text` | 185 |
+| variable | `operation` | 196 |
+| function | `context()` | 216 |
+| variable | `value` | 218 |
+| function | `complete_list(endpoint)` | 232 |
+| parameter | `endpoint` | 232 |
+| variable | `rows` | 234 |
+| variable | `page` | 235 |
+| variable | `current` | 236 |
+| function | `require_source(value)` | 244 |
+| parameter | `value` | 244 |
+| variable | `source` | 246 |
+| variable | `workflow` | 248 |
+| variable | `envelope` | 249 |
+| variable | `rows` | 250 |
+| variable | `row` | 255 |
+| variable | `row` | 265 |
+| variable | `analyses` | 268 |
+| variable | `current` | 269 |
+| variable | `row` | 269 |
+| variable | `row` | 271 |
+| variable | `row` | 274 |
+| function | `draft(identifier, value)` | 296 |
+| parameter | `identifier` | 296 |
+| parameter | `value` | 296 |
+| variable | `record` | 298 |
+| function | `names(version, system)` | 310 |
+| parameter | `system` | 310 |
+| parameter | `version` | 310 |
+| variable | `values` | 312 |
+| variable | `name` | 318 |
+| variable | `payload` | 318 |
+| function | `attached(record, version, complete)` | 321 |
+| parameter | `complete` | 321 |
+| parameter | `record` | 321 |
+| parameter | `version` | 321 |
+| variable | `expected` | 323 |
+| variable | `name` | 324 |
+| variable | `system` | 324 |
+| variable | `result` | 326 |
+| variable | `identifiers` | 327 |
+| variable | `row` | 328 |
+| variable | `name` | 329 |
+| function | `archive_metadata(file, system)` | 351 |
+| parameter | `file` | 351 |
+| parameter | `system` | 351 |
+| variable | `prefix` | 357 |
+| variable | `expected` | 358 |
+| variable | `found` | 359 |
+| variable | `archive` | 361 |
+| variable | `member` | 364 |
+| variable | `member` | 367 |
+| variable | `archive` | 378 |
+| variable | `expanded` | 379 |
+| variable | `index` | 380 |
+| variable | `member` | 380 |
+| variable | `expanded` | 382 |
+| variable | `name` | 384 |
+| variable | `stream` | 390 |
+| variable | `value` | 393 |
+| function | `upload_bytes(identifier, file, name, expected_digest)` | 398 |
+| parameter | `expected_digest` | 398 |
+| parameter | `file` | 398 |
+| parameter | `identifier` | 398 |
+| parameter | `name` | 398 |
+| variable | `token` | 400 |
+| variable | `connection` | 402 |
+| variable | `started` | 403 |
+| variable | `stream` | 405 |
+| variable | `size` | 406 |
+| variable | `key` | 411 |
+| variable | `value` | 411 |
+| variable | `remaining` | 421 |
+| variable | `uploaded_digest` | 422 |
+| variable | `block` | 425 |
+| variable | `remaining` | 429 |
+| variable | `response` | 434 |
+| variable | `content` | 436 |
+| variable | `result` | 438 |
+| function | `upload(value, identifier)` | 450 |
+| parameter | `identifier` | 450 |
+| parameter | `value` | 450 |
+| variable | `system` | 452 |
+| variable | `name` | 453 |
+| variable | `paths` | 453 |
+| variable | `receipt` | 454 |
+| variable | `archive` | 468 |
+| variable | `archive_value` | 469 |
+| variable | `worker` | 469 |
+| variable | `payload` | 474 |
+| variable | `sidecar` | 474 |
+| variable | `stream` | 483 |
+| variable | `digest` | 484 |
+| variable | `existing` | 489 |
+| variable | `file` | 491 |
+| variable | `file` | 494 |
+| variable | `current` | 495 |
+| variable | `name` | 496 |
+| variable | `stream` | 498 |
+| variable | `digest` | 499 |
+| variable | `observed` | 501 |
+| function | `main()` | 508 |
+| variable | `parser` | 510 |
+| variable | `operation` | 512 |
+| variable | `target` | 514 |
+| variable | `value` | 518 |
+| variable | `tag` | 521 |
+| variable | `created` | 526 |
+| variable | `record` | 537 |
+| variable | `output` | 539 |
+| variable | `raw` | 542 |
+| variable | `identifier` | 544 |
+| variable | `record` | 549 |
 
 ## scripts/training_checks.py
 
@@ -1984,18 +2198,20 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `{ verifyElectron }` | 17 |
-| variable | `executable` | 23 |
-| variable | `app` | 26 |
-| variable | `resources` | 45 |
-| variable | `file` | 46 |
-| variable | `page` | 70 |
-| variable | `browserErrors` | 73 |
-| variable | `health` | 77 |
-| variable | `state` | 85 |
-| variable | `directory` | 100 |
-| variable | `serviceLog` | 103 |
-| variable | `statuses` | 104 |
+| variable | `{ verifyElectron }` | 24 |
+| variable | `executable` | 30 |
+| variable | `app` | 33 |
+| variable | `acceptedPackage` | 46 |
+| variable | `resources` | 53 |
+| variable | `file` | 54 |
+| variable | `metadata` | 87 |
+| variable | `page` | 107 |
+| variable | `browserErrors` | 110 |
+| variable | `health` | 114 |
+| variable | `state` | 122 |
+| variable | `directory` | 137 |
+| variable | `serviceLog` | 140 |
+| variable | `statuses` | 141 |
 
 ## tests/electron-readiness.test.cjs
 
@@ -2008,6 +2224,27 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `path` | 16 |
 | variable | `{ verifyElectron }` | 17 |
 | variable | `directory` | 20 |
+
+## tests/node-report.test.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `assert` | 12 |
+| variable | `fs` | 13 |
+| variable | `path` | 14 |
+| variable | `os` | 15 |
+| variable | `{ test }` | 16 |
+| variable | `{ reportJson }` | 17 |
+| variable | `LIMIT` | 18 |
+| function | `fixture(run)` | 21 |
+| variable | `directory` | 22 |
+| variable | `content` | 39 |
+| variable | `content` | 49 |
+| variable | `original` | 66 |
+| variable | `read` | 85 |
+| variable | `descriptor` | 86 |
+| variable | `original` | 104 |
+| variable | `status` | 106 |
 
 ## tests/private.spec.ts
 
@@ -2172,11 +2409,100 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | function | `test_web_demo_source_matches_ci()` | 183 |
 | variable | `manifest` | 185 |
 | variable | `matched` | 186 |
-| function | `test_training_bad_data(tmp_path, rows)` | 203 |
-| parameter | `rows` | 203 |
-| parameter | `tmp_path` | 203 |
-| variable | `path` | 205 |
-| variable | `row` | 206 |
+| function | `test_demo_literal_pattern_rejects_long_unterminated_input(tail)` | 197 |
+| parameter | `tail` | 197 |
+| function | `test_training_bad_data(tmp_path, rows)` | 213 |
+| parameter | `rows` | 213 |
+| parameter | `tmp_path` | 213 |
+| variable | `path` | 215 |
+| variable | `row` | 216 |
+
+## tests/test_draft_lookup.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `REPO` | 21 |
+| variable | `SOURCE` | 22 |
+| variable | `BASE` | 23 |
+| function | `row(identifier)` | 26 |
+| parameter | `changes` | 26 |
+| parameter | `identifier` | 26 |
+| variable | `result` | 28 |
+| class | `Fixtures` | 44 |
+| function | `reader(self, pages, detail)` | 47 |
+| parameter | `detail` | 47 |
+| parameter | `pages` | 47 |
+| parameter | `self` | 47 |
+| function | `read(endpoint)` | 51 |
+| parameter | `endpoint` | 51 |
+| variable | `identifier` | 62 |
+| variable | `page` | 63 |
+| variable | `value` | 63 |
+| function | `test_untagged_draft_reads_numeric_id_not_public_tag(self)` | 67 |
+| parameter | `self` | 67 |
+| variable | `value` | 69 |
+| variable | `actual` | 70 |
+| function | `test_complete_empty_listing_allows_explicit_absence(self)` | 74 |
+| parameter | `self` | 74 |
+| function | `test_missing_required_release_is_error(self)` | 78 |
+| parameter | `self` | 78 |
+| function | `test_general_collision_lookup_retains_public_wrong_source(self)` | 83 |
+| parameter | `self` | 83 |
+| variable | `value` | 85 |
+| function | `test_later_page_exact_match(self)` | 88 |
+| parameter | `self` | 88 |
+| variable | `first` | 90 |
+| variable | `i` | 90 |
+| variable | `actual` | 91 |
+| function | `test_all_full_pages_fail_without_false_absence(self)` | 95 |
+| parameter | `self` | 95 |
+| variable | `pages` | 97 |
+| variable | `i` | 98 |
+| variable | `p` | 99 |
+| function | `test_full_cap_even_found_cannot_hide_later_duplicate(self)` | 105 |
+| parameter | `self` | 105 |
+| variable | `pages` | 107 |
+| variable | `i` | 108 |
+| variable | `p` | 109 |
+| function | `test_duplicate_exact_tag_refuses_first_match(self)` | 115 |
+| parameter | `self` | 115 |
+| function | `test_repeated_id_pagination_refuses(self)` | 121 |
+| parameter | `self` | 121 |
+| variable | `i` | 123 |
+| variable | `page` | 123 |
+| function | `test_malformed_pages_fail(self)` | 127 |
+| parameter | `self` | 127 |
+| variable | `page` | 129 |
+| function | `test_invalid_ids_never_become_paths(self)` | 133 |
+| parameter | `self` | 133 |
+| variable | `identifier` | 135 |
+| function | `test_foreign_list_namespace_refuses_before_detail(self)` | 140 |
+| parameter | `self` | 140 |
+| function | `test_detail_identity_swap_publication_and_retarget_refuse(self)` | 146 |
+| parameter | `self` | 146 |
+| variable | `changes` | 148 |
+| function | `test_detail_foreign_hypermedia_refuses(self)` | 158 |
+| parameter | `self` | 158 |
+| variable | `key` | 160 |
+| function | `test_lost_access_never_falls_back_to_list(self)` | 168 |
+| parameter | `self` | 168 |
+| function | `test_auth_network_errors_are_not_absence(self)` | 173 |
+| parameter | `self` | 173 |
+| variable | `message` | 175 |
+| function | `denied(_, message)` | 177 |
+| parameter | `_` | 177 |
+| parameter | `message` | 177 |
+| function | `test_same_bad_state_in_both_snapshots_still_fails_draft_policy(self)` | 184 |
+| parameter | `self` | 184 |
+| variable | `changes` | 186 |
+| function | `test_expected_prepared_id_is_bound(self)` | 190 |
+| parameter | `self` | 190 |
+| function | `test_invalid_namespace_tag_source_refuses_before_http(self)` | 199 |
+| parameter | `self` | 199 |
+| variable | `repo` | 201 |
+| variable | `source` | 201 |
+| variable | `version` | 201 |
+| variable | `read` | 206 |
 
 ## tests/test_execution.py
 
@@ -2571,6 +2897,216 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `root` | 43 |
 | variable | `relative` | 45 |
 | variable | `data` | 51 |
+
+## tests/test_release_gate.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `SOURCE` | 30 |
+| variable | `VALUE` | 31 |
+| function | `source_responses()` | 41 |
+| variable | `result` | 43 |
+| variable | `workflow` | 44 |
+| variable | `category` | 73 |
+| variable | `index` | 73 |
+| function | `strict_reader(responses)` | 81 |
+| parameter | `responses` | 81 |
+| function | `read(endpoint)` | 84 |
+| parameter | `endpoint` | 84 |
+| parameter | `kwargs` | 84 |
+| function | `release_record()` | 92 |
+| parameter | `changes` | 92 |
+| variable | `prefix` | 94 |
+| function | `test_real_source_response_contract_passes(monkeypatch)` | 110 |
+| parameter | `monkeypatch` | 110 |
+| function | `test_zero_unknown_or_noninteger_codeql_rule_counts_never_authorize_release(monkeypatch, count)` | 117 |
+| parameter | `count` | 117 |
+| parameter | `monkeypatch` | 117 |
+| variable | `responses` | 119 |
+| variable | `row` | 120 |
+| function | `test_source_failures_cannot_authorize_release(monkeypatch, defect)` | 149 |
+| parameter | `defect` | 149 |
+| parameter | `monkeypatch` | 149 |
+| variable | `responses` | 151 |
+| variable | `key` | 152 |
+| variable | `row` | 153 |
+| variable | `field` | 155 |
+| variable | `value` | 155 |
+| variable | `analyses` | 177 |
+| function | `test_unknown_or_full_scan_pages_fail_closed(monkeypatch)` | 193 |
+| parameter | `monkeypatch` | 193 |
+| parameter | `endpoint` | 195 |
+| function | `test_prepared_numeric_id_cannot_be_public_or_swapped(monkeypatch, change)` | 210 |
+| parameter | `change` | 210 |
+| parameter | `monkeypatch` | 210 |
+| parameter | `tag` | 213 |
+| function | `test_actual_workflow_policy_rejects_security_mutants(before, after)` | 232 |
+| parameter | `after` | 232 |
+| parameter | `before` | 232 |
+| variable | `original` | 234 |
+| variable | `changed` | 236 |
+| function | `test_package_schema_is_strict(value)` | 243 |
+| parameter | `value` | 243 |
+| variable | `bad` | 245 |
+| function | `test_metadata_duplicates_nonfinite_and_nonobjects_are_errors(source)` | 251 |
+| parameter | `source` | 251 |
+| function | `portable(file, value, worker, system, symlink)` | 257 |
+| parameter | `file` | 257 |
+| parameter | `symlink` | 257 |
+| parameter | `system` | 257 |
+| parameter | `value` | 257 |
+| parameter | `worker` | 257 |
+| variable | `prefix` | 259 |
+| variable | `members` | 260 |
+| variable | `archive` | 265 |
+| variable | `content` | 266 |
+| variable | `name` | 266 |
+| variable | `archive` | 269 |
+| variable | `content` | 270 |
+| variable | `name` | 270 |
+| variable | `entry` | 271 |
+| function | `test_actual_platform_archive_metadata(tmp_path, system, suffix)` | 281 |
+| parameter | `suffix` | 281 |
+| parameter | `system` | 281 |
+| parameter | `tmp_path` | 281 |
+| variable | `file` | 283 |
+| function | `test_archive_metadata_link_is_never_followed(tmp_path)` | 288 |
+| parameter | `tmp_path` | 288 |
+| variable | `file` | 290 |
+| function | `staged(tmp_path, monkeypatch)` | 296 |
+| parameter | `metadata_changes` | 296 |
+| parameter | `monkeypatch` | 296 |
+| parameter | `tmp_path` | 296 |
+| variable | `directory` | 300 |
+| variable | `installer` | 302 |
+| variable | `archive` | 304 |
+| variable | `file` | 306 |
+| variable | `digest` | 307 |
+| variable | `record` | 322 |
+| parameter | `tag` | 323 |
+| parameter | `endpoint` | 327 |
+| function | `test_invalid_local_or_remote_package_cannot_reach_upload(tmp_path, monkeypatch, defect)` | 337 |
+| parameter | `defect` | 337 |
+| parameter | `monkeypatch` | 337 |
+| parameter | `tmp_path` | 337 |
+| variable | `changes` | 339 |
+| variable | `directory` | 346 |
+| variable | `record` | 346 |
+| parameter | `args` | 362 |
+| function | `test_exact_staged_files_upload_to_prepared_id_without_overwrite(tmp_path, monkeypatch)` | 368 |
+| parameter | `monkeypatch` | 368 |
+| parameter | `tmp_path` | 368 |
+| variable | `_` | 370 |
+| variable | `record` | 370 |
+| variable | `writes` | 371 |
+| function | `send(identifier, file, name, digest)` | 373 |
+| parameter | `digest` | 373 |
+| parameter | `file` | 373 |
+| parameter | `identifier` | 373 |
+| parameter | `name` | 373 |
+| variable | `row` | 376 |
+| variable | `row` | 378 |
+| function | `test_fixed_https_transport_id_digest_and_redirect_refusal(tmp_path, monkeypatch, status, digest_ok)` | 403 |
+| parameter | `digest_ok` | 403 |
+| parameter | `monkeypatch` | 403 |
+| parameter | `status` | 403 |
+| parameter | `tmp_path` | 403 |
+| variable | `file` | 405 |
+| variable | `digest` | 407 |
+| variable | `events` | 408 |
+| class | `Connection` | 410 |
+| function | `__init__(self, host, timeout)` | 413 |
+| parameter | `host` | 413 |
+| parameter | `self` | 413 |
+| parameter | `timeout` | 413 |
+| function | `putrequest(self, method, url)` | 416 |
+| parameter | `method` | 416 |
+| parameter | `self` | 416 |
+| parameter | `url` | 416 |
+| function | `putheader(self, key, value)` | 419 |
+| parameter | `key` | 419 |
+| parameter | `self` | 419 |
+| parameter | `value` | 419 |
+| function | `endheaders(self)` | 423 |
+| parameter | `self` | 423 |
+| function | `send(self, block)` | 426 |
+| parameter | `block` | 426 |
+| parameter | `self` | 426 |
+| function | `getresponse(self)` | 429 |
+| parameter | `self` | 429 |
+| parameter | `limit` | 435 |
+| parameter | `self` | 435 |
+| function | `close(self)` | 445 |
+| parameter | `self` | 445 |
+| variable | `key` | 457 |
+| variable | `value` | 457 |
+| function | `test_cli_command_allowlist_precedes_execution(monkeypatch)` | 460 |
+| parameter | `monkeypatch` | 460 |
+| parameter | `args` | 463 |
+| parameter | `kwargs` | 463 |
+| variable | `arguments` | 465 |
+| function | `test_tag_absence_distinguishes_real404_from_permission_errors(monkeypatch)` | 475 |
+| parameter | `monkeypatch` | 475 |
+| parameter | `name` | 477 |
+| variable | `accepted` | 478 |
+| variable | `code` | 478 |
+| variable | `error` | 478 |
+| variable | `output` | 478 |
+| parameter | `args` | 487 |
+| parameter | `code` | 487 |
+| parameter | `error` | 487 |
+| parameter | `kwargs` | 487 |
+| parameter | `output` | 487 |
+| function | `prepared_context(tmp_path, monkeypatch)` | 498 |
+| parameter | `monkeypatch` | 498 |
+| parameter | `tmp_path` | 498 |
+| variable | `workflow` | 500 |
+| variable | `key` | 507 |
+| variable | `value` | 507 |
+| function | `test_actual_prepare_orders_all_checks_before_the_only_write(tmp_path, monkeypatch, defect)` | 522 |
+| parameter | `defect` | 522 |
+| parameter | `monkeypatch` | 522 |
+| parameter | `tmp_path` | 522 |
+| variable | `responses` | 525 |
+| variable | `listing` | 526 |
+| variable | `record` | 538 |
+| variable | `reads` | 541 |
+| variable | `writes` | 541 |
+| function | `transport(endpoint, body)` | 543 |
+| parameter | `body` | 543 |
+| parameter | `endpoint` | 543 |
+| parameter | `tag` | 563 |
+| function | `test_untrusted_context_never_reaches_github(tmp_path, monkeypatch, field, value)` | 584 |
+| parameter | `field` | 584 |
+| parameter | `monkeypatch` | 584 |
+| parameter | `tmp_path` | 584 |
+| parameter | `value` | 584 |
+| parameter | `args` | 588 |
+| parameter | `kwargs` | 588 |
+| function | `test_final_verification_rechecks_security_but_keeps_release_draft(tmp_path, monkeypatch, capsys)` | 593 |
+| parameter | `capsys` | 593 |
+| parameter | `monkeypatch` | 593 |
+| parameter | `tmp_path` | 593 |
+| variable | `record` | 598 |
+| variable | `system` | 599 |
+| variable | `name` | 600 |
+| variable | `responses` | 610 |
+| parameter | `tag` | 613 |
+| variable | `result` | 615 |
+| function | `test_dirty_source_and_publish_operation_are_refused_before_network(tmp_path, monkeypatch)` | 621 |
+| parameter | `monkeypatch` | 621 |
+| parameter | `tmp_path` | 621 |
+| parameter | `args` | 625 |
+| parameter | `kwargs` | 625 |
+| variable | `error` | 629 |
+| function | `test_actual_checked_in_product_version_and_worker_metadata()` | 634 |
+| function | `test_api_structured_body_and_fixed_namespace(monkeypatch)` | 639 |
+| parameter | `monkeypatch` | 639 |
+| variable | `calls` | 641 |
+| function | `execute(arguments, data)` | 643 |
+| parameter | `arguments` | 643 |
+| parameter | `data` | 643 |
+| variable | `body` | 649 |
 
 ## tests/test_sanitizer_probe.py
 

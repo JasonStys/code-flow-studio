@@ -2,6 +2,8 @@
 
 - [Verified source inspection and draft navigation](source-navigation.md), with [observed practical-workflow validation](reports/practical-workflows-2026-11-09.md).
 - [Worker sanitizer compatibility and separate analyzer audit](worker-toolchain.md).
+- [0.4.1 hotfix preparation](releases/v0.4.1.md): descriptor-bound worker JSON reads; full-main CodeQL fixes and pending native acceptance.
+- [0.4.1 finding and release-guard validation](reports/codeql-main-fixes-2026-11-09.md): exact original alerts, independent negative cases, local compiled package provenance and required hosted acceptance.
 - [0.4.0 release notes](releases/v0.4.0.md): exact-source publication gate, unchanged data formats and matching worker-image update.
 
 - [Polyglot coverage and unused-code measurements](polyglot-locations.md), [current validation](validation-polyglot.md) and [0.3.0 release notes](releases/v0.3.0.md).

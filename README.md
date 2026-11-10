@@ -2,7 +2,7 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Version 0.4.0: polyglot evidence and verified source review.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+**Version 0.4.1: bounded worker reports and verified source review.** Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
 Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-polyglot.md), [historical Python-location validation](docs/validation-locations.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
@@ -37,6 +37,11 @@ Binary formats can be retained as fixtures. There is no promise to understand ev
 The [source inspection workflow](docs/source-navigation.md) explains stale/legacy references, generated artifacts, bounds and review steps. [Observed local validation](docs/reports/practical-workflows-2026-11-09.md) separates actual browser/native journeys from UI report-contract fixtures and compiler checks that require isolated CI workers.
 
 ## Run and install
+
+The 0.4.1 source prepares a security hotfix. Its [release notes](docs/releases/v0.4.1.md)
+and [full-main finding/validation report](docs/reports/codeql-main-fixes-2026-11-09.md)
+describe the bounded worker reader and the fresh native/download checks required
+before publication. A source version change alone does not replace a published download.
 
 For end users, use the checksummed OS-specific packages in Releases. The UI runtime is bundled. Open the app's **Code Flow → Open local website** menu for browser use; no login token appears in the URL. Compiler jobs require an isolated local Unix/named-pipe Docker engine and the trusted worker image. Missing isolation is blocked, never passed; there is no host-execution fallback. Save/edit/static review/history/help remain usable without Docker.
 
@@ -81,6 +86,8 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `runner/sanitizer_probe.py`, `scripts/worker_analyzer_checks.cjs` | Trusted same-container sanitizer-startup/fault controls and independent exact-line JS/TS checks against the separately audited worker dependency graph. |
 | `scripts/private_worker_checks.py` | Real twelve-adapter execution through authenticated account API and encrypted-history reopen. |
 | `scripts/license_bundle.py`, `scripts/release_archive.py` | Generated third-party notices, portable app packages and SHA-256 checksums; never package user accounts. |
+| `scripts/release_gate.py`, `scripts/draft_lookup.py` | Current-main source/CodeQL prerequisites, strict authenticated numeric draft identity, embedded source/worker provenance, bounded fixed-host uploads and draft-only final verification. |
+| `tests/test_release_gate.py`, `tests/test_draft_lookup.py`, `tests/node-report.test.cjs` | Independent GitHub response/policy mutation fixtures, real archive/transport negative oracles and actual descriptor-bound worker JSON read regressions. |
 | `scripts/push_analysis.py` | Push generation/test/candidate workflow without automatic source promotion. |
 | `tests/` | Controller/security/history/provider/metric tests, browser flows and native launch smoke. |
 | `.github/workflows/` | Validation, real isolated workers, training and native OS-package workflows. |

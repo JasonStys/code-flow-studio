@@ -31,6 +31,7 @@ jobs:
       - run: python -m pytest --cov=studio --cov=training.dataset --cov-fail-under=80 --cov-report=xml:artifacts/coverage.xml --junitxml=artifacts/tests.xml
       - run: npm ci
       - run: npm run test:electron-readiness
+      - run: npm run test:worker-reports
       - run: npm audit --audit-level=high
       - name: Audit and exercise the separately locked worker analyzers
         run: |
@@ -92,7 +93,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -e '.[dev]'
-      - run: docker build -t code-flow-worker:0.4.0 runner
+      - run: docker build -t code-flow-worker:0.4.1 runner
       - run: python -m scripts.worker_checks
       - run: python -m scripts.private_worker_checks
       - run: python -m scripts.push_analysis

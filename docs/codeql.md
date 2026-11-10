@@ -48,6 +48,10 @@ that baseline. We add no internal override, exclusion or fabricated empty result
 
 ## Read and act on a result
 
+The [full-main fix report](reports/codeql-main-fixes-2026-11-09.md) records the two
+actual pre-existing findings, descriptor-bound worker reads, independent negative
+regressions and the separate 0.4.1 delivery acceptance still required.
+
 Open **Security → Code scanning** or the CodeQL check on the pull request. Confirm the
 workflow source, language/category, completed extraction and successful result processing.
 A passing job does not mean it found no alerts: inspect the actual alerts and source paths.

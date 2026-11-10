@@ -1,17 +1,24 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L17; executable@L23; app@L26; resources@L45; file@L46; page@L70; browserErrors@L73; health@L77; state@L85; directory@L100; serviceLog@L103; statuses@L104
+ * variables: { verifyElectron }@L24; executable@L30; app@L33; acceptedPackage@L46; resources@L53; file@L54; metadata@L87; page@L107; browserErrors@L110; health@L114; state@L122; directory@L137; serviceLog@L140; statuses@L141
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
  * Symbol locations: docs/code-index.md.
  */
 import { test, expect, _electron as electron } from "@playwright/test";
-import { mkdtempSync, existsSync, readFileSync } from "node:fs";
+import {
+  mkdtempSync,
+  existsSync,
+  readFileSync,
+  mkdirSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createRequire } from "node:module";
+import { createHash } from "node:crypto";
 import { createSession, editorJourney } from "./account-session";
 import { inspectHelper } from "./source-journey";
 const { verifyElectron } = createRequire(import.meta.url)(
@@ -36,6 +43,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
   app.process().once("exit", (code, signal) => {
     console.info("NATIVE_PROCESS_EXIT", JSON.stringify({ code, signal }));
   });
+  let acceptedPackage: { source: string; worker_sha256: string } | undefined;
   try {
     expect(await app.evaluate(({ app }) => app.getPath("userData"))).toContain(
       "code-flow-launcher-test-",
@@ -66,6 +74,35 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       expect(
         existsSync(join(resources, "runner", "tools", "node_modules")),
       ).toBe(false);
+      // Prove the actual distributed worker resource is this reviewed source, not an older existence-only copy.
+      expect(
+        createHash("sha256")
+          .update(readFileSync(join(resources, "runner", "node_checks.cjs")))
+          .digest("hex"),
+      ).toBe(
+        createHash("sha256")
+          .update(readFileSync("runner/node_checks.cjs"))
+          .digest("hex"),
+      );
+      const metadata = JSON.parse(
+        readFileSync(
+          join(resources, "metadata", "source-release.json"),
+          "utf8",
+        ),
+      );
+      expect(metadata.schema).toBe(1);
+      expect(metadata.product).toBe("code-flow-studio");
+      expect(metadata.version).toBe("0.4.1");
+      expect(metadata.source).toMatch(/^[a-f0-9]{40}$/);
+      expect(typeof metadata.source_dirty).toBe("boolean");
+      expect(metadata.worker_sha256).toBe(
+        createHash("sha256")
+          .update(readFileSync(join(resources, "runner", "node_checks.cjs")))
+          .digest("hex"),
+      );
+      if (process.env.GITHUB_SHA)
+        expect(metadata.source).toBe(process.env.GITHUB_SHA);
+      acceptedPackage = metadata;
     }
     const page = await app.firstWindow();
     page.once("crash", () => console.error("NATIVE_RENDERER_EVENT", "crashed"));
@@ -75,7 +112,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       if (browserErrors.length < 8) browserErrors.push(error.name);
     });
     const health = await page.request.get(new URL("/health", page.url()).href);
-    expect((await health.json()).version).toBe("0.4.0");
+    expect((await health.json()).version).toBe("0.4.1");
     try {
       console.info("NATIVE_JOURNEY_STAGE", "account:start");
       await createSession(page, "native_fictional");
@@ -168,5 +205,20 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     console.info("NATIVE_JOURNEY_STAGE", "owned-close:start");
     await app.close();
     console.info("NATIVE_JOURNEY_STAGE", "owned-close:complete");
+  }
+  if (acceptedPackage) {
+    // Generated proof contains source/package identity only; no profile, alias, source text or account key.
+    mkdirSync("artifacts", { recursive: true });
+    writeFileSync(
+      "artifacts/native-resource-acceptance.json",
+      JSON.stringify({
+        schema: 1,
+        version: "0.4.1",
+        source: acceptedPackage.source,
+        worker_sha256: acceptedPackage.worker_sha256,
+        compiled_app: true,
+        journey: "passed",
+      }),
+    );
   }
 });

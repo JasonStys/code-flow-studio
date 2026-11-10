@@ -3,9 +3,8 @@ on:
   workflow_dispatch:
     inputs:
       commit:
-        description: Exact validated source commit
+        description: Exact validated current-main 40-character source SHA
         required: true
-        default: main
 permissions:
   contents: read
 concurrency:
@@ -13,13 +12,17 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prepare:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
       actions: read
+      security-events: read
     outputs:
       sha: ${{ steps.gate.outputs.sha }}
       tag: ${{ steps.gate.outputs.tag }}
+      release_id: ${{ steps.gate.outputs.release_id }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -28,27 +31,23 @@ jobs:
       - id: gate
         env:
           GH_TOKEN: ${{ github.token }}
+          EXPECTED_SOURCE: ${{ inputs.commit }}
+        shell: bash
         run: |
           set -euo pipefail
-          sha=$(git rev-parse HEAD)
-          version=$(python -c 'import json; print(json.load(open("package.json"))["version"])')
-          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
-          test "$version" = "$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
-          tag="v$version"
-          test "$(gh run list --workflow validate.yml --commit "$sha" --limit 1 --json conclusion --jq '.[0].conclusion')" = success
-          test "$(gh run list --workflow packages.yml --commit "$sha" --limit 1 --json conclusion --jq '.[0].conclusion')" = success
-          echo "sha=$sha" >> "$GITHUB_OUTPUT"
-          echo "tag=$tag" >> "$GITHUB_OUTPUT"
-          if gh release view "$tag" --json isDraft,targetCommitish > /tmp/cfs-release.json 2>/dev/null; then
-            test "$(jq -r '.isDraft' /tmp/cfs-release.json)" = true
-            test "$(jq -r '.targetCommitish' /tmp/cfs-release.json)" = "$sha"
-          else
-            gh release create "$tag" --draft --target "$sha" --title "Code Flow Studio $version — verified source review" --notes-file "docs/releases/$tag.md"
-          fi
+          [[ "$EXPECTED_SOURCE" =~ ^[a-f0-9]{40}$ ]]
+          test "$GITHUB_REPOSITORY" = "JasonStys/code-flow-studio"
+          test "$GITHUB_REF" = refs/heads/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SOURCE"
+          test "$GITHUB_SHA" = "$EXPECTED_SOURCE"
+          test "$(gh api repos/JasonStys/code-flow-studio/git/ref/heads/main --jq .object.sha)" = "$EXPECTED_SOURCE"
+          test -z "$(git status --porcelain)"
+          python -m scripts.release_gate prepare
   build:
     needs: prepare
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
@@ -57,7 +56,8 @@ jobs:
       contents: write
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-      RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      EXPECTED_SOURCE: ${{ needs.prepare.outputs.sha }}
+      EXPECTED_RELEASE_ID: ${{ needs.prepare.outputs.release_id }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -81,6 +81,7 @@ jobs:
       - run: npm run build
       - run: python scripts/license_bundle.py
       - run: python -m PyInstaller --noconfirm --onefile --name code-flow-service --distpath release/service --paths . --add-data "dist/ui:ui" scripts/frozen_entry.py
+      - run: python -m scripts.release_gate metadata
       - run: npm run package -- --publish never
       - name: Verify actual packaged app and create checksummed archive
         shell: bash
@@ -95,28 +96,26 @@ jobs:
           fi
           if [ "$RUNNER_OS" = Linux ]; then xvfb-run -a npm run test:desktop; else npm run test:desktop; fi
           python scripts/release_archive.py
-      - name: Upload only tested binaries to draft Release, not Actions storage
-        shell: bash
+      - name: Upload only accepted bytes to the prepared numeric draft ID
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          gh release upload "$RELEASE_TAG" release/installers/*.sha256 --clobber
-          if [ "$RUNNER_OS" = Windows ]; then
-            gh release upload "$RELEASE_TAG" release/installers/*.exe release/installers/*.zip --clobber
-          elif [ "$RUNNER_OS" = macOS ]; then
-            gh release upload "$RELEASE_TAG" release/installers/*.dmg release/installers/*.tar.gz --clobber
-          else
-            gh release upload "$RELEASE_TAG" release/installers/*.AppImage release/installers/*.tar.gz --clobber
-          fi
-  publish:
+        run: python -m scripts.release_gate upload
+  verify-draft:
     needs: [prepare, build]
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
-      contents: write
+      contents: read
+      actions: read
+      security-events: read
     steps:
-      - env:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+          persist-credentials: false
+      - name: Recheck full-main security and complete assets; preserve draft for independent acceptance
+        env:
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
-        run: gh release edit "$RELEASE_TAG" --draft=false
+          EXPECTED_SOURCE: ${{ needs.prepare.outputs.sha }}
+          EXPECTED_RELEASE_ID: ${{ needs.prepare.outputs.release_id }}
+        run: python -m scripts.release_gate verify

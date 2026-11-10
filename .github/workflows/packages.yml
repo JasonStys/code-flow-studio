@@ -53,6 +53,7 @@ jobs:
         if: runner.os != 'Linux'
       - run: xvfb-run -a npm run test:desktop
         if: runner.os == 'Linux'
+      - run: python -m scripts.release_gate metadata
       - run: npm run package -- --publish never
       - name: Verify the actual packaged executable
         shell: bash

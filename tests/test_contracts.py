@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: test_unsafe_names(name)@L47; test_safe_flat_names(suffix)@L54; test_project_invalid(project, changes)@L73; test_invalid_binary(project)@L79; test_zero_weights()@L87; test_history_retains_oracles(tmp_path, project)@L93; test_history_restart(tmp_path, project)@L112; test_reports_escaped(project)@L123; test_static_no_execution(project, tmp_path)@L133; test_comparison_gates()@L142; test_catalog_no_fake_passes()@L167; test_training_split()@L176; test_web_demo_source_matches_ci()@L183; test_training_bad_data(tmp_path, rows)@L203
-# variables: payload@L81; store@L95; payload@L96; initial@L98; candidate@L99; change@L104; store@L114; revision@L115; run@L116; restarted@L117; run@L125; report@L126; archive@L128; sentinel@L135; payload@L136; result@L138; valid@L144; candidate@L152; changes@L154; rows@L169; row@L170; row@L173; result@L178; train@L178; validation@L178; row@L179; manifest@L185; matched@L186; path@L205; row@L206
-# parameters: name@L47; suffix@L54; changes@L73; project@L73; project@L79; project@L93; tmp_path@L93; project@L112; tmp_path@L112; project@L123; project@L133; tmp_path@L133; rows@L203; tmp_path@L203
+# functions: test_unsafe_names(name)@L47; test_safe_flat_names(suffix)@L54; test_project_invalid(project, changes)@L73; test_invalid_binary(project)@L79; test_zero_weights()@L87; test_history_retains_oracles(tmp_path, project)@L93; test_history_restart(tmp_path, project)@L112; test_reports_escaped(project)@L123; test_static_no_execution(project, tmp_path)@L133; test_comparison_gates()@L142; test_catalog_no_fake_passes()@L167; test_training_split()@L176; test_web_demo_source_matches_ci()@L183; test_demo_literal_pattern_rejects_long_unterminated_input(tail)@L197; test_training_bad_data(tmp_path, rows)@L213
+# variables: payload@L81; store@L95; payload@L96; initial@L98; candidate@L99; change@L104; store@L114; revision@L115; run@L116; restarted@L117; run@L125; report@L126; archive@L128; sentinel@L135; payload@L136; result@L138; valid@L144; candidate@L152; changes@L154; rows@L169; row@L170; row@L173; result@L178; train@L178; validation@L178; row@L179; manifest@L185; matched@L186; path@L215; row@L216
+# parameters: name@L47; suffix@L54; changes@L73; project@L73; project@L79; project@L93; tmp_path@L93; project@L112; tmp_path@L112; project@L123; project@L133; tmp_path@L133; tail@L197; rows@L213; tmp_path@L213
 # </code-map>
 
 """Input boundary, history and comparison invariants. Symbols: docs/code-index.md."""
@@ -183,10 +183,20 @@ def test_training_split():
 def test_web_demo_source_matches_ci():
     """The CI manifest contains the exact inert source shown by the web/native CSV demo."""
     manifest = Project.model_validate_json(Path("examples/web-demo.project.json").read_text())
-    matched = re.search(r"content:\s*('(?:\\.|[^'])*')", Path("ui/demo.ts").read_text())
+    matched = re.search(r"content:\s*('(?:\\.|[^'\\])*')", Path("ui/demo.ts").read_text())
     assert matched is not None
     assert ast.literal_eval(matched[1]) == manifest.files[0].content
     assert len(manifest.cases) == 3 and manifest.fuzz_cases == 24
+
+
+@pytest.mark.parametrize(
+    "tail",
+    ["\\&" * 100_000, "\\'" * 100_000, "a" * 200_000],
+    ids=["escaped-ampersands", "escaped-quotes", "unescaped-text"],
+)
+def test_demo_literal_pattern_rejects_long_unterminated_input(tail):
+    """Disjoint escape/unescaped alternatives reject hostile unterminated text without exponential ambiguity."""
+    assert re.search(r"content:\s*('(?:\\.|[^'\\])*')", "content:'" + tail) is None
 
 
 @pytest.mark.parametrize(
