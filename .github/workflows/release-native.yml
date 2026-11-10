@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: ${{ inputs.commit }}
+          ref: ${{ github.sha }}
           persist-credentials: false
       - id: gate
         env:
@@ -44,6 +44,7 @@ jobs:
           test -z "$(git status --porcelain)"
           python -m scripts.release_gate prepare
   build:
+    if: github.ref == 'refs/heads/main'
     needs: prepare
     strategy:
       fail-fast: false
@@ -61,7 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: ${{ needs.prepare.outputs.sha }}
+          ref: ${{ github.sha }}
           persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
@@ -101,6 +102,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python -m scripts.release_gate upload
   verify-draft:
+    if: github.ref == 'refs/heads/main'
     needs: [prepare, build]
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -111,7 +113,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: ${{ needs.prepare.outputs.sha }}
+          ref: ${{ github.sha }}
           persist-credentials: false
       - name: Recheck full-main security and complete assets; preserve draft for independent acceptance
         env:

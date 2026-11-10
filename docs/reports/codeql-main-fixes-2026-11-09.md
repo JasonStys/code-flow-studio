@@ -130,3 +130,28 @@ Windows symlink-protection claim is made. JSON syntax failures and I/O errors
 remain failures, never empty successful coverage reports. Static analysis and
 bounded regression cases do not establish absence of every defect or a precise
 performance/complexity guarantee.
+
+## First corrective PR Actions review
+
+All original controller/worker/training and three-platform native package jobs
+passed for corrective source `3ef22671f6cce7353ed030a84b645fbb4fa0d553`.
+Its actual PR CodeQL run reported two new Actions findings at the release
+workflow's dynamic prepared-output checkout: `actions/untrusted-checkout/medium`
+and `actions/cache-poisoning/poisonable-step`. The previous preparation guard
+already required that output to equal the immutable event SHA and current main,
+but the checkout expressed this trusted identity through a job output.
+
+All release jobs now explicitly require the main ref and check out the immutable
+`github.sha` event identity directly. The caller's full source input and prepared
+source still must equal that identity through the existing active guards. This
+removes the unnecessary output-selected code execution boundary without relaxing
+source, analysis, permission or upload checks. Negative workflow mutations reject
+mutable main refs, prepared-output refs and a removed main-only condition. No
+query or finding was suppressed or dismissed; the corrected hosted scan is a
+separate required observation.
+
+The updated policy suite passed 92 release/draft tests plus 28 subtests, retaining
+310/319 measured helper lines (97.18%). The complete suite passed 250 Python tests
+plus 28 subtests with the original controller/training-data coverage unchanged.
+Workflow actionlint, Ruff and all 75 source maps passed. No application/worker
+resources changed during this Actions checkout correction.
