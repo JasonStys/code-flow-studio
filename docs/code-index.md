@@ -4273,226 +4273,233 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `prefix` | 94 |
 | function | `test_real_source_response_contract_passes(monkeypatch)` | 110 |
 | parameter | `monkeypatch` | 110 |
-| function | `test_zero_unknown_or_noninteger_codeql_rule_counts_never_authorize_release(monkeypatch, count)` | 117 |
-| parameter | `count` | 117 |
+| function | `test_compiler_acceptance_is_an_independent_exact_main_release_prerequisite(monkeypatch, defect)` | 117 |
+| parameter | `defect` | 117 |
 | parameter | `monkeypatch` | 117 |
 | variable | `responses` | 119 |
-| variable | `row` | 120 |
-| function | `test_source_failures_cannot_authorize_release(monkeypatch, defect)` | 149 |
-| parameter | `defect` | 149 |
-| parameter | `monkeypatch` | 149 |
-| variable | `responses` | 151 |
-| variable | `key` | 152 |
-| variable | `row` | 153 |
-| variable | `field` | 155 |
-| variable | `value` | 155 |
-| variable | `analyses` | 177 |
-| function | `test_unknown_or_full_scan_pages_fail_closed(monkeypatch)` | 193 |
-| parameter | `monkeypatch` | 193 |
-| parameter | `endpoint` | 195 |
-| function | `test_prepared_numeric_id_cannot_be_public_or_swapped(monkeypatch, change)` | 210 |
-| parameter | `change` | 210 |
-| parameter | `monkeypatch` | 210 |
-| parameter | `tag` | 213 |
-| function | `test_actual_workflow_policy_rejects_security_mutants(before, after)` | 234 |
-| parameter | `after` | 234 |
-| parameter | `before` | 234 |
-| variable | `original` | 236 |
-| variable | `changed` | 238 |
-| function | `test_real_final_job_permission_mutations_cannot_authorize_draft(scope, before, after)` | 250 |
-| parameter | `after` | 250 |
-| parameter | `before` | 250 |
-| parameter | `scope` | 250 |
-| variable | `original` | 252 |
-| variable | `prefix` | 254 |
-| variable | `separator` | 254 |
-| variable | `verifier` | 254 |
-| variable | `changed` | 256 |
-| function | `test_commented_duplicate_or_unparsed_final_permissions_fail_closed(extra)` | 266 |
-| parameter | `extra` | 266 |
-| variable | `original` | 268 |
-| variable | `prefix` | 269 |
-| variable | `separator` | 269 |
-| variable | `verifier` | 269 |
-| variable | `changed` | 271 |
-| function | `test_legitimate_final_scope_comments_are_parsed_not_ignored()` | 276 |
-| variable | `original` | 278 |
+| variable | `endpoint` | 120 |
+| variable | `row` | 121 |
+| function | `test_zero_unknown_or_noninteger_codeql_rule_counts_never_authorize_release(monkeypatch, count)` | 142 |
+| parameter | `count` | 142 |
+| parameter | `monkeypatch` | 142 |
+| variable | `responses` | 144 |
+| variable | `row` | 145 |
+| function | `test_source_failures_cannot_authorize_release(monkeypatch, defect)` | 174 |
+| parameter | `defect` | 174 |
+| parameter | `monkeypatch` | 174 |
+| variable | `responses` | 176 |
+| variable | `key` | 177 |
+| variable | `row` | 178 |
+| variable | `field` | 180 |
+| variable | `value` | 180 |
+| variable | `analyses` | 202 |
+| function | `test_unknown_or_full_scan_pages_fail_closed(monkeypatch)` | 218 |
+| parameter | `monkeypatch` | 218 |
+| parameter | `endpoint` | 220 |
+| function | `test_prepared_numeric_id_cannot_be_public_or_swapped(monkeypatch, change)` | 235 |
+| parameter | `change` | 235 |
+| parameter | `monkeypatch` | 235 |
+| parameter | `tag` | 238 |
+| function | `test_actual_workflow_policy_rejects_security_mutants(before, after)` | 259 |
+| parameter | `after` | 259 |
+| parameter | `before` | 259 |
+| variable | `original` | 261 |
+| variable | `changed` | 263 |
+| function | `test_real_final_job_permission_mutations_cannot_authorize_draft(scope, before, after)` | 275 |
+| parameter | `after` | 275 |
+| parameter | `before` | 275 |
+| parameter | `scope` | 275 |
+| variable | `original` | 277 |
 | variable | `prefix` | 279 |
 | variable | `separator` | 279 |
 | variable | `verifier` | 279 |
 | variable | `changed` | 281 |
-| function | `test_duplicate_whole_final_permission_blocks_fail_closed(position, field)` | 290 |
-| parameter | `field` | 290 |
-| parameter | `position` | 290 |
-| variable | `original` | 292 |
-| variable | `prefix` | 293 |
-| variable | `separator` | 293 |
-| variable | `verifier` | 293 |
-| variable | `extra` | 295 |
-| variable | `changed` | 297 |
-| variable | `changed` | 299 |
-| function | `test_package_schema_is_strict(value)` | 305 |
-| parameter | `value` | 305 |
-| variable | `bad` | 307 |
-| function | `test_metadata_duplicates_nonfinite_and_nonobjects_are_errors(source)` | 313 |
-| parameter | `source` | 313 |
-| function | `portable(file, value, worker, system, symlink)` | 319 |
-| parameter | `file` | 319 |
-| parameter | `symlink` | 319 |
-| parameter | `system` | 319 |
-| parameter | `value` | 319 |
-| parameter | `worker` | 319 |
-| variable | `prefix` | 321 |
-| variable | `members` | 322 |
-| variable | `archive` | 327 |
-| variable | `content` | 328 |
-| variable | `name` | 328 |
-| variable | `archive` | 331 |
-| variable | `content` | 332 |
-| variable | `name` | 332 |
-| variable | `entry` | 333 |
-| function | `test_actual_platform_archive_metadata(tmp_path, system, suffix)` | 343 |
-| parameter | `suffix` | 343 |
-| parameter | `system` | 343 |
-| parameter | `tmp_path` | 343 |
-| variable | `file` | 345 |
-| function | `test_archive_metadata_link_is_never_followed(tmp_path)` | 350 |
-| parameter | `tmp_path` | 350 |
-| variable | `file` | 352 |
-| function | `staged(tmp_path, monkeypatch)` | 358 |
-| parameter | `metadata_changes` | 358 |
-| parameter | `monkeypatch` | 358 |
-| parameter | `tmp_path` | 358 |
-| variable | `directory` | 362 |
-| variable | `installer` | 364 |
-| variable | `archive` | 366 |
-| variable | `file` | 368 |
-| variable | `digest` | 369 |
-| variable | `record` | 384 |
-| parameter | `tag` | 385 |
-| parameter | `endpoint` | 389 |
-| function | `test_invalid_local_or_remote_package_cannot_reach_upload(tmp_path, monkeypatch, defect)` | 399 |
-| parameter | `defect` | 399 |
-| parameter | `monkeypatch` | 399 |
-| parameter | `tmp_path` | 399 |
-| variable | `changes` | 401 |
-| variable | `directory` | 408 |
-| variable | `record` | 408 |
-| parameter | `args` | 424 |
-| function | `test_exact_staged_files_upload_to_prepared_id_without_overwrite(tmp_path, monkeypatch)` | 430 |
-| parameter | `monkeypatch` | 430 |
-| parameter | `tmp_path` | 430 |
-| variable | `_` | 432 |
-| variable | `record` | 432 |
-| variable | `writes` | 433 |
-| function | `send(identifier, file, name, digest)` | 435 |
-| parameter | `digest` | 435 |
-| parameter | `file` | 435 |
-| parameter | `identifier` | 435 |
-| parameter | `name` | 435 |
-| variable | `row` | 438 |
-| variable | `row` | 440 |
-| function | `test_fixed_https_transport_id_digest_and_redirect_refusal(tmp_path, monkeypatch, status, digest_ok)` | 465 |
-| parameter | `digest_ok` | 465 |
-| parameter | `monkeypatch` | 465 |
-| parameter | `status` | 465 |
-| parameter | `tmp_path` | 465 |
-| variable | `file` | 467 |
-| variable | `digest` | 469 |
-| variable | `events` | 470 |
-| class | `Connection` | 472 |
-| function | `__init__(self, host, timeout)` | 475 |
-| parameter | `host` | 475 |
-| parameter | `self` | 475 |
-| parameter | `timeout` | 475 |
-| function | `putrequest(self, method, url)` | 478 |
-| parameter | `method` | 478 |
-| parameter | `self` | 478 |
-| parameter | `url` | 478 |
-| function | `putheader(self, key, value)` | 481 |
-| parameter | `key` | 481 |
-| parameter | `self` | 481 |
-| parameter | `value` | 481 |
-| function | `endheaders(self)` | 485 |
-| parameter | `self` | 485 |
-| function | `send(self, block)` | 488 |
-| parameter | `block` | 488 |
-| parameter | `self` | 488 |
-| function | `getresponse(self)` | 491 |
-| parameter | `self` | 491 |
-| parameter | `limit` | 497 |
-| parameter | `self` | 497 |
-| function | `close(self)` | 507 |
-| parameter | `self` | 507 |
-| variable | `key` | 519 |
-| variable | `value` | 519 |
-| function | `test_cli_command_allowlist_precedes_execution(monkeypatch)` | 522 |
-| parameter | `monkeypatch` | 522 |
-| parameter | `args` | 525 |
-| parameter | `kwargs` | 525 |
-| variable | `arguments` | 527 |
-| function | `test_tag_absence_distinguishes_real404_from_permission_errors(monkeypatch)` | 537 |
-| parameter | `monkeypatch` | 537 |
-| parameter | `name` | 539 |
-| variable | `accepted` | 540 |
-| variable | `code` | 540 |
-| variable | `error` | 540 |
-| variable | `output` | 540 |
-| parameter | `args` | 549 |
-| parameter | `code` | 549 |
-| parameter | `error` | 549 |
-| parameter | `kwargs` | 549 |
-| parameter | `output` | 549 |
-| function | `prepared_context(tmp_path, monkeypatch)` | 560 |
-| parameter | `monkeypatch` | 560 |
-| parameter | `tmp_path` | 560 |
-| variable | `workflow` | 562 |
-| variable | `key` | 569 |
-| variable | `value` | 569 |
-| function | `test_actual_prepare_orders_all_checks_before_the_only_write(tmp_path, monkeypatch, defect)` | 584 |
-| parameter | `defect` | 584 |
-| parameter | `monkeypatch` | 584 |
-| parameter | `tmp_path` | 584 |
-| variable | `responses` | 587 |
-| variable | `listing` | 588 |
-| variable | `record` | 600 |
-| variable | `reads` | 603 |
-| variable | `writes` | 603 |
-| function | `transport(endpoint, body)` | 605 |
-| parameter | `body` | 605 |
-| parameter | `endpoint` | 605 |
-| parameter | `tag` | 625 |
-| function | `test_untrusted_context_never_reaches_github(tmp_path, monkeypatch, field, value)` | 646 |
-| parameter | `field` | 646 |
-| parameter | `monkeypatch` | 646 |
-| parameter | `tmp_path` | 646 |
-| parameter | `value` | 646 |
-| parameter | `args` | 650 |
-| parameter | `kwargs` | 650 |
-| function | `test_final_verification_rechecks_security_but_keeps_release_draft(tmp_path, monkeypatch, capsys)` | 655 |
-| parameter | `capsys` | 655 |
-| parameter | `monkeypatch` | 655 |
-| parameter | `tmp_path` | 655 |
-| variable | `record` | 660 |
-| variable | `system` | 661 |
-| variable | `name` | 662 |
-| variable | `responses` | 672 |
-| parameter | `tag` | 675 |
-| variable | `result` | 677 |
-| function | `test_dirty_source_and_publish_operation_are_refused_before_network(tmp_path, monkeypatch)` | 683 |
-| parameter | `monkeypatch` | 683 |
-| parameter | `tmp_path` | 683 |
-| parameter | `args` | 687 |
-| parameter | `kwargs` | 687 |
-| variable | `error` | 691 |
-| function | `test_actual_checked_in_product_version_and_worker_metadata()` | 696 |
-| function | `test_api_structured_body_and_fixed_namespace(monkeypatch)` | 701 |
-| parameter | `monkeypatch` | 701 |
-| variable | `calls` | 703 |
-| function | `execute(arguments, data)` | 705 |
-| parameter | `arguments` | 705 |
-| parameter | `data` | 705 |
-| variable | `body` | 711 |
+| function | `test_commented_duplicate_or_unparsed_final_permissions_fail_closed(extra)` | 291 |
+| parameter | `extra` | 291 |
+| variable | `original` | 293 |
+| variable | `prefix` | 294 |
+| variable | `separator` | 294 |
+| variable | `verifier` | 294 |
+| variable | `changed` | 296 |
+| function | `test_legitimate_final_scope_comments_are_parsed_not_ignored()` | 301 |
+| variable | `original` | 303 |
+| variable | `prefix` | 304 |
+| variable | `separator` | 304 |
+| variable | `verifier` | 304 |
+| variable | `changed` | 306 |
+| function | `test_duplicate_whole_final_permission_blocks_fail_closed(position, field)` | 315 |
+| parameter | `field` | 315 |
+| parameter | `position` | 315 |
+| variable | `original` | 317 |
+| variable | `prefix` | 318 |
+| variable | `separator` | 318 |
+| variable | `verifier` | 318 |
+| variable | `extra` | 320 |
+| variable | `changed` | 322 |
+| variable | `changed` | 324 |
+| function | `test_package_schema_is_strict(value)` | 330 |
+| parameter | `value` | 330 |
+| variable | `bad` | 332 |
+| function | `test_metadata_duplicates_nonfinite_and_nonobjects_are_errors(source)` | 338 |
+| parameter | `source` | 338 |
+| function | `portable(file, value, worker, system, symlink)` | 344 |
+| parameter | `file` | 344 |
+| parameter | `symlink` | 344 |
+| parameter | `system` | 344 |
+| parameter | `value` | 344 |
+| parameter | `worker` | 344 |
+| variable | `prefix` | 346 |
+| variable | `members` | 347 |
+| variable | `archive` | 352 |
+| variable | `content` | 353 |
+| variable | `name` | 353 |
+| variable | `archive` | 356 |
+| variable | `content` | 357 |
+| variable | `name` | 357 |
+| variable | `entry` | 358 |
+| function | `test_actual_platform_archive_metadata(tmp_path, system, suffix)` | 368 |
+| parameter | `suffix` | 368 |
+| parameter | `system` | 368 |
+| parameter | `tmp_path` | 368 |
+| variable | `file` | 370 |
+| function | `test_archive_metadata_link_is_never_followed(tmp_path)` | 375 |
+| parameter | `tmp_path` | 375 |
+| variable | `file` | 377 |
+| function | `staged(tmp_path, monkeypatch)` | 383 |
+| parameter | `metadata_changes` | 383 |
+| parameter | `monkeypatch` | 383 |
+| parameter | `tmp_path` | 383 |
+| variable | `directory` | 387 |
+| variable | `installer` | 389 |
+| variable | `archive` | 391 |
+| variable | `file` | 393 |
+| variable | `digest` | 394 |
+| variable | `record` | 409 |
+| parameter | `tag` | 410 |
+| parameter | `endpoint` | 414 |
+| function | `test_invalid_local_or_remote_package_cannot_reach_upload(tmp_path, monkeypatch, defect)` | 424 |
+| parameter | `defect` | 424 |
+| parameter | `monkeypatch` | 424 |
+| parameter | `tmp_path` | 424 |
+| variable | `changes` | 426 |
+| variable | `directory` | 433 |
+| variable | `record` | 433 |
+| parameter | `args` | 449 |
+| function | `test_exact_staged_files_upload_to_prepared_id_without_overwrite(tmp_path, monkeypatch)` | 455 |
+| parameter | `monkeypatch` | 455 |
+| parameter | `tmp_path` | 455 |
+| variable | `_` | 457 |
+| variable | `record` | 457 |
+| variable | `writes` | 458 |
+| function | `send(identifier, file, name, digest)` | 460 |
+| parameter | `digest` | 460 |
+| parameter | `file` | 460 |
+| parameter | `identifier` | 460 |
+| parameter | `name` | 460 |
+| variable | `row` | 463 |
+| variable | `row` | 465 |
+| function | `test_fixed_https_transport_id_digest_and_redirect_refusal(tmp_path, monkeypatch, status, digest_ok)` | 490 |
+| parameter | `digest_ok` | 490 |
+| parameter | `monkeypatch` | 490 |
+| parameter | `status` | 490 |
+| parameter | `tmp_path` | 490 |
+| variable | `file` | 492 |
+| variable | `digest` | 494 |
+| variable | `events` | 495 |
+| class | `Connection` | 497 |
+| function | `__init__(self, host, timeout)` | 500 |
+| parameter | `host` | 500 |
+| parameter | `self` | 500 |
+| parameter | `timeout` | 500 |
+| function | `putrequest(self, method, url)` | 503 |
+| parameter | `method` | 503 |
+| parameter | `self` | 503 |
+| parameter | `url` | 503 |
+| function | `putheader(self, key, value)` | 506 |
+| parameter | `key` | 506 |
+| parameter | `self` | 506 |
+| parameter | `value` | 506 |
+| function | `endheaders(self)` | 510 |
+| parameter | `self` | 510 |
+| function | `send(self, block)` | 513 |
+| parameter | `block` | 513 |
+| parameter | `self` | 513 |
+| function | `getresponse(self)` | 516 |
+| parameter | `self` | 516 |
+| parameter | `limit` | 522 |
+| parameter | `self` | 522 |
+| function | `close(self)` | 532 |
+| parameter | `self` | 532 |
+| variable | `key` | 544 |
+| variable | `value` | 544 |
+| function | `test_cli_command_allowlist_precedes_execution(monkeypatch)` | 547 |
+| parameter | `monkeypatch` | 547 |
+| parameter | `args` | 550 |
+| parameter | `kwargs` | 550 |
+| variable | `arguments` | 552 |
+| function | `test_tag_absence_distinguishes_real404_from_permission_errors(monkeypatch)` | 562 |
+| parameter | `monkeypatch` | 562 |
+| parameter | `name` | 564 |
+| variable | `accepted` | 565 |
+| variable | `code` | 565 |
+| variable | `error` | 565 |
+| variable | `output` | 565 |
+| parameter | `args` | 574 |
+| parameter | `code` | 574 |
+| parameter | `error` | 574 |
+| parameter | `kwargs` | 574 |
+| parameter | `output` | 574 |
+| function | `prepared_context(tmp_path, monkeypatch)` | 585 |
+| parameter | `monkeypatch` | 585 |
+| parameter | `tmp_path` | 585 |
+| variable | `workflow` | 587 |
+| variable | `key` | 594 |
+| variable | `value` | 594 |
+| function | `test_actual_prepare_orders_all_checks_before_the_only_write(tmp_path, monkeypatch, defect)` | 609 |
+| parameter | `defect` | 609 |
+| parameter | `monkeypatch` | 609 |
+| parameter | `tmp_path` | 609 |
+| variable | `responses` | 612 |
+| variable | `listing` | 613 |
+| variable | `record` | 629 |
+| variable | `reads` | 632 |
+| variable | `writes` | 632 |
+| function | `transport(endpoint, body)` | 634 |
+| parameter | `body` | 634 |
+| parameter | `endpoint` | 634 |
+| parameter | `tag` | 655 |
+| function | `test_untrusted_context_never_reaches_github(tmp_path, monkeypatch, field, value)` | 676 |
+| parameter | `field` | 676 |
+| parameter | `monkeypatch` | 676 |
+| parameter | `tmp_path` | 676 |
+| parameter | `value` | 676 |
+| parameter | `args` | 680 |
+| parameter | `kwargs` | 680 |
+| function | `test_final_verification_rechecks_security_but_keeps_release_draft(tmp_path, monkeypatch, capsys, compiler_passed)` | 686 |
+| parameter | `capsys` | 686 |
+| parameter | `compiler_passed` | 686 |
+| parameter | `monkeypatch` | 686 |
+| parameter | `tmp_path` | 686 |
+| variable | `record` | 691 |
+| variable | `system` | 692 |
+| variable | `name` | 693 |
+| variable | `responses` | 703 |
+| parameter | `tag` | 710 |
+| variable | `result` | 717 |
+| function | `test_dirty_source_and_publish_operation_are_refused_before_network(tmp_path, monkeypatch)` | 723 |
+| parameter | `monkeypatch` | 723 |
+| parameter | `tmp_path` | 723 |
+| parameter | `args` | 727 |
+| parameter | `kwargs` | 727 |
+| variable | `error` | 731 |
+| function | `test_actual_checked_in_product_version_and_worker_metadata()` | 736 |
+| function | `test_api_structured_body_and_fixed_namespace(monkeypatch)` | 741 |
+| parameter | `monkeypatch` | 741 |
+| variable | `calls` | 743 |
+| function | `execute(arguments, data)` | 745 |
+| parameter | `arguments` | 745 |
+| parameter | `data` | 745 |
+| variable | `body` | 751 |
 
 ## tests/test_released_service_probe.py
 
