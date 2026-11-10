@@ -1,0 +1,465 @@
+{
+  "schema": 1,
+  "recordedUtc": "2026-11-10T19:31:57.953212+00:00",
+  "version": "0.4.3",
+  "reviewedHead": "4bf014904b7b032887cb720b169af2d72874ff45",
+  "runtimeSource": "f6d313754c9b9db2f8fdb6a4452ffc48f2286c14",
+  "observedRuns": [
+    {
+      "databaseId": 42883764689,
+      "workflowName": "Compiler execution acceptance",
+      "event": "pull_request",
+      "headSha": "4bf014904b7b032887cb720b169af2d72874ff45",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42883764689",
+      "jobs": [
+        {
+          "name": "Realistic compilers (release-0.4.2)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Realistic compilers (current)",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "databaseId": 42883753475,
+      "workflowName": "Compiler execution acceptance",
+      "event": "push",
+      "headSha": "4bf014904b7b032887cb720b169af2d72874ff45",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42883753475",
+      "jobs": [
+        {
+          "name": "Realistic compilers (current)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Realistic compilers (release-0.4.2)",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "databaseId": 42883765065,
+      "workflowName": "Validate",
+      "event": "pull_request",
+      "headSha": "4bf014904b7b032887cb720b169af2d72874ff45",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42883765065",
+      "jobs": [
+        {
+          "name": "controller",
+          "conclusion": "success"
+        },
+        {
+          "name": "training-smoke",
+          "conclusion": "success"
+        },
+        {
+          "name": "isolated-workers",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "databaseId": 42883753364,
+      "workflowName": "Validate",
+      "event": "push",
+      "headSha": "4bf014904b7b032887cb720b169af2d72874ff45",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42883753364",
+      "jobs": [
+        {
+          "name": "controller",
+          "conclusion": "success"
+        },
+        {
+          "name": "training-smoke",
+          "conclusion": "success"
+        },
+        {
+          "name": "isolated-workers",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "databaseId": 42883753311,
+      "workflowName": "Desktop packages",
+      "event": "push",
+      "headSha": "4bf014904b7b032887cb720b169af2d72874ff45",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42883753311",
+      "jobs": [
+        {
+          "name": "package (macos-latest)",
+          "conclusion": "success"
+        },
+        {
+          "name": "package (ubuntu-latest)",
+          "conclusion": "success"
+        },
+        {
+          "name": "package (windows-latest)",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "databaseId": 42883764587,
+      "workflowName": "CodeQL",
+      "event": "pull_request",
+      "headSha": "4bf014904b7b032887cb720b169af2d72874ff45",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42883764587",
+      "jobs": [
+        {
+          "name": "Analyze / javascript-typescript",
+          "conclusion": "success"
+        },
+        {
+          "name": "Analyze / actions",
+          "conclusion": "success"
+        },
+        {
+          "name": "Analyze / python",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "bridgeSha256": "64e1d4e2dfca531b58e595945e937b41de1334eaba71b729e85794f8ff4fcc41",
+  "exactExitCases": [
+    {
+      "name": "success-zero",
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "target_exit_code": 0,
+      "collector_exit_code": 0
+    },
+    {
+      "name": "expected-one",
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "target_exit_code": 1,
+      "collector_exit_code": 0
+    },
+    {
+      "name": "expected-two",
+      "expected_exit_code": 2,
+      "exit_code": 2,
+      "target_exit_code": 2,
+      "collector_exit_code": 0
+    },
+    {
+      "name": "expected-seven",
+      "expected_exit_code": 7,
+      "exit_code": 7,
+      "target_exit_code": 7,
+      "collector_exit_code": 0
+    },
+    {
+      "name": "expected-255",
+      "expected_exit_code": 255,
+      "exit_code": 255,
+      "target_exit_code": 255,
+      "collector_exit_code": 0
+    },
+    {
+      "name": "malformed-input",
+      "expected_exit_code": 2,
+      "exit_code": 2,
+      "target_exit_code": 2,
+      "collector_exit_code": 0
+    }
+  ],
+  "coverageStatus": "measured",
+  "collectorControls": {
+    "collector_invalid-option": {
+      "actual_collector": {
+        "exit_code": 0,
+        "timeout": false,
+        "option_rejected": true,
+        "valid_target_observation": false
+      },
+      "coverage_status": "blocked"
+    },
+    "collector_unwritable-output": {
+      "actual_collector": {
+        "exit_code": 101,
+        "timeout": false,
+        "option_rejected": false,
+        "valid_target_observation": true,
+        "target_exit_code": 0
+      },
+      "coverage_status": "blocked"
+    },
+    "collector_timeout": {
+      "actual_collector": {
+        "exit_code": -9,
+        "timeout": true,
+        "option_rejected": false,
+        "valid_target_observation": false
+      },
+      "coverage_status": "blocked"
+    }
+  },
+  "unexpectedExit": {
+    "expected": 2,
+    "actual": 7,
+    "collector": 0,
+    "coverage": "partial",
+    "failed_cases": 1
+  },
+  "unexpectedException": {
+    "target_exit": -6,
+    "coverage": "partial",
+    "failed_cases": 1
+  },
+  "sourceLanes": [
+    {
+      "provenance": {
+        "lane": "release-0.4.2",
+        "runtime_source": "eb9b1cd0c3e3fd1e70e397edeffb059073464f74",
+        "runtime_version": "0.4.2",
+        "worker_node_sha256": "750b665e545b7cf0806d4c493db86174f7f4e7ab2218aa239718e652ccdce158",
+        "worker_image_id": "sha256:b782cd6016d955ea46dee3a7733995f86325e8fdcb81e4e2fc9d330eb701adba",
+        "validation_source": "f6d313754c9b9db2f8fdb6a4452ffc48f2286c14",
+        "run_id": "42883764689",
+        "run_attempt": "1",
+        "host": "GitHub-hosted Linux",
+        "toolchain_caveat": "The image was freshly built from the identified source. Mutable upstream base tags/APT packages mean it is not asserted identical to a historical image.",
+        "isolation": {
+          "network": "none",
+          "user": "65534:65534",
+          "read_only": true,
+          "memory_mib": 1024,
+          "cpus": 2,
+          "pids": 128
+        },
+        "toolchain": {
+          "python": "Python 3.12.12",
+          "javascript": "v24.22.2",
+          "typescript": "Version 5.9.3",
+          "cpp": "g++ (Debian 12.2.0-14+deb12u1) 12.2.0",
+          "c": "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",
+          "java": "javac 17.0.21",
+          "csharp": "8.0.428",
+          "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+          "php": "PHP 8.2.35 (cli) (built: Oct 21 2026 06:29:51) (NTS)",
+          "bash": "GNU bash, version 5.2.15(1)-release (x86_64-pc-linux-gnu)",
+          "sql": "3.40.1 2022-12-28 14:03:47 df5c253c0b3dd24916e4ec7cf77d3db5294cc9fd45ae7b9c5e82ad8197f3alt1",
+          "assembly": "GNU assembler (GNU Binutils for Debian) 2.40"
+        },
+        "private_history": {
+          "login_after_logout": "passed",
+          "sealed_and_reopened_reports": 12,
+          "plaintext_removed": true
+        },
+        "acceptance": "passed"
+      },
+      "scenarios": 70,
+      "cases_per_language": 6,
+      "csharp_direct_coverage": "partial",
+      "csharp_private_coverage": "partial",
+      "all_positive_coverage": {
+        "python": "measured",
+        "javascript": "measured",
+        "typescript": "measured",
+        "cpp": "measured",
+        "c": "measured",
+        "java": "measured",
+        "csharp": "partial",
+        "rust": "measured",
+        "php": "measured",
+        "bash": "measured",
+        "sql": "measured",
+        "assembly": "measured"
+      }
+    },
+    {
+      "provenance": {
+        "lane": "current",
+        "runtime_source": "f6d313754c9b9db2f8fdb6a4452ffc48f2286c14",
+        "runtime_version": "0.4.3",
+        "worker_node_sha256": "750b665e545b7cf0806d4c493db86174f7f4e7ab2218aa239718e652ccdce158",
+        "worker_image_id": "sha256:9d3d6754da0c2b36e159e2919fb17c564ce975cfebfc100ed0afe563812cbeac",
+        "validation_source": "f6d313754c9b9db2f8fdb6a4452ffc48f2286c14",
+        "run_id": "42883764689",
+        "run_attempt": "1",
+        "host": "GitHub-hosted Linux",
+        "toolchain_caveat": "The image was freshly built from the identified source. Mutable upstream base tags/APT packages mean it is not asserted identical to a historical image.",
+        "isolation": {
+          "network": "none",
+          "user": "65534:65534",
+          "read_only": true,
+          "memory_mib": 1024,
+          "cpus": 2,
+          "pids": 128
+        },
+        "toolchain": {
+          "python": "Python 3.12.12",
+          "javascript": "v24.22.2",
+          "typescript": "Version 5.9.3",
+          "cpp": "g++ (Debian 12.2.0-14+deb12u1) 12.2.0",
+          "c": "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",
+          "java": "javac 17.0.21",
+          "csharp": "8.0.428",
+          "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+          "php": "PHP 8.2.35 (cli) (built: Oct 21 2026 06:29:51) (NTS)",
+          "bash": "GNU bash, version 5.2.15(1)-release (x86_64-pc-linux-gnu)",
+          "sql": "3.40.1 2022-12-28 14:03:47 df5c253c0b3dd24916e4ec7cf77d3db5294cc9fd45ae7b9c5e82ad8197f3alt1",
+          "assembly": "GNU assembler (GNU Binutils for Debian) 2.40"
+        },
+        "private_history": {
+          "login_after_logout": "passed",
+          "sealed_and_reopened_reports": 12,
+          "plaintext_removed": true
+        },
+        "acceptance": "passed"
+      },
+      "scenarios": 70,
+      "cases_per_language": 6,
+      "csharp_direct_coverage": "measured",
+      "csharp_private_coverage": "measured",
+      "all_positive_coverage": {
+        "python": "measured",
+        "javascript": "measured",
+        "typescript": "measured",
+        "cpp": "measured",
+        "c": "measured",
+        "java": "measured",
+        "csharp": "measured",
+        "rust": "measured",
+        "php": "measured",
+        "bash": "measured",
+        "sql": "measured",
+        "assembly": "measured"
+      }
+    }
+  ],
+  "historicalPublishedService": {
+    "approved_cases": 72,
+    "languages": [
+      {
+        "approved_cases": 6,
+        "language": "python",
+        "result_sha256": "90e6f31225ee32c8c4ba43f198ec72ab9f74d5397be82355b335aeabfcb75b5f",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "javascript",
+        "result_sha256": "d374e3ef860738082fbc383c0fb87a9eacc7a8d75a12f6f632fa2d3f1b642be6",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "typescript",
+        "result_sha256": "c04ad0b114ae4aa5f7478a6ea09af4a4b93c5e0ee2b2bbfd15d9d8102d8a3b2d",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "cpp",
+        "result_sha256": "0205ac23a64579311467a41927a1e5c2ac75c945d028f813561cd82aceddbc44",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "c",
+        "result_sha256": "0cd5b4932c9223b740504bc705abd5f5f69c9241e096995ff97ffafb6b003d8a",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "java",
+        "result_sha256": "5de4cfc27a42905ccbd1678902515cdf8f01f62ec1e10495d707c0ce5a4d4774",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "csharp",
+        "result_sha256": "f39c5aab74a5af0703f773861c8dd30a972ab879643efcddc31742bb45d87c05",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "rust",
+        "result_sha256": "13abe24615d899ddf110f06e5a255a4ff38f3c394bb5ddcdc1025a0fe7164ae9",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "php",
+        "result_sha256": "3427e302b73ada624e0474aedd9bfbf21f011ee5b08b4c66c7d6558c949de057",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "bash",
+        "result_sha256": "ca3725cbc05ec07ce972884ac074dd5e13b8e6cebb82268061b6474930dce31f",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "sql",
+        "result_sha256": "d20066c58c141bb11eae6ebd3afa0f945966b81a1c744c81fd7af5c2e9e10c7b",
+        "status": "passed"
+      },
+      {
+        "approved_cases": 6,
+        "language": "assembly",
+        "result_sha256": "fc162eec36afa82b68c86a89758ef3c967338db7598c6ffda6c1122313b6733b",
+        "status": "passed"
+      }
+    ],
+    "payload_bytes": 188603375,
+    "payload_sha256": "1e75085bae4ab2611ead61a513b60f444941495608840cf33875d940cf963ebe",
+    "release_id": 440504623,
+    "released_source": "eb9b1cd0c3e3fd1e70e397edeffb059073464f74",
+    "restored_reports": 12,
+    "schema": 1,
+    "scope": "Published Linux service with a fresh source-bound0.4.2 hosted Docker worker; not a local PC compiler run or historical image-byte proof",
+    "stage": "complete",
+    "status": "passed",
+    "verifier_source": "f6d313754c9b9db2f8fdb6a4452ffc48f2286c14",
+    "version": "0.4.2",
+    "worker_sha256": "750b665e545b7cf0806d4c493db86174f7f4e7ab2218aa239718e652ccdce158"
+  },
+  "testResults": {
+    "hostedTests": 410,
+    "hostedSubtests": 28,
+    "controllerTrainingCoveragePercent": 85.01,
+    "unchangedCoverageFloor": 80,
+    "localFocusedPassed": 238,
+    "localWindowsPlatformSkips": 2,
+    "openPrMergeCodeqlAlerts": 0
+  },
+  "evidenceHashes": [
+    {
+      "file": "results.json",
+      "lane": "release-0.4.2",
+      "sha256": "f0cd91c97f5f475b46817713ca23eee0590698f489ba97ea2e7bcf8b1ddeb44f"
+    },
+    {
+      "file": "results.json",
+      "lane": "current",
+      "sha256": "7ab9116b1dfae4a785fefc744bed69b5811ea5d32fdd5a3b5c1168eff51b98da"
+    },
+    {
+      "file": "csharp-coverage.json",
+      "sha256": "691fe8d86ad2f90375e93b09092ca42de48a6b918d9a00a933dbda76ac7e4ed3"
+    }
+  ],
+  "scope": {
+    "dockerPcChanged": false,
+    "installedAppChanged": false,
+    "accountsDataChanged": false,
+    "releasePublished": false,
+    "installedVersionRemains": "0.4.2",
+    "newApplicationWorkerSourceVersion": "0.4.3"
+  }
+}
