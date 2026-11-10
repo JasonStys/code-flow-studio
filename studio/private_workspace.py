@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: InstanceLock@L50; Workspaces@L78
-# functions: atomic_json(path, value)@L37; __init__(self, path)@L53; close(self)@L73; __init__(self, root)@L81; archive(self, owner)@L116; status(self, owner, session)@L124; providers(self)@L136; unlock(self, owner, session, encoded, salt)@L150; require(self, owner, session)@L214; save(self, force)@L220; remove_active(self, owner)@L235; lock(self, owner)@L247; delete(self, owner)@L265; close(self)@L273
-# variables: HISTORY_RECOVERY_BYTES@L34; descriptor@L39; name@L39; stream@L41; allowed@L87; p@L96; c@L119; config@L126; path@L138; data@L139; data@L143; k@L145; p@L145; v@L145; p@L148; key@L154; current@L155; config@L156; proof@L159; nonce@L170; config@L171; keys@L200; settings@L200; current@L228
-# parameters: path@L37; value@L37; path@L53; self@L53; self@L73; root@L81; self@L81; owner@L116; self@L116; owner@L124; self@L124; session@L124; self@L136; encoded@L150; owner@L150; salt@L150; self@L150; session@L150; owner@L214; self@L214; session@L214; force@L220; self@L220; owner@L235; self@L235; owner@L247; self@L247; owner@L265; self@L265; self@L273
+# functions: atomic_json(path, value)@L37; __init__(self, path)@L53; close(self)@L73; __init__(self, root)@L81; archive(self, owner)@L116; status(self, owner, session)@L124; providers(self)@L136; unlock(self, owner, session, encoded, salt)@L150; _unlock(self, owner, session, encoded, salt)@L154; require(self, owner, session)@L218; save(self, force)@L224; remove_active(self, owner)@L239; lock(self, owner)@L251; _lock(self, owner)@L255; delete(self, owner)@L273; close(self)@L281
+# variables: HISTORY_RECOVERY_BYTES@L34; descriptor@L39; name@L39; stream@L41; allowed@L87; p@L96; c@L119; config@L126; path@L138; data@L139; data@L143; k@L145; p@L145; v@L145; p@L148; key@L158; current@L159; config@L160; proof@L163; nonce@L174; config@L175; keys@L204; settings@L204; current@L232
+# parameters: path@L37; value@L37; path@L53; self@L53; self@L73; root@L81; self@L81; owner@L116; self@L116; owner@L124; self@L124; session@L124; self@L136; encoded@L150; owner@L150; salt@L150; self@L150; session@L150; encoded@L154; owner@L154; salt@L154; self@L154; session@L154; owner@L218; self@L218; session@L218; force@L224; self@L224; owner@L239; self@L239; owner@L251; self@L251; owner@L255; self@L255; owner@L273; self@L273; self@L281
 # </code-map>
 
 """Jason Stys: exclusive account-scoped controller, encrypted history/providers, and recoverable shutdown.
@@ -22,10 +22,10 @@ import tempfile
 from pathlib import Path
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-from starlette.concurrency import run_in_threadpool
 
 from studio.accounts import Accounts, decode_field
 from studio.api import create_app
+from studio.completed_offload import completed_offload, completed_operation
 from studio.permissions import protect_directory
 from studio.providers import Providers
 from studio.vault import AAD, decrypt_workspace, encrypt_workspace, members, signature
@@ -148,6 +148,10 @@ class Workspaces:
         }, {p["id"]: p.get("key", "") for p in data["providers"]}
 
     async def unlock(self, owner: str, session: str, encoded: str, salt: str | None):
+        """Complete decrypt/marker/controller/key setup while the caller retains the request mutex."""
+        return await completed_operation(self._unlock(owner, session, encoded, salt))
+
+    async def _unlock(self, owner: str, session: str, encoded: str, salt: str | None):
         """Authenticate the independent key, recover only its owner, then enter its genuine controller lifecycle."""
         if self.owner is not None and self.owner != owner:
             raise ValueError("Another account has this local engine unlocked; it must lock first")
@@ -186,7 +190,7 @@ class Workspaces:
         else:
             if self.archive(owner).exists():
                 try:
-                    await run_in_threadpool(decrypt_workspace, self.archive(owner), self.active, key)
+                    await completed_offload(decrypt_workspace, self.archive(owner), self.active, key)
                 except Exception:
                     raise ValueError("Cannot unlock damaged archive; existing files were preserved") from None
             else:
@@ -209,7 +213,7 @@ class Workspaces:
         self.owner, self.key = owner, key
         self.sessions = {session}
         self.saved_signature = None
-        await run_in_threadpool(self.save, True)
+        await completed_offload(self.save, True)
 
     def require(self, owner: str, session: str):
         """A login cookie alone cannot join an already-unlocked account without key proof."""
@@ -245,6 +249,10 @@ class Workspaces:
         self.marker.unlink()
 
     async def lock(self, owner: str):
+        """Complete container cleanup, snapshot and plaintext removal before reporting caller cancellation."""
+        return await completed_operation(self._lock(owner))
+
+    async def _lock(self, owner: str):
         """Cancel/clean only this account's containers before sealing; preserve all recovery data on failure."""
         if self.owner != owner:
             return {"locked": True}
@@ -253,8 +261,8 @@ class Workspaces:
                 await self.context.__aexit__(None, None, None)
                 self.context = None
                 self.app.state.active.clear()
-            await run_in_threadpool(self.save, True)
-            await run_in_threadpool(self.remove_active, owner)
+            await completed_offload(self.save, True)
+            await completed_offload(self.remove_active, owner)
         except Exception:
             self.failed = True
             raise
@@ -267,7 +275,7 @@ class Workspaces:
         if self.owner == owner:
             await self.lock(owner)
         elif self.marker.exists() and json.loads(self.marker.read_text())["owner"] == owner:
-            await run_in_threadpool(self.remove_active, owner)
+            await completed_offload(self.remove_active, owner)
         self.archive(owner).unlink(missing_ok=True)
 
     async def close(self):

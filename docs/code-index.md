@@ -1389,6 +1389,23 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `failed` | 65 |
 | variable | `failed` | 70 |
 
+## studio/completed_offload.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `completed_offload(function)` | 24 |
+| parameter | `args` | 24 |
+| parameter | `function` | 24 |
+| parameter | `kwargs` | 24 |
+| function | `completed_operation(operation)` | 38 |
+| parameter | `operation` | 38 |
+| function | `capture()` | 45 |
+| variable | `work` | 52 |
+| variable | `cancelled` | 53 |
+| variable | `result` | 56 |
+| variable | `succeeded` | 56 |
+| variable | `cancelled` | 63 |
+
 ## studio/execution.py
 
 | Kind | Declaration | Line |
@@ -1570,8 +1587,34 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| function | `native_stage(stage)` | 17 |
-| parameter | `stage` | 17 |
+| function | `native_stage(stage, connections, tasks)` | 18 |
+| parameter | `connections` | 18 |
+| parameter | `stage` | 18 |
+| parameter | `tasks` | 18 |
+| variable | `counts` | 21 |
+| variable | `count` | 26 |
+| variable | `name` | 26 |
+
+## studio/native_server.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `HTTP_DRAIN_SECONDS` | 22 |
+| function | `native_config(app, port)` | 25 |
+| parameter | `app` | 25 |
+| parameter | `port` | 25 |
+| class | `NativeServer` | 34 |
+| function | `shutdown(self, sockets)` | 37 |
+| parameter | `self` | 37 |
+| parameter | `sockets` | 37 |
+| function | `stage(self, name)` | 43 |
+| parameter | `name` | 43 |
+| parameter | `self` | 43 |
+| function | `_wait_tasks_to_complete(self)` | 51 |
+| parameter | `self` | 51 |
+| variable | `pending` | 63 |
+| variable | `task` | 63 |
+| variable | `task` | 64 |
 
 ## studio/permissions.py
 
@@ -1727,61 +1770,65 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `data` | 421 |
 | variable | `db` | 425 |
 | variable | `row` | 426 |
-| variable | `fresh` | 432 |
-| function | `account(request)` | 438 |
-| parameter | `request` | 438 |
-| variable | `owner` | 440 |
-| variable | `session` | 440 |
-| function | `unlock(request, data)` | 448 |
-| parameter | `data` | 448 |
-| parameter | `request` | 448 |
-| variable | `owner` | 450 |
-| variable | `session` | 450 |
-| function | `activity(request, data)` | 459 |
-| parameter | `data` | 459 |
-| parameter | `request` | 459 |
-| function | `save(request)` | 467 |
-| parameter | `request` | 467 |
-| function | `lock(request)` | 474 |
-| parameter | `request` | 474 |
-| variable | `owner` | 477 |
-| variable | `session` | 477 |
-| function | `logout(request)` | 482 |
-| parameter | `request` | 482 |
-| variable | `owner` | 485 |
-| variable | `session` | 485 |
-| variable | `response` | 489 |
-| function | `delete(request, data)` | 494 |
-| parameter | `data` | 494 |
-| parameter | `request` | 494 |
-| variable | `_` | 497 |
-| variable | `owner` | 497 |
-| variable | `db` | 498 |
-| variable | `row` | 499 |
-| variable | `response` | 505 |
-| function | `backup(request)` | 510 |
-| parameter | `request` | 510 |
-| variable | `_` | 512 |
-| variable | `owner` | 512 |
-| variable | `path` | 513 |
-| function | `get_providers(request)` | 521 |
-| parameter | `request` | 521 |
-| function | `providers(request, data)` | 528 |
-| parameter | `data` | 528 |
-| parameter | `request` | 528 |
-| variable | `keys` | 532 |
-| variable | `old` | 532 |
-| variable | `rows` | 533 |
-| variable | `provider` | 534 |
-| variable | `row` | 535 |
-| variable | `p` | 537 |
-| variable | `previous` | 537 |
-| variable | `config` | 542 |
-| variable | `router` | 543 |
-| variable | `k` | 545 |
-| variable | `p` | 545 |
-| variable | `v` | 545 |
-| variable | `p` | 548 |
+| function | `commit_reset()` | 431 |
+| variable | `fresh` | 436 |
+| function | `account(request)` | 442 |
+| parameter | `request` | 442 |
+| variable | `owner` | 444 |
+| variable | `session` | 444 |
+| function | `unlock(request, data)` | 452 |
+| parameter | `data` | 452 |
+| parameter | `request` | 452 |
+| variable | `owner` | 454 |
+| variable | `session` | 454 |
+| function | `activity(request, data)` | 463 |
+| parameter | `data` | 463 |
+| parameter | `request` | 463 |
+| function | `save(request)` | 471 |
+| parameter | `request` | 471 |
+| function | `lock(request)` | 478 |
+| parameter | `request` | 478 |
+| variable | `owner` | 481 |
+| variable | `session` | 481 |
+| function | `logout(request)` | 486 |
+| parameter | `request` | 486 |
+| variable | `owner` | 489 |
+| variable | `session` | 489 |
+| function | `commit_logout()` | 490 |
+| variable | `response` | 497 |
+| function | `delete(request, data)` | 502 |
+| parameter | `data` | 502 |
+| parameter | `request` | 502 |
+| variable | `_` | 505 |
+| variable | `owner` | 505 |
+| variable | `db` | 506 |
+| variable | `row` | 507 |
+| function | `commit_delete()` | 510 |
+| variable | `response` | 517 |
+| function | `backup(request)` | 522 |
+| parameter | `request` | 522 |
+| variable | `_` | 524 |
+| variable | `owner` | 524 |
+| variable | `path` | 525 |
+| function | `get_providers(request)` | 533 |
+| parameter | `request` | 533 |
+| function | `providers(request, data)` | 540 |
+| parameter | `data` | 540 |
+| parameter | `request` | 540 |
+| variable | `keys` | 544 |
+| variable | `old` | 544 |
+| variable | `rows` | 545 |
+| variable | `provider` | 546 |
+| variable | `row` | 547 |
+| variable | `p` | 549 |
+| variable | `previous` | 549 |
+| variable | `config` | 554 |
+| variable | `router` | 555 |
+| variable | `k` | 557 |
+| variable | `p` | 557 |
+| variable | `v` | 557 |
+| variable | `p` | 560 |
+| function | `commit_providers()` | 562 |
 
 ## studio/private_cli.py
 
@@ -1805,11 +1852,11 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `port` | 76 |
 | variable | `app` | 77 |
 | variable | `server` | 84 |
-| function | `shutdown()` | 97 |
-| function | `run_server()` | 102 |
-| variable | `thread` | 111 |
-| variable | `deadline` | 115 |
-| variable | `url` | 120 |
+| function | `shutdown()` | 86 |
+| function | `run_server()` | 91 |
+| variable | `thread` | 100 |
+| variable | `deadline` | 104 |
+| variable | `url` | 109 |
 
 ## studio/private_workspace.py
 
@@ -1858,33 +1905,42 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `salt` | 150 |
 | parameter | `self` | 150 |
 | parameter | `session` | 150 |
-| variable | `key` | 154 |
-| variable | `current` | 155 |
-| variable | `config` | 156 |
-| variable | `proof` | 159 |
-| variable | `nonce` | 170 |
-| variable | `config` | 171 |
-| variable | `keys` | 200 |
-| variable | `settings` | 200 |
-| function | `require(self, owner, session)` | 214 |
-| parameter | `owner` | 214 |
-| parameter | `self` | 214 |
-| parameter | `session` | 214 |
-| function | `save(self, force)` | 220 |
-| parameter | `force` | 220 |
-| parameter | `self` | 220 |
-| variable | `current` | 228 |
-| function | `remove_active(self, owner)` | 235 |
-| parameter | `owner` | 235 |
-| parameter | `self` | 235 |
-| function | `lock(self, owner)` | 247 |
-| parameter | `owner` | 247 |
-| parameter | `self` | 247 |
-| function | `delete(self, owner)` | 265 |
-| parameter | `owner` | 265 |
-| parameter | `self` | 265 |
-| function | `close(self)` | 273 |
+| function | `_unlock(self, owner, session, encoded, salt)` | 154 |
+| parameter | `encoded` | 154 |
+| parameter | `owner` | 154 |
+| parameter | `salt` | 154 |
+| parameter | `self` | 154 |
+| parameter | `session` | 154 |
+| variable | `key` | 158 |
+| variable | `current` | 159 |
+| variable | `config` | 160 |
+| variable | `proof` | 163 |
+| variable | `nonce` | 174 |
+| variable | `config` | 175 |
+| variable | `keys` | 204 |
+| variable | `settings` | 204 |
+| function | `require(self, owner, session)` | 218 |
+| parameter | `owner` | 218 |
+| parameter | `self` | 218 |
+| parameter | `session` | 218 |
+| function | `save(self, force)` | 224 |
+| parameter | `force` | 224 |
+| parameter | `self` | 224 |
+| variable | `current` | 232 |
+| function | `remove_active(self, owner)` | 239 |
+| parameter | `owner` | 239 |
+| parameter | `self` | 239 |
+| function | `lock(self, owner)` | 251 |
+| parameter | `owner` | 251 |
+| parameter | `self` | 251 |
+| function | `_lock(self, owner)` | 255 |
+| parameter | `owner` | 255 |
+| parameter | `self` | 255 |
+| function | `delete(self, owner)` | 273 |
+| parameter | `owner` | 273 |
 | parameter | `self` | 273 |
+| function | `close(self)` | 281 |
+| parameter | `self` | 281 |
 
 ## studio/providers.py
 
@@ -2250,14 +2306,15 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `statuses` | 195 |
 | variable | `lifecycle` | 260 |
 | variable | `records` | 261 |
-| variable | `launcher` | 262 |
-| variable | `line` | 265 |
-| variable | `service` | 270 |
+| variable | `launcher` | 268 |
 | variable | `line` | 271 |
-| variable | `diagnostic` | 278 |
-| variable | `records` | 282 |
-| variable | `stage` | 283 |
-| variable | `pid` | 294 |
+| variable | `service` | 276 |
+| variable | `line` | 277 |
+| variable | `diagnostic` | 284 |
+| variable | `records` | 288 |
+| variable | `stage` | 289 |
+| variable | `record` | 301 |
+| variable | `pid` | 314 |
 
 ## tests/electron-readiness.test.cjs
 
@@ -2444,6 +2501,31 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `runs` | 106 |
 | variable | `_` | 107 |
 | variable | `saved` | 108 |
+
+## tests/test_completed_offload.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_native_cancellation_cannot_release_mutex_before_actual_worker(cancels, fail)` | 24 |
+| parameter | `cancels` | 24 |
+| parameter | `fail` | 24 |
+| function | `offload_scenario(cancels, fail)` | 29 |
+| parameter | `cancels` | 29 |
+| parameter | `fail` | 29 |
+| variable | `release` | 31 |
+| variable | `started` | 31 |
+| variable | `mutex` | 32 |
+| variable | `events` | 33 |
+| variable | `unhandled` | 33 |
+| variable | `loop` | 34 |
+| variable | `original_handler` | 35 |
+| parameter | `_loop` | 36 |
+| parameter | `context` | 36 |
+| function | `worker()` | 38 |
+| function | `caller()` | 48 |
+| variable | `request` | 56 |
+| variable | `_` | 59 |
+| variable | `outcome` | 68 |
 
 ## tests/test_contracts.py
 
@@ -2751,6 +2833,95 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `data` | 327 |
 | variable | `result` | 333 |
 
+## tests/test_native_drain.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_actual_native_drain_preserves_authenticated_workspace(tmp_path, project, kind, monkeypatch)` | 33 |
+| parameter | `kind` | 33 |
+| parameter | `monkeypatch` | 33 |
+| parameter | `project` | 33 |
+| parameter | `tmp_path` | 33 |
+| function | `native_scenario(tmp_path, project, kind, monkeypatch)` | 38 |
+| parameter | `kind` | 38 |
+| parameter | `monkeypatch` | 38 |
+| parameter | `project` | 38 |
+| parameter | `tmp_path` | 38 |
+| variable | `listener` | 40 |
+| variable | `port` | 44 |
+| variable | `base` | 45 |
+| variable | `token` | 46 |
+| variable | `key` | 47 |
+| variable | `app` | 48 |
+| variable | `manager` | 49 |
+| variable | `_` | 50 |
+| variable | `budget` | 50 |
+| variable | `entered` | 50 |
+| variable | `ready` | 50 |
+| variable | `release` | 50 |
+| variable | `cancellation_deferred` | 51 |
+| variable | `_` | 52 |
+| variable | `thread_entered` | 52 |
+| variable | `thread_finished` | 52 |
+| variable | `thread_release` | 52 |
+| variable | `counts` | 53 |
+| variable | `events` | 53 |
+| variable | `original_stage` | 54 |
+| function | `observe_offload(stage)` | 56 |
+| parameter | `stage` | 56 |
+| function | `held(request)` | 65 |
+| parameter | `request` | 65 |
+| variable | `original_save` | 76 |
+| variable | `original_decrypt` | 77 |
+| function | `held_save()` | 79 |
+| parameter | `args` | 79 |
+| variable | `result` | 86 |
+| function | `held_decrypt()` | 92 |
+| parameter | `args` | 92 |
+| variable | `result` | 98 |
+| function | `observed_app(scope, receive, send)` | 104 |
+| parameter | `receive` | 104 |
+| parameter | `scope` | 104 |
+| parameter | `send` | 104 |
+| variable | `partial` | 108 |
+| function | `observe_receive()` | 110 |
+| variable | `message` | 114 |
+| variable | `partial` | 116 |
+| class | `ObservedServer` | 121 |
+| function | `startup(self, sockets)` | 124 |
+| parameter | `self` | 124 |
+| parameter | `sockets` | 124 |
+| function | `stage(self, name)` | 129 |
+| parameter | `name` | 129 |
+| parameter | `self` | 129 |
+| variable | `server` | 137 |
+| variable | `running` | 139 |
+| variable | `pending` | 140 |
+| variable | `writer` | 141 |
+| variable | `client` | 147 |
+| variable | `response` | 148 |
+| variable | `response` | 152 |
+| variable | `response` | 156 |
+| variable | `owner` | 158 |
+| variable | `revision` | 158 |
+| variable | `archive` | 159 |
+| variable | `_` | 161 |
+| variable | `writer` | 161 |
+| variable | `cookie` | 162 |
+| variable | `name` | 162 |
+| variable | `value` | 162 |
+| variable | `pending` | 173 |
+| variable | `pending` | 179 |
+| variable | `pending` | 182 |
+| variable | `response` | 185 |
+| variable | `response` | 199 |
+| variable | `_` | 205 |
+| variable | `name` | 205 |
+| variable | `tasks` | 205 |
+| variable | `restored` | 213 |
+| function | `test_private_cli_selects_finite_http_drain()` | 234 |
+| variable | `config` | 237 |
+
 ## tests/test_native_lifecycle.py
 
 | Kind | Declaration | Line |
@@ -2761,13 +2932,18 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `payload` | 29 |
 | variable | `prefix` | 29 |
 | variable | `value` | 31 |
-| function | `test_actual_launcher_shutdown_denials_cannot_invoke_callback(tmp_path)` | 37 |
-| parameter | `tmp_path` | 37 |
-| variable | `app` | 39 |
-| variable | `called` | 40 |
-| variable | `headers` | 42 |
-| variable | `client` | 43 |
-| variable | `response` | 50 |
+| function | `test_native_stage_counts_are_only_nonnegative_integers(monkeypatch, capsys)` | 37 |
+| parameter | `capsys` | 37 |
+| parameter | `monkeypatch` | 37 |
+| variable | `value` | 41 |
+| variable | `value` | 44 |
+| function | `test_actual_launcher_shutdown_denials_cannot_invoke_callback(tmp_path)` | 48 |
+| parameter | `tmp_path` | 48 |
+| variable | `app` | 50 |
+| variable | `called` | 51 |
+| variable | `headers` | 53 |
+| variable | `client` | 54 |
+| variable | `response` | 61 |
 
 ## tests/test_native_locations.py
 
@@ -2956,6 +3132,51 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `monkeypatch` | 334 |
 | parameter | `project` | 334 |
 | variable | `identity` | 340 |
+
+## tests/test_private_cancellation.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_cancelled_authorized_transition_is_completed_under_request_mutex(tmp_path, monkeypatch, kind)` | 29 |
+| parameter | `kind` | 29 |
+| parameter | `monkeypatch` | 29 |
+| parameter | `tmp_path` | 29 |
+| function | `transition_scenario(tmp_path, monkeypatch, kind)` | 34 |
+| parameter | `kind` | 34 |
+| parameter | `monkeypatch` | 34 |
+| parameter | `tmp_path` | 34 |
+| variable | `base` | 36 |
+| variable | `password` | 37 |
+| variable | `key` | 38 |
+| variable | `app` | 39 |
+| variable | `manager` | 40 |
+| variable | `entered` | 41 |
+| variable | `release` | 41 |
+| variable | `deferred` | 42 |
+| variable | `original_stage` | 43 |
+| function | `stage(name)` | 45 |
+| parameter | `name` | 45 |
+| variable | `request` | 51 |
+| variable | `client` | 55 |
+| variable | `owner` | 60 |
+| variable | `archive` | 61 |
+| variable | `config` | 62 |
+| variable | `original` | 67 |
+| function | `held_write()` | 69 |
+| parameter | `args` | 69 |
+| variable | `request` | 77 |
+| variable | `original` | 79 |
+| function | `held_delete()` | 81 |
+| parameter | `args` | 81 |
+| variable | `request` | 89 |
+| variable | `disk` | 99 |
+| variable | `router` | 100 |
+| variable | `name` | 104 |
+| variable | `value` | 104 |
+| variable | `row` | 105 |
+| variable | `public` | 108 |
+| variable | `restored` | 111 |
+| variable | `db` | 115 |
 
 ## tests/test_providers.py
 
