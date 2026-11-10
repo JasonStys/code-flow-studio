@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-09",
+  "failed_run": 42723755846,
+  "failed_windows_job": 129524058336,
+  "stage": "after vault unlock submission, registration already successful",
+  "proven_underlying_native_cause": "unknown: original API response/progress not captured",
+  "correction": "Observe real HTTP200 and unlocked session proof before unchanged5second rendering assertions",
+  "native_overall_deadline_seconds": 60,
+  "retries_added": 0,
+  "cryptography_or_isolation_changed": false,
+  "local": {
+    "actual_windows_packaged_app": "pass",
+    "journey_seconds": 7.8,
+    "unlock_proof_ms": 171,
+    "private_three_engine_tests": 12,
+    "release_contract_tests": 5,
+    "typescript_build_maps": "pass"
+  },
+  "limitations": [
+    "Original hosted delay not reproduced locally",
+    "Existing packaged product reused because changes affect only test synchronization/diagnostics",
+    "New exact-source hosted and draft native gates required; no published release retarget"
+  ]
+}

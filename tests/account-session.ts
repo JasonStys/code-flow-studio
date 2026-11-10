@@ -1,8 +1,9 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * types: Page@L9
- * functions: createSession(page: Page, alias: string)@L12; editorJourney(page: Page)@L40
+ * types: Page@L10
+ * functions: createSession(page: Page, alias: string)@L13; editorJourney(page: Page)@L65
+ * variables: started@L32; unlocking@L33; response@L41
  * </code-map> */
 
 /** Jason Stys: reusable actual browser/native account journey; credentials and code are disposable fixtures. */
@@ -27,9 +28,33 @@ export async function createSession(page: Page, alias: string) {
   await page
     .getByLabel("Vault phrase")
     .fill("fictional six word vault phrase example 2026");
+  // Unlock includes browser PBKDF2 and native vault initialization. A click is not completion.
+  const started = Date.now();
+  const unlocking = page.waitForResponse(
+    (response) =>
+      new URL(response.url()).pathname === "/private/unlock" &&
+      response.request().method() === "POST",
+  );
   await page
     .getByRole("button", { name: "Unlock or create workspace", exact: true })
     .click();
+  const response = await unlocking;
+  expect(
+    response.status(),
+    "Real vault unlock must succeed before checking its rendered workspace",
+  ).toBe(200);
+  expect(
+    (await response.json()).unlocked,
+    "The service must prove this session's workspace is unlocked",
+  ).toBe(true);
+  console.info(
+    "ACCOUNT_UNLOCK_STAGE",
+    JSON.stringify({
+      elapsedMs: Date.now() - started,
+      status: response.status(),
+      sessionProved: true,
+    }),
+  );
   await expect(
     page.getByRole("heading", { name: "Make your next iteration count." }),
   ).toBeVisible();

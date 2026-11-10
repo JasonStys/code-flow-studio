@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L17; executable@L23; app@L25; resources@L40; file@L41; page@L65; health@L66
+ * variables: { verifyElectron }@L17; executable@L23; app@L25; resources@L40; file@L41; page@L65; browserErrors@L66; health@L70; state@L76; directory@L91; serviceLog@L94; statuses@L95
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -63,9 +63,54 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       ).toBe(false);
     }
     const page = await app.firstWindow();
+    const browserErrors: string[] = [];
+    page.on("pageerror", (error) => {
+      if (browserErrors.length < 8) browserErrors.push(error.name);
+    });
     const health = await page.request.get(new URL("/health", page.url()).href);
     expect((await health.json()).version).toBe("0.4.0");
-    await createSession(page, "native_fictional");
+    try {
+      await createSession(page, "native_fictional");
+    } catch (error) {
+      // Only synthetic test-window state and fixed-route status codes; no keys, request bodies or cookies.
+      const state = await page
+        .evaluate(() => ({
+          heading: document.querySelector("h2")?.textContent?.slice(0, 160),
+          notice: document
+            .getElementById("account-notice")
+            ?.textContent?.slice(0, 250),
+          unlockDisabled: (
+            document.querySelector(
+              'button[type="submit"]',
+            ) as HTMLButtonElement | null
+          )?.disabled,
+        }))
+        .catch(() => ({
+          unavailable: "native renderer did not provide account state",
+        }));
+      const directory = await app.evaluate(({ app }) =>
+        app.getPath("userData"),
+      );
+      const serviceLog = join(directory, "service.log");
+      const statuses = existsSync(serviceLog)
+        ? [
+            ...readFileSync(serviceLog, "utf8").matchAll(
+              /"(POST|GET) \/(private\/(?:unlock|account|register)|health) HTTP\/1\.1" (\d{3})/g,
+            ),
+          ]
+            .slice(-12)
+            .map((match) => ({
+              method: match[1],
+              route: match[2],
+              status: Number(match[3]),
+            }))
+        : [];
+      console.error(
+        "NATIVE_ACCOUNT_FAILURE",
+        JSON.stringify({ state, browserErrors, statuses }),
+      );
+      throw error;
+    }
     await editorJourney(page);
     await inspectHelper(page);
     await page.getByRole("button", { name: "Workspace", exact: true }).click();
