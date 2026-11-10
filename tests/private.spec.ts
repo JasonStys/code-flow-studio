@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: external@L15; origin@L16; url@L20; downloaded@L37; external@L109; origin@L110
+ * variables: external@L15; origin@L16; url@L20; downloaded@L37; external@L109; origin@L110; release@L143; held@L144; ready@L147; received@L148; response@L152; creating@L157
  * </code-map> */
 
 /** Jason Stys: private website journeys, owner isolation, downloads and no unsolicited external requests. */
@@ -133,4 +133,50 @@ test("private exact-source inspection sends no external requests and disappears 
     page.getByRole("region", { name: "Evidence source inspector" }),
   ).toHaveCount(0);
   expect(external).toEqual([]);
+});
+
+test("account helper observes genuine unlock completion before checking the rendered workspace", async ({
+  page,
+}) => {
+  /** Hold a real accepted response, prove the UI is still busy/locked, then release without sleeps or retries. */
+  await page.goto("/");
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let ready!: () => void;
+  const received = new Promise<void>((resolve) => {
+    ready = resolve;
+  });
+  await page.route("**/private/unlock", async (route) => {
+    const response = await route.fetch();
+    ready();
+    await held;
+    await route.fulfill({ response });
+  });
+  const creating = createSession(page, "staged_" + test.info().project.name);
+  try {
+    await received;
+    await expect(
+      page.getByRole("heading", { name: "Unlock your private code workspace" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", {
+        name: "Unlock or create workspace",
+        exact: true,
+      }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("heading", { name: "Make your next iteration count." }),
+    ).toHaveCount(0);
+  } finally {
+    release();
+  }
+  await creating;
+  await page
+    .getByRole("button", { name: "Lock workspace", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Unlock your private code workspace" }),
+  ).toBeVisible();
 });

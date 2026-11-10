@@ -1967,9 +1967,12 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| type | `Page` | 9 |
-| function | `createSession(page: Page, alias: string)` | 12 |
-| function | `editorJourney(page: Page)` | 40 |
+| type | `Page` | 10 |
+| function | `createSession(page: Page, alias: string)` | 13 |
+| variable | `started` | 32 |
+| variable | `unlocking` | 33 |
+| variable | `response` | 41 |
+| function | `editorJourney(page: Page)` | 65 |
 
 ## tests/conftest.py
 
@@ -1987,7 +1990,12 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `resources` | 40 |
 | variable | `file` | 41 |
 | variable | `page` | 65 |
-| variable | `health` | 66 |
+| variable | `browserErrors` | 66 |
+| variable | `health` | 70 |
+| variable | `state` | 76 |
+| variable | `directory` | 91 |
+| variable | `serviceLog` | 94 |
+| variable | `statuses` | 95 |
 
 ## tests/electron-readiness.test.cjs
 
@@ -2011,6 +2019,12 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `downloaded` | 37 |
 | variable | `external` | 109 |
 | variable | `origin` | 110 |
+| variable | `release` | 143 |
+| variable | `held` | 144 |
+| variable | `ready` | 147 |
+| variable | `received` | 148 |
+| variable | `response` | 152 |
+| variable | `creating` | 157 |
 
 ## tests/source-journey.ts
 
