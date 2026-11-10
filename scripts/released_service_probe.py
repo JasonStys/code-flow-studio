@@ -570,7 +570,7 @@ def exercise(service: Service, data: Path, evidence: Evidence) -> dict:
             require(time.monotonic() < deadline, "Released worker job deadline exceeded")
             time.sleep(0.25)
         require(result.get("status") == "completed", "Released worker did not complete")
-        validate_positive(result.get("result", {}), project)
+        validate_positive(result.get("result", {}), project, historical_source=SOURCE)
         exported = request_json(client, "GET", f"/private/api/runs/{job}/report?format=json")
         require(
             result.get("id") == job and result.get("revision_id") == identifier,

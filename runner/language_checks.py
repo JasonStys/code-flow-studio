@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Evidence@L68
-# functions: read_text(path)@L43; read_json(path)@L50; read_xml(path)@L55; __init__(self, project)@L71; name(self, path)@L90; line(self, name, value)@L95; add_lines(self, path, counts)@L100; finding(self, path, line, column, code, message, severity)@L111; coverage(self, tool, metric, cases, expected)@L136; cobertura(evidence, path, case_index)@L190; jacoco(evidence, path)@L216; gcov(evidence, path)@L235; lcov(evidence, text)@L253; shell_lines(node)@L274; assembly_symbols(evidence)@L291; native_checks(project, work, execute, command)@L322; unused_checks(evidence, root, execute)@L340; measure(evidence, root, execute, command)@L585
-# variables: MAX_REPORT@L24; SUFFIXES@L25; text@L59; text@L62; file@L75; name@L82; text@L82; name@L84; text@L84; value@L92; line@L97; name@L102; lines@L105; count@L106; value@L106; line@L107; name@L113; key@L116; files@L138; name@L139; text@L139; counts@L140; covered@L147; value@L147; count@L158; line@L158; count@L159; line@L159; budget@L165; key@L166; record@L167; values@L168; budget@L170; file@L172; measured@L172; complete@L173; case@L175; file@L185; document@L192; roots@L193; source@L193; item@L194; reported@L195; paths@L196; root@L196; candidate@L197; name@L197; path@L197; line@L201; line@L203; condition@L204; file@L218; name@L219; line@L222; line@L230; stream@L237; text@L238; file@L241; name@L242; line@L245; line@L248; branch@L249; index@L249; name@L255; row@L256; name@L258; _@L260; count@L260; line@L260; block@L263; branch@L263; count@L263; line@L263; output@L276; pending@L277; item@L279; position@L282; name@L293; text@L293; definitions@L294; exported@L295; used@L296; line@L297; source@L297; source@L298; label@L304; source@L307; source@L309; column@L311; label@L311; line@L311; evidence@L324; root@L325; unused@L327; coverage@L331; coverage@L333; project@L342; language@L343; entry@L344; output@L345; allowed@L346; result@L347; parse_failed@L348; result@L351; item@L356; parse_failed@L357; tool@L366; result@L368; item@L384; location@L387; tool@L395; result@L397; line@L415; item@L416; code@L417; span@L419; tool@L428; allowed@L430; result@L431; parsed@L448; parse_failed@L449; file@L450; item@L451; tool@L459; allowed@L461; result@L462; parsed@L479; parse_failed@L480; file@L481; item@L482; tool@L484; allowed@L486; result@L487; item@L499; parse_failed@L500; tool@L504; allowed@L506; result@L507; file@L524; item@L525; parse_failed@L526; tool@L534; result@L536; line@L552; match@L553; tool@L558; result@L561; tool@L562; project@L587; entry@L588; language@L588; work@L589; build@L590; metric@L591; tool@L591; run@L592; metric@L594; tool@L594; build@L595; run@L605; metric@L607; tool@L607; build@L608; run@L623; metric@L625; tool@L625; classes@L626; build@L628; run@L629; metric@L638; tool@L638; build@L639; metric@L641; tool@L641; metric@L644; tool@L644; run@L645; metric@L647; tool@L647; build@L648; metric@L660; tool@L660; name@L661; tree@L662; result@L663; line@L670; metric@L672; tool@L672; result@L674; cases@L677; case@L678; index@L678; output@L679; environment@L680; run@L688; run@L690; run@L701; result@L716; lines@L730; name@L730; count@L731; line@L731; trace@L735; match@L736; current@L739; row@L740; current@L742; _@L744; hits@L744; line@L744; output@L747; result@L748; lines@L754; name@L754; note@L757; result@L758; file@L761; profiles@L764; result@L765; output@L778; result@L779; output@L794; result@L795; result@L816; row@L817; match@L818; name@L820; existing@L822
-# parameters: path@L43; path@L50; path@L55; project@L71; self@L71; path@L90; self@L90; name@L95; self@L95; value@L95; counts@L100; path@L100; self@L100; code@L111; column@L111; line@L111; message@L111; path@L111; self@L111; severity@L111; cases@L136; expected@L136; metric@L136; self@L136; tool@L136; case_index@L190; evidence@L190; path@L190; evidence@L216; path@L216; evidence@L235; path@L235; evidence@L253; text@L253; node@L274; evidence@L291; command@L322; execute@L322; project@L322; work@L322; evidence@L340; execute@L340; root@L340; command@L585; evidence@L585; execute@L585; root@L585
+# classes: Evidence@L74
+# functions: read_text(path)@L49; read_json(path)@L56; read_xml(path)@L61; __init__(self, project)@L77; name(self, path)@L96; line(self, name, value)@L101; add_lines(self, path, counts)@L106; finding(self, path, line, column, code, message, severity)@L117; coverage(self, tool, metric, cases, expected)@L142; cobertura(evidence, path, case_index)@L199; jacoco(evidence, path)@L225; gcov(evidence, path)@L244; lcov(evidence, text)@L262; shell_lines(node)@L283; assembly_symbols(evidence)@L300; native_checks(project, work, execute, command)@L331; unused_checks(evidence, root, execute)@L349; measure(evidence, root, execute, command)@L594
+# variables: MAX_REPORT@L30; SUFFIXES@L31; text@L65; text@L68; file@L81; name@L88; text@L88; name@L90; text@L90; value@L98; line@L103; name@L108; lines@L111; count@L112; value@L112; line@L113; name@L119; key@L122; files@L144; name@L145; text@L145; counts@L146; covered@L153; value@L153; count@L164; line@L164; count@L165; line@L165; budget@L171; key@L172; record@L173; values@L174; budget@L176; file@L178; measured@L178; complete@L179; case@L184; file@L194; document@L201; roots@L202; source@L202; item@L203; reported@L204; paths@L205; root@L205; candidate@L206; name@L206; path@L206; line@L210; line@L212; condition@L213; file@L227; name@L228; line@L231; line@L239; stream@L246; text@L247; file@L250; name@L251; line@L254; line@L257; branch@L258; index@L258; name@L264; row@L265; name@L267; _@L269; count@L269; line@L269; block@L272; branch@L272; count@L272; line@L272; output@L285; pending@L286; item@L288; position@L291; name@L302; text@L302; definitions@L303; exported@L304; used@L305; line@L306; source@L306; source@L307; label@L313; source@L316; source@L318; column@L320; label@L320; line@L320; evidence@L333; root@L334; unused@L336; coverage@L340; coverage@L342; project@L351; language@L352; entry@L353; output@L354; allowed@L355; result@L356; parse_failed@L357; result@L360; item@L365; parse_failed@L366; tool@L375; result@L377; item@L393; location@L396; tool@L404; result@L406; line@L424; item@L425; code@L426; span@L428; tool@L437; allowed@L439; result@L440; parsed@L457; parse_failed@L458; file@L459; item@L460; tool@L468; allowed@L470; result@L471; parsed@L488; parse_failed@L489; file@L490; item@L491; tool@L493; allowed@L495; result@L496; item@L508; parse_failed@L509; tool@L513; allowed@L515; result@L516; file@L533; item@L534; parse_failed@L535; tool@L543; result@L545; line@L561; match@L562; tool@L567; result@L570; tool@L571; project@L596; entry@L597; language@L597; work@L598; build@L599; metric@L600; tool@L600; run@L601; metric@L603; tool@L603; build@L604; run@L614; metric@L616; tool@L616; build@L617; run@L632; metric@L634; tool@L634; classes@L635; build@L637; run@L638; metric@L647; tool@L647; build@L648; metric@L650; tool@L650; metric@L653; tool@L653; run@L654; metric@L656; tool@L656; build@L657; metric@L669; tool@L669; name@L670; tree@L671; result@L672; line@L679; metric@L681; tool@L681; result@L683; cases@L686; project_sha256@L687; case@L692; index@L692; output@L693; environment@L694; run@L702; run@L704; bridge_request@L715; request_path@L715; run@L718; result@L733; observation@L734; observation@L740; lines@L764; name@L764; count@L765; line@L765; trace@L769; match@L770; current@L773; row@L774; current@L776; _@L778; hits@L778; line@L778; output@L781; result@L782; lines@L788; name@L788; note@L791; result@L792; file@L795; profiles@L798; result@L799; output@L812; result@L813; output@L828; result@L829; result@L850; row@L851; match@L852; name@L854; existing@L856
+# parameters: path@L49; path@L56; path@L61; project@L77; self@L77; path@L96; self@L96; name@L101; self@L101; value@L101; counts@L106; path@L106; self@L106; code@L117; column@L117; line@L117; message@L117; path@L117; self@L117; severity@L117; cases@L142; expected@L142; metric@L142; self@L142; tool@L142; case_index@L199; evidence@L199; path@L199; evidence@L225; path@L225; evidence@L244; path@L244; evidence@L262; text@L262; node@L283; evidence@L300; command@L331; execute@L331; project@L331; work@L331; evidence@L349; execute@L349; root@L349; command@L594; evidence@L594; execute@L594; root@L594
 # </code-map>
 
 """Jason Stys: real polyglot coverage and unused-code adapters, container execution only.
@@ -18,8 +18,14 @@ import hashlib
 import json
 import posixpath
 import re
+import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+if __package__:
+    from .csharp_coverage_bridge import make_request, read_observation
+else:
+    from csharp_coverage_bridge import make_request, read_observation
 
 MAX_REPORT = 8 * 1024 * 1024
 SUFFIXES = {
@@ -171,7 +177,10 @@ class Evidence:
                 record["truncated"] = record.get("truncated", False) or len(values) != len(record[key])
         measured = any(file["status"] == "measured" for file in files.values())
         complete = len(cases) == expected and all(
-            not case.get("timeout") and case.get("exit_code") == case.get("expected_exit_code", 0)
+            not case.get("timeout")
+            and case.get("exit_code") == case.get("expected_exit_code", 0)
+            and case.get("collector_exit_code", 0) == 0
+            and not case.get("collector_output_truncated", False)
             for case in cases
         )
         return {
@@ -675,6 +684,11 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
         if result["exit_code"] != 0:
             raise ValueError("Coverage build failed: " + result["stderr"] + result["stdout"])
     cases = []
+    project_sha256 = hashlib.sha256(
+        json.dumps(project["files"], sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode(
+            "utf-8"
+        )
+    ).hexdigest()
     for index, case in enumerate(project["cases"]):
         output = root / f"case-{index}.json"
         environment = {}
@@ -698,13 +712,16 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
                 str(root / "target"),
             ]
         elif language == "csharp":
+            request_path, bridge_request = make_request(
+                root, project_sha256, index, case["stdin"].encode("utf-8")
+            )
             run = [
                 "/opt/coverlet/coverlet",
                 str(root / "csharp/App.dll"),
                 "--target",
-                "/usr/share/dotnet/dotnet",
+                sys.executable,
                 "--targetargs",
-                str(root / "csharp/App.dll"),
+                f"-I /opt/csharp_coverage_bridge.py {request_path.as_posix()}",
                 "--format",
                 "cobertura",
                 "--include-test-assembly",
@@ -714,15 +731,32 @@ def measure(evidence: Evidence, root: Path, execute, command: list[str]) -> dict
                 "normal",
             ]
         result = execute(run, case["stdin"], timeout=20, env=environment)
+        observation = None
+        if language == "csharp":
+            # A target's expected nonzero return is not a collector error. Only
+            # the trusted bridge observes that return; Coverlet must itself finish.
+            if result.get("timeout") or result.get("exit_code") != 0 or result.get("output_truncated"):
+                raise ValueError("C# coverage collector failed, timed out or truncated output")
+            observation = read_observation(request_path, bridge_request)
         cases.append(
             {
                 "name": case["name"],
-                "exit_code": result["exit_code"],
+                "exit_code": observation["target_exit_code"]
+                if observation is not None
+                else result["exit_code"],
                 "expected_exit_code": case["exit_code"],
                 "timeout": result.get("timeout", False),
             }
         )
         if language == "csharp":
+            cases[-1].update(
+                {
+                    "target_exit_code": observation["target_exit_code"],
+                    "collector_exit_code": result["exit_code"],
+                    "collector_output_truncated": bool(result.get("output_truncated")),
+                    "bridge": observation,
+                }
+            )
             cases[-1]["collector_messages"] = (result["stdout"] + result["stderr"])[-2000:]
         if result.get("timeout") or result["exit_code"] is None:
             break

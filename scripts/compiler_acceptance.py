@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Evidence@L305
-# functions: require(condition, message)@L44; source_digest(text)@L50; source_line_count(text)@L55; validate_coverage_completion(coverage, project)@L60; validate_locations(result, project)@L93; validate_positive(result, project)@L106; negative_project(project, kind)@L207; validate_negative(result, project, kind)@L226; __init__(self, output, provenance)@L308; record(self, language, kind, project, result, error)@L315; save(self)@L337; broker_scenarios(evidence)@L364; anchor_scenarios(evidence)@L385; private_scenarios(evidence)@L412; provenance(runtime, expected_source, lane)@L516; toolchain_versions()@L570; main()@L615
-# variables: RELEASE_SOURCE@L40; RELEASE_WORKER_SHA256@L41; wrapped@L62; cases@L64; actual@L69; expected@L69; wrapped@L85; expected_status@L86; file@L95; sources@L95; item@L97; line@L98; name@L98; compilation@L109; checks@L116; observed@L118; actual@L120; expected@L120; oracle@L130; case@L131; benchmark@L135; samples@L136; value@L139; coverage@L145; entry@L148; content@L149; file@L149; measured@L155; name@L155; file@L158; source@L158; line@L163; executed@L165; missing@L165; summary@L171; covered@L172; extra@L180; first@L184; data@L209; replacement@L215; expected_oracle@L237; case@L238; checks@L241; line@L259; item@L265; case@L276; exit_code@L283; marker@L288; row@L319; key@L333; record@L339; temporary@L340; lines@L343; row@L351; checks@L352; lines@L356; language@L366; baseline@L367; kind@L368; project@L371; result@L372; error@L373; result@L375; error@L381; language@L387; missing_line@L388; project@L388; unused_line@L388; result@L389; error@L390; result@L392; item@L403; error@L408; credentials@L414; key@L415; directory@L416; app@L417; client@L422; jobs@L430; language@L431; project@L432; result@L433; error@L434; response@L436; revision@L438; response@L439; job@L441; deadline@L442; response@L444; report@L446; result@L451; exported@L453; html@L458; error@L465; archives@L469; response@L484; job@L490; result_sha256@L490; response@L491; exported@L498; runtime@L524; source@L529; dirty@L531; worker@L540; command@L545; image@L546; commands@L572; program@L586; name@L591; directory@L592; root@L593; argv@L595; argv@L597; code@L599; output@L599; versions@L601; value@L607; parser@L617; args@L622; evidence@L623; language@L644
-# parameters: condition@L44; message@L44; text@L50; text@L55; coverage@L60; project@L60; project@L93; result@L93; project@L106; result@L106; kind@L207; project@L207; kind@L226; project@L226; result@L226; output@L308; provenance@L308; self@L308; error@L316; kind@L316; language@L316; project@L316; result@L316; self@L316; self@L337; evidence@L364; evidence@L385; evidence@L412; expected_source@L516; lane@L516; runtime@L516
+# classes: Evidence@L348
+# functions: require(condition, message)@L45; source_digest(text)@L51; source_line_count(text)@L56; validate_coverage_completion(coverage, project, historical_source)@L61; validate_locations(result, project)@L136; validate_positive(result, project, historical_source)@L149; negative_project(project, kind)@L250; validate_negative(result, project, kind)@L269; __init__(self, output, provenance)@L351; record(self, language, kind, project, result, error)@L358; save(self)@L380; broker_scenarios(evidence)@L407; anchor_scenarios(evidence)@L434; private_scenarios(evidence)@L465; provenance(runtime, expected_source, lane)@L575; toolchain_versions()@L630; main()@L675
+# variables: RELEASE_SOURCE@L40; RELEASE_WORKER_SHA256@L41; CSHARP_TARGET@L42; wrapped@L66; cases@L68; actual@L73; expected@L73; index@L73; wrapped@L90; bridge@L100; source_hash@L101; file@L103; input_bytes@L109; expected_bridge@L110; expected_status@L129; file@L138; sources@L138; item@L140; line@L141; name@L141; compilation@L152; checks@L159; observed@L161; actual@L163; expected@L163; oracle@L173; case@L174; benchmark@L178; samples@L179; value@L182; coverage@L188; entry@L191; content@L192; file@L192; measured@L198; name@L198; file@L201; source@L201; line@L206; executed@L208; missing@L208; summary@L214; covered@L215; extra@L223; first@L227; data@L252; replacement@L258; expected_oracle@L280; case@L281; checks@L284; line@L302; item@L308; case@L319; exit_code@L326; marker@L331; row@L362; key@L376; record@L382; temporary@L383; lines@L386; row@L394; checks@L395; lines@L399; language@L409; baseline@L410; kind@L411; project@L414; result@L415; error@L416; result@L418; error@L430; language@L436; missing_line@L437; project@L437; unused_line@L437; result@L438; error@L439; result@L441; item@L456; error@L461; credentials@L467; key@L468; directory@L469; app@L470; client@L475; jobs@L483; language@L484; project@L485; result@L486; error@L487; response@L489; revision@L491; response@L492; job@L494; deadline@L495; response@L497; report@L499; result@L504; exported@L512; html@L517; error@L524; archives@L528; response@L543; job@L549; result_sha256@L549; response@L550; exported@L557; runtime@L583; source@L588; dirty@L590; worker@L600; command@L605; image@L606; commands@L632; program@L646; name@L651; directory@L652; root@L653; argv@L655; argv@L657; code@L659; output@L659; versions@L661; value@L667; parser@L677; args@L682; evidence@L683; language@L704
+# parameters: condition@L45; message@L45; text@L51; text@L56; coverage@L62; historical_source@L62; project@L62; project@L136; result@L136; historical_source@L149; project@L149; result@L149; kind@L250; project@L250; kind@L269; project@L269; result@L269; output@L351; provenance@L351; self@L351; error@L359; kind@L359; language@L359; project@L359; result@L359; self@L359; self@L380; evidence@L407; evidence@L434; evidence@L465; expected_source@L575; lane@L575; runtime@L575
 # </code-map>
 
 """Jason Stys: real hosted compiler scenarios, independent oracles and private history.
@@ -39,6 +39,7 @@ from studio.private_api import create_private_app
 
 RELEASE_SOURCE = "eb9b1cd0c3e3fd1e70e397edeffb059073464f74"
 RELEASE_WORKER_SHA256 = "750b665e545b7cf0806d4c493db86174f7f4e7ab2218aa239718e652ccdce158"
+CSHARP_TARGET = "/tmp/project/.analysis/csharp/App.dll"  # noqa: S108 -- inert original worker path, never a host file.
 
 
 def require(condition: bool, message: str) -> None:
@@ -57,8 +58,11 @@ def source_line_count(text: str) -> int:
     return len(text.replace("\r\n", "\n").replace("\r", "\n").split("\n"))
 
 
-def validate_coverage_completion(coverage: dict, project: Project) -> None:
-    """Preserve the documented Coverlet nonzero-exit limitation without inventing full coverage."""
+def validate_coverage_completion(
+    coverage: dict, project: Project, historical_source: str | None = None
+) -> None:
+    """Require exact current target/collector evidence; preserve only the pinned historical baseline."""
+    require(historical_source in (None, RELEASE_SOURCE), "Unknown historical coverage policy")
     wrapped = False
     if project.language != "python":
         cases = coverage.get("cases", [])
@@ -66,7 +70,7 @@ def validate_coverage_completion(coverage: dict, project: Project) -> None:
             coverage.get("requested_cases") == len(project.cases) and len(cases) == len(project.cases),
             "Missing instrumented case evidence",
         )
-        for expected, actual in zip(project.cases, cases, strict=True):
+        for index, (expected, actual) in enumerate(zip(project.cases, cases, strict=True)):
             require(
                 actual.get("name") == expected.name
                 and actual.get("expected_exit_code") == expected.exit_code
@@ -75,7 +79,8 @@ def validate_coverage_completion(coverage: dict, project: Project) -> None:
             )
             if actual.get("exit_code") != expected.exit_code:
                 require(
-                    project.language == "csharp"
+                    historical_source == RELEASE_SOURCE
+                    and project.language == "csharp"
                     and coverage.get("tool") == "Coverlet 8.0.1"
                     and expected.exit_code != 0
                     and actual.get("exit_code") == 1
@@ -83,6 +88,44 @@ def validate_coverage_completion(coverage: dict, project: Project) -> None:
                     "Unexpected instrumented execution failure",
                 )
                 wrapped = True
+            if project.language == "csharp" and historical_source is None:
+                require(
+                    type(actual.get("collector_exit_code")) is int
+                    and actual["collector_exit_code"] == 0
+                    and type(actual.get("target_exit_code")) is int
+                    and actual["target_exit_code"] == actual.get("exit_code")
+                    and not actual.get("collector_output_truncated"),
+                    "Current C# collector/target exits are not independently complete",
+                )
+                bridge = actual.get("bridge", {})
+                source_hash = source_digest(
+                    json.dumps(
+                        [file.model_dump() for file in project.files],
+                        sort_keys=True,
+                        separators=(",", ":"),
+                        ensure_ascii=False,
+                    )
+                )
+                input_bytes = expected.stdin.encode("utf-8")
+                expected_bridge = (
+                    Path(studio.__file__).resolve().parent.parent / "runner/csharp_coverage_bridge.py"
+                )
+                require(
+                    type(bridge.get("schema")) is int
+                    and bridge["schema"] == 1
+                    and type(bridge.get("case_index")) is int
+                    and bridge["case_index"] == index
+                    and bridge.get("target") == CSHARP_TARGET
+                    and bridge.get("source_sha256") == source_hash
+                    and bridge.get("stdin_sha256") == hashlib.sha256(input_bytes).hexdigest()
+                    and type(bridge.get("stdin_bytes")) is int
+                    and bridge["stdin_bytes"] == len(input_bytes)
+                    and type(bridge.get("target_exit_code")) is int
+                    and bridge["target_exit_code"] == expected.exit_code
+                    and bridge.get("bridge_sha256")
+                    == hashlib.sha256(expected_bridge.read_bytes()).hexdigest(),
+                    "Current C# bridge is not bound to this source/case/input/helper",
+                )
     expected_status = "partial" if wrapped else "measured"
     require(
         coverage.get("status") == expected_status,
@@ -103,7 +146,7 @@ def validate_locations(result: dict, project: Project) -> None:
         require(item.get("source_sha256") == source_digest(sources[name]), "Diagnostic source hash mismatch")
 
 
-def validate_positive(result: dict, project: Project) -> None:
+def validate_positive(result: dict, project: Project, *, historical_source: str | None = None) -> None:
     """Require actual compilation, every approved output, measurements and source-bound coverage."""
     require(result.get("tool_status") == "completed", "Worker did not complete")
     compilation = result.get("compilation", {})
@@ -143,7 +186,7 @@ def validate_positive(result: dict, project: Project) -> None:
         type(benchmark.get("max_rss_kib")) is int and benchmark["max_rss_kib"] > 0, "Missing measured RSS"
     )
     coverage = result.get("coverage", {})
-    validate_coverage_completion(coverage, project)
+    validate_coverage_completion(coverage, project, historical_source)
     require(not coverage.get("locations_truncated"), "Coverage locations were truncated")
     entry = coverage.get("files", {}).get(project.entry, {})
     content = next(file.content for file in project.files if file.name == project.entry)
@@ -374,7 +417,13 @@ async def broker_scenarios(evidence: Evidence) -> None:
             try:
                 result = await execution.run(project, local_only=True)
                 if kind == "positive":
-                    validate_positive(result, project)
+                    validate_positive(
+                        result,
+                        project,
+                        historical_source=RELEASE_SOURCE
+                        if evidence.provenance["lane"] == "release-0.4.2"
+                        else None,
+                    )
                 else:
                     validate_negative(result, project, kind)
             except (OSError, ValueError, KeyError, TypeError) as failure:
@@ -390,7 +439,11 @@ async def anchor_scenarios(evidence: Evidence) -> None:
         error = None
         try:
             result = await execution.run(project, local_only=True)
-            validate_positive(result, project)
+            validate_positive(
+                result,
+                project,
+                historical_source=RELEASE_SOURCE if evidence.provenance["lane"] == "release-0.4.2" else None,
+            )
             require(
                 missing_line in result["coverage"]["files"][project.entry]["missing_lines"],
                 "Authored uncovered anchor was not measured as missing",
@@ -449,7 +502,13 @@ def private_scenarios(evidence: Evidence) -> None:
                         time.sleep(0.5)
                     require(report["status"] == "completed", "Private job did not complete")
                     result = report["result"]
-                    validate_positive(result, project)
+                    validate_positive(
+                        result,
+                        project,
+                        historical_source=RELEASE_SOURCE
+                        if evidence.provenance["lane"] == "release-0.4.2"
+                        else None,
+                    )
                     exported = client.get(f"/private/api/runs/{job}/report?format=json")
                     require(
                         exported.status_code == 200 and exported.json()["result"] == result,
@@ -534,7 +593,8 @@ def provenance(runtime: Path, expected_source: str, lane: str) -> dict:
     ).strip()
     require(not dirty, "Runtime tracked source is dirty")
     require(
-        studio.__version__ == "0.4.2" and execution.IMAGE == "code-flow-worker:0.4.2",
+        studio.__version__ == ("0.4.2" if lane == "release-0.4.2" else "0.4.3")
+        and execution.IMAGE == f"code-flow-worker:{studio.__version__}",
         "Wrong product/worker version",
     )
     worker = hashlib.sha256((runtime / "runner/node_checks.cjs").read_bytes()).hexdigest()

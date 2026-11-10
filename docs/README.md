@@ -1,5 +1,7 @@
 # Documentation
 
+- [0.4.3 exact C# coverage exits](csharp-coverage.md), [release notes](releases/v0.4.3.md) and [validation](reports/csharp-coverage-2026-11-10.md).
+
 - [Verified source inspection and draft navigation](source-navigation.md), with [observed practical-workflow validation](reports/practical-workflows-2026-11-09.md).
 - [Worker sanitizer compatibility and separate analyzer audit](worker-toolchain.md).
 - [0.4.2 delivery correction](releases/v0.4.2.md): required draft visibility for the read-only final verifier; coherent new product/worker metadata and preserved prior assets.
