@@ -1,9 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: validate_publications(root)@L30; copy_publications(tmp_path)@L145; rewrite_package(root, filename, change)@L155; test_actual_reviewed_publications_are_bound_to_source_and_workflows()@L173; test_actual_binary_tamper_fails_digest(tmp_path)@L178; test_renamed_publication_cannot_select_an_external_path(tmp_path)@L187; test_rehashed_active_office_members_still_fail(tmp_path, member)@L202; test_rehashed_zip_without_document_root_fails(tmp_path)@L214; test_rehashed_workbook_missing_actual_filter_fails(tmp_path)@L222; remove_filter(entries)@L226; test_rehashed_workbook_changed_formula_fails(tmp_path)@L238; change_formula(entries)@L242
-# variables: FILES@L26; NS@L27; reports@L32; manifest@L33; source@L34; records@L41; r@L42; workflows@L44; r@L45; r@L56; record@L59; stream@L62; payload@L63; package@L70; members@L71; m@L72; names@L72; required@L73; m@L81; xml@L83; member@L84; lower@L85; marker@L87; text@L97; marker@L98; relation@L102; approval@L110; count@L111; n@L115; name@L119; node@L119; tables@L119; t@L123; cells@L126; node@L128; c@L129; n@L132; row@L133; expected@L134; actual@L140; c@L140; source@L147; target@L148; name@L150; path@L157; original@L158; entries@L159; m@L159; package@L161; content@L162; name@L162; manifest_path@L164; manifest@L165; r@L166; record@L166; payload@L167; root@L180; path@L181; root@L189; path@L190; record@L191; root@L204; root@L216; root@L224; n@L228; name@L228; table@L229; root@L240; name@L244; sheet@L245; formula@L246
-# parameters: root@L30; tmp_path@L145; change@L155; filename@L155; root@L155; tmp_path@L178; tmp_path@L187; member@L202; tmp_path@L202; entries@L208; tmp_path@L214; entries@L217; tmp_path@L222; entries@L226; tmp_path@L238; entries@L242
+# classes: BoundedInflater@L295
+# functions: validate_publications(root)@L34; copy_publications(tmp_path)@L153; rewrite_package(root, filename, change)@L163; test_actual_reviewed_publications_are_bound_to_source_and_workflows()@L181; test_actual_binary_tamper_fails_digest(tmp_path)@L186; test_renamed_publication_cannot_select_an_external_path(tmp_path)@L195; test_rehashed_active_office_members_still_fail(tmp_path, member)@L210; test_rehashed_zip_without_document_root_fails(tmp_path)@L222; test_rehashed_workbook_missing_actual_filter_fails(tmp_path)@L230; remove_filter(entries)@L234; test_rehashed_workbook_changed_formula_fails(tmp_path)@L246; change_formula(entries)@L250; test_dishonest_compressed_xml_uses_bounded_actual_decompression(tmp_path, monkeypatch)@L263; __init__(self, actual)@L298; decompress(self, data, max_length)@L302; __getattr__(self, attribute)@L309; observed_factory(compression)@L313
+# variables: FILES@L29; NS@L30; XML_BYTES@L31; reports@L36; manifest@L37; source@L38; records@L45; r@L46; workflows@L48; r@L49; r@L60; record@L63; stream@L66; payload@L67; package@L74; members@L75; m@L76; names@L76; required@L77; m@L85; xml@L87; member@L88; lower@L89; marker@L91; xml_stream@L101; xml_bytes@L102; text@L105; marker@L106; relation@L110; approval@L118; count@L119; n@L123; name@L127; node@L127; tables@L127; t@L131; cells@L134; node@L136; c@L137; n@L140; row@L141; expected@L142; actual@L148; c@L148; source@L155; target@L156; name@L158; path@L165; original@L166; entries@L167; m@L167; package@L169; content@L170; name@L170; manifest_path@L172; manifest@L173; r@L174; record@L174; payload@L175; root@L188; path@L189; root@L197; path@L198; record@L199; root@L212; root@L224; root@L232; n@L236; name@L236; table@L237; root@L248; name@L252; sheet@L253; formula@L254; root@L265; name@L266; path@L270; payload@L271; end@L272; cursor@L273; changed@L274; comment_size@L276; extra_size@L276; filename_size@L276; filename@L277; local@L279; changed@L283; cursor@L284; manifest_path@L287; manifest@L288; r@L289; record@L289; limits@L292; factory@L293; actual@L315
+# parameters: root@L34; tmp_path@L153; change@L163; filename@L163; root@L163; tmp_path@L186; tmp_path@L195; member@L210; tmp_path@L210; entries@L216; tmp_path@L222; entries@L225; tmp_path@L230; entries@L234; tmp_path@L246; entries@L250; monkeypatch@L263; tmp_path@L263; entries@L268; actual@L298; self@L298; data@L302; max_length@L302; self@L302; attribute@L309; self@L309; compression@L313
 # </code-map>
 
 """Jason Stys: source-bound publication integrity with real Office tamper regressions.
@@ -17,6 +18,8 @@ import io
 import json
 import re
 import shutil
+import struct
+import zipfile
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZIP_STORED, ZipFile
 
@@ -25,6 +28,7 @@ from defusedxml import ElementTree as ET
 
 FILES = {"project-guide.docx", "validation-review.docx", "validation-evidence.xlsx"}
 NS = {"x": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+XML_BYTES = 8 * 1024 * 1024
 
 
 def validate_publications(root: Path) -> None:
@@ -94,7 +98,11 @@ def validate_publications(root: Path) -> None:
                 ):
                     raise ValueError("Publication member budget/type")
                 if member.filename.endswith((".xml", ".rels")):
-                    text = package.read(member).decode("utf-8", errors="strict")
+                    with package.open(member) as xml_stream:
+                        xml_bytes = xml_stream.read(XML_BYTES + 1)
+                    if len(xml_bytes) > XML_BYTES or len(xml_bytes) != member.file_size:
+                        raise ValueError("Publication actual XML budget/length")
+                    text = xml_bytes.decode("utf-8", errors="strict")
                     if any(marker in text.lower() for marker in ["<!doctype", "<!entity", "macroenabled"]):
                         raise ValueError("Active publication XML")
                     xml[member.filename] = ET.fromstring(text, forbid_dtd=True)
@@ -250,3 +258,65 @@ def test_rehashed_workbook_changed_formula_fails(tmp_path):
     rewrite_package(root, "validation-evidence.xlsx", change_formula)
     with pytest.raises(ValueError, match="formula/cached"):
         validate_publications(root)
+
+
+def test_dishonest_compressed_xml_uses_bounded_actual_decompression(tmp_path, monkeypatch):
+    """A small real ZIP with understated sizes exercises actual zlib under an independent allocation-request budget."""
+    root = copy_publications(tmp_path)
+    name = "word/dishonest.xml"
+    rewrite_package(
+        root, "project-guide.docx", lambda entries: entries.update({name: b"<r>" + b"x" * 65536 + b"</r>"})
+    )
+    path = root / "docs" / "reports" / "project-guide.docx"
+    payload = bytearray(path.read_bytes())
+    end = payload.rfind(b"PK\x05\x06")
+    cursor = struct.unpack_from("<I", payload, end + 16)[0]
+    changed = False
+    while payload[cursor : cursor + 4] == b"PK\x01\x02":
+        filename_size, extra_size, comment_size = struct.unpack_from("<HHH", payload, cursor + 28)
+        filename = payload[cursor + 46 : cursor + 46 + filename_size].decode("utf-8")
+        if filename == name:
+            local = struct.unpack_from("<I", payload, cursor + 42)[0]
+            assert payload[local : local + 4] == b"PK\x03\x04"
+            struct.pack_into("<I", payload, cursor + 24, 1)
+            struct.pack_into("<I", payload, local + 22, 1)
+            changed = True
+        cursor += 46 + filename_size + extra_size + comment_size
+    assert changed
+    path.write_bytes(payload)
+    manifest_path = path.parent / "publications.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    record = next(r for r in manifest["documents"] if r["filename"] == "project-guide.docx")
+    record["bytes"], record["sha256"] = len(payload), hashlib.sha256(payload).hexdigest()
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    limits = []
+    factory = zipfile._get_decompressor
+
+    class BoundedInflater:
+        """Delegate actual native zlib while rejecting unbounded output requests before allocation."""
+
+        def __init__(self, actual):
+            """Retain the genuine stdlib decompressor; no substitute inflated payloads."""
+            self.actual = actual
+
+        def decompress(self, data, max_length=0):
+            """Record and enforce output-request size independently of attacker-controlled ZIP metadata."""
+            limits.append(max_length)
+            if not 0 < max_length <= 8 * 1024 * 1024 + 1:
+                raise AssertionError("Actual inflater output request must be explicitly bounded")
+            return self.actual.decompress(data, max_length)
+
+        def __getattr__(self, attribute):
+            """Preserve genuine eof/tail/flush behavior instead of mocking ZIP acceptance."""
+            return getattr(self.actual, attribute)
+
+    def observed_factory(compression):
+        """Instrument only construction; all compressed input is processed by the actual native decoder."""
+        actual = factory(compression)
+        return BoundedInflater(actual) if actual is not None else None
+
+    monkeypatch.setattr(zipfile, "_get_decompressor", observed_factory)
+    # CRC rejects the understated member, but that rejection alone would not establish a memory bound.
+    with pytest.raises(zipfile.BadZipFile, match="CRC"):
+        validate_publications(root)
+    assert limits and max(limits) <= 8 * 1024 * 1024 + 1

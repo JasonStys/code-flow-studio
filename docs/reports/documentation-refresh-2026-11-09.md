@@ -30,12 +30,16 @@ Use the [handbook](../handbook.md) to choose usage, design, security and test do
 
 ## Local integration checks and future CI
 
-The complete original controller/training gate passed 261 tests and 28 subtests,
+The complete original controller/training gate passed 262 tests and 28 subtests,
 covering 1,462/1,734 measured statements (84.31%, unchanged 80% floor). This adds
-nine actual publication cases: exact source-bound reviewed packages, binary tamper,
+ten actual publication cases: exact source-bound reviewed packages, binary tamper,
 closed filenames, real macro/ActiveX/embedding ZIP members, missing Word root,
 removed Excel autoFilter and changed real formula. Tampered structural fixtures
 recompute their archive digest so the structural rejection is exercised independently.
+A real deflated ZIP with understated member sizes also checks the actual zlib output
+request budget. XML reads explicitly request at most 8 MiB plus one byte before
+checking actual length. A sensitivity run restoring the old unbounded read fails
+this oracle before inflation; a later CRC rejection alone is not a memory-bound proof.
 The checks do not execute Office or substitute metadata for the independent visual review.
 
 XML parsing uses explicitly pinned development-only
