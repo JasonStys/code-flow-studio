@@ -2,8 +2,8 @@
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
  * types: Page@L10
- * functions: createSession(page: Page, alias: string)@L13; editorJourney(page: Page)@L65
- * variables: started@L32; unlocking@L33; response@L41
+ * functions: createSession(page: Page, alias: string)@L13; editorJourney(page: Page)@L89
+ * variables: registeringAt@L22; registration@L23; registered@L32; registrationProof@L37; started@L56; unlocking@L57; response@L65
  * </code-map> */
 
 /** Jason Stys: reusable actual browser/native account journey; credentials and code are disposable fixtures. */
@@ -18,9 +18,33 @@ export async function createSession(page: Page, alias: string) {
   await page
     .getByLabel("Login password", { exact: true })
     .fill("fictional-browser-password-2026");
+  // Registration includes real native password hashing; a click is not its completion.
+  const registeringAt = Date.now();
+  const registration = page.waitForResponse(
+    (response) =>
+      new URL(response.url()).origin === new URL(page.url()).origin &&
+      new URL(response.url()).pathname === "/private/register" &&
+      response.request().method() === "POST",
+  );
   await page
     .getByRole("button", { name: "Register account", exact: true })
     .click();
+  const registered = await registration;
+  expect(
+    registered.status(),
+    "Real account registration must succeed before checking its recovery screen",
+  ).toBe(200);
+  const registrationProof = await registered.json();
+  expect(typeof registrationProof.recovery).toBe("string");
+  expect(registrationProof.recovery.length).toBeGreaterThanOrEqual(32);
+  console.info(
+    "ACCOUNT_REGISTER_STAGE",
+    JSON.stringify({
+      elapsedMs: Date.now() - registeringAt,
+      status: registered.status(),
+      recoveryProved: true,
+    }),
+  );
   await expect(page.locator("#recovery-code")).toBeVisible();
   await page
     .getByRole("button", { name: "I saved it privately", exact: true })

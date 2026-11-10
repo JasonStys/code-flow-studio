@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L24; executable@L30; app@L33; acceptedPackage@L46; resources@L53; file@L54; metadata@L87; page@L107; browserErrors@L110; health@L114; state@L122; directory@L137; serviceLog@L140; statuses@L141
+ * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; metadata@L98; page@L118; accountStartedAt@L121; accountRoutes@L122; route@L124; route@L136; browserErrors@L148; health@L152; state@L160; directory@L191; serviceLog@L194; statuses@L195; lifecycle@L260; records@L261; launcher@L262; line@L265; service@L270; line@L271; diagnostic@L278; records@L282; stage@L283; pid@L294
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -24,6 +24,9 @@ import { inspectHelper } from "./source-journey";
 const { verifyElectron } = createRequire(import.meta.url)(
   "../scripts/verify_electron.cjs",
 );
+const { readDiagnosticLog } = createRequire(import.meta.url)(
+  "./native-diagnostics.cjs",
+);
 
 test("bundled desktop authenticates, seals history and provides a sandboxed editor", async () => {
   /** Native renderer and bundled service both start without a separately installed Python runtime. */
@@ -43,6 +46,14 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
   app.process().once("exit", (code, signal) => {
     console.info("NATIVE_PROCESS_EXIT", JSON.stringify({ code, signal }));
   });
+  app.on("console", (message) => {
+    // Main-process instrumentation contains fixed milestones/statuses only; never forward arbitrary console content.
+    if (message.text().startsWith("NATIVE_LAUNCHER_STAGE "))
+      console.info(message.text());
+  });
+  const launcherDirectory = await app.evaluate(({ app }) =>
+    app.getPath("userData"),
+  );
   let acceptedPackage: { source: string; worker_sha256: string } | undefined;
   try {
     expect(await app.evaluate(({ app }) => app.getPath("userData"))).toContain(
@@ -107,6 +118,33 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     const page = await app.firstWindow();
     page.once("crash", () => console.error("NATIVE_RENDERER_EVENT", "crashed"));
     page.once("close", () => console.info("NATIVE_RENDERER_EVENT", "closed"));
+    const accountStartedAt = Date.now();
+    const accountRoutes = new Set(["/private/register", "/private/unlock"]);
+    page.on("request", (request) => {
+      const route = new URL(request.url()).pathname;
+      if (request.method() === "POST" && accountRoutes.has(route))
+        console.info(
+          "NATIVE_ACCOUNT_REQUEST",
+          JSON.stringify({
+            route,
+            stage: "started",
+            elapsedMs: Date.now() - accountStartedAt,
+          }),
+        );
+    });
+    page.on("response", (response) => {
+      const route = new URL(response.url()).pathname;
+      if (response.request().method() === "POST" && accountRoutes.has(route))
+        console.info(
+          "NATIVE_ACCOUNT_REQUEST",
+          JSON.stringify({
+            route,
+            stage: "response",
+            status: response.status(),
+            elapsedMs: Date.now() - accountStartedAt,
+          }),
+        );
+    });
     const browserErrors: string[] = [];
     page.on("pageerror", (error) => {
       if (browserErrors.length < 8) browserErrors.push(error.name);
@@ -125,10 +163,26 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
           notice: document
             .getElementById("account-notice")
             ?.textContent?.slice(0, 250),
-          unlockDisabled: (
-            document.querySelector(
-              'button[type="submit"]',
-            ) as HTMLButtonElement | null
+          documentReady: document.readyState,
+          inputs: Array.from(
+            document.querySelectorAll<HTMLInputElement>(
+              "input[name=alias], input[name=password], input[name=phrase]",
+            ),
+          ).map((input) => ({
+            name: input.name,
+            valid: input.validity.valid,
+            valueMissing: input.validity.valueMissing,
+            patternMismatch: input.validity.patternMismatch,
+            tooShort: input.validity.tooShort,
+            tooLong: input.validity.tooLong,
+          })),
+          submitDisabled: (
+            document
+              .querySelector<HTMLInputElement>(
+                "input[name=alias], input[name=phrase]",
+              )
+              ?.closest("form")
+              ?.querySelector("button") as HTMLButtonElement | null
           )?.disabled,
         }))
         .catch(() => ({
@@ -203,8 +257,53 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     ).toEqual([]);
   } finally {
     console.info("NATIVE_JOURNEY_STAGE", "owned-close:start");
-    await app.close();
-    console.info("NATIVE_JOURNEY_STAGE", "owned-close:complete");
+    const lifecycle = () => {
+      const records: { stage: string; pid: number; parent_pid: number }[] = [];
+      const launcher = readDiagnosticLog(
+        join(launcherDirectory, "native-lifecycle.log"),
+      );
+      for (const line of launcher.split(/\r?\n/).filter(Boolean))
+        console.info(
+          "NATIVE_LAUNCHER_RECEIPT",
+          JSON.stringify(JSON.parse(line)),
+        );
+      const service = readDiagnosticLog(join(launcherDirectory, "service.log"));
+      for (const line of service.split(/\r?\n/))
+        if (line.startsWith("NATIVE_SERVICE_STAGE ")) {
+          console.info(line);
+          records.push(JSON.parse(line.slice("NATIVE_SERVICE_STAGE ".length)));
+        }
+      return records;
+    };
+    const diagnostic = setTimeout(lifecycle, 10000);
+    try {
+      await app.close();
+      console.info("NATIVE_JOURNEY_STAGE", "owned-close:complete");
+      const records = lifecycle();
+      for (const stage of [
+        "workspace-close-complete",
+        "lifespan-close-complete",
+        "server-thread-stopped",
+        "main-complete",
+      ])
+        expect(
+          records.some((record) => record.stage === stage),
+          `Actual frozen service milestone: ${stage}`,
+        ).toBe(true);
+      // Signal zero observes identity existence without sending a termination signal or touching unrelated processes.
+      for (const pid of new Set(
+        records.flatMap((record) => [record.pid, record.parent_pid]),
+      )) {
+        expect(Number.isSafeInteger(pid) && pid > 0).toBe(true);
+        expect(
+          () => process.kill(pid, 0),
+          `Owned service/bootloader PID ${pid} must have exited`,
+        ).toThrow(/ESRCH/);
+      }
+    } finally {
+      clearTimeout(diagnostic);
+      lifecycle();
+    }
   }
   if (acceptedPackage) {
     // Generated proof contains source/package identity only; no profile, alias, source text or account key.
