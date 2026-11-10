@@ -35,7 +35,7 @@ from scripts.draft_lookup import find_release, read_by_id, require
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = "JasonStys/code-flow-studio"
 BASE = f"repos/{REPOSITORY}"
-WORKFLOWS = ("validate.yml", "packages.yml", "codeql.yml")
+WORKFLOWS = ("validate.yml", "packages.yml", "codeql.yml", "compiler-execution.yml")
 CATEGORIES = {"/language:python", "/language:javascript-typescript", "/language:actions"}
 MAX_ASSET = 1024**3
 
