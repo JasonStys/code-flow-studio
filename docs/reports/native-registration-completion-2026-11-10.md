@@ -57,3 +57,44 @@ The initial restricted-network package attempt could not resolve GitHub; the nor
 build completed with the same locked tools. No Docker repair, installed-app replacement,
 public release change or deadline increase occurred. Fresh exact-source hosted checks
 remain required before the release owner can promote a new download.
+
+## Follow-up: actual Windows shutdown boundary
+
+[PR5 Windows job](https://github.com/JasonStys/code-flow-studio/actions/runs/42785409337/job/129725253872)
+completed real registration (HTTP 200, 626 ms), unlock (HTTP 200, 406 ms), editor,
+source inspector, privacy and lock checks. The SDK journey then stalled in owned
+application close. The renderer and Electron process exited with code zero after
+approximately the existing 30-second backend wait, but the worker subsequently
+timed out and the hosted runner found an orphan frozen service. This is a distinct
+shutdown observation; it does not establish a registration failure or prove the
+exact reason the backend failed to exit.
+
+The existing launcher did not inspect shutdown HTTP status or acknowledgement.
+Native-test diagnostics now distinguish HTTP status, a bounded boolean stopping
+receipt, the graceful-stop callback, workspace/lifespan completion, server-thread
+completion, frozen main completion and the bootloader's exit. Only fixed milestones,
+owned process identities, status and booleans are recorded. A separate disposable
+launcher log survives debugger disconnection during asynchronous before-quit;
+readback is capped at 64 KiB and emits no account/source values. The ten-second
+snapshot is diagnostic only; it grants no success or extra time.
+
+Native acceptance additionally requires all actual frozen completion milestones and
+observes that the owned service/bootloader PIDs no longer exist (signal zero only,
+never force termination). A successful click, a stopping receipt or Electron's exit
+alone is insufficient. The existing two-second HTTP, 30-second graceful-stop and
+60-second total journey limits, lack of retries and recoverable workspace behavior
+are unchanged. This instrumentation is not represented as a speculative fix for the
+unreproduced hosted shutdown cause.
+
+Two real Response-stream cases reject denied/negative/malformed/oversized stopping
+receipts; two Python cases check opt-in diagnostic privacy and the authenticated
+route's actual callback/denial behavior. The complete existing Python gate passed
+252 tests and 28 subtests, covering 1462/1734 controller/training statements (84.31%,
+80% floor retained). All three Electron readiness/receipt Node cases passed.
+Strict build, Ruff and 79 generated source maps passed. After rebuilding the frozen
+service, the real Windows SDK journey passed in 6.7 seconds and a freshly compiled
+unsigned unpacked application passed in 6.1 seconds; both proved HTTP 200/stopping
+true, all sealing/thread/main milestones and owned child/bootloader disappearance.
+The separate empty-store frozen-service probe also exited gracefully in 0.557 seconds.
+These are local observations, not a claim that the failing hosted condition was
+reproduced or repaired. Actual fresh hosted lifecycle evidence remains required.

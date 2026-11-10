@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: port()@L26; launch()@L37
- * variables: { spawn }@L17; { randomBytes }@L18; { join }@L19; net@L20; fs@L21; service@L22; closing@L23; server@L27; selected@L31; selected@L38; nonce@L40; resources@L41; executable@L44; ui@L51; log@L55; env@L60; exited@L76; origin@L84; ready@L86; attempt@L87; response@L89; health@L92; isolated@L106; allowed@L114; window@L122; stopped@L202; window@L238
+ * functions: nativeStage(stage, details = {})@L27; port()@L42; launch()@L53
+ * variables: { spawn }@L17; { randomBytes }@L18; { join }@L19; net@L20; fs@L21; { shutdownProof }@L22; service@L23; closing@L24; record@L29; server@L43; selected@L47; selected@L54; nonce@L56; resources@L57; executable@L60; ui@L67; log@L71; env@L76; exited@L93; origin@L102; ready@L104; attempt@L105; response@L107; health@L110; isolated@L124; allowed@L132; window@L140; stopped@L220; response@L226; stopping@L237; outcome@L239; window@L266
  * </code-map> */
 
 /** Jason Stys: native private-account launcher. No renderer secrets, privileged preload or host code execution. */
@@ -19,8 +19,24 @@ const { randomBytes } = require("node:crypto");
 const { join } = require("node:path");
 const net = require("node:net");
 const fs = require("node:fs");
+const { shutdownProof } = require("./shutdown-proof.cjs");
 let service, serviceOrigin, serviceToken;
 let closing = false;
+
+/** Emit only owned process/status milestones during disposable native acceptance; never token or response content. */
+function nativeStage(stage, details = {}) {
+  if (process.env.STUDIO_DESKTOP_TEST === "1") {
+    const record = JSON.stringify({ stage, ...details });
+    console.info("NATIVE_LAUNCHER_STAGE", record);
+    // The debugger may disconnect before asynchronous before-quit finishes.
+    // Preserve only the same value-free milestone in the disposable profile.
+    fs.appendFileSync(
+      join(app.getPath("userData"), "native-lifecycle.log"),
+      record + "\n",
+      { mode: 0o600 },
+    );
+  }
+}
 
 /** Reserve a local port; the owned Python service verifies binding and a random launch nonce. */
 async function port() {
@@ -73,12 +89,14 @@ async function launch() {
     { env, windowsHide: true, stdio: ["ignore", log, log] },
   );
   fs.closeSync(log);
+  nativeStage("service-spawned", { pid: service.pid });
   let exited = false;
   service.once("error", () => {
     exited = true;
   });
-  service.once("exit", () => {
+  service.once("exit", (code, signal) => {
     exited = true;
+    nativeStage("service-exited", { pid: service.pid, code, signal });
     if (!closing) app.quit();
   });
   const origin = `http://127.0.0.1:${selected}`;
@@ -199,10 +217,13 @@ app.on("before-quit", (event) => {
   if (closing || !service || service.exitCode !== null) return;
   event.preventDefault();
   closing = true;
-  const stopped = new Promise((resolve) => service.once("exit", resolve));
+  const stopped = new Promise((resolve) =>
+    service.once("exit", () => resolve("service-exited")),
+  );
   void (async () => {
     try {
-      await fetch(serviceOrigin + "/launcher/shutdown", {
+      nativeStage("shutdown-requested", { pid: service.pid });
+      const response = await fetch(serviceOrigin + "/launcher/shutdown", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + serviceToken,
@@ -212,11 +233,18 @@ app.on("before-quit", (event) => {
         body: "{}",
         signal: AbortSignal.timeout(2000),
       });
-      await Promise.race([
+      nativeStage("shutdown-http-response", { status: response.status });
+      const stopping = await shutdownProof(response);
+      nativeStage("shutdown-response", { status: response.status, stopping });
+      const outcome = await Promise.race([
         stopped,
-        new Promise((resolve) => setTimeout(resolve, 30000)),
+        new Promise((resolve) =>
+          setTimeout(() => resolve("existing-deadline"), 30000),
+        ),
       ]);
-    } catch {
+      nativeStage("shutdown-wait-complete", { outcome });
+    } catch (error) {
+      nativeStage("shutdown-transport-failed", { errorType: error.name });
       /* Parent monitor still requests graceful sealing if this launcher exits. */
     }
     app.exit(0);

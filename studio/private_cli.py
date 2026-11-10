@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: data_directory()@L26; parent_guard(server)@L39; main()@L60
-# variables: base@L31; base@L33; base@L35; pid@L41; started@L42; parent@L46; parser@L62; args@L67; bundle@L70; ui@L71; listener@L72; port@L75; app@L76; server@L83; thread@L96; deadline@L100; url@L105
-# parameters: server@L39
+# functions: data_directory()@L27; parent_guard(server)@L40; main()@L61; shutdown()@L97; run_server()@L102
+# variables: base@L32; base@L34; base@L36; pid@L42; started@L43; parent@L47; parser@L63; args@L68; bundle@L71; ui@L72; listener@L73; port@L76; app@L77; server@L84; thread@L111; deadline@L115; url@L120
+# parameters: server@L40
 # </code-map>
 
 """Jason Stys: token-free local account website and frozen service; never run submitted code on the host."""
@@ -20,6 +20,7 @@ from pathlib import Path
 import psutil
 import uvicorn
 
+from studio.native_lifecycle import native_stage
 from studio.private_api import create_private_app
 
 
@@ -92,8 +93,22 @@ def main():
             timeout_keep_alive=5,
         )
     )
-    app.state.shutdown = lambda: setattr(server, "should_exit", True)
-    thread = threading.Thread(target=server.run, kwargs={"sockets": [listener]}, daemon=False)
+
+    def shutdown():
+        """Record actual accepted launcher shutdown before requesting the existing graceful server stop."""
+        native_stage("shutdown-callback")
+        server.should_exit = True
+
+    def run_server():
+        """Separate HTTP/lifespan completion from the frozen process/bootloader exit."""
+        native_stage("server-thread-started")
+        try:
+            server.run(sockets=[listener])
+        finally:
+            native_stage("server-thread-stopped")
+
+    app.state.shutdown = shutdown
+    thread = threading.Thread(target=run_server, daemon=False)
     thread.start()
     threading.Thread(target=parent_guard, args=(server,), daemon=True).start()
     try:
@@ -115,6 +130,7 @@ def main():
     finally:
         server.should_exit = True
         listener.close()
+        native_stage("main-complete")
 
 
 if __name__ == "__main__":

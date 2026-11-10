@@ -23,7 +23,7 @@
     "test:private": "playwright test --config playwright.private.config.ts",
     "test:desktop": "playwright test --config playwright.desktop.config.ts",
     "setup:electron": "node node_modules/electron/install.js && node scripts/verify_electron.cjs",
-    "test:electron-readiness": "node --test tests/electron-readiness.test.cjs",
+    "test:electron-readiness": "node --test tests/electron-readiness.test.cjs tests/shutdown-proof.test.cjs",
     "test:worker-reports": "node --test tests/node-report.test.cjs"
   },
   "dependencies": {

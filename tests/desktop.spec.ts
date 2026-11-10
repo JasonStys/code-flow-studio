@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L24; executable@L30; app@L33; acceptedPackage@L46; resources@L53; file@L54; metadata@L87; page@L107; accountStartedAt@L110; accountRoutes@L111; route@L113; route@L125; browserErrors@L137; health@L141; state@L149; directory@L180; serviceLog@L183; statuses@L184
+ * variables: { verifyElectron }@L28; executable@L34; app@L37; launcherDirectory@L55; acceptedPackage@L58; resources@L65; file@L66; metadata@L99; page@L119; accountStartedAt@L122; accountRoutes@L123; route@L125; route@L137; browserErrors@L149; health@L153; state@L161; directory@L192; serviceLog@L195; statuses@L196; lifecycle@L261; records@L262; launcher@L263; descriptor@L265; size@L267; bytes@L268; used@L269; line@L276; file@L289; descriptor@L292; size@L294; bytes@L295; used@L296; line@L303; diagnostic@L319; records@L323; stage@L324; pid@L335
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -14,6 +14,10 @@ import {
   readFileSync,
   mkdirSync,
   writeFileSync,
+  openSync,
+  fstatSync,
+  readSync,
+  closeSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -43,6 +47,14 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
   app.process().once("exit", (code, signal) => {
     console.info("NATIVE_PROCESS_EXIT", JSON.stringify({ code, signal }));
   });
+  app.on("console", (message) => {
+    // Main-process instrumentation contains fixed milestones/statuses only; never forward arbitrary console content.
+    if (message.text().startsWith("NATIVE_LAUNCHER_STAGE "))
+      console.info(message.text());
+  });
+  const launcherDirectory = await app.evaluate(({ app }) =>
+    app.getPath("userData"),
+  );
   let acceptedPackage: { source: string; worker_sha256: string } | undefined;
   try {
     expect(await app.evaluate(({ app }) => app.getPath("userData"))).toContain(
@@ -246,8 +258,93 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     ).toEqual([]);
   } finally {
     console.info("NATIVE_JOURNEY_STAGE", "owned-close:start");
-    await app.close();
-    console.info("NATIVE_JOURNEY_STAGE", "owned-close:complete");
+    const lifecycle = () => {
+      const records: { stage: string; pid: number; parent_pid: number }[] = [];
+      const launcher = join(launcherDirectory, "native-lifecycle.log");
+      if (existsSync(launcher)) {
+        const descriptor = openSync(launcher, "r");
+        try {
+          const size = fstatSync(descriptor).size;
+          const bytes = Buffer.alloc(Math.min(size, 65536));
+          const used = readSync(
+            descriptor,
+            bytes,
+            0,
+            bytes.length,
+            Math.max(0, size - bytes.length),
+          );
+          for (const line of bytes
+            .subarray(0, used)
+            .toString("utf8")
+            .split(/\r?\n/)
+            .filter(Boolean))
+            console.info(
+              "NATIVE_LAUNCHER_RECEIPT",
+              JSON.stringify(JSON.parse(line)),
+            );
+        } finally {
+          closeSync(descriptor);
+        }
+      }
+      const file = join(launcherDirectory, "service.log");
+      if (existsSync(file)) {
+        // Bound even the owned log read; emit only marked identity/milestone records, never service messages or private data.
+        const descriptor = openSync(file, "r");
+        try {
+          const size = fstatSync(descriptor).size;
+          const bytes = Buffer.alloc(Math.min(size, 65536));
+          const used = readSync(
+            descriptor,
+            bytes,
+            0,
+            bytes.length,
+            Math.max(0, size - bytes.length),
+          );
+          for (const line of bytes
+            .subarray(0, used)
+            .toString("utf8")
+            .split(/\r?\n/))
+            if (line.startsWith("NATIVE_SERVICE_STAGE ")) {
+              console.info(line);
+              records.push(
+                JSON.parse(line.slice("NATIVE_SERVICE_STAGE ".length)),
+              );
+            }
+        } finally {
+          closeSync(descriptor);
+        }
+      }
+      return records;
+    };
+    const diagnostic = setTimeout(lifecycle, 10000);
+    try {
+      await app.close();
+      console.info("NATIVE_JOURNEY_STAGE", "owned-close:complete");
+      const records = lifecycle();
+      for (const stage of [
+        "workspace-close-complete",
+        "lifespan-close-complete",
+        "server-thread-stopped",
+        "main-complete",
+      ])
+        expect(
+          records.some((record) => record.stage === stage),
+          `Actual frozen service milestone: ${stage}`,
+        ).toBe(true);
+      // Signal zero observes identity existence without sending a termination signal or touching unrelated processes.
+      for (const pid of new Set(
+        records.flatMap((record) => [record.pid, record.parent_pid]),
+      )) {
+        expect(Number.isSafeInteger(pid) && pid > 0).toBe(true);
+        expect(
+          () => process.kill(pid, 0),
+          `Owned service/bootloader PID ${pid} must have exited`,
+        ).toThrow(/ESRCH/);
+      }
+    } finally {
+      clearTimeout(diagnostic);
+      lifecycle();
+    }
   }
   if (acceptedPackage) {
     // Generated proof contains source/package identity only; no profile, alias, source text or account key.
