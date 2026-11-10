@@ -1986,16 +1986,16 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 |---|---|---|
 | variable | `{ verifyElectron }` | 17 |
 | variable | `executable` | 23 |
-| variable | `app` | 25 |
-| variable | `resources` | 40 |
-| variable | `file` | 41 |
-| variable | `page` | 65 |
-| variable | `browserErrors` | 66 |
-| variable | `health` | 70 |
-| variable | `state` | 76 |
-| variable | `directory` | 91 |
-| variable | `serviceLog` | 94 |
-| variable | `statuses` | 95 |
+| variable | `app` | 26 |
+| variable | `resources` | 45 |
+| variable | `file` | 46 |
+| variable | `page` | 70 |
+| variable | `browserErrors` | 73 |
+| variable | `health` | 77 |
+| variable | `state` | 85 |
+| variable | `directory` | 100 |
+| variable | `serviceLog` | 103 |
+| variable | `statuses` | 104 |
 
 ## tests/electron-readiness.test.cjs
 
