@@ -23,10 +23,10 @@ from studio.execution import IMAGE
 @pytest.mark.parametrize(
     "name",
     [
-        "Code Flow Studio Setup 0.4.0.exe",
-        "Code Flow Studio-0.4.0-arm64.dmg",
-        "Code Flow Studio-0.4.0.AppImage",
-        "CodeFlowStudio-0.4.0-windows-x64.zip",
+        "Code Flow Studio Setup 0.4.1.exe",
+        "Code Flow Studio-0.4.1-arm64.dmg",
+        "Code Flow Studio-0.4.1.AppImage",
+        "CodeFlowStudio-0.4.1-windows-x64.zip",
     ],
 )
 def test_checksum_download_filename(tmp_path, name):
@@ -54,5 +54,5 @@ def test_product_and_worker_release_versions_remain_coherent():
             assert data["packages"][""]["version"] == __version__
     assert IMAGE == f"code-flow-worker:{__version__}"
     assert IMAGE in (root / ".github/workflows/validate.yml").read_text()
-    assert f"/ v{'.'.join(__version__.split('.')[:2])}" in (root / "ui/App.tsx").read_text()
+    assert f"/ v{__version__}" in (root / "ui/App.tsx").read_text()
     assert (root / f"docs/releases/v{__version__}.md").is_file()

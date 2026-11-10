@@ -7,7 +7,7 @@ By Jason Stys. Version 0.3 adds native evidence to every existing execution adap
 Rebuild the reviewed worker on an **already working, authorized** local Docker engine:
 
 ```sh
-docker build -t code-flow-worker:0.4.0 runner
+docker build -t code-flow-worker:0.4.1 runner
 ```
 
 The new image tag prevents silently reusing the old Python-only coverage worker. No Docker repair, privileged container, host execution fallback, additional network or host filesystem access is introduced. Installed UI packages include the worker sources and locked tool manifest, not an installed Docker engine or container image.

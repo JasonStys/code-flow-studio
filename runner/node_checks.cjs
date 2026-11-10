@@ -1,8 +1,8 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * functions: reportJson(file)@L21; main()@L27
- * variables: fs@L12; path@L13; { fileURLToPath }@L14; toolRequire@L15; { Linter }@L16; tsParser@L17; tsPlugin@L18; v8toIstanbul@L19; [mode, input, output, directory]@L29; project@L30; typed@L31; files@L32; linter@L34; findings@L35; file@L36; config@L37; item@L43; collected@L53; name@L54; report@L56; script@L57; scriptPath@L59; base@L60; original@L61; expectedPath@L62; source@L64; sources@L65; map@L67; converter@L76; coverage@L79; lines@L80; [id, statement]@L81; line@L82
+ * functions: reportJson(file)@L17; main()@L40
+ * variables: fs@L12; path@L13; { fileURLToPath }@L14; MAX_REPORT_BYTES@L15; descriptor@L19; status@L21; chunks@L24; size@L25; content@L27; count@L28; toolRequire@L42; { Linter }@L43; tsParser@L44; tsPlugin@L45; v8toIstanbul@L46; [mode, input, output, directory]@L47; project@L48; typed@L49; files@L50; linter@L52; findings@L53; file@L54; config@L55; item@L61; collected@L71; name@L72; report@L74; script@L75; scriptPath@L77; base@L78; original@L79; expectedPath@L80; source@L82; sources@L83; map@L85; converter@L94; coverage@L97; lines@L98; [id, statement]@L99; line@L100
  * </code-map> */
 
 /** Jason Stys: fixed ESLint and V8-to-Istanbul bridge; never import a target module/config/plugin.
@@ -12,20 +12,38 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { fileURLToPath } = require("node:url");
-const toolRequire = require("node:module").createRequire("/opt/tools/package.json");
-const { Linter } = toolRequire("eslint");
-const tsParser = toolRequire("@typescript-eslint/parser");
-const tsPlugin = toolRequire("@typescript-eslint/eslint-plugin");
-const v8toIstanbul = toolRequire("v8-to-istanbul");
+const MAX_REPORT_BYTES = 8 * 1024 * 1024;
 
 function reportJson(file) {
-  /** Bound native V8/job/report input before parsing; no tool-reported external paths are followed. */
-  if (fs.statSync(file).size > 8 * 1024 * 1024) throw Error("Native JSON report exceeds eight MiB");
-  return JSON.parse(fs.readFileSync(file, "utf8"));
+  /** Open once, reject non-regular files and cap actual descriptor bytes even if a writer grows/replaces its path. */
+  const descriptor = fs.openSync(file, fs.constants.O_RDONLY | (fs.constants.O_NONBLOCK || 0) | (fs.constants.O_NOFOLLOW || 0));
+  try {
+    const status = fs.fstatSync(descriptor);
+    if (!status.isFile()) throw Error("Native JSON report must be a regular file");
+    if (status.size > MAX_REPORT_BYTES) throw Error("Native JSON report exceeds eight MiB");
+    const chunks = [];
+    let size = 0;
+    while (size <= MAX_REPORT_BYTES) {
+      const content = Buffer.alloc(Math.min(64 * 1024, MAX_REPORT_BYTES + 1 - size));
+      const count = fs.readSync(descriptor, content, 0, content.length, null);
+      if (count === 0) break;
+      size += count;
+      if (size > MAX_REPORT_BYTES) throw Error("Native JSON report exceeds eight MiB");
+      chunks.push(content.subarray(0, count));
+    }
+    return JSON.parse(Buffer.concat(chunks, size).toString("utf8"));
+  } finally {
+    fs.closeSync(descriptor);
+  }
 }
 
 async function main() {
   /** Inspect original source or translate native V8 ranges; only supplied paths may enter reports. */
+  const toolRequire = require("node:module").createRequire("/opt/tools/package.json");
+  const { Linter } = toolRequire("eslint");
+  const tsParser = toolRequire("@typescript-eslint/parser");
+  const tsPlugin = toolRequire("@typescript-eslint/eslint-plugin");
+  const v8toIstanbul = toolRequire("v8-to-istanbul");
   const [mode, input, output, directory] = process.argv.slice(2);
   const project = reportJson(input);
   const typed = project.language === "typescript";
@@ -88,4 +106,5 @@ async function main() {
   }
   fs.writeFileSync(output, JSON.stringify(Object.fromEntries(collected)));
 }
-main().catch(error => { console.error(error.message); process.exitCode = 2; });
+module.exports = { reportJson };
+if (require.main === module) main().catch(error => { console.error(error.message); process.exitCode = 2; });
