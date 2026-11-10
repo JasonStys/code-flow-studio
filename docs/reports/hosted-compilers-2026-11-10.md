@@ -6,9 +6,28 @@ as Docker running on the owner's PC.
 
 ## Status and source identities
 
-The realistic examples and evidence validators have been added. Hosted execution
-results are pending the workflow run and will be recorded here after inspection.
+The first [hosted compiler run](https://github.com/JasonStys/code-flow-studio/actions/runs/42869521158)
+executed all twelve realistic projects in both source lanes. Every language had
+six approved cases passed and zero failed, both through the broker and the real
+authenticated account API. Its overall acceptance failed because the new
+validator made incorrect coverage assumptions; these failures remain visible.
+The corrected full acceptance and published-binary probe are awaiting a fresh run.
 Local evidence-validator tests are not compiler execution evidence.
+
+The first run identified three validation-contract issues: Python's module
+docstring trace event differs from executable-statement counts; PHP can report
+the empty terminal EOF line; Coverlet wraps an approved C# exit 2 as collector
+exit 1, which correctly leaves coverage partial. The correction preserves tool
+semantics and the exact original source/oracles, and rejects unexplained partial
+or truncated results. The [tool-specific limits](../compiler-execution.md#tool-specific-coverage-completion)
+describe these explicitly. The frozen-service probe also had a report-schema
+assumption corrected against the actual SQLite `Store.timeline` dictionary;
+its tests now use the real store instead of a mirrored mock schema.
+
+There are 59 passing focused local evidence/protocol regressions, including replay
+of four actual first-run reports and negative controls for altered result/export
+identity. No change to an installed runtime, worker implementation, language
+example or approved oracle was needed for these validation corrections.
 
 The immutable published baseline is
 [`eb9b1cd0c3e3fd1e70e397edeffb059073464f74`](https://github.com/JasonStys/code-flow-studio/tree/eb9b1cd0c3e3fd1e70e397edeffb059073464f74).

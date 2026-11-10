@@ -1,0 +1,1440 @@
+{
+  "schema": 1,
+  "run_id": 42869521158,
+  "source": "eb9b1cd0c3e3fd1e70e397edeffb059073464f74",
+  "scope": "Observed synthetic reports from the initial hosted run, including legitimate partial coverage; replay tests are not live execution.",
+  "reports": [
+    {
+      "language": "python",
+      "kind": "positive",
+      "acceptance": "failed",
+      "project": {
+        "title": "Practical python standard-library CLI validation",
+        "language": "python",
+        "entry": "main.py",
+        "files": [
+          {
+            "name": "main.py",
+            "content": "\"\"\"Summarize at most 64 comma-separated, bounded integer telemetry samples.\"\"\"\nimport sys\n\ndef summarize(text):\n    \"\"\"Return count/sum/min/max; reject malformed or out-of-range samples.\"\"\"\n    if not text.strip():\n        return \"0|0|NA|NA\"\n    values = [int(part.strip()) for part in text.strip().split(\",\")]\n    if len(values) > 64 or any(value < -1000 or value > 1000 for value in values):\n        raise ValueError(\"Invalid telemetry range\")\n    return f\"{len(values)}|{sum(values)}|{min(values)}|{max(values)}\"\n\ntry:\n    print(summarize(sys.stdin.read()))\nexcept ValueError:\n    raise SystemExit(2) from None\n",
+            "encoding": "text"
+          }
+        ],
+        "cases": [
+          {
+            "name": "telemetry-window",
+            "stdin": "20,30,10\n",
+            "stdout": "3|60|10|30",
+            "exit_code": 0
+          },
+          {
+            "name": "zero-readings",
+            "stdin": "0,0\n",
+            "stdout": "2|0|0|0",
+            "exit_code": 0
+          },
+          {
+            "name": "signed-readings",
+            "stdin": "-5,5\n",
+            "stdout": "2|0|-5|5",
+            "exit_code": 0
+          },
+          {
+            "name": "empty-window",
+            "stdin": "",
+            "stdout": "0|0|NA|NA",
+            "exit_code": 0
+          },
+          {
+            "name": "range-boundaries",
+            "stdin": "-1000,1000\n",
+            "stdout": "2|0|-1000|1000",
+            "exit_code": 0
+          },
+          {
+            "name": "malformed-reading",
+            "stdin": "12,bad\n",
+            "stdout": "",
+            "exit_code": 2
+          }
+        ],
+        "requirements": "Synthetic bounded CLI demonstration. Preserve the approved stdout and exit-code oracles, reject invalid input explicitly, and use no network or external packages.",
+        "tests": "",
+        "fuzz_methods": [
+          "boundary",
+          "mutation"
+        ],
+        "fuzz_cases": 0,
+        "seed": 42,
+        "benchmark_repeats": 1,
+        "mutation": false,
+        "fuzz_engine": "blackbox",
+        "fuzz_harness": "",
+        "priorities": {
+          "runtime": 0.4,
+          "memory": 0.2,
+          "readability": 0.25,
+          "footprint": 0.15,
+          "scrutiny": "strict"
+        }
+      },
+      "result": {
+        "tool_status": "completed",
+        "compilation": {
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "timeout": false,
+          "ms": 114.19804199999817,
+          "output_truncated": false
+        },
+        "checks": {
+          "passed": 6,
+          "failed": 0,
+          "cases": [
+            {
+              "name": "telemetry-window",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "3|60|10|30\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 15.847777000004726,
+              "output_truncated": false
+            },
+            {
+              "name": "zero-readings",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "2|0|0|0\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 15.694094999986419,
+              "output_truncated": false
+            },
+            {
+              "name": "signed-readings",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "2|0|-5|5\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 15.70573300000433,
+              "output_truncated": false
+            },
+            {
+              "name": "empty-window",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "0|0|NA|NA\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 15.704260999996222,
+              "output_truncated": false
+            },
+            {
+              "name": "range-boundaries",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "2|0|-1000|1000\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 15.74163699999076,
+              "output_truncated": false
+            },
+            {
+              "name": "malformed-reading",
+              "passed": true,
+              "exit_code": 2,
+              "stdout": "",
+              "stderr": "",
+              "timeout": false,
+              "ms": 15.763164999981427,
+              "output_truncated": false
+            }
+          ]
+        },
+        "oracle_hash": "86148a99da058d72efdc9f46a73480644e16525c78dd8def5b64be36b25a837c",
+        "environment": {
+          "worker": "polyglot-v3-language-evidence",
+          "python": "3.12.12",
+          "language": "python",
+          "machine": "x86_64",
+          "benchmark_repeats": 1
+        },
+        "generated_tests": {
+          "status": "not-provided"
+        },
+        "benchmark": {
+          "samples_ms": [
+            15.75225300001648,
+            15.668045999973401,
+            15.69523700001696,
+            15.691530999987435,
+            15.757335000017747,
+            15.914937000019336
+          ],
+          "median_ms": 15.72374500001672,
+          "max_rss_kib": 24068,
+          "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+        },
+        "coverage": {
+          "status": "measured",
+          "entry": {
+            "covered_lines": 11,
+            "num_statements": 12,
+            "percent_covered": 87.5,
+            "percent_covered_display": "88",
+            "missing_lines": 1,
+            "excluded_lines": 0,
+            "num_branches": 4,
+            "num_partial_branches": 1,
+            "covered_branches": 3,
+            "missing_branches": 1
+          },
+          "files": {
+            "main.py": {
+              "status": "measured",
+              "summary": {
+                "covered_lines": 11,
+                "num_statements": 12,
+                "percent_covered": 87.5,
+                "percent_covered_display": "88",
+                "missing_lines": 1,
+                "excluded_lines": 0,
+                "num_branches": 4,
+                "num_partial_branches": 1,
+                "covered_branches": 3,
+                "missing_branches": 1
+              },
+              "source_sha256": "661139d62e78982c04de13dc3bf66d6ab7366e52b573ad2f21c709ae42d46a95",
+              "truncated": false,
+              "missing_lines": [
+                10
+              ],
+              "missing_branches": [
+                [
+                  9,
+                  10
+                ]
+              ],
+              "executed_lines": [
+                1,
+                2,
+                4,
+                6,
+                7,
+                8,
+                9,
+                11,
+                13,
+                14,
+                15,
+                16
+              ],
+              "excluded_lines": []
+            }
+          },
+          "locations_truncated": false,
+          "scope": "Supplied Python sources under approved CLI cases only, not generated pytest tests; line/branch, not condition/MC/DC. At most 20,000 location entries, missing before executed; negative branch destinations denote function exits."
+        },
+        "mutation": {
+          "status": "not-selected"
+        },
+        "fuzz": {
+          "status": "completed",
+          "engine": "blackbox",
+          "executed": 0,
+          "seed": 42,
+          "findings": [],
+          "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+          "blocked_methods": [],
+          "coverage_guided": false
+        },
+        "diagnostics": [],
+        "diagnostics_truncated": false,
+        "unlocated_failures": [],
+        "location_caveat": "Tool-reported references, not proven root causes. Output may be incomplete, misleading or truncated; unrecognized paths remain in raw logs.",
+        "static": {
+          "sha256": "661139d62e78982c04de13dc3bf66d6ab7366e52b573ad2f21c709ae42d46a95",
+          "source_bytes": 614,
+          "lines": 16,
+          "long_lines": 0,
+          "function_count": 1,
+          "branch_nodes": 3,
+          "findings": [],
+          "files": {
+            "main.py": {
+              "source_sha256": "661139d62e78982c04de13dc3bf66d6ab7366e52b573ad2f21c709ae42d46a95",
+              "parsed": true,
+              "function_count": 1,
+              "branch_nodes": 3
+            }
+          },
+          "findings_truncated": false,
+          "caveat": "Python syntax and conservative unused/unreachable candidates; other text uses risk patterns only. Unused is not uncovered. No inferred Big-O, complete bug detection or security certification."
+        },
+        "isolation": {
+          "network": "none",
+          "memory_mib": 1024,
+          "cpus": 2,
+          "pids": 128,
+          "read_only": true
+        }
+      },
+      "error": "Coverage counts disagree with retained locations"
+    },
+    {
+      "language": "csharp",
+      "kind": "positive",
+      "acceptance": "failed",
+      "project": {
+        "title": "Practical csharp standard-library CLI validation",
+        "language": "csharp",
+        "entry": "Program.cs",
+        "files": [
+          {
+            "name": "Program.cs",
+            "content": "// Decimal invoice; invariant formatting and explicit half-away-from-zero currency rounding.\nusing System.Globalization;\nvar fields = Console.In.ReadToEnd().Split((char[])null, StringSplitOptions.RemoveEmptyEntries);\nvar culture = CultureInfo.InvariantCulture;\nif (fields.Length != 3 ||\n    !int.TryParse(fields[0], NumberStyles.None, culture, out var quantity) ||\n    !decimal.TryParse(fields[1], NumberStyles.AllowDecimalPoint, culture, out var unitPrice) ||\n    !decimal.TryParse(fields[2], NumberStyles.AllowDecimalPoint, culture, out var taxPercent) ||\n    quantity > 1000 || unitPrice > 1000000m || taxPercent > 100m) return 2;\nvar subtotal = decimal.Round(quantity * unitPrice, 2, MidpointRounding.AwayFromZero);\nvar tax = decimal.Round(subtotal * taxPercent / 100m, 2, MidpointRounding.AwayFromZero);\nConsole.WriteLine(subtotal.ToString(\"F2\", culture) + \"|\" + tax.ToString(\"F2\", culture) +\n                  \"|\" + (subtotal + tax).ToString(\"F2\", culture));\nreturn 0;\n",
+            "encoding": "text"
+          }
+        ],
+        "cases": [
+          {
+            "name": "taxed-invoice",
+            "stdin": "3 19.99 8.25\n",
+            "stdout": "59.97|4.95|64.92",
+            "exit_code": 0
+          },
+          {
+            "name": "zero-quantity",
+            "stdin": "0 19.99 8.25\n",
+            "stdout": "0.00|0.00|0.00",
+            "exit_code": 0
+          },
+          {
+            "name": "half-cent-tax",
+            "stdin": "1 0.05 10\n",
+            "stdout": "0.05|0.01|0.06",
+            "exit_code": 0
+          },
+          {
+            "name": "tax-free-invoice",
+            "stdin": "2 7.50 0\n",
+            "stdout": "15.00|0.00|15.00",
+            "exit_code": 0
+          },
+          {
+            "name": "bounded-maximum",
+            "stdin": "1 1000000 100\n",
+            "stdout": "1000000.00|1000000.00|2000000.00",
+            "exit_code": 0
+          },
+          {
+            "name": "malformed-price",
+            "stdin": "1 money 8\n",
+            "stdout": "",
+            "exit_code": 2
+          }
+        ],
+        "requirements": "Synthetic bounded CLI demonstration. Preserve the approved stdout and exit-code oracles, reject invalid input explicitly, and use no network or external packages.",
+        "tests": "",
+        "fuzz_methods": [
+          "boundary",
+          "mutation"
+        ],
+        "fuzz_cases": 0,
+        "seed": 42,
+        "benchmark_repeats": 1,
+        "mutation": false,
+        "fuzz_engine": "blackbox",
+        "fuzz_harness": "",
+        "priorities": {
+          "runtime": 0.4,
+          "memory": 0.2,
+          "readability": 0.25,
+          "footprint": 0.15,
+          "scrutiny": "strict"
+        }
+      },
+      "result": {
+        "tool_status": "completed",
+        "compilation": {
+          "exit_code": 0,
+          "stdout": "\nWelcome to .NET 8.0!\r\n---------------------\r\nSDK Version: 8.0.427\n\n----------------\r\nInstalled an ASP.NET Core HTTPS development certificate.\r\nTo trust the certificate, view the instructions: https://aka.ms/dotnet-https-linux\n\n----------------\r\nWrite your first app: https://aka.ms/dotnet-hello-world\r\nFind out what's new: https://aka.ms/dotnet-whats-new\r\nExplore documentation: https://aka.ms/dotnet-docs\r\nReport issues and find source on GitHub: https://github.com/dotnet/core\r\nUse 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli\r\n--------------------------------------------------------------------------------------\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.16\n",
+          "stderr": "",
+          "timeout": false,
+          "ms": 2770.765936999993,
+          "output_truncated": false
+        },
+        "checks": {
+          "passed": 6,
+          "failed": 0,
+          "cases": [
+            {
+              "name": "taxed-invoice",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "59.97|4.95|64.92\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 64.18759599998225,
+              "output_truncated": false
+            },
+            {
+              "name": "zero-quantity",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "0.00|0.00|0.00\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 64.07732599998894,
+              "output_truncated": false
+            },
+            {
+              "name": "half-cent-tax",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "0.05|0.01|0.06\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 64.07525200000919,
+              "output_truncated": false
+            },
+            {
+              "name": "tax-free-invoice",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "15.00|0.00|15.00\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 64.0945810000062,
+              "output_truncated": false
+            },
+            {
+              "name": "bounded-maximum",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "1000000.00|1000000.00|2000000.00\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 64.11351500000251,
+              "output_truncated": false
+            },
+            {
+              "name": "malformed-price",
+              "passed": true,
+              "exit_code": 2,
+              "stdout": "",
+              "stderr": "",
+              "timeout": false,
+              "ms": 64.1329990000088,
+              "output_truncated": false
+            }
+          ]
+        },
+        "oracle_hash": "212c8e6419ec44ccd921ed1e7b2900b2408ba3bfc805993afa71db6f1bef062c",
+        "environment": {
+          "worker": "polyglot-v3-language-evidence",
+          "python": "3.12.12",
+          "language": "csharp",
+          "machine": "x86_64",
+          "benchmark_repeats": 1
+        },
+        "generated_tests": {
+          "status": "not-provided"
+        },
+        "benchmark": {
+          "samples_ms": [
+            64.12505700001248,
+            64.10751100000311,
+            64.10314299998277,
+            64.05358999998612,
+            64.15890399998148,
+            64.11448100001849
+          ],
+          "median_ms": 64.1109960000108,
+          "max_rss_kib": 171844,
+          "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+        },
+        "coverage": {
+          "status": "partial",
+          "tool": "Coverlet 8.0.1",
+          "metric": "portable-pdb-sequence-point-line",
+          "files": {
+            "Program.cs": {
+              "status": "measured",
+              "metric": "portable-pdb-sequence-point-line",
+              "summary": {
+                "covered_lines": 12,
+                "num_statements": 12,
+                "missing_lines": 0,
+                "percent_covered": 100.0
+              },
+              "source_sha256": "6d63cfb4c471b31a81d2eb920411a5778b95dea0c5763c129492eb5c520708c5",
+              "missing_lines": [],
+              "executed_lines": [
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14
+              ],
+              "excluded_lines": [],
+              "missing_branches": [],
+              "branch_points": [
+                {
+                  "line": 5,
+                  "branch_id": "28",
+                  "case_index": 0,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "42",
+                  "case_index": 0,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "57",
+                  "case_index": 0,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "72",
+                  "case_index": 0,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "80",
+                  "case_index": 0,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "98",
+                  "case_index": 0,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "121",
+                  "case_index": 0,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "28",
+                  "case_index": 1,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "42",
+                  "case_index": 1,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "57",
+                  "case_index": 1,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "72",
+                  "case_index": 1,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "80",
+                  "case_index": 1,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "98",
+                  "case_index": 1,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "121",
+                  "case_index": 1,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "28",
+                  "case_index": 2,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "42",
+                  "case_index": 2,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "57",
+                  "case_index": 2,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "72",
+                  "case_index": 2,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "80",
+                  "case_index": 2,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "98",
+                  "case_index": 2,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "121",
+                  "case_index": 2,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "28",
+                  "case_index": 3,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "42",
+                  "case_index": 3,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "57",
+                  "case_index": 3,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "72",
+                  "case_index": 3,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "80",
+                  "case_index": 3,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "98",
+                  "case_index": 3,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "121",
+                  "case_index": 3,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "28",
+                  "case_index": 4,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "42",
+                  "case_index": 4,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "57",
+                  "case_index": 4,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "72",
+                  "case_index": 4,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "80",
+                  "case_index": 4,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "98",
+                  "case_index": 4,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "121",
+                  "case_index": 4,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "28",
+                  "case_index": 5,
+                  "coverage": "100%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "42",
+                  "case_index": 5,
+                  "coverage": "100%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "57",
+                  "case_index": 5,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "72",
+                  "case_index": 5,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "80",
+                  "case_index": 5,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "98",
+                  "case_index": 5,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                },
+                {
+                  "line": 5,
+                  "branch_id": "121",
+                  "case_index": 5,
+                  "coverage": "50%",
+                  "kind": "coverlet-condition"
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "entry": {
+            "covered_lines": 12,
+            "num_statements": 12,
+            "missing_lines": 0,
+            "percent_covered": 100.0
+          },
+          "cases": [
+            {
+              "name": "taxed-invoice",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false,
+              "collector_messages": "59.97|4.95|64.92\n\nCalculating coverage result...\n  Generating report '/tmp/project/.analysis/case-0.json'\n+--------+------+--------+--------+\n| Module | Line | Branch | Method |\n+--------+------+--------+--------+\n| App    | 100% | 50%    | 100%   |\n+--------+------+--------+--------+\n\n+---------+------+--------+--------+\n|         | Line | Branch | Method |\n+---------+------+--------+--------+\n| Total   | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n| Average | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n\n"
+            },
+            {
+              "name": "zero-quantity",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false,
+              "collector_messages": "0.00|0.00|0.00\n\nCalculating coverage result...\n  Generating report '/tmp/project/.analysis/case-1.json'\n+--------+------+--------+--------+\n| Module | Line | Branch | Method |\n+--------+------+--------+--------+\n| App    | 100% | 50%    | 100%   |\n+--------+------+--------+--------+\n\n+---------+------+--------+--------+\n|         | Line | Branch | Method |\n+---------+------+--------+--------+\n| Total   | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n| Average | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n\n"
+            },
+            {
+              "name": "half-cent-tax",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false,
+              "collector_messages": "0.05|0.01|0.06\n\nCalculating coverage result...\n  Generating report '/tmp/project/.analysis/case-2.json'\n+--------+------+--------+--------+\n| Module | Line | Branch | Method |\n+--------+------+--------+--------+\n| App    | 100% | 50%    | 100%   |\n+--------+------+--------+--------+\n\n+---------+------+--------+--------+\n|         | Line | Branch | Method |\n+---------+------+--------+--------+\n| Total   | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n| Average | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n\n"
+            },
+            {
+              "name": "tax-free-invoice",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false,
+              "collector_messages": "15.00|0.00|15.00\n\nCalculating coverage result...\n  Generating report '/tmp/project/.analysis/case-3.json'\n+--------+------+--------+--------+\n| Module | Line | Branch | Method |\n+--------+------+--------+--------+\n| App    | 100% | 50%    | 100%   |\n+--------+------+--------+--------+\n\n+---------+------+--------+--------+\n|         | Line | Branch | Method |\n+---------+------+--------+--------+\n| Total   | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n| Average | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n\n"
+            },
+            {
+              "name": "bounded-maximum",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false,
+              "collector_messages": "1000000.00|1000000.00|2000000.00\n\nCalculating coverage result...\n  Generating report '/tmp/project/.analysis/case-4.json'\n+--------+------+--------+--------+\n| Module | Line | Branch | Method |\n+--------+------+--------+--------+\n| App    | 100% | 50%    | 100%   |\n+--------+------+--------+--------+\n\n+---------+------+--------+--------+\n|         | Line | Branch | Method |\n+---------+------+--------+--------+\n| Total   | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n| Average | 100% | 50%    | 100%   |\n+---------+------+--------+--------+\n\n"
+            },
+            {
+              "name": "malformed-price",
+              "exit_code": 1,
+              "expected_exit_code": 2,
+              "timeout": false,
+              "collector_messages": "\nCalculating coverage result...\n  Generating report '/tmp/project/.analysis/case-5.json'\n+--------+--------+--------+--------+\n| Module | Line   | Branch | Method |\n+--------+--------+--------+--------+\n| App    | 58.33% | 64.28% | 100%   |\n+--------+--------+--------+--------+\n\n+---------+--------+--------+--------+\n|         | Line   | Branch | Method |\n+---------+--------+--------+--------+\n| Total   | 58.33% | 64.28% | 100%   |\n+---------+--------+--------+--------+\n| Average | 58.33% | 64.28% | 100%   |\n+---------+--------+--------+--------+\n\n"
+            }
+          ],
+          "requested_cases": 6,
+          "locations_truncated": false,
+          "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+        },
+        "unused": {
+          "status": "completed",
+          "reason": null,
+          "tool": "C# compiler unused locals/private fields",
+          "process": {
+            "exit_code": 0,
+            "stdout": "\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:00.84\n",
+            "stderr": "",
+            "timeout": false,
+            "ms": 1016.2306930000113,
+            "output_truncated": false
+          },
+          "findings": [],
+          "findings_truncated": false,
+          "scope": "Review-only language-native unused candidates; public APIs, side effects and dynamic references require human review."
+        },
+        "mutation": {
+          "status": "not-selected"
+        },
+        "fuzz": {
+          "status": "completed",
+          "engine": "blackbox",
+          "executed": 0,
+          "seed": 42,
+          "findings": [],
+          "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+          "blocked_methods": [],
+          "coverage_guided": false
+        },
+        "diagnostics": [],
+        "diagnostics_truncated": false,
+        "unlocated_failures": [],
+        "location_caveat": "Tool-reported references, not proven root causes. Output may be incomplete, misleading or truncated; unrecognized paths remain in raw logs.",
+        "static": {
+          "sha256": "6d63cfb4c471b31a81d2eb920411a5778b95dea0c5763c129492eb5c520708c5",
+          "source_bytes": 975,
+          "lines": 14,
+          "long_lines": 0,
+          "function_count": 0,
+          "branch_nodes": 0,
+          "findings": [],
+          "files": {
+            "Program.cs": {
+              "source_sha256": "6d63cfb4c471b31a81d2eb920411a5778b95dea0c5763c129492eb5c520708c5"
+            }
+          },
+          "findings_truncated": false,
+          "caveat": "Python syntax and conservative unused/unreachable candidates; other text uses risk patterns only. Unused is not uncovered. No inferred Big-O, complete bug detection or security certification."
+        },
+        "isolation": {
+          "network": "none",
+          "memory_mib": 1024,
+          "cpus": 2,
+          "pids": 128,
+          "read_only": true
+        }
+      },
+      "error": "Coverage was not measured"
+    },
+    {
+      "language": "php",
+      "kind": "positive",
+      "acceptance": "failed",
+      "project": {
+        "title": "Practical php standard-library CLI validation",
+        "language": "php",
+        "entry": "main.php",
+        "files": [
+          {
+            "name": "main.php",
+            "content": "<?php\n// Integer-cent quote: ten or more units receive a rounded five-percent discount.\n$fields = preg_split('/\\s+/', trim(stream_get_contents(STDIN)));\nif (count($fields) !== 3) { exit(2); }\nforeach ($fields as $field) {\n    if (!preg_match('/\\A[0-9]+\\z/', $field)) { exit(2); }\n}\n[$quantity, $unitCents, $shippingCents] = array_map('intval', $fields);\nif ($quantity > 1000 || $unitCents > 100000 || $shippingCents > 100000) { exit(2); }\n$subtotal = $quantity * $unitCents;\n$discount = $quantity >= 10 ? intdiv($subtotal * 5 + 50, 100) : 0;\n$total = $subtotal - $discount + ($quantity > 0 ? $shippingCents : 0);\necho $subtotal . '|' . $discount . '|' . $total . \"\\n\";\n",
+            "encoding": "text"
+          }
+        ],
+        "cases": [
+          {
+            "name": "ordinary-quote",
+            "stdin": "3 1200 500\n",
+            "stdout": "3600|0|4100",
+            "exit_code": 0
+          },
+          {
+            "name": "bulk-discount",
+            "stdin": "10 1000 500\n",
+            "stdout": "10000|500|10000",
+            "exit_code": 0
+          },
+          {
+            "name": "zero-order",
+            "stdin": "0 1000 500\n",
+            "stdout": "0|0|0",
+            "exit_code": 0
+          },
+          {
+            "name": "half-cent-discount",
+            "stdin": "10 1 0\n",
+            "stdout": "10|1|9",
+            "exit_code": 0
+          },
+          {
+            "name": "bounded-maximum",
+            "stdin": "1000 100000 100000\n",
+            "stdout": "100000000|5000000|95100000",
+            "exit_code": 0
+          },
+          {
+            "name": "malformed-price",
+            "stdin": "2 nope 1\n",
+            "stdout": "",
+            "exit_code": 2
+          }
+        ],
+        "requirements": "Synthetic bounded CLI demonstration. Preserve the approved stdout and exit-code oracles, reject invalid input explicitly, and use no network or external packages.",
+        "tests": "",
+        "fuzz_methods": [
+          "boundary",
+          "mutation"
+        ],
+        "fuzz_cases": 0,
+        "seed": 42,
+        "benchmark_repeats": 1,
+        "mutation": false,
+        "fuzz_engine": "blackbox",
+        "fuzz_harness": "",
+        "priorities": {
+          "runtime": 0.4,
+          "memory": 0.2,
+          "readability": 0.25,
+          "footprint": 0.15,
+          "scrutiny": "strict"
+        }
+      },
+      "result": {
+        "tool_status": "completed",
+        "compilation": {
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in main.php\n",
+          "stderr": "",
+          "timeout": false,
+          "ms": 32.08741299999929,
+          "output_truncated": false
+        },
+        "checks": {
+          "passed": 6,
+          "failed": 0,
+          "cases": [
+            {
+              "name": "ordinary-quote",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "3600|0|4100\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 31.925749000009773,
+              "output_truncated": false
+            },
+            {
+              "name": "bulk-discount",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "10000|500|10000\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 31.962915000008252,
+              "output_truncated": false
+            },
+            {
+              "name": "zero-order",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "0|0|0\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 31.916494999990164,
+              "output_truncated": false
+            },
+            {
+              "name": "half-cent-discount",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "10|1|9\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 31.922033000000738,
+              "output_truncated": false
+            },
+            {
+              "name": "bounded-maximum",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "100000000|5000000|95100000\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 31.91297000000759,
+              "output_truncated": false
+            },
+            {
+              "name": "malformed-price",
+              "passed": true,
+              "exit_code": 2,
+              "stdout": "",
+              "stderr": "",
+              "timeout": false,
+              "ms": 31.93240899997818,
+              "output_truncated": false
+            }
+          ]
+        },
+        "oracle_hash": "e6675841c9c281c8a8ebdabb069d189dba8989d43bbb56a09e9d608903f886ab",
+        "environment": {
+          "worker": "polyglot-v3-language-evidence",
+          "python": "3.12.12",
+          "language": "php",
+          "machine": "x86_64",
+          "benchmark_repeats": 1
+        },
+        "generated_tests": {
+          "status": "not-provided"
+        },
+        "benchmark": {
+          "samples_ms": [
+            31.945880000023408,
+            31.87698599998612,
+            31.94118199999707,
+            31.875693999978694,
+            31.906910999992988,
+            31.92115300001319
+          ],
+          "median_ms": 31.91403200000309,
+          "max_rss_kib": 24252,
+          "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+        },
+        "coverage": {
+          "status": "measured",
+          "tool": "PHP Xdebug",
+          "metric": "php-opcode-line",
+          "files": {
+            "main.php": {
+              "status": "measured",
+              "metric": "php-opcode-line",
+              "summary": {
+                "covered_lines": 11,
+                "num_statements": 11,
+                "missing_lines": 0,
+                "percent_covered": 100.0
+              },
+              "source_sha256": "4a32eb1188ca5630bdefdce166bbba6904981125c8a5b7c46c526e9115990c53",
+              "missing_lines": [],
+              "executed_lines": [
+                3,
+                4,
+                5,
+                6,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14
+              ],
+              "excluded_lines": [],
+              "missing_branches": [],
+              "branch_points": [],
+              "truncated": false
+            }
+          },
+          "entry": {
+            "covered_lines": 11,
+            "num_statements": 11,
+            "missing_lines": 0,
+            "percent_covered": 100.0
+          },
+          "cases": [
+            {
+              "name": "ordinary-quote",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false
+            },
+            {
+              "name": "bulk-discount",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false
+            },
+            {
+              "name": "zero-order",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false
+            },
+            {
+              "name": "half-cent-discount",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false
+            },
+            {
+              "name": "bounded-maximum",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false
+            },
+            {
+              "name": "malformed-price",
+              "exit_code": 2,
+              "expected_exit_code": 2,
+              "timeout": false
+            }
+          ],
+          "requested_cases": 6,
+          "locations_truncated": false,
+          "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+        },
+        "unused": {
+          "status": "completed",
+          "reason": null,
+          "tool": "PHPMD unusedcode",
+          "process": {
+            "exit_code": 0,
+            "stdout": "{\n    \"version\": \"3.0.0\",\n    \"package\": \"phpmd\",\n    \"timestamp\": \"2026-11-10T17:56:34+00:00\",\n    \"files\": []\n}\n",
+            "stderr": " 0/1 [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%\n 1/1 [\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593] 100%\n",
+            "timeout": false,
+            "ms": 114.11100300000498,
+            "output_truncated": false
+          },
+          "findings": [],
+          "findings_truncated": false,
+          "scope": "Review-only language-native unused candidates; public APIs, side effects and dynamic references require human review."
+        },
+        "mutation": {
+          "status": "not-selected"
+        },
+        "fuzz": {
+          "status": "completed",
+          "engine": "blackbox",
+          "executed": 0,
+          "seed": 42,
+          "findings": [],
+          "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+          "blocked_methods": [],
+          "coverage_guided": false
+        },
+        "diagnostics": [],
+        "diagnostics_truncated": false,
+        "unlocated_failures": [],
+        "location_caveat": "Tool-reported references, not proven root causes. Output may be incomplete, misleading or truncated; unrecognized paths remain in raw logs.",
+        "static": {
+          "sha256": "4a32eb1188ca5630bdefdce166bbba6904981125c8a5b7c46c526e9115990c53",
+          "source_bytes": 669,
+          "lines": 13,
+          "long_lines": 0,
+          "function_count": 0,
+          "branch_nodes": 0,
+          "findings": [],
+          "files": {
+            "main.php": {
+              "source_sha256": "4a32eb1188ca5630bdefdce166bbba6904981125c8a5b7c46c526e9115990c53"
+            }
+          },
+          "findings_truncated": false,
+          "caveat": "Python syntax and conservative unused/unreachable candidates; other text uses risk patterns only. Unused is not uncovered. No inferred Big-O, complete bug detection or security certification."
+        },
+        "isolation": {
+          "network": "none",
+          "memory_mib": 1024,
+          "cpus": 2,
+          "pids": 128,
+          "read_only": true
+        }
+      },
+      "error": "Coverage line out of range"
+    },
+    {
+      "language": "php",
+      "kind": "native-location",
+      "acceptance": "failed",
+      "project": {
+        "title": "php compiler contract",
+        "language": "php",
+        "entry": "main.php",
+        "files": [
+          {
+            "name": "main.php",
+            "content": "<?php\nfunction unused() {\n  return 7; // missed\n}\nfunction work() {\n  $leftover = 1;\n  echo \"4\\n\";\n}\nwork();\n",
+            "encoding": "text"
+          }
+        ],
+        "cases": [
+          {
+            "name": "known-path",
+            "stdin": "",
+            "stdout": "4",
+            "exit_code": 0
+          }
+        ],
+        "requirements": "",
+        "tests": "",
+        "fuzz_methods": [
+          "boundary",
+          "mutation"
+        ],
+        "fuzz_cases": 0,
+        "seed": 42,
+        "benchmark_repeats": 1,
+        "mutation": false,
+        "fuzz_engine": "blackbox",
+        "fuzz_harness": "",
+        "priorities": {
+          "runtime": 0.4,
+          "memory": 0.2,
+          "readability": 0.25,
+          "footprint": 0.15,
+          "scrutiny": "strict"
+        }
+      },
+      "result": {
+        "tool_status": "completed",
+        "compilation": {
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in main.php\n",
+          "stderr": "",
+          "timeout": false,
+          "ms": 32.125379000007115,
+          "output_truncated": false
+        },
+        "checks": {
+          "passed": 1,
+          "failed": 0,
+          "cases": [
+            {
+              "name": "known-path",
+              "passed": true,
+              "exit_code": 0,
+              "stdout": "4\n",
+              "stderr": "",
+              "timeout": false,
+              "ms": 31.917317999983652,
+              "output_truncated": false
+            }
+          ]
+        },
+        "oracle_hash": "090538fa46c40b5ad71fa9a7224e6b9014553ada1a2aa5f75e1505bbe39a8d66",
+        "environment": {
+          "worker": "polyglot-v3-language-evidence",
+          "python": "3.12.12",
+          "language": "php",
+          "machine": "x86_64",
+          "benchmark_repeats": 1
+        },
+        "generated_tests": {
+          "status": "not-provided"
+        },
+        "benchmark": {
+          "samples_ms": [
+            31.916445000007343
+          ],
+          "median_ms": 31.916445000007343,
+          "max_rss_kib": 23948,
+          "scope": "Process startup + workload; peak child RSS, not per-function memory. Exploratory measurements."
+        },
+        "coverage": {
+          "status": "measured",
+          "tool": "PHP Xdebug",
+          "metric": "php-opcode-line",
+          "files": {
+            "main.php": {
+              "status": "measured",
+              "metric": "php-opcode-line",
+              "summary": {
+                "covered_lines": 5,
+                "num_statements": 6,
+                "missing_lines": 1,
+                "percent_covered": 83.33333333333333
+              },
+              "source_sha256": "f667cc61a5706eec7b3f032c1c198311cbaefab35de661dad17c61cfc931c1a6",
+              "missing_lines": [
+                3
+              ],
+              "executed_lines": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ],
+              "excluded_lines": [],
+              "missing_branches": [],
+              "branch_points": [],
+              "truncated": false
+            }
+          },
+          "entry": {
+            "covered_lines": 5,
+            "num_statements": 6,
+            "missing_lines": 1,
+            "percent_covered": 83.33333333333333
+          },
+          "cases": [
+            {
+              "name": "known-path",
+              "exit_code": 0,
+              "expected_exit_code": 0,
+              "timeout": false
+            }
+          ],
+          "requested_cases": 1,
+          "locations_truncated": false,
+          "scope": "Instrumented approved CLI reruns only, separate from timing/RSS and generated pytest tests. Unknown/unloaded sources remain not-measured. Branch points retain tool IDs, not invented destination lines. Shared-worker interference remains possible."
+        },
+        "unused": {
+          "status": "completed",
+          "reason": null,
+          "tool": "PHPMD unusedcode",
+          "process": {
+            "exit_code": 2,
+            "stdout": "{\n    \"version\": \"3.0.0\",\n    \"package\": \"phpmd\",\n    \"timestamp\": \"2026-11-10T17:57:04+00:00\",\n    \"files\": [\n        {\n            \"file\": \"\\/tmp\\/project\\/main.php\",\n            \"relativePath\": \"main.php\",\n            \"violations\": [\n                {\n                    \"beginLine\": 6,\n                    \"endLine\": 6,\n                    \"package\": null,\n                    \"function\": null,\n                    \"class\": null,\n                    \"method\": null,\n                    \"description\": \"Avoid unused local variables such as \\u0027$leftover\\u0027.\",\n                    \"rule\": \"UnusedLocalVariable\",\n                    \"ruleSet\": \"Unused Code Rules\",\n                    \"externalInfoUrl\": \"https:\\/\\/phpmd.org\\/rules\\/unusedcode.html#unusedlocalvariable\",\n                    \"priority\": 3\n                }\n            ]\n        }\n    ]\n}\n",
+            "stderr": " 0/1 [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%\n 1/1 [\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593\u2593] 100%\n",
+            "timeout": false,
+            "ms": 114.09855800002333,
+            "output_truncated": false
+          },
+          "findings": [
+            {
+              "file": "main.php",
+              "line": 6,
+              "column": null,
+              "code": "UnusedLocalVariable",
+              "message": "Avoid unused local variables such as '$leftover'.",
+              "severity": "review",
+              "origin": "native-unused",
+              "source_sha256": "f667cc61a5706eec7b3f032c1c198311cbaefab35de661dad17c61cfc931c1a6"
+            }
+          ],
+          "findings_truncated": false,
+          "scope": "Review-only language-native unused candidates; public APIs, side effects and dynamic references require human review."
+        },
+        "mutation": {
+          "status": "not-selected"
+        },
+        "fuzz": {
+          "status": "completed",
+          "engine": "blackbox",
+          "executed": 0,
+          "seed": 42,
+          "findings": [],
+          "nonzero_policy": "Ordinary nonzero exits are not automatically bugs; approved expected behavior is required",
+          "blocked_methods": [],
+          "coverage_guided": false
+        },
+        "diagnostics": [
+          {
+            "file": "main.php",
+            "line": 6,
+            "column": null,
+            "code": "UnusedLocalVariable",
+            "message": "Avoid unused local variables such as '$leftover'.",
+            "severity": "review",
+            "origin": "native-unused",
+            "source_sha256": "f667cc61a5706eec7b3f032c1c198311cbaefab35de661dad17c61cfc931c1a6",
+            "stage": "unused-code",
+            "artifact": "source",
+            "column_unit": "tool-reported"
+          }
+        ],
+        "diagnostics_truncated": false,
+        "unlocated_failures": [],
+        "location_caveat": "Tool-reported references, not proven root causes. Output may be incomplete, misleading or truncated; unrecognized paths remain in raw logs.",
+        "static": {
+          "sha256": "f667cc61a5706eec7b3f032c1c198311cbaefab35de661dad17c61cfc931c1a6",
+          "source_bytes": 109,
+          "lines": 9,
+          "long_lines": 0,
+          "function_count": 0,
+          "branch_nodes": 0,
+          "findings": [],
+          "files": {
+            "main.php": {
+              "source_sha256": "f667cc61a5706eec7b3f032c1c198311cbaefab35de661dad17c61cfc931c1a6"
+            }
+          },
+          "findings_truncated": false,
+          "caveat": "Python syntax and conservative unused/unreachable candidates; other text uses risk patterns only. Unused is not uncovered. No inferred Big-O, complete bug detection or security certification."
+        },
+        "isolation": {
+          "network": "none",
+          "memory_mib": 1024,
+          "cpus": 2,
+          "pids": 128,
+          "read_only": true
+        }
+      },
+      "error": "Coverage line out of range"
+    }
+  ]
+}

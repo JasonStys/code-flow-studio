@@ -1,10 +1,10 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# classes: Evidence@L249
-# functions: require(condition, message)@L43; source_digest(text)@L49; validate_locations(result, project)@L54; validate_positive(result, project)@L67; negative_project(project, kind)@L151; validate_negative(result, project, kind)@L170; __init__(self, output, provenance)@L252; record(self, language, kind, project, result, error)@L259; save(self)@L281; broker_scenarios(evidence)@L308; anchor_scenarios(evidence)@L329; private_scenarios(evidence)@L356; provenance(runtime, expected_source, lane)@L460; toolchain_versions()@L514; main()@L559
-# variables: RELEASE_SOURCE@L39; RELEASE_WORKER_SHA256@L40; file@L56; sources@L56; item@L58; line@L59; name@L59; compilation@L70; checks@L77; observed@L79; actual@L81; expected@L81; oracle@L91; case@L92; benchmark@L96; samples@L97; value@L100; coverage@L106; entry@L109; content@L110; file@L110; measured@L116; name@L116; file@L119; source@L119; line@L124; executed@L126; missing@L126; summary@L132; data@L153; replacement@L159; expected_oracle@L181; case@L182; checks@L185; line@L203; item@L209; case@L220; exit_code@L227; marker@L232; row@L263; key@L277; record@L283; temporary@L284; lines@L287; row@L295; checks@L296; lines@L300; language@L310; baseline@L311; kind@L312; project@L315; result@L316; error@L317; result@L319; error@L325; language@L331; missing_line@L332; project@L332; unused_line@L332; result@L333; error@L334; result@L336; item@L347; error@L352; credentials@L358; key@L359; directory@L360; app@L361; client@L366; jobs@L374; language@L375; project@L376; result@L377; error@L378; response@L380; revision@L382; response@L383; job@L385; deadline@L386; response@L388; report@L390; result@L395; exported@L397; html@L402; error@L409; archives@L413; response@L428; job@L434; result_sha256@L434; response@L435; exported@L442; runtime@L468; source@L473; dirty@L475; worker@L484; command@L489; image@L490; commands@L516; program@L530; name@L535; directory@L536; root@L537; argv@L539; argv@L541; code@L543; output@L543; versions@L545; value@L551; parser@L561; args@L566; evidence@L567; language@L588
-# parameters: condition@L43; message@L43; text@L49; project@L54; result@L54; project@L67; result@L67; kind@L151; project@L151; kind@L170; project@L170; result@L170; output@L252; provenance@L252; self@L252; error@L260; kind@L260; language@L260; project@L260; result@L260; self@L260; self@L281; evidence@L308; evidence@L329; evidence@L356; expected_source@L460; lane@L460; runtime@L460
+# classes: Evidence@L305
+# functions: require(condition, message)@L44; source_digest(text)@L50; source_line_count(text)@L55; validate_coverage_completion(coverage, project)@L60; validate_locations(result, project)@L93; validate_positive(result, project)@L106; negative_project(project, kind)@L207; validate_negative(result, project, kind)@L226; __init__(self, output, provenance)@L308; record(self, language, kind, project, result, error)@L315; save(self)@L337; broker_scenarios(evidence)@L364; anchor_scenarios(evidence)@L385; private_scenarios(evidence)@L412; provenance(runtime, expected_source, lane)@L516; toolchain_versions()@L570; main()@L615
+# variables: RELEASE_SOURCE@L40; RELEASE_WORKER_SHA256@L41; wrapped@L62; cases@L64; actual@L69; expected@L69; wrapped@L85; expected_status@L86; file@L95; sources@L95; item@L97; line@L98; name@L98; compilation@L109; checks@L116; observed@L118; actual@L120; expected@L120; oracle@L130; case@L131; benchmark@L135; samples@L136; value@L139; coverage@L145; entry@L148; content@L149; file@L149; measured@L155; name@L155; file@L158; source@L158; line@L163; executed@L165; missing@L165; summary@L171; covered@L172; extra@L180; first@L184; data@L209; replacement@L215; expected_oracle@L237; case@L238; checks@L241; line@L259; item@L265; case@L276; exit_code@L283; marker@L288; row@L319; key@L333; record@L339; temporary@L340; lines@L343; row@L351; checks@L352; lines@L356; language@L366; baseline@L367; kind@L368; project@L371; result@L372; error@L373; result@L375; error@L381; language@L387; missing_line@L388; project@L388; unused_line@L388; result@L389; error@L390; result@L392; item@L403; error@L408; credentials@L414; key@L415; directory@L416; app@L417; client@L422; jobs@L430; language@L431; project@L432; result@L433; error@L434; response@L436; revision@L438; response@L439; job@L441; deadline@L442; response@L444; report@L446; result@L451; exported@L453; html@L458; error@L465; archives@L469; response@L484; job@L490; result_sha256@L490; response@L491; exported@L498; runtime@L524; source@L529; dirty@L531; worker@L540; command@L545; image@L546; commands@L572; program@L586; name@L591; directory@L592; root@L593; argv@L595; argv@L597; code@L599; output@L599; versions@L601; value@L607; parser@L617; args@L622; evidence@L623; language@L644
+# parameters: condition@L44; message@L44; text@L50; text@L55; coverage@L60; project@L60; project@L93; result@L93; project@L106; result@L106; kind@L207; project@L207; kind@L226; project@L226; result@L226; output@L308; provenance@L308; self@L308; error@L316; kind@L316; language@L316; project@L316; result@L316; self@L316; self@L337; evidence@L364; evidence@L385; evidence@L412; expected_source@L516; lane@L516; runtime@L516
 # </code-map>
 
 """Jason Stys: real hosted compiler scenarios, independent oracles and private history.
@@ -14,6 +14,7 @@ Source maps in this file and docs/code-index.md describe exact declarations.
 """
 
 import argparse
+import ast
 import asyncio
 import base64
 import hashlib
@@ -51,6 +52,44 @@ def source_digest(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def source_line_count(text: str) -> int:
+    """Use the app's original-source convention, retaining an empty terminal line for EOF opcodes."""
+    return len(text.replace("\r\n", "\n").replace("\r", "\n").split("\n"))
+
+
+def validate_coverage_completion(coverage: dict, project: Project) -> None:
+    """Preserve the documented Coverlet nonzero-exit limitation without inventing full coverage."""
+    wrapped = False
+    if project.language != "python":
+        cases = coverage.get("cases", [])
+        require(
+            coverage.get("requested_cases") == len(project.cases) and len(cases) == len(project.cases),
+            "Missing instrumented case evidence",
+        )
+        for expected, actual in zip(project.cases, cases, strict=True):
+            require(
+                actual.get("name") == expected.name
+                and actual.get("expected_exit_code") == expected.exit_code
+                and not actual.get("timeout"),
+                "Instrumented case identity/deadline mismatch",
+            )
+            if actual.get("exit_code") != expected.exit_code:
+                require(
+                    project.language == "csharp"
+                    and coverage.get("tool") == "Coverlet 8.0.1"
+                    and expected.exit_code != 0
+                    and actual.get("exit_code") == 1
+                    and "Generating report" in actual.get("collector_messages", ""),
+                    "Unexpected instrumented execution failure",
+                )
+                wrapped = True
+    expected_status = "partial" if wrapped else "measured"
+    require(
+        coverage.get("status") == expected_status,
+        "Coverage completion status disagrees with actual collector exits",
+    )
+
+
 def validate_locations(result: dict, project: Project) -> None:
     """Accept only reported in-range references to the supplied source snapshot."""
     sources = {file.name: file.content for file in project.files if file.encoding == "text"}
@@ -59,7 +98,7 @@ def validate_locations(result: dict, project: Project) -> None:
         name, line = item.get("file"), item.get("line")
         require(name in sources, "Diagnostic references an unknown file")
         require(
-            type(line) is int and 0 < line <= len(sources[name].splitlines()), "Diagnostic line is invalid"
+            type(line) is int and 0 < line <= source_line_count(sources[name]), "Diagnostic line is invalid"
         )
         require(item.get("source_sha256") == source_digest(sources[name]), "Diagnostic source hash mismatch")
 
@@ -104,7 +143,7 @@ def validate_positive(result: dict, project: Project) -> None:
         type(benchmark.get("max_rss_kib")) is int and benchmark["max_rss_kib"] > 0, "Missing measured RSS"
     )
     coverage = result.get("coverage", {})
-    require(coverage.get("status") == "measured", "Coverage was not measured")
+    validate_coverage_completion(coverage, project)
     require(not coverage.get("locations_truncated"), "Coverage locations were truncated")
     entry = coverage.get("files", {}).get(project.entry, {})
     content = next(file.content for file in project.files if file.name == project.entry)
@@ -122,7 +161,7 @@ def validate_positive(result: dict, project: Project) -> None:
             "Unknown measured source",
         )
         for line in measured.get("executed_lines", []) + measured.get("missing_lines", []):
-            require(type(line) is int and 0 < line <= len(source.splitlines()), "Coverage line out of range")
+            require(type(line) is int and 0 < line <= source_line_count(source), "Coverage line out of range")
         executed, missing = measured.get("executed_lines", []), measured.get("missing_lines", [])
         require(
             len(executed) == len(set(executed)) and len(missing) == len(set(missing)),
@@ -130,12 +169,29 @@ def validate_positive(result: dict, project: Project) -> None:
         )
         require(not set(executed).intersection(missing), "Coverage line is both executed and missing")
         summary = measured.get("summary", {})
+        covered = summary.get("covered_lines")
         require(
-            summary.get("covered_lines") == len(executed)
+            type(covered) is int
+            and covered >= 0
             and summary.get("missing_lines") == len(missing)
-            and summary.get("num_statements") == len(executed) + len(missing),
-            "Coverage counts disagree with retained locations",
+            and summary.get("num_statements") == covered + len(missing),
+            "Coverage statement counts disagree",
         )
+        extra = len(executed) - covered
+        if extra and project.language == "python":
+            # coverage.py retains the module docstring trace event, but excludes
+            # that nonstatement from its executable-statement denominator.
+            first = ast.parse(source).body[0]
+            require(
+                extra == 1
+                and isinstance(first, ast.Expr)
+                and isinstance(first.value, ast.Constant)
+                and isinstance(first.value.value, str)
+                and first.lineno in executed,
+                "Unexplained Python trace/statement count difference",
+            )
+        else:
+            require(extra == 0, "Coverage counts disagree with retained locations")
     if project.language != "python":
         require(
             result.get("unused", {}).get("status") == "completed", "Native unused-code tool did not complete"
@@ -528,7 +584,7 @@ async def toolchain_versions() -> dict:
         "assembly": ["as", "--version"],
     }
     program = (
-        "import json,subprocess\ncommands="
+        "import json,subprocess,sys\nsys.path.insert(0,'/opt')\nfrom worker import prepare_runtime\nprepare_runtime()\ncommands="
         + repr(commands)
         + "\nversions={}\nfor name,argv in commands.items():\n result=subprocess.run(argv,check=True,capture_output=True,text=True,timeout=10)\n versions[name]=(result.stdout or result.stderr).splitlines()[0]\nprint(json.dumps(versions))\n"
     )

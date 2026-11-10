@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: complete_result(project)@L24; test_practical_matrix_is_complete_and_independent()@L70; test_positive_validator_rejects_incomplete_or_fabricated_evidence(defect)@L114; test_exact_compiler_location_and_nonexecution_are_required()@L168; test_runtime_failure_is_distinct_from_incorrect_oracle()@L201; test_real_execution_guard_refuses_this_pc_before_subprocess(monkeypatch)@L237
-# variables: content@L26; case@L42; case@L46; language@L74; project@L75; case@L77; duplicate@L81; project@L116; result@L117; project@L170; result@L171; defect@L189; changed@L190; project@L203; result@L204; wrong@L226
-# parameters: project@L24; defect@L114; monkeypatch@L237
+# functions: complete_result(project)@L24; test_practical_matrix_is_complete_and_independent()@L80; test_positive_validator_rejects_incomplete_or_fabricated_evidence(defect)@L124; test_exact_compiler_location_and_nonexecution_are_required()@L178; test_runtime_failure_is_distinct_from_incorrect_oracle()@L211; test_real_execution_guard_refuses_this_pc_before_subprocess(monkeypatch)@L247; test_actual_first_hosted_reports_retain_their_real_tool_semantics(language, kind)@L258
+# variables: content@L26; case@L42; case@L46; case@L63; language@L84; project@L85; case@L87; duplicate@L91; project@L126; result@L127; project@L180; result@L181; defect@L199; changed@L200; project@L213; result@L214; wrong@L236; observed@L262; item@L265; row@L265; project@L266; changed@L271; changed@L275
+# parameters: project@L24; defect@L124; monkeypatch@L247; kind@L258; language@L258
 # </code-map>
 
 """Jason Stys: reject fabricated/incomplete compiler evidence without using local Docker."""
@@ -52,6 +52,16 @@ def complete_result(project):
         },
         "coverage": {
             "status": "measured",
+            "requested_cases": len(project.cases),
+            "cases": [
+                {
+                    "name": case.name,
+                    "expected_exit_code": case.exit_code,
+                    "exit_code": case.exit_code,
+                    "timeout": False,
+                }
+                for case in project.cases
+            ],
             "files": {
                 project.entry: {
                     "status": "measured",
@@ -239,3 +249,30 @@ def test_real_execution_guard_refuses_this_pc_before_subprocess(monkeypatch):
     monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
     with pytest.raises(ValueError, match="GitHub-hosted Linux"):
         provenance(Path.cwd(), "0" * 40, "release-0.4.2")
+
+
+@pytest.mark.parametrize(
+    "language,kind",
+    [("python", "positive"), ("php", "positive"), ("php", "native-location"), ("csharp", "positive")],
+)
+def test_actual_first_hosted_reports_retain_their_real_tool_semantics(language, kind):
+    """Replay observed source-bound reports; these regressions are not fresh compiler execution."""
+    from studio.models import Project
+
+    observed = json.loads(
+        (Path(__file__).parent / "fixtures/compiler-reports-042.json").read_text(encoding="utf-8")
+    )
+    row = next(item for item in observed["reports"] if item["language"] == language and item["kind"] == kind)
+    project = Project.model_validate(row["project"])
+    validate_positive(row["result"], project)
+    if language == "csharp":
+        # Do not disguise the collector's expected nonzero wrapper result as full coverage.
+        assert row["result"]["coverage"]["status"] == "partial"
+        changed = copy.deepcopy(row["result"])
+        changed["coverage"]["status"] = "measured"
+        with pytest.raises(ValueError, match="collector exits"):
+            validate_positive(changed, project)
+        changed = copy.deepcopy(row["result"])
+        changed["coverage"]["cases"][0]["exit_code"] = 1
+        with pytest.raises(ValueError, match="Unexpected instrumented"):
+            validate_positive(changed, project)

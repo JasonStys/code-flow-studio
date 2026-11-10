@@ -96,3 +96,25 @@ tests/test_released_service_probe.py`; they do not execute the target source.
 These are flat-project demonstrations, not production domain algorithms or an
 empirical Big-O measurement. Timings include process startup; small changes and
 cross-language rankings are not reliable performance comparisons.
+
+### Tool-specific coverage completion
+
+The C# malformed-input case correctly returns exit 2 in the ordinary execution.
+Coverlet 8.0.1 wraps that expected nonzero target exit as collector exit 1. The
+application conservatively retains `coverage.status: partial`, despite a valid
+source-bound report. Acceptance requires all six ordinary case outputs/exits,
+all instrumented case identities, successful zero-exit instrumentation, the exact
+known nonzero wrapper behavior and a generated coverage report. It never relabels
+that report as fully measured. An unrelated collector failure is rejected.
+The [pinned Coverlet console implementation](https://github.com/coverlet-coverage/coverlet/blob/v8.0.1/src/coverlet.console/Program.cs)
+maps positive target exits to its test-failed wrapper status. The exact nonzero
+target exit is independently checked in ordinary execution, not inferred from
+the instrumented wrapper's exit 1.
+
+coverage.py may retain the module-docstring trace event while excluding it from
+its executable-statement count. The validator permits only that source-proven
+one-line difference. PHP Xdebug can report an implicit return at an empty terminal
+source line; location bounds use the same newline convention as the app/editor.
+The [observed report snapshots](../tests/fixtures/compiler-reports-042.json) retain
+these actual first-run results, including their original failed-acceptance labels;
+replay unit tests are not a new compiler run.

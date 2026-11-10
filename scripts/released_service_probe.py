@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Evidence@L117; Service@L421
-# functions: require(condition, message)@L72; strict_json(body)@L78; pairs(items)@L81; constant(_value)@L86; hosted_output(output)@L92; __init__(self, output)@L120; save(self)@L134; stage(self, stage)@L141; bounded_body(response, maximum)@L147; api_json(client, path)@L156; release_assets(release, tag)@L164; download_url(url, initial)@L216; download(client, row, target)@L240; preflight_tar(stream)@L280; unpack(archive, destination)@L316; service_environment(home, token, nonce)@L392; request_json(client, method, path, data)@L410; __init__(self, executable, data, home)@L424; ready(self)@L437; stop(self)@L471; exercise(service, data, evidence)@L484; restored(service, data, private)@L559; canonical_digest(value)@L592; cleanup_owned(services, temporary)@L599; main()@L622
-# variables: SOURCE@L42; WORKER_SHA256@L43; VERSION@L44; RELEASE_ID@L45; REPOSITORY@L46; API@L47; PAYLOAD@L48; PAYLOAD_ID@L49; PAYLOAD_BYTES@L50; PAYLOAD_SHA256@L51; MAX_ARCHIVE@L52; MAX_EXPANDED@L53; MAX_MEMBER@L54; MAX_RESPONSE@L55; EXPECTED_LANGUAGES@L56; result@L82; workspace@L102; selected@L104; temporary@L135; body@L149; chunk@L150; response@L159; rows@L182; row@L184; row@L188; row@L189; row@L190; found@L193; row@L193; maximum@L201; name@L201; row@L202; expected@L211; prefix@L219; parsed@L221; initial@L242; url@L251; started@L252; _@L253; response@L256; url@L258; digest@L262; measured@L262; stream@L263; chunk@L264; measured@L265; expanded@L282; headers@L282; raw@L283; header@L285; expanded@L286; expanded@L290; chunk@L292; expanded@L293; headers@L296; number@L298; size@L300; kind@L301; limit@L303; remaining@L305; chunk@L307; remaining@L311; expanded@L312; expanded@L319; seen@L319; stream@L320; package@L324; index@L325; member@L325; name@L326; parts@L329; c@L337; part@L338; key@L341; expanded@L346; selected@L348; source@L353; measured@L355; output@L356; chunk@L357; measured@L358; resources@L363; metadata@L364; value@L366; worker@L382; service@L387; config@L394; response@L416; output@L428; deadline@L439; source@L441; body@L442; matches@L444; origin@L447; candidate@L448; health@L456; alias@L487; password@L487; key@L488; client@L492; stored@L497; language@L498; project@L500; revision@L504; identifier@L505; job@L511; deadline@L513; result@L515; exported@L522; digest@L532; client@L561; history@L569; row@L572; row@L575; result@L576; exported@L577; failed@L601; service@L602; failed@L612; service@L613; parser@L624; args@L628; output@L629; evidence@L630; temporary@L631; services@L633; client@L635; payload@L636; sidecar@L636; archive@L640; checksum@L640; digest@L641; executable@L648; data@L650; first@L652; private@L655; second@L658; row@L667
-# parameters: condition@L72; message@L72; body@L78; items@L81; _value@L86; output@L92; output@L120; self@L120; self@L134; public@L141; self@L141; stage@L141; maximum@L147; response@L147; client@L156; path@L156; release@L164; tag@L164; initial@L216; url@L216; client@L240; row@L240; target@L240; stream@L280; archive@L316; destination@L316; home@L392; nonce@L392; token@L392; client@L410; data@L410; method@L410; path@L410; data@L424; executable@L424; home@L424; self@L424; self@L437; self@L471; data@L484; evidence@L484; service@L484; data@L559; private@L559; service@L559; value@L592; services@L599; temporary@L599
+# functions: require(condition, message)@L72; strict_json(body)@L78; pairs(items)@L81; constant(_value)@L86; hosted_output(output)@L92; __init__(self, output)@L120; save(self)@L134; stage(self, stage)@L141; bounded_body(response, maximum)@L147; api_json(client, path)@L156; release_assets(release, tag)@L164; download_url(url, initial)@L216; download(client, row, target)@L240; preflight_tar(stream)@L280; unpack(archive, destination)@L316; service_environment(home, token, nonce)@L392; request_json(client, method, path, data)@L410; __init__(self, executable, data, home)@L424; ready(self)@L437; stop(self)@L471; validate_export(exported, result, revision)@L484; exercise(service, data, evidence)@L536; restored(service, data, private)@L607; canonical_digest(value)@L640; cleanup_owned(services, temporary)@L647; main()@L670
+# variables: SOURCE@L42; WORKER_SHA256@L43; VERSION@L44; RELEASE_ID@L45; REPOSITORY@L46; API@L47; PAYLOAD@L48; PAYLOAD_ID@L49; PAYLOAD_BYTES@L50; PAYLOAD_SHA256@L51; MAX_ARCHIVE@L52; MAX_EXPANDED@L53; MAX_MEMBER@L54; MAX_RESPONSE@L55; EXPECTED_LANGUAGES@L56; result@L82; workspace@L102; selected@L104; temporary@L135; body@L149; chunk@L150; response@L159; rows@L182; row@L184; row@L188; row@L189; row@L190; found@L193; row@L193; maximum@L201; name@L201; row@L202; expected@L211; prefix@L219; parsed@L221; initial@L242; url@L251; started@L252; _@L253; response@L256; url@L258; digest@L262; measured@L262; stream@L263; chunk@L264; measured@L265; expanded@L282; headers@L282; raw@L283; header@L285; expanded@L286; expanded@L290; chunk@L292; expanded@L293; headers@L296; number@L298; size@L300; kind@L301; limit@L303; remaining@L305; chunk@L307; remaining@L311; expanded@L312; expanded@L319; seen@L319; stream@L320; package@L324; index@L325; member@L325; name@L326; parts@L329; c@L337; part@L338; key@L341; expanded@L346; selected@L348; source@L353; measured@L355; output@L356; chunk@L357; measured@L358; resources@L363; metadata@L364; value@L366; worker@L382; service@L387; config@L394; response@L416; output@L428; deadline@L439; source@L441; body@L442; matches@L444; origin@L447; candidate@L448; health@L456; key@L488; value@L488; history@L491; snapshot@L504; attempt@L518; actual@L519; key@L526; alias@L539; password@L539; key@L540; client@L544; stored@L549; language@L550; project@L552; revision@L556; identifier@L557; job@L563; deadline@L565; result@L567; exported@L574; digest@L580; client@L609; history@L617; row@L620; row@L623; result@L624; exported@L625; failed@L649; service@L650; failed@L660; service@L661; parser@L672; args@L676; output@L677; evidence@L678; temporary@L679; services@L681; client@L683; payload@L684; sidecar@L684; archive@L688; checksum@L688; digest@L689; executable@L696; data@L698; first@L700; private@L703; second@L706; row@L715
+# parameters: condition@L72; message@L72; body@L78; items@L81; _value@L86; output@L92; output@L120; self@L120; self@L134; public@L141; self@L141; stage@L141; maximum@L147; response@L147; client@L156; path@L156; release@L164; tag@L164; initial@L216; url@L216; client@L240; row@L240; target@L240; stream@L280; archive@L316; destination@L316; home@L392; nonce@L392; token@L392; client@L410; data@L410; method@L410; path@L410; data@L424; executable@L424; home@L424; self@L424; self@L437; self@L471; exported@L484; result@L484; revision@L484; data@L536; evidence@L536; service@L536; data@L607; private@L607; service@L607; value@L640; services@L647; temporary@L647
 # </code-map>
 
 """Jason Stys: hosted-only published0.4.2 frozen-service -> Docker -> sealed-history acceptance.
@@ -481,6 +481,58 @@ class Service:
         require(self.process.returncode == 0, "Released service exit failed")
 
 
+def validate_export(exported: dict, result: dict, revision: dict) -> None:
+    """Bind the shipping Store.timeline object to this exact saved project, revision and run."""
+    require(
+        isinstance(exported, dict)
+        and {key: value for key, value in exported.items() if key != "iteration_history"} == result,
+        "JSON export differs from actual run",
+    )
+    history = exported.get("iteration_history")
+    require(
+        isinstance(history, dict)
+        and set(history) == {"project_id", "revisions", "truncated", "scope"}
+        and isinstance(revision.get("project_id"), str)
+        and history["project_id"] == revision["project_id"]
+        and history["truncated"] is False
+        and history["scope"]
+        == "Latest 50 revisions; latest 10 attempts each. Full source/logs remain in their individual exports."
+        and isinstance(history["revisions"], list)
+        and len(history["revisions"]) == 1,
+        "JSON export timeline schema/project differs",
+    )
+    snapshot = history["revisions"][0]
+    require(
+        isinstance(snapshot, dict)
+        and snapshot.get("id") == revision["id"]
+        and snapshot.get("parent_id") is None
+        and snapshot.get("snapshot_sha256")
+        == hashlib.sha256(json.dumps(revision["project"]).encode()).hexdigest()
+        and snapshot.get("priorities") == revision["project"]["priorities"]
+        and isinstance(snapshot.get("created"), str)
+        and bool(snapshot["created"])
+        and isinstance(snapshot.get("attempts"), list)
+        and len(snapshot["attempts"]) == 1,
+        "JSON export timeline revision differs",
+    )
+    attempt = snapshot["attempts"][0]
+    actual = result["result"]
+    require(
+        isinstance(attempt, dict)
+        and attempt.get("id") == result["id"]
+        and attempt.get("status") == "completed"
+        and isinstance(attempt.get("created"), str)
+        and bool(attempt["created"])
+        and attempt.get("checks") == {key: actual.get("checks", {}).get(key) for key in ("passed", "failed")}
+        and attempt.get("benchmark") == actual.get("benchmark", {})
+        and attempt.get("coverage") == actual.get("coverage", {})
+        and attempt.get("mutation_score") == actual.get("mutation", {}).get("score")
+        and attempt.get("fuzz_status") == actual.get("fuzz", {}).get("status")
+        and attempt.get("generated_tests_exit") == actual.get("generated_tests", {}).get("exit_code"),
+        "JSON export timeline attempt differs",
+    )
+
+
 def exercise(service: Service, data: Path, evidence: Evidence) -> dict:
     """Run real literal-oracle projects through HTTP, then save/seal before a full process restart."""
     require(set(LANGUAGES) == EXPECTED_LANGUAGES and len(LANGUAGES) == 12, "Language inventory changed")
@@ -521,14 +573,10 @@ def exercise(service: Service, data: Path, evidence: Evidence) -> dict:
         validate_positive(result.get("result", {}), project)
         exported = request_json(client, "GET", f"/private/api/runs/{job}/report?format=json")
         require(
-            exported.get("result") == result["result"]
-            and exported.get("id") == job
-            and exported.get("revision_id") == identifier
-            and exported.get("status") == "completed"
-            and isinstance(exported.get("iteration_history"), list)
-            and exported["iteration_history"],
-            "JSON export differs from actual run",
+            result.get("id") == job and result.get("revision_id") == identifier,
+            "Run/revision identity differs",
         )
+        validate_export(exported, result, revision)
         digest = canonical_digest(result["result"])
         stored[language] = {
             "revision": identifier,
