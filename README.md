@@ -76,6 +76,7 @@ Source-development instructions, provider setup, first-run diagnostics and packa
 | `ui/demo.ts`, `ui/types.ts`                                                                             | Synthetic CSV example and renderer contracts.                                                                                                                                           |
 | `ui/index.html`, `ui/style.css`                                                                         | Local HTML entry and responsive accessible layout.                                                                                                                                      |
 | `desktop/main.cjs`                                                                                      | Sandboxed Electron renderer and private bundled-service lifecycle.                                                                                                                      |
+| `studio/native_server.py`, `studio/completed_offload.py`                                                | Finite HTTP drain, completed cancellation cleanup and coherent account/vault transitions before normal sealing.                                                                         |
 | `training/dataset.py`, `training/train.py`, `training/serve.py`                                         | Provenance/split validation, parameterized real training, local model API.                                                                                                              |
 | `examples/projects.py`, `examples/web-demo.project.json`                                                | Compiler-contract fixtures and the exact synthetic CSV source/manifest used by the UI, checked in CI.                                                                                   |
 | `examples/language_locations.py`, `tests/test_native_locations.py`                                      | Independent polyglot unused/missed-line oracles and pure native-report parser/security regressions.                                                                                     |
@@ -100,6 +101,12 @@ startup comparison, deliberate ASan fault control and separate worker npm audit.
 problems remain visible as failures until the actual isolated acceptance checks pass.
 
 Historical 0.1 bearer-token CLI mode remains explicitly opt-in for existing automation; it is not account mode. No automatic import of legacy plaintext projects or global AI keys occurs.
+
+Native shutdown uses a five-second HTTP-drain budget and completes owned disk and
+vault transitions before normal sealing. Critical I/O is never abandoned to meet
+a fabricated fixed exit time. The [dated native-drain report](docs/reports/native-http-drain-2026-11-10.md)
+separates the actual observed defect, real cancellation/recovery controls and
+local packaged evidence from later hosted/release acceptance.
 
 ## CodeQL source security review
 

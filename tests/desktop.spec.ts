@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; metadata@L98; page@L118; accountStartedAt@L121; accountRoutes@L122; route@L124; route@L136; browserErrors@L148; health@L152; state@L160; directory@L191; serviceLog@L194; statuses@L195; lifecycle@L260; records@L261; launcher@L262; line@L265; service@L270; line@L271; diagnostic@L278; records@L282; stage@L283; pid@L294
+ * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; metadata@L98; page@L118; accountStartedAt@L121; accountRoutes@L122; route@L124; route@L136; browserErrors@L148; health@L152; state@L160; directory@L191; serviceLog@L194; statuses@L195; lifecycle@L260; records@L261; launcher@L268; line@L271; service@L276; line@L277; diagnostic@L284; records@L288; stage@L289; record@L301; pid@L314
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -258,7 +258,13 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
   } finally {
     console.info("NATIVE_JOURNEY_STAGE", "owned-close:start");
     const lifecycle = () => {
-      const records: { stage: string; pid: number; parent_pid: number }[] = [];
+      const records: {
+        stage: string;
+        pid: number;
+        parent_pid: number;
+        connections?: number;
+        tasks?: number;
+      }[] = [];
       const launcher = readDiagnosticLog(
         join(launcherDirectory, "native-lifecycle.log"),
       );
@@ -281,6 +287,8 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       console.info("NATIVE_JOURNEY_STAGE", "owned-close:complete");
       const records = lifecycle();
       for (const stage of [
+        "http-drain-started",
+        "http-drain-complete",
         "workspace-close-complete",
         "lifespan-close-complete",
         "server-thread-stopped",
@@ -290,6 +298,18 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
           records.some((record) => record.stage === stage),
           `Actual frozen service milestone: ${stage}`,
         ).toBe(true);
+      for (const record of records.filter((record) =>
+        ["http-drain-started", "http-drain-complete"].includes(record.stage),
+      )) {
+        expect(
+          Number.isSafeInteger(record.connections) && record.connections! >= 0,
+        ).toBe(true);
+        expect(Number.isSafeInteger(record.tasks) && record.tasks! >= 0).toBe(
+          true,
+        );
+        if (record.stage === "http-drain-complete")
+          expect(record.tasks).toBe(0);
+      }
       // Signal zero observes identity existence without sending a termination signal or touching unrelated processes.
       for (const pid of new Set(
         records.flatMap((record) => [record.pid, record.parent_pid]),

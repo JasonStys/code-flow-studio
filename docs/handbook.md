@@ -49,18 +49,18 @@ The editable Markdown remains the maintenance source. The Word files are readabl
 
 ## Historical results and reproduction
 
-The reviewed source is [`eeac1df6275437f401a8c060b7770c138dbaf132`](https://github.com/JasonStys/code-flow-studio/tree/eeac1df6275437f401a8c060b7770c138dbaf132). The observed functional workflow baseline is `eeac1df6275437f401a8c060b7770c138dbaf132`; those observations are recorded at `2026-11-10T09:40:54.286353+00:00`. They do not certify an unrun later revision.
+The reviewed source is [`7d2158a57bb49e8f837fffbfe23b301902465412`](https://github.com/JasonStys/code-flow-studio/tree/7d2158a57bb49e8f837fffbfe23b301902465412). The observed functional workflow baseline is `7d2158a57bb49e8f837fffbfe23b301902465412`; those observations are recorded at `2026-11-10T13:28:55.865054+00:00`. They do not certify an unrun later revision.
 
-- [Detailed recorded validation](reports/native-registration-completion-2026-11-10.md)
+- [Detailed recorded validation](reports/native-http-drain-2026-11-10.md)
 - [Current Actions](https://github.com/JasonStys/code-flow-studio/actions) records later integration checks separately.
 - Preserve dated measurements and follow the existing testing guide to reproduce them; a test-source inventory alone does not establish execution.
 
 ## Practical boundaries
 
-- Twelve bounded flat CLI adapters do not cover every framework, dependency or architecture; coverage and unused-code candidates are not correctness or dead-code proof.
-- Execution needs a separately built local Docker worker with no host fallback. Shared worker identity and containers are not a certified public hostile-code sandbox.
-- Hashes bind retained bytes and locations, not trusted attestation by a malicious target. UI-only report fixtures are separate from native collector evidence.
-- Local accounts trust the OS and unlocked service. Downloads are unsigned development builds; no native mobile installer or clean-machine installer lifecycle certification is claimed.
+- Local account/vault plaintext is accessible to the trusted local service and device OS while unlocked; this is not browser-only end-to-end encryption or public SaaS authentication.
+- Compiler tests require the fixed isolated local worker image. No host-code fallback, automatic Docker repair, universal coverage/bug detection or hostile-code security certification is provided.
+- The five-second HTTP drain is not a universal exit-time guarantee: critical disk/container cleanup and vault sealing must finish safely; preserve recovery data on failure.
+- Supported CodeQL categories, actual statement coverage, fixture browser journeys and tiny CPU training have distinct scopes. Passing checks do not establish model quality, vulnerability freedom or clean-machine installer acceptance.
 
 ## Maintaining these editions
 

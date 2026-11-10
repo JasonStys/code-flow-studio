@@ -3,98 +3,77 @@
   "project": "code-flow-studio",
   "author": "Jason Stys",
   "editionDate": "2026-11-09",
-  "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
-  "sourceUrl": "https://github.com/JasonStys/code-flow-studio/tree/eeac1df6275437f401a8c060b7770c138dbaf132",
-  "functionalEvidenceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
-  "evidenceObservedAt": "2026-11-10T09:40:54.286353+00:00",
+  "sourceBaseline": "7d2158a57bb49e8f837fffbfe23b301902465412",
+  "sourceUrl": "https://github.com/JasonStys/code-flow-studio/tree/7d2158a57bb49e8f837fffbfe23b301902465412",
+  "functionalEvidenceBaseline": "7d2158a57bb49e8f837fffbfe23b301902465412",
+  "evidenceObservedAt": "2026-11-10T13:28:55.865054+00:00",
   "workflowEvidence": [
     {
       "name": "CodeQL",
-      "headSha": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "headSha": "7d2158a57bb49e8f837fffbfe23b301902465412",
       "event": "push",
       "status": "completed",
       "conclusion": "success",
-      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42791315566"
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42823802503"
     },
     {
       "name": "Desktop packages",
-      "headSha": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "headSha": "7d2158a57bb49e8f837fffbfe23b301902465412",
       "event": "push",
       "status": "completed",
       "conclusion": "success",
-      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42791315489"
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42823802633"
     },
     {
       "name": "Validate",
-      "headSha": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "headSha": "7d2158a57bb49e8f837fffbfe23b301902465412",
       "event": "push",
       "status": "completed",
       "conclusion": "success",
-      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42791315575"
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42823802584"
     }
   ],
   "summary": "Filter diagnostics, unused-code candidates and missed coverage; inspect hash-verified source and navigate safely to unchanged drafts. Fixed rapid typing, worker compatibility and native launch preparation.",
   "rationale": "Turns report findings into a reproducible developer triage workflow while preserving source identity and isolated execution.",
   "limitations": [
-    "Twelve bounded flat CLI adapters do not cover every framework, dependency or architecture; coverage and unused-code candidates are not correctness or dead-code proof.",
-    "Execution needs a separately built local Docker worker with no host fallback. Shared worker identity and containers are not a certified public hostile-code sandbox.",
-    "Hashes bind retained bytes and locations, not trusted attestation by a malicious target. UI-only report fixtures are separate from native collector evidence.",
-    "Local accounts trust the OS and unlocked service. Downloads are unsigned development builds; no native mobile installer or clean-machine installer lifecycle certification is claimed."
+    "Local account/vault plaintext is accessible to the trusted local service and device OS while unlocked; this is not browser-only end-to-end encryption or public SaaS authentication.",
+    "Compiler tests require the fixed isolated local worker image. No host-code fallback, automatic Docker repair, universal coverage/bug detection or hostile-code security certification is provided.",
+    "The five-second HTTP drain is not a universal exit-time guarantee: critical disk/container cleanup and vault sealing must finish safely; preserve recovery data on failure.",
+    "Supported CodeQL categories, actual statement coverage, fixture browser journeys and tiny CPU training have distinct scopes. Passing checks do not establish model quality, vulnerability freedom or clean-machine installer acceptance."
   ],
   "documents": [
     {
       "filename": "project-guide.docx",
       "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "bytes": 45782,
-      "sha256": "50920e113b79dd071f6f1e927d656bfc63d46e1bf98239374de634be2176bfd9",
-      "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "bytes": 46007,
+      "sha256": "4d0a998f70fb0d798a6a76e3739af62f54c73c4d147bc9ddbdf1f5f3bac0d039",
+      "sourceBaseline": "7d2158a57bb49e8f837fffbfe23b301902465412",
       "visualReview": {
         "approved": true,
-        "method": "Every rendered page individually viewed at readable original resolution",
+        "method": "Every current rendered page individually viewed at readable original resolution",
         "pageCount": 6,
         "renderedPageSha256": {
-          "page-1.png": "610de09770df16ac8b4b0c5d3a7d57863d73994847314e9563059f025949477a",
+          "page-1.png": "f6389eb6a6a07929fe59b777a6b106dfaf368c35c478846ea078d8407c5c16ea",
           "page-2.png": "8d1029a2356088276ff475806232582176dee2edaec0343d5d98201c553b9304",
-          "page-3.png": "e115599498399b63c6793b12795be7cb8306f28874e115bdef23e6d5ac827e63",
+          "page-3.png": "bfb2f61c30beb44e6cc916244eaf73efd515ef2944c50b3ba733e740d0ca11b6",
           "page-4.png": "7dbcbac153ceec3e3eee6d5770adf2ba003db344ae175f474191c16fc0d099d8",
-          "page-5.png": "3fdc61cb9dd7577e2bf8a2cd9339e801dce34e621764c9fcf9976416d2311e86",
-          "page-6.png": "94dfdae4f1043eb589160980749b70fc7be51688f612aacf2512d172070a85f5"
-        }
-      }
-    },
-    {
-      "filename": "validation-review.docx",
-      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "bytes": 48485,
-      "sha256": "c94e4fc9b6a56c25baabd7160a5f0414015459107e14ea8c905cdf4c5b9a00ce",
-      "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
-      "visualReview": {
-        "approved": true,
-        "method": "Every rendered page individually viewed at readable original resolution",
-        "pageCount": 7,
-        "renderedPageSha256": {
-          "page-1.png": "39b9f8ca2b0ec01e2931f77a2e8ffd100af81ab34ca2892d104a412a67f364f4",
-          "page-2.png": "866d6d752dbd26d397c65de09a31f6e648599623ea4ea6b9ea8a4aa89695202a",
-          "page-3.png": "bc7d2d2570f6d0bc349d34100a168d52e754e00f8756b0ca55021f7021760249",
-          "page-4.png": "19730b39fde3cbe66cee95406ad60469318e005a2283acd106c1256fd7adf727",
-          "page-5.png": "38141efb11c0705c484d9d1ca6401100972b3d47e0ffd1f8fabbb6f077d5e9c6",
-          "page-6.png": "e77bf5f2cae65db10fb873f193e8b562c13f744871aecd2a6eaf8e0c799b0762",
-          "page-7.png": "0fc2e8492822ce26be55294e1244dcb2c7d952a543c9204148ecc0063f3b4491"
+          "page-5.png": "7e1532fc9e02a7df0af324e02c04c0d0ef7f7f2843c80860eba5ae889d76878e",
+          "page-6.png": "41f6baed81243199244f32799a0c14ab4b22759c88395ffef4a8131d616338cd"
         }
       }
     },
     {
       "filename": "validation-evidence.xlsx",
       "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "bytes": 7695,
-      "sha256": "12ed9f288f77f4a930115126fdc1b9140b8680da2c0c67d46ff1fc184ee83f8c",
-      "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "bytes": 7760,
+      "sha256": "0a9b5f1e6239dcb400bf195887461fcc967eec545633d1ebf3280d3353356c71",
+      "sourceBaseline": "7d2158a57bb49e8f837fffbfe23b301902465412",
       "visualReview": {
         "approved": true,
         "tabsReviewed": ["Workflow evidence", "Test sources"],
         "previewSha256": {
-          "workflow-evidence.png": "34609745f653ec1919de40b0268a1bd325acde0a5817529598b0b2bce67d30e5",
-          "test-sources.png": "3e1c739000f0afbd3da738e5711e164ee84919c4500e45edc445f503af5ff476"
+          "workflow-evidence.png": "b56139ba891c6c15b2f5cd2ae3b85cd173215943e01a0fb6e389cb9b8535eff5",
+          "test-sources.png": "c02062a33b3df1357abda90ea452b9f373b52f8b4b038af944a9b68a3ca4d786"
         },
         "tables": [
           {
@@ -108,7 +87,7 @@
           {
             "path": "xl/tables/table2.xml",
             "name": "TestSources",
-            "range": "A7:C31",
+            "range": "A7:C34",
             "columns": 3,
             "autoFilter": true,
             "filterButtonsEnabled": true
@@ -117,6 +96,26 @@
         "formulaCount": 4,
         "failureSensitivityReceiptPassed": true,
         "formulaErrors": 0
+      }
+    },
+    {
+      "filename": "validation-review.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 47230,
+      "sha256": "3e472c90824be2501e0acdc7aff2ea6750ca9f4f0109804d0ff97e74020ee973",
+      "sourceBaseline": "7d2158a57bb49e8f837fffbfe23b301902465412",
+      "visualReview": {
+        "approved": true,
+        "method": "Every current rendered page individually viewed at readable original resolution",
+        "pageCount": 6,
+        "renderedPageSha256": {
+          "page-1.png": "d42862d4f851acb65c1a1ad6f5ee98fa15cbf51da50ac720a1dbb3360854d6ac",
+          "page-2.png": "86c87bf349b6e65419873670a7d2c27e5b1beb591796303696995bfe5f8445e6",
+          "page-3.png": "31c5dcb15bf5420267d77444e7c9db6812ab0a2a0b232d7044a7d7f0d75a1716",
+          "page-4.png": "56b49bfaa999a5dccb0bd5e47ca3f383551a22d7e1cd357847e2b51a72593e35",
+          "page-5.png": "d2b5d3195958a411937b1d74d4a6025d109f616b3145af4679f94fe8116081dc",
+          "page-6.png": "e6d9877b71bbac8d90a1d39b1d784db59c4a74902511e5a89c1281cff723987d"
+        }
       }
     }
   ],

@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: test_native_stage_is_opt_in_and_has_only_fixed_identity_fields(monkeypatch, capsys)@L22; test_actual_launcher_shutdown_denials_cannot_invoke_callback(tmp_path)@L37
-# variables: payload@L29; prefix@L29; value@L31; app@L39; called@L40; headers@L42; client@L43; response@L50
-# parameters: capsys@L22; monkeypatch@L22; tmp_path@L37
+# functions: test_native_stage_is_opt_in_and_has_only_fixed_identity_fields(monkeypatch, capsys)@L22; test_native_stage_counts_are_only_nonnegative_integers(monkeypatch, capsys)@L37; test_actual_launcher_shutdown_denials_cannot_invoke_callback(tmp_path)@L48
+# variables: payload@L29; prefix@L29; value@L31; value@L41; value@L44; app@L50; called@L51; headers@L53; client@L54; response@L61
+# parameters: capsys@L22; monkeypatch@L22; capsys@L37; monkeypatch@L37; tmp_path@L48
 # </code-map>
 
 """Jason Stys: opt-in native diagnostic privacy and genuine launcher acknowledgement.
@@ -32,6 +32,17 @@ def test_native_stage_is_opt_in_and_has_only_fixed_identity_fields(monkeypatch, 
     assert set(value) == {"stage", "pid", "parent_pid"}
     assert value["stage"] == "test-milestone"
     assert value["pid"] > 0 and value["parent_pid"] > 0
+
+
+def test_native_stage_counts_are_only_nonnegative_integers(monkeypatch, capsys):
+    """Fixed numeric drain observations never accept booleans, negative values or arbitrary strings."""
+    monkeypatch.setenv("STUDIO_DESKTOP_TEST", "1")
+    native_stage("http-drain-started", connections=2, tasks=0)
+    value = json.loads(capsys.readouterr().out.strip().split(" ", 1)[1])
+    assert value["connections"] == 2 and value["tasks"] == 0
+    native_stage("http-drain-started", connections=True, tasks=-1)
+    value = json.loads(capsys.readouterr().out.strip().split(" ", 1)[1])
+    assert set(value) == {"stage", "pid", "parent_pid"}
 
 
 def test_actual_launcher_shutdown_denials_cannot_invoke_callback(tmp_path):

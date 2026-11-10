@@ -1,8 +1,8 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: data_directory()@L27; parent_guard(server)@L40; main()@L61; shutdown()@L97; run_server()@L102
-# variables: base@L32; base@L34; base@L36; pid@L42; started@L43; parent@L47; parser@L63; args@L68; bundle@L71; ui@L72; listener@L73; port@L76; app@L77; server@L84; thread@L111; deadline@L115; url@L120
+# functions: data_directory()@L27; parent_guard(server)@L40; main()@L61; shutdown()@L86; run_server()@L91
+# variables: base@L32; base@L34; base@L36; pid@L42; started@L43; parent@L47; parser@L63; args@L68; bundle@L71; ui@L72; listener@L73; port@L76; app@L77; server@L84; thread@L100; deadline@L104; url@L109
 # parameters: server@L40
 # </code-map>
 
@@ -18,9 +18,9 @@ import webbrowser
 from pathlib import Path
 
 import psutil
-import uvicorn
 
 from studio.native_lifecycle import native_stage
+from studio.native_server import NativeServer, native_config
 from studio.private_api import create_private_app
 
 
@@ -81,18 +81,7 @@ def main():
         os.environ.get("CFS_LAUNCH_TOKEN", ""),
         os.environ.get("CFS_LAUNCH_NONCE", ""),
     )
-    server = uvicorn.Server(
-        uvicorn.Config(
-            app,
-            host="127.0.0.1",
-            port=port,
-            access_log=False,
-            log_level="warning",
-            proxy_headers=False,
-            limit_concurrency=50,
-            timeout_keep_alive=5,
-        )
-    )
+    server = NativeServer(native_config(app, port))
 
     def shutdown():
         """Record actual accepted launcher shutdown before requesting the existing graceful server stop."""
