@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L28; executable@L34; app@L37; launcherDirectory@L55; acceptedPackage@L58; resources@L65; file@L66; metadata@L99; page@L119; accountStartedAt@L122; accountRoutes@L123; route@L125; route@L137; browserErrors@L149; health@L153; state@L161; directory@L192; serviceLog@L195; statuses@L196; lifecycle@L261; records@L262; launcher@L263; descriptor@L265; size@L267; bytes@L268; used@L269; line@L276; file@L289; descriptor@L292; size@L294; bytes@L295; used@L296; line@L303; diagnostic@L319; records@L323; stage@L324; pid@L335
+ * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; metadata@L98; page@L118; accountStartedAt@L121; accountRoutes@L122; route@L124; route@L136; browserErrors@L148; health@L152; state@L160; directory@L191; serviceLog@L194; statuses@L195; lifecycle@L260; records@L261; launcher@L262; line@L265; service@L270; line@L271; diagnostic@L278; records@L282; stage@L283; pid@L294
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -14,10 +14,6 @@ import {
   readFileSync,
   mkdirSync,
   writeFileSync,
-  openSync,
-  fstatSync,
-  readSync,
-  closeSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -27,6 +23,9 @@ import { createSession, editorJourney } from "./account-session";
 import { inspectHelper } from "./source-journey";
 const { verifyElectron } = createRequire(import.meta.url)(
   "../scripts/verify_electron.cjs",
+);
+const { readDiagnosticLog } = createRequire(import.meta.url)(
+  "./native-diagnostics.cjs",
 );
 
 test("bundled desktop authenticates, seals history and provides a sandboxed editor", async () => {
@@ -260,60 +259,20 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     console.info("NATIVE_JOURNEY_STAGE", "owned-close:start");
     const lifecycle = () => {
       const records: { stage: string; pid: number; parent_pid: number }[] = [];
-      const launcher = join(launcherDirectory, "native-lifecycle.log");
-      if (existsSync(launcher)) {
-        const descriptor = openSync(launcher, "r");
-        try {
-          const size = fstatSync(descriptor).size;
-          const bytes = Buffer.alloc(Math.min(size, 65536));
-          const used = readSync(
-            descriptor,
-            bytes,
-            0,
-            bytes.length,
-            Math.max(0, size - bytes.length),
-          );
-          for (const line of bytes
-            .subarray(0, used)
-            .toString("utf8")
-            .split(/\r?\n/)
-            .filter(Boolean))
-            console.info(
-              "NATIVE_LAUNCHER_RECEIPT",
-              JSON.stringify(JSON.parse(line)),
-            );
-        } finally {
-          closeSync(descriptor);
+      const launcher = readDiagnosticLog(
+        join(launcherDirectory, "native-lifecycle.log"),
+      );
+      for (const line of launcher.split(/\r?\n/).filter(Boolean))
+        console.info(
+          "NATIVE_LAUNCHER_RECEIPT",
+          JSON.stringify(JSON.parse(line)),
+        );
+      const service = readDiagnosticLog(join(launcherDirectory, "service.log"));
+      for (const line of service.split(/\r?\n/))
+        if (line.startsWith("NATIVE_SERVICE_STAGE ")) {
+          console.info(line);
+          records.push(JSON.parse(line.slice("NATIVE_SERVICE_STAGE ".length)));
         }
-      }
-      const file = join(launcherDirectory, "service.log");
-      if (existsSync(file)) {
-        // Bound even the owned log read; emit only marked identity/milestone records, never service messages or private data.
-        const descriptor = openSync(file, "r");
-        try {
-          const size = fstatSync(descriptor).size;
-          const bytes = Buffer.alloc(Math.min(size, 65536));
-          const used = readSync(
-            descriptor,
-            bytes,
-            0,
-            bytes.length,
-            Math.max(0, size - bytes.length),
-          );
-          for (const line of bytes
-            .subarray(0, used)
-            .toString("utf8")
-            .split(/\r?\n/))
-            if (line.startsWith("NATIVE_SERVICE_STAGE ")) {
-              console.info(line);
-              records.push(
-                JSON.parse(line.slice("NATIVE_SERVICE_STAGE ".length)),
-              );
-            }
-        } finally {
-          closeSync(descriptor);
-        }
-      }
       return records;
     };
     const diagnostic = setTimeout(lifecycle, 10000);

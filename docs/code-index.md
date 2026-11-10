@@ -2228,43 +2228,36 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `{ verifyElectron }` | 28 |
-| variable | `executable` | 34 |
-| variable | `app` | 37 |
-| variable | `launcherDirectory` | 55 |
-| variable | `acceptedPackage` | 58 |
-| variable | `resources` | 65 |
-| variable | `file` | 66 |
-| variable | `metadata` | 99 |
-| variable | `page` | 119 |
-| variable | `accountStartedAt` | 122 |
-| variable | `accountRoutes` | 123 |
-| variable | `route` | 125 |
-| variable | `route` | 137 |
-| variable | `browserErrors` | 149 |
-| variable | `health` | 153 |
-| variable | `state` | 161 |
-| variable | `directory` | 192 |
-| variable | `serviceLog` | 195 |
-| variable | `statuses` | 196 |
-| variable | `lifecycle` | 261 |
-| variable | `records` | 262 |
-| variable | `launcher` | 263 |
-| variable | `descriptor` | 265 |
-| variable | `size` | 267 |
-| variable | `bytes` | 268 |
-| variable | `used` | 269 |
-| variable | `line` | 276 |
-| variable | `file` | 289 |
-| variable | `descriptor` | 292 |
-| variable | `size` | 294 |
-| variable | `bytes` | 295 |
-| variable | `used` | 296 |
-| variable | `line` | 303 |
-| variable | `diagnostic` | 319 |
-| variable | `records` | 323 |
-| variable | `stage` | 324 |
-| variable | `pid` | 335 |
+| variable | `{ verifyElectron }` | 24 |
+| variable | `{ readDiagnosticLog }` | 27 |
+| variable | `executable` | 33 |
+| variable | `app` | 36 |
+| variable | `launcherDirectory` | 54 |
+| variable | `acceptedPackage` | 57 |
+| variable | `resources` | 64 |
+| variable | `file` | 65 |
+| variable | `metadata` | 98 |
+| variable | `page` | 118 |
+| variable | `accountStartedAt` | 121 |
+| variable | `accountRoutes` | 122 |
+| variable | `route` | 124 |
+| variable | `route` | 136 |
+| variable | `browserErrors` | 148 |
+| variable | `health` | 152 |
+| variable | `state` | 160 |
+| variable | `directory` | 191 |
+| variable | `serviceLog` | 194 |
+| variable | `statuses` | 195 |
+| variable | `lifecycle` | 260 |
+| variable | `records` | 261 |
+| variable | `launcher` | 262 |
+| variable | `line` | 265 |
+| variable | `service` | 270 |
+| variable | `line` | 271 |
+| variable | `diagnostic` | 278 |
+| variable | `records` | 282 |
+| variable | `stage` | 283 |
+| variable | `pid` | 294 |
 
 ## tests/electron-readiness.test.cjs
 
@@ -2277,6 +2270,34 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `path` | 16 |
 | variable | `{ verifyElectron }` | 17 |
 | variable | `directory` | 20 |
+
+## tests/native-diagnostics.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `fs` | 9 |
+| function | `readDiagnosticLog(file)` | 12 |
+| variable | `descriptor` | 13 |
+| variable | `metadata` | 26 |
+| variable | `bytes` | 29 |
+| variable | `used` | 30 |
+
+## tests/native-diagnostics.test.cjs
+
+| Kind | Declaration | Line |
+|---|---|---|
+| variable | `{ test }` | 8 |
+| variable | `assert` | 9 |
+| variable | `fs` | 10 |
+| variable | `{ tmpdir }` | 11 |
+| variable | `{ join }` | 12 |
+| variable | `{ readDiagnosticLog }` | 13 |
+| variable | `directory` | 16 |
+| variable | `file` | 18 |
+| variable | `directory` | 34 |
+| variable | `file` | 35 |
+| variable | `original` | 37 |
+| variable | `descriptor` | 39 |
 
 ## tests/node-report.test.cjs
 

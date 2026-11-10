@@ -98,3 +98,21 @@ true, all sealing/thread/main milestones and owned child/bootloader disappearanc
 The separate empty-store frozen-service probe also exited gracefully in 0.557 seconds.
 These are local observations, not a claim that the failing hosted condition was
 reproduced or repaired. Actual fresh hosted lifecycle evidence remains required.
+
+## Diagnostic reader findings and correction
+
+The first lifecycle-evidence PR scan identified two `js/file-system-race` results
+in the new native test's diagnostic log readers (alerts 5 and 6). Both performed a
+pathname existence check before opening; these were corrected rather than dismissed
+or excluded. A shared test reader now opens once, handles missing files through
+that operation's ENOENT result, verifies the same descriptor is a regular file,
+reads at most the final 64 KiB and closes in all cases. Available no-follow and
+nonblocking flags also avoid following a substituted link or blocking on a FIFO.
+The descriptor is not claimed to freeze concurrent writes to the same file.
+
+Two actual filesystem regressions cover missing/ordinary/oversized/nonregular
+inputs and pathname replacement after the descriptor has opened. All five Node
+readiness/receipt/descriptor tests pass; strict build and 81 exact source maps pass.
+This correction affects diagnostic acceptance code, not the application shutdown
+protocol, existing deadline or reported hosted failure. Fresh scanning is required
+to confirm the two results have been automatically resolved.
