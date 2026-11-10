@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L24; executable@L30; app@L33; acceptedPackage@L46; resources@L53; file@L54; metadata@L87; page@L107; browserErrors@L110; health@L114; state@L122; directory@L137; serviceLog@L140; statuses@L141
+ * variables: { verifyElectron }@L24; executable@L30; app@L33; acceptedPackage@L46; resources@L53; file@L54; metadata@L87; page@L107; accountStartedAt@L110; accountRoutes@L111; route@L113; route@L125; browserErrors@L137; health@L141; state@L149; directory@L180; serviceLog@L183; statuses@L184
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -107,6 +107,33 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     const page = await app.firstWindow();
     page.once("crash", () => console.error("NATIVE_RENDERER_EVENT", "crashed"));
     page.once("close", () => console.info("NATIVE_RENDERER_EVENT", "closed"));
+    const accountStartedAt = Date.now();
+    const accountRoutes = new Set(["/private/register", "/private/unlock"]);
+    page.on("request", (request) => {
+      const route = new URL(request.url()).pathname;
+      if (request.method() === "POST" && accountRoutes.has(route))
+        console.info(
+          "NATIVE_ACCOUNT_REQUEST",
+          JSON.stringify({
+            route,
+            stage: "started",
+            elapsedMs: Date.now() - accountStartedAt,
+          }),
+        );
+    });
+    page.on("response", (response) => {
+      const route = new URL(response.url()).pathname;
+      if (response.request().method() === "POST" && accountRoutes.has(route))
+        console.info(
+          "NATIVE_ACCOUNT_REQUEST",
+          JSON.stringify({
+            route,
+            stage: "response",
+            status: response.status(),
+            elapsedMs: Date.now() - accountStartedAt,
+          }),
+        );
+    });
     const browserErrors: string[] = [];
     page.on("pageerror", (error) => {
       if (browserErrors.length < 8) browserErrors.push(error.name);
@@ -125,10 +152,26 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
           notice: document
             .getElementById("account-notice")
             ?.textContent?.slice(0, 250),
-          unlockDisabled: (
-            document.querySelector(
-              'button[type="submit"]',
-            ) as HTMLButtonElement | null
+          documentReady: document.readyState,
+          inputs: Array.from(
+            document.querySelectorAll<HTMLInputElement>(
+              "input[name=alias], input[name=password], input[name=phrase]",
+            ),
+          ).map((input) => ({
+            name: input.name,
+            valid: input.validity.valid,
+            valueMissing: input.validity.valueMissing,
+            patternMismatch: input.validity.patternMismatch,
+            tooShort: input.validity.tooShort,
+            tooLong: input.validity.tooLong,
+          })),
+          submitDisabled: (
+            document
+              .querySelector<HTMLInputElement>(
+                "input[name=alias], input[name=phrase]",
+              )
+              ?.closest("form")
+              ?.querySelector("button") as HTMLButtonElement | null
           )?.disabled,
         }))
         .catch(() => ({

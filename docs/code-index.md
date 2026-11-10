@@ -2183,10 +2183,14 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 |---|---|---|
 | type | `Page` | 10 |
 | function | `createSession(page: Page, alias: string)` | 13 |
-| variable | `started` | 32 |
-| variable | `unlocking` | 33 |
-| variable | `response` | 41 |
-| function | `editorJourney(page: Page)` | 65 |
+| variable | `registeringAt` | 22 |
+| variable | `registration` | 23 |
+| variable | `registered` | 32 |
+| variable | `registrationProof` | 37 |
+| variable | `started` | 56 |
+| variable | `unlocking` | 57 |
+| variable | `response` | 65 |
+| function | `editorJourney(page: Page)` | 89 |
 
 ## tests/conftest.py
 
@@ -2206,12 +2210,16 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `file` | 54 |
 | variable | `metadata` | 87 |
 | variable | `page` | 107 |
-| variable | `browserErrors` | 110 |
-| variable | `health` | 114 |
-| variable | `state` | 122 |
-| variable | `directory` | 137 |
-| variable | `serviceLog` | 140 |
-| variable | `statuses` | 141 |
+| variable | `accountStartedAt` | 110 |
+| variable | `accountRoutes` | 111 |
+| variable | `route` | 113 |
+| variable | `route` | 125 |
+| variable | `browserErrors` | 137 |
+| variable | `health` | 141 |
+| variable | `state` | 149 |
+| variable | `directory` | 180 |
+| variable | `serviceLog` | 183 |
+| variable | `statuses` | 184 |
 
 ## tests/electron-readiness.test.cjs
 
@@ -2262,6 +2270,13 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `received` | 148 |
 | variable | `response` | 152 |
 | variable | `creating` | 157 |
+| variable | `release` | 189 |
+| variable | `held` | 190 |
+| variable | `ready` | 193 |
+| variable | `received` | 194 |
+| variable | `response` | 198 |
+| variable | `creating` | 204 |
+| variable | `alias` | 235 |
 
 ## tests/source-journey.ts
 

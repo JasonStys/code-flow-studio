@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: external@L15; origin@L16; url@L20; downloaded@L37; external@L109; origin@L110; release@L143; held@L144; ready@L147; received@L148; response@L152; creating@L157
+ * variables: external@L15; origin@L16; url@L20; downloaded@L37; external@L109; origin@L110; release@L143; held@L144; ready@L147; received@L148; response@L152; creating@L157; release@L189; held@L190; ready@L193; received@L194; response@L198; creating@L204; alias@L235
  * </code-map> */
 
 /** Jason Stys: private website journeys, owner isolation, downloads and no unsolicited external requests. */
@@ -179,4 +179,71 @@ test("account helper observes genuine unlock completion before checking the rend
   await expect(
     page.getByRole("heading", { name: "Unlock your private code workspace" }),
   ).toBeVisible();
+});
+
+test("registration helper waits for a genuine accepted response before recovery", async ({
+  page,
+}) => {
+  /** The real service creates an account; only delivery is held, never substituted with a canned payload. */
+  await page.goto("/");
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let ready!: () => void;
+  const received = new Promise<void>((resolve) => {
+    ready = resolve;
+  });
+  await page.route("**/private/register", async (route) => {
+    const response = await route.fetch();
+    expect(response.status()).toBe(200);
+    ready();
+    await held;
+    await route.fulfill({ response });
+  });
+  const creating = createSession(
+    page,
+    "registration_" + test.info().project.name,
+  );
+  try {
+    await received;
+    await expect(
+      page.getByRole("heading", { name: "Create your local account" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Register account", exact: true }),
+    ).toBeDisabled();
+    await expect(page.locator("#recovery-code")).toHaveCount(0);
+    await expect(
+      page.getByRole("heading", { name: "Make your next iteration count." }),
+    ).toHaveCount(0);
+  } finally {
+    release();
+  }
+  await creating;
+  await page
+    .getByRole("button", { name: "Lock workspace", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Unlock your private code workspace" }),
+  ).toBeVisible();
+});
+
+test("registration helper rejects an actual existing-account response instead of treating click as success", async ({
+  page,
+}) => {
+  const alias = "registration_conflict_" + test.info().project.name;
+  await page.goto("/");
+  await createSession(page, alias);
+  await page.getByRole("button", { name: "Sign out", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Sign in to your local studio" }),
+  ).toBeVisible();
+  await expect(createSession(page, alias)).rejects.toThrow(
+    "Real account registration must succeed",
+  );
+  await expect(page.locator("#recovery-code")).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Make your next iteration count." }),
+  ).toHaveCount(0);
 });
