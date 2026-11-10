@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "project": "code-flow-studio",
+  "author": "Jason Stys",
+  "editionDate": "2026-11-09",
+  "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
+  "sourceUrl": "https://github.com/JasonStys/code-flow-studio/tree/eeac1df6275437f401a8c060b7770c138dbaf132",
+  "functionalEvidenceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
+  "evidenceObservedAt": "2026-11-10T09:40:54.286353+00:00",
+  "workflowEvidence": [
+    {
+      "name": "CodeQL",
+      "headSha": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42791315566"
+    },
+    {
+      "name": "Desktop packages",
+      "headSha": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42791315489"
+    },
+    {
+      "name": "Validate",
+      "headSha": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/code-flow-studio/actions/runs/42791315575"
+    }
+  ],
+  "summary": "Filter diagnostics, unused-code candidates and missed coverage; inspect hash-verified source and navigate safely to unchanged drafts. Fixed rapid typing, worker compatibility and native launch preparation.",
+  "rationale": "Turns report findings into a reproducible developer triage workflow while preserving source identity and isolated execution.",
+  "limitations": [
+    "Twelve bounded flat CLI adapters do not cover every framework, dependency or architecture; coverage and unused-code candidates are not correctness or dead-code proof.",
+    "Execution needs a separately built local Docker worker with no host fallback. Shared worker identity and containers are not a certified public hostile-code sandbox.",
+    "Hashes bind retained bytes and locations, not trusted attestation by a malicious target. UI-only report fixtures are separate from native collector evidence.",
+    "Local accounts trust the OS and unlocked service. Downloads are unsigned development builds; no native mobile installer or clean-machine installer lifecycle certification is claimed."
+  ],
+  "documents": [
+    {
+      "filename": "project-guide.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 45782,
+      "sha256": "50920e113b79dd071f6f1e927d656bfc63d46e1bf98239374de634be2176bfd9",
+      "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 6,
+        "renderedPageSha256": {
+          "page-1.png": "610de09770df16ac8b4b0c5d3a7d57863d73994847314e9563059f025949477a",
+          "page-2.png": "8d1029a2356088276ff475806232582176dee2edaec0343d5d98201c553b9304",
+          "page-3.png": "e115599498399b63c6793b12795be7cb8306f28874e115bdef23e6d5ac827e63",
+          "page-4.png": "7dbcbac153ceec3e3eee6d5770adf2ba003db344ae175f474191c16fc0d099d8",
+          "page-5.png": "3fdc61cb9dd7577e2bf8a2cd9339e801dce34e621764c9fcf9976416d2311e86",
+          "page-6.png": "94dfdae4f1043eb589160980749b70fc7be51688f612aacf2512d172070a85f5"
+        }
+      }
+    },
+    {
+      "filename": "validation-review.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 48485,
+      "sha256": "c94e4fc9b6a56c25baabd7160a5f0414015459107e14ea8c905cdf4c5b9a00ce",
+      "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 7,
+        "renderedPageSha256": {
+          "page-1.png": "39b9f8ca2b0ec01e2931f77a2e8ffd100af81ab34ca2892d104a412a67f364f4",
+          "page-2.png": "866d6d752dbd26d397c65de09a31f6e648599623ea4ea6b9ea8a4aa89695202a",
+          "page-3.png": "bc7d2d2570f6d0bc349d34100a168d52e754e00f8756b0ca55021f7021760249",
+          "page-4.png": "19730b39fde3cbe66cee95406ad60469318e005a2283acd106c1256fd7adf727",
+          "page-5.png": "38141efb11c0705c484d9d1ca6401100972b3d47e0ffd1f8fabbb6f077d5e9c6",
+          "page-6.png": "e77bf5f2cae65db10fb873f193e8b562c13f744871aecd2a6eaf8e0c799b0762",
+          "page-7.png": "0fc2e8492822ce26be55294e1244dcb2c7d952a543c9204148ecc0063f3b4491"
+        }
+      }
+    },
+    {
+      "filename": "validation-evidence.xlsx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "bytes": 7695,
+      "sha256": "12ed9f288f77f4a930115126fdc1b9140b8680da2c0c67d46ff1fc184ee83f8c",
+      "sourceBaseline": "eeac1df6275437f401a8c060b7770c138dbaf132",
+      "visualReview": {
+        "approved": true,
+        "tabsReviewed": ["Workflow evidence", "Test sources"],
+        "previewSha256": {
+          "workflow-evidence.png": "34609745f653ec1919de40b0268a1bd325acde0a5817529598b0b2bce67d30e5",
+          "test-sources.png": "3e1c739000f0afbd3da738e5711e164ee84919c4500e45edc445f503af5ff476"
+        },
+        "tables": [
+          {
+            "path": "xl/tables/table1.xml",
+            "name": "WorkflowEvidence",
+            "range": "A7:D10",
+            "columns": 4,
+            "autoFilter": true,
+            "filterButtonsEnabled": true
+          },
+          {
+            "path": "xl/tables/table2.xml",
+            "name": "TestSources",
+            "range": "A7:C31",
+            "columns": 3,
+            "autoFilter": true,
+            "filterButtonsEnabled": true
+          }
+        ],
+        "formulaCount": 4,
+        "failureSensitivityReceiptPassed": true,
+        "formulaErrors": 0
+      }
+    }
+  ],
+  "scope": "Reviewed documentation editions of the cited source. Checksums identify bytes, not authorship. Historical measurements retain their own dates; integration CI must be checked separately."
+}

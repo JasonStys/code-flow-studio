@@ -1,2 +1,4 @@
 # Worker resources must remain Linux-compatible even inside Windows/macOS installers.
 runner/** text eol=lf
+*.docx binary
+*.xlsx binary

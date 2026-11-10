@@ -3,6 +3,49 @@
 By Jason Stys. This follow-up changes validation and diagnostics; application behavior,
 account schemas and the prepared 0.4.1 product version are unchanged.
 
+## Verified current-main source — 2026-11-10
+
+Source `eeac1df6275437f401a8c060b7770c138dbaf132` passed all three exact-main
+push workflows: [Validate 42791315575](https://github.com/JasonStys/code-flow-studio/actions/runs/42791315575),
+[Desktop packages 42791315489](https://github.com/JasonStys/code-flow-studio/actions/runs/42791315489)
+and [CodeQL 42791315566](https://github.com/JasonStys/code-flow-studio/actions/runs/42791315566).
+The following older failures and local measurements retain their original scopes.
+
+Actual full-main job logs identify this source and contain no PR diff range or
+incremental exclusion filter. They report 52/52 Python, 19/19 TypeScript, 10/10
+JavaScript, 1/1 HTML and 4/4 Actions files scanned. Processed SARIF has zero results
+in each category, with 50 Python, 103 JavaScript/TypeScript and 23 Actions queries,
+without processing errors/warnings. The main alert inventory is empty. Original
+alerts 1–2 automatically closed as fixed; four later PR-only findings have fixed
+instances at their own PR refs. No alert was dismissed or query suppressed.
+Query counts and scanned-file inventory are not code coverage or vulnerability freedom.
+
+All three native operating-system jobs passed their SDK and actual compiled
+application journeys. The actual Windows job
+[129745181301](https://github.com/JasonStys/code-flow-studio/actions/runs/42791315489/job/129745181301)
+completed SDK acceptance in 10.3 seconds and compiled acceptance in 7.7 seconds.
+Both recorded shutdown HTTP 200/stopping true, actual workspace/lifespan/thread/main
+completion and owned frozen-child/bootloader exit; the test also verifies those PIDs
+are absent without terminating them. Packaged source identity and the corrected
+worker resource SHA are checked against this checkout. This is native package
+acceptance, not downloaded-installer or clean-machine proof.
+
+The complete source Validate gate includes actual isolated workers, privacy/browser
+checks and synthetic training smoke; these are separate from static analysis and
+local report fixtures. Local controller/training validation measured 1,462/1,734
+statements (84.31%, unchanged 80% floor), with 252 tests and 28 subtests. Five Node
+readiness/receipt/descriptor cases and 81 source maps passed. These denominators do
+not include worker runtime, trained-model quality or all renderer statements.
+
+The strengthened completion/diagnostic contracts now provide explicit evidence;
+the original intermittent hosted registration/shutdown causes were not reproduced
+or conclusively identified. Existing deadlines and zero retries remain unchanged.
+A 0.4.1 downloadable release still needs independent draft/download/installer
+acceptance and the release owner's promotion; this source observation does not
+claim publication or change any installed application, account, store or 0.4.0 asset.
+
+## Earlier observations and independent regressions
+
 ## Observed hosted failure
 
 The full-main source `4f1d0aafd151db3c183e342012900dc75beda96d` passed
@@ -31,20 +74,9 @@ values, response bodies, aliases, passwords and recovery/vault material.
 
 ## Independent local checks
 
-- Eighteen actual private-browser journeys passed across Chromium, Firefox and
-  WebKit, including genuine held registration and genuine duplicate-account cases.
-  The held response comes from the real service: while delivery is held the form
-  remains busy, with neither recovery nor workspace visible; releasing it completes
-  a real account/unlock/lock journey. No canned success payload or timed sleep is used.
-- The duplicate-account case receives the real conflict response and requires the
-  helper to reject it before claiming recovery or workspace success. Replacing only
-  the helper with its previous committed implementation makes this regression fail;
-  the corrected file was restored byte-for-byte afterwards.
-- The owned Windows Electron SDK journey passed in 5.7 seconds. A freshly rebuilt,
-  unsigned unpacked Windows development application passed in 5.5 seconds, with
-  embedded reviewed worker bytes and honestly dirty development provenance checked.
-  Both use disposable profiles and close only their owned process. They do not prove
-  installation, a clean machine, other operating systems or future hosted results.
+- Eighteen actual private-browser journeys passed across Chromium, Firefox and WebKit, including genuine held registration and genuine duplicate-account cases. The held response comes from the real service: while delivery is held the form remains busy, with neither recovery nor workspace visible; releasing it completes a real account/unlock/lock journey. No canned success payload or timed sleep is used.
+- The duplicate-account case receives the real conflict response and requires the helper to reject it before claiming recovery or workspace success. Replacing only the helper with its previous committed implementation makes this regression fail; the corrected file was restored byte-for-byte afterwards.
+- The owned Windows Electron SDK journey passed in 5.7 seconds. A freshly rebuilt, unsigned unpacked Windows development application passed in 5.5 seconds, with embedded reviewed worker bytes and honestly dirty development provenance checked. Both use disposable profiles and close only their owned process. They do not prove installation, a clean machine, other operating systems or future hosted results.
 - Strict TypeScript/Vite build, Ruff and generated source-index checks passed.
   Existing large-chunk and pytest-cache warnings are not hidden.
 
