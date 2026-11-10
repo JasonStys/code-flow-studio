@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "repository": "code-flow-studio",
+  "runtimeVersion": "0.4.3",
+  "runtimeSource": "1d0b19ed589947ae45e93555d97331c95cad26cc",
+  "createdAt": "2026-11-10T23:09:57.579Z",
+  "author": "Jason Stys",
+  "document": "windows-application-guide.docx",
+  "sha256": "15f42a67a7580d3f4cb8e2d97926ccc6bb644f93c841cef06c30b4b32503fd18",
+  "screenshots": [
+    {
+      "file": "desktop-workspace.png",
+      "sha256": "38828b82fa0f3b6871bda9c2dc95ca6c0dc9801fe4b2921462d237b97aaf8c70",
+      "width": 2139,
+      "height": 1407,
+      "caption": "The actual installed workspace with a synthetic project after revision save and static review. This overview illustrates the interface; the native journey independently verified real account creation, vault unlock, editing and history."
+    },
+    {
+      "file": "desktop-source-inspector.png",
+      "sha256": "f5138722b3ec6e9c4f5840197276e16c498a1f34b778a12394b47397f5b671a1",
+      "width": 1634,
+      "height": 1239,
+      "caption": "The installed application highlights physical line 6 of helper.py in its immutable evidence snapshot. The current draft matches the verified source bytes. This is static evidence from a synthetic example, not a local compiler execution claim."
+    }
+  ],
+  "snippets": [
+    {
+      "file": "runner/csharp_coverage_bridge.py",
+      "first": 239,
+      "last": 250,
+      "sha256": "64e1d4e2dfca531b58e595945e937b41de1334eaba71b729e85794f8ff4fcc41",
+      "url": "https://github.com/JasonStys/code-flow-studio/blob/1d0b19ed589947ae45e93555d97331c95cad26cc/runner/csharp_coverage_bridge.py#L239"
+    },
+    {
+      "file": "ui/SourceInspector.tsx",
+      "first": 60,
+      "last": 79,
+      "sha256": "2413783242d19c11b1eab25dddb7a4985aec247689df7980ebe2ee2933797a73",
+      "url": "https://github.com/JasonStys/code-flow-studio/blob/1d0b19ed589947ae45e93555d97331c95cad26cc/ui/SourceInspector.tsx#L60"
+    }
+  ],
+  "observedTests": [
+    {
+      "name": "Installed identity",
+      "observed": "Version 0.4.3, immutable release source and bundled Node analyzer and CSharp bridge hashes matched.",
+      "result": "Passed"
+    },
+    {
+      "name": "Native user journey",
+      "observed": "One real installed executable journey passed with disposable registration, WebCrypto unlock, editor, revision, source inspection and 48 category catalog.",
+      "result": "Passed"
+    },
+    {
+      "name": "Lock and shutdown",
+      "observed": "The journey checked vault lock, owned service drain, sealing and actual service and bootloader exit.",
+      "result": "Passed"
+    },
+    {
+      "name": "Source release tests",
+      "observed": "The published source passed 419 tests and 28 subtests, with 85.01 percent controller and training coverage at the unchanged 80 percent floor.",
+      "result": "Passed"
+    },
+    {
+      "name": "Hosted CSharp controls",
+      "observed": "Actual target exits 0, 1, 2, 7, 255 and malformed input 2 were measured; argument rejection, report write failure and timeout were blocked.",
+      "result": "Passed"
+    }
+  ],
+  "visualReview": {
+    "approved": true,
+    "method": "Every current rendered page individually viewed; pages 1 to 3 match the previously reviewed render byte for byte; page 4 inspected after the help-link pagination correction.",
+    "pageCount": 4,
+    "renderedPageSha256": {
+      "page-1.png": "df2043daff2b642f16f9bf42cb32f9fcc724b096496a1d645c700d2e75275d49",
+      "page-2.png": "c9bbef7496430f7bbb13843c5f6622defac12196d0b1f80dfb7c947ce3952fc0",
+      "page-3.png": "c85cf054d550823a2127a17b3b7e0348c73dba3ec6ca1ac68ab947d2c2bc6626",
+      "page-4.png": "5216facbd162c1a5d569ee53481a5db7f5d54925496e7bd8a9d7fb97d01b8a73"
+    }
+  },
+  "structureValidation": {
+    "result": "passed",
+    "method": "OOXML schema/paragraph validation; explicit UTF-8 Python mode on Windows; all existing source text and image pixels retained."
+  }
+}

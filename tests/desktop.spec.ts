@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; file@L91; metadata@L103; page@L123; accountStartedAt@L126; accountRoutes@L127; route@L129; route@L141; browserErrors@L153; health@L157; state@L165; directory@L196; serviceLog@L199; statuses@L200; lifecycle@L265; records@L266; launcher@L273; line@L276; service@L281; line@L282; diagnostic@L289; records@L293; stage@L294; record@L306; pid@L319
+ * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; file@L91; metadata@L103; page@L123; accountStartedAt@L126; accountRoutes@L127; route@L129; route@L141; browserErrors@L153; health@L157; state@L165; directory@L196; serviceLog@L199; statuses@L200; sourceInspector@L223; lifecycle@L273; records@L274; launcher@L281; line@L284; service@L289; line@L290; diagnostic@L297; records@L301; stage@L302; record@L314; pid@L327
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -220,7 +220,10 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     await editorJourney(page);
     console.info("NATIVE_JOURNEY_STAGE", "editor:complete");
     console.info("NATIVE_JOURNEY_STAGE", "source-inspection:start");
-    await inspectHelper(page);
+    const sourceInspector = await inspectHelper(page);
+    await sourceInspector.screenshot({
+      path: "artifacts/desktop-source-inspector.png",
+    });
     console.info("NATIVE_JOURNEY_STAGE", "source-inspection:complete");
     console.info("NATIVE_JOURNEY_STAGE", "workspace-security:start");
     await page.getByRole("button", { name: "Workspace", exact: true }).click();
@@ -236,6 +239,11 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     );
     await page.getByRole("button", { name: "Test catalog" }).click();
     await expect(page.locator(".catalog-grid article")).toHaveCount(48);
+    // Actual installed-app evidence for the user guide; synthetic profile only.
+    await page.screenshot({
+      path: "artifacts/desktop-test-catalog.png",
+      fullPage: false,
+    });
     await page.getByRole("button", { name: "Workspace", exact: true }).click();
     expect(new URL(page.url()).hash).toBe("");
     expect(
@@ -245,7 +253,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
     console.info("NATIVE_JOURNEY_STAGE", "screenshot:start");
     await page.screenshot({
       path: "artifacts/desktop-workspace.png",
-      fullPage: true,
+      fullPage: false,
     });
     console.info("NATIVE_JOURNEY_STAGE", "screenshot:complete");
     console.info("NATIVE_JOURNEY_STAGE", "lock:start");

@@ -127,6 +127,12 @@ dependency, privacy and isolation checks; it does not certify every input or pla
 
 ## Documentation editions
 
+The current [Windows application guide](docs/reports/windows-application-guide.docx)
+contains actual installed 0.4.3 screenshots, a worked source-inspection journey,
+important source excerpts and explicit test limits. See the
+[fresh desktop acceptance](docs/reports/windows-application-2026-11-10.md) and
+[guide identities](docs/reports/windows-application-guide.json).
+
 Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx) · [validation-review.docx](docs/reports/validation-review.docx) · [validation-evidence.xlsx](docs/reports/validation-evidence.xlsx).
 
 [Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
