@@ -1,0 +1,76 @@
+name: Compiler execution acceptance
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: compiler-execution-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  realistic-compilers:
+    name: Realistic compilers (${{ matrix.runtime }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        runtime: [release-0.4.2, current]
+    steps:
+      - name: Check out reviewed validation scenarios
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: validation
+          persist-credentials: false
+      - name: Check out independently identified runtime
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: runtime
+          ref: ${{ matrix.runtime == 'release-0.4.2' && 'eb9b1cd0c3e3fd1e70e397edeffb059073464f74' || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Install only controller validation dependencies
+        run: python -m pip install -e './runtime[dev]'
+      - name: Identify exact runtime source
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'CFS_RUNTIME_SOURCE=%s\n' "$(git -C runtime rev-parse HEAD)" >> "$GITHUB_ENV"
+      - name: Build worker on disposable hosted runner
+        run: docker build --label org.opencontainers.image.revision="$CFS_RUNTIME_SOURCE" -t code-flow-worker:0.4.2 runtime/runner
+      - name: Run realistic programs and deliberate failure controls
+        working-directory: runtime
+        env:
+          PYTHONPATH: ${{ github.workspace }}/runtime:${{ github.workspace }}/validation
+          CFS_VALIDATION_LANE: ${{ matrix.runtime }}
+        run: >-
+          python ../validation/scripts/compiler_acceptance.py
+          --runtime-root .
+          --runtime-source "$CFS_RUNTIME_SOURCE"
+          --lane "$CFS_VALIDATION_LANE"
+          --output ../validation/artifacts/compiler-validation
+      - name: Test the actual published frozen 0.4.2 service
+        if: matrix.runtime == 'release-0.4.2'
+        working-directory: validation
+        run: python -m scripts.released_service_probe --output artifacts/released-service
+      - name: Retain a compact result table in the run summary
+        if: always()
+        shell: bash
+        run: |
+          if test -f validation/artifacts/compiler-validation/summary.md; then
+            cat validation/artifacts/compiler-validation/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Save small synthetic reports, including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: compiler-validation-${{ matrix.runtime }}
+          path: |
+            validation/artifacts/compiler-validation/results.json
+            validation/artifacts/compiler-validation/summary.md
+            validation/artifacts/released-service/*.json
+          if-no-files-found: error
+          retention-days: 3
