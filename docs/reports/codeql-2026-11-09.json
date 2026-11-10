@@ -1,0 +1,62 @@
+{
+  "author": "Jason Stys",
+  "repository": "JasonStys/code-flow-studio",
+  "scope": "First genuine observed PR merge-ref security-extended scan; a source-bound historical observation, not a security certification",
+  "pullRequest": "https://github.com/JasonStys/code-flow-studio/pull/3",
+  "headCommit": "94e69adb2af9279f56583ad5ab963138ab6c6089",
+  "analyzedMergeCommit": "22ddd4e6b2701129b8f1192bcdb9f0628bf1d342",
+  "ref": "refs/pull/3/merge",
+  "codeqlVersion": "2.27.4",
+  "actionCommit": "33d7b85da1a04171e211befe2c739303b9a4c066",
+  "querySuite": "security-extended",
+  "analyses": [
+    {
+      "language": "python",
+      "category": "/language:python",
+      "analysisId": 2132757586,
+      "analyzedCommit": "22ddd4e6b2701129b8f1192bcdb9f0628bf1d342",
+      "extractedRepositoryPaths": 46,
+      "rules": 50,
+      "results": 0,
+      "error": "",
+      "warning": "",
+      "jobUrl": "https://github.com/JasonStys/code-flow-studio/actions/runs/42763968827/job/129655983033",
+      "sarifProcessing": "complete"
+    },
+    {
+      "language": "javascript-typescript",
+      "category": "/language:javascript-typescript",
+      "analysisId": 2132758739,
+      "analyzedCommit": "22ddd4e6b2701129b8f1192bcdb9f0628bf1d342",
+      "extractedRepositoryPaths": 32,
+      "rules": 103,
+      "results": 0,
+      "error": "",
+      "warning": "",
+      "jobUrl": "https://github.com/JasonStys/code-flow-studio/actions/runs/42763968827/job/129655983052",
+      "sarifProcessing": "complete"
+    },
+    {
+      "language": "actions",
+      "category": "/language:actions",
+      "analysisId": 2132757399,
+      "analyzedCommit": "22ddd4e6b2701129b8f1192bcdb9f0628bf1d342",
+      "extractedRepositoryPaths": 4,
+      "rules": 23,
+      "results": 0,
+      "error": "",
+      "warning": "",
+      "jobUrl": "https://github.com/JasonStys/code-flow-studio/actions/runs/42763968827/job/129655982615",
+      "sarifProcessing": "complete"
+    }
+  ],
+  "openAlertsOnQueriedRef": 0,
+  "sourceOrQueryExclusionsAdded": false,
+  "suppressionsOrDismissalsAdded": false,
+  "sarifResultsFabricated": false,
+  "limitations": [
+    "Language-specific extracted paths are not line/branch coverage or universal support for dynamic source.",
+    "Zero results/open alerts at this exact ref does not prove absence of vulnerabilities.",
+    "Existing runtime/browser/native/ML/isolation gates remain separate requirements."
+  ]
+}
