@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: complete_result(project)@L24; test_practical_matrix_is_complete_and_independent()@L80; test_positive_validator_rejects_incomplete_or_fabricated_evidence(defect)@L124; test_exact_compiler_location_and_nonexecution_are_required()@L178; test_runtime_failure_is_distinct_from_incorrect_oracle()@L211; test_real_execution_guard_refuses_this_pc_before_subprocess(monkeypatch)@L247; test_actual_first_hosted_reports_retain_their_real_tool_semantics(language, kind)@L258
-# variables: content@L26; case@L42; case@L46; case@L63; language@L84; project@L85; case@L87; duplicate@L91; project@L126; result@L127; project@L180; result@L181; defect@L199; changed@L200; project@L213; result@L214; wrong@L236; observed@L262; item@L265; row@L265; project@L266; changed@L271; changed@L275
-# parameters: project@L24; defect@L124; monkeypatch@L247; kind@L258; language@L258
+# functions: complete_result(project)@L30; test_practical_matrix_is_complete_and_independent()@L119; test_positive_validator_rejects_incomplete_or_fabricated_evidence(defect)@L163; test_exact_compiler_location_and_nonexecution_are_required()@L217; test_runtime_failure_is_distinct_from_incorrect_oracle()@L250; test_real_execution_guard_refuses_this_pc_before_subprocess(monkeypatch)@L286; test_actual_first_hosted_reports_retain_their_real_tool_semantics(language, kind)@L297; test_current_csharp_rejects_the_historical_partial_allowance()@L320; test_current_csharp_requires_separate_source_bound_exit_observation(defect)@L331
+# variables: content@L32; result@L33; case@L48; case@L52; case@L69; source_hash@L85; file@L87; bridge_hash@L93; case@L96; index@L96; record@L96; raw@L97; language@L123; project@L124; case@L126; duplicate@L130; project@L165; result@L166; project@L219; result@L220; defect@L238; changed@L239; project@L252; result@L253; wrong@L275; observed@L301; item@L304; row@L304; project@L305; changed@L310; changed@L314; observed@L322; item@L323; row@L323; project@L333; result@L334; case@L335
+# parameters: project@L30; defect@L163; monkeypatch@L286; kind@L297; language@L297; defect@L331
 # </code-map>
 
 """Jason Stys: reject fabricated/incomplete compiler evidence without using local Docker."""
@@ -17,14 +17,20 @@ from pathlib import Path
 import pytest
 
 from examples.practical_projects import CASES, PROGRAMS, RUNTIME_FAILURES, SYNTAX_FAILURES, practical_project
-from scripts.compiler_acceptance import negative_project, provenance, validate_negative, validate_positive
+from scripts.compiler_acceptance import (
+    CSHARP_TARGET,
+    negative_project,
+    provenance,
+    validate_negative,
+    validate_positive,
+)
 from studio.models import LANGUAGES
 
 
 def complete_result(project):
     """A minimal synthetic evidence record for validator mutation tests, never toolchain proof."""
     content = project.files[0].content
-    return {
+    result = {
         "tool_status": "completed",
         "compilation": {"exit_code": 0},
         "checks": {
@@ -75,6 +81,39 @@ def complete_result(project):
         "unused": {"status": "completed"},
         "static": {"files": {project.entry: {"parsed": True}}},
     }
+    if project.language == "csharp":
+        source_hash = hashlib.sha256(
+            json.dumps(
+                [file.model_dump() for file in project.files],
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+            ).encode()
+        ).hexdigest()
+        bridge_hash = hashlib.sha256(
+            (Path(__file__).parents[1] / "runner/csharp_coverage_bridge.py").read_bytes()
+        ).hexdigest()
+        for index, (case, record) in enumerate(zip(project.cases, result["coverage"]["cases"], strict=True)):
+            raw = case.stdin.encode()
+            record.update(
+                {
+                    "target_exit_code": case.exit_code,
+                    "collector_exit_code": 0,
+                    "collector_output_truncated": False,
+                    "bridge": {
+                        "schema": 1,
+                        "nonce": "a" * 64,
+                        "case_index": index,
+                        "source_sha256": source_hash,
+                        "stdin_sha256": hashlib.sha256(raw).hexdigest(),
+                        "stdin_bytes": len(raw),
+                        "target": CSHARP_TARGET,
+                        "target_exit_code": case.exit_code,
+                        "bridge_sha256": bridge_hash,
+                    },
+                }
+            )
+    return result
 
 
 def test_practical_matrix_is_complete_and_independent():
@@ -264,15 +303,45 @@ def test_actual_first_hosted_reports_retain_their_real_tool_semantics(language, 
     )
     row = next(item for item in observed["reports"] if item["language"] == language and item["kind"] == kind)
     project = Project.model_validate(row["project"])
-    validate_positive(row["result"], project)
+    validate_positive(row["result"], project, historical_source=observed["source"])
     if language == "csharp":
         # Do not disguise the collector's expected nonzero wrapper result as full coverage.
         assert row["result"]["coverage"]["status"] == "partial"
         changed = copy.deepcopy(row["result"])
         changed["coverage"]["status"] = "measured"
         with pytest.raises(ValueError, match="collector exits"):
-            validate_positive(changed, project)
+            validate_positive(changed, project, historical_source=observed["source"])
         changed = copy.deepcopy(row["result"])
         changed["coverage"]["cases"][0]["exit_code"] = 1
         with pytest.raises(ValueError, match="Unexpected instrumented"):
-            validate_positive(changed, project)
+            validate_positive(changed, project, historical_source=observed["source"])
+
+
+def test_current_csharp_rejects_the_historical_partial_allowance():
+    """Current workers cannot opt into old partial completion by copying a tool name/message."""
+    observed = json.loads((Path(__file__).parent / "fixtures/compiler-reports-042.json").read_text())
+    row = next(item for item in observed["reports"] if item["language"] == "csharp")
+    from studio.models import Project
+
+    with pytest.raises(ValueError):
+        validate_positive(row["result"], Project.model_validate(row["project"]))
+
+
+@pytest.mark.parametrize("defect", ["collector", "target", "binding", "helper", "false-complete"])
+def test_current_csharp_requires_separate_source_bound_exit_observation(defect):
+    """A collector success or an expected-code guess cannot replace the bridge observation."""
+    project = practical_project("csharp")
+    result = complete_result(project)
+    case = result["coverage"]["cases"][0]
+    if defect == "collector":
+        case["collector_exit_code"] = 1
+    elif defect == "target":
+        case["target_exit_code"] = 7
+    elif defect == "binding":
+        case["bridge"]["case_index"] = 5
+    elif defect == "helper":
+        case["bridge"]["bridge_sha256"] = "0" * 64
+    else:
+        result["coverage"]["status"] = "partial"
+    with pytest.raises(ValueError):
+        validate_positive(result, project)

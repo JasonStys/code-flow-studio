@@ -17,6 +17,11 @@ jobs:
       fail-fast: false
       matrix:
         runtime: [release-0.4.2, current]
+        include:
+          - runtime: release-0.4.2
+            worker-version: '0.4.2'
+          - runtime: current
+            worker-version: '0.4.3'
     steps:
       - name: Check out reviewed validation scenarios
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
@@ -40,7 +45,9 @@ jobs:
           set -euo pipefail
           printf 'CFS_RUNTIME_SOURCE=%s\n' "$(git -C runtime rev-parse HEAD)" >> "$GITHUB_ENV"
       - name: Build worker on disposable hosted runner
-        run: docker build --label org.opencontainers.image.revision="$CFS_RUNTIME_SOURCE" -t code-flow-worker:0.4.2 runtime/runner
+        env:
+          CFS_WORKER_IMAGE: code-flow-worker:${{ matrix.worker-version }}
+        run: docker build --label org.opencontainers.image.revision="$CFS_RUNTIME_SOURCE" -t "$CFS_WORKER_IMAGE" runtime/runner
       - name: Run realistic programs and deliberate failure controls
         working-directory: runtime
         env:
@@ -52,6 +59,12 @@ jobs:
           --runtime-source "$CFS_RUNTIME_SOURCE"
           --lane "$CFS_VALIDATION_LANE"
           --output ../validation/artifacts/compiler-validation
+      - name: Verify actual C# target exits and collector failures
+        if: matrix.runtime == 'current'
+        working-directory: runtime
+        env:
+          PYTHONPATH: ${{ github.workspace }}/runtime:${{ github.workspace }}/validation
+        run: python -m scripts.csharp_coverage_checks --runtime-source "$CFS_RUNTIME_SOURCE" --output ../validation/artifacts/csharp-coverage
       - name: Test the actual published frozen 0.4.2 service
         if: matrix.runtime == 'release-0.4.2'
         working-directory: validation
@@ -72,5 +85,6 @@ jobs:
             validation/artifacts/compiler-validation/results.json
             validation/artifacts/compiler-validation/summary.md
             validation/artifacts/released-service/*.json
+            validation/artifacts/csharp-coverage/*.json
           if-no-files-found: error
           retention-days: 3

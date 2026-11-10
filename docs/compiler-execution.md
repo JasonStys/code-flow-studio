@@ -97,9 +97,9 @@ These are flat-project demonstrations, not production domain algorithms or an
 empirical Big-O measurement. Timings include process startup; small changes and
 cross-language rankings are not reliable performance comparisons.
 
-### Tool-specific coverage completion
+### Historical 0.4.2 coverage completion
 
-The C# malformed-input case correctly returns exit 2 in the ordinary execution.
+The historical 0.4.2 C# malformed-input case correctly returns exit 2 in ordinary execution.
 Coverlet 8.0.1 wraps that expected nonzero target exit as collector exit 1. The
 application conservatively retains `coverage.status: partial`, despite a valid
 source-bound report. Acceptance requires all six ordinary case outputs/exits,
@@ -118,3 +118,8 @@ source line; location bounds use the same newline convention as the app/editor.
 The [observed report snapshots](../tests/fixtures/compiler-reports-042.json) retain
 these actual first-run results, including their original failed-acceptance labels;
 replay unit tests are not a new compiler run.
+
+Current 0.4.3 workers use a [separate exact target-exit bridge](csharp-coverage.md)
+and must report measured completion for approved nonzero exits. The old partial
+allowance is available only to the independently pinned 0.4.2 baseline verifier;
+it cannot make a current worker pass acceptance.

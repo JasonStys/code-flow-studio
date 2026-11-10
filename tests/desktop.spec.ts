@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; metadata@L98; page@L118; accountStartedAt@L121; accountRoutes@L122; route@L124; route@L136; browserErrors@L148; health@L152; state@L160; directory@L191; serviceLog@L194; statuses@L195; lifecycle@L260; records@L261; launcher@L268; line@L271; service@L276; line@L277; diagnostic@L284; records@L288; stage@L289; record@L301; pid@L314
+ * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; file@L91; metadata@L103; page@L123; accountStartedAt@L126; accountRoutes@L127; route@L129; route@L141; browserErrors@L153; health@L157; state@L165; directory@L196; serviceLog@L199; statuses@L200; lifecycle@L265; records@L266; launcher@L273; line@L276; service@L281; line@L282; diagnostic@L289; records@L293; stage@L294; record@L306; pid@L319
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -66,6 +66,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
         "Dockerfile",
         "worker.py",
         "language_checks.py",
+        "csharp_coverage_bridge.py",
         "node_checks.cjs",
         "sql_runtime.py",
         "php_coverage.php",
@@ -85,16 +86,20 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       expect(
         existsSync(join(resources, "runner", "tools", "node_modules")),
       ).toBe(false);
-      // Prove the actual distributed worker resource is this reviewed source, not an older existence-only copy.
-      expect(
-        createHash("sha256")
-          .update(readFileSync(join(resources, "runner", "node_checks.cjs")))
-          .digest("hex"),
-      ).toBe(
-        createHash("sha256")
-          .update(readFileSync("runner/node_checks.cjs"))
-          .digest("hex"),
-      );
+      // Bind the actual packaged analyzers and C# bridge to this reviewed source.
+      // Metadata schema 1 retains its legacy Node-only worker_sha256 field.
+      for (const file of ["node_checks.cjs", "csharp_coverage_bridge.py"]) {
+        expect(
+          createHash("sha256")
+            .update(readFileSync(join(resources, "runner", file)))
+            .digest("hex"),
+          `Bundled worker digest: ${file}`,
+        ).toBe(
+          createHash("sha256")
+            .update(readFileSync(join("runner", file)))
+            .digest("hex"),
+        );
+      }
       const metadata = JSON.parse(
         readFileSync(
           join(resources, "metadata", "source-release.json"),
@@ -103,7 +108,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       );
       expect(metadata.schema).toBe(1);
       expect(metadata.product).toBe("code-flow-studio");
-      expect(metadata.version).toBe("0.4.2");
+      expect(metadata.version).toBe("0.4.3");
       expect(metadata.source).toMatch(/^[a-f0-9]{40}$/);
       expect(typeof metadata.source_dirty).toBe("boolean");
       expect(metadata.worker_sha256).toBe(
@@ -150,7 +155,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       if (browserErrors.length < 8) browserErrors.push(error.name);
     });
     const health = await page.request.get(new URL("/health", page.url()).href);
-    expect((await health.json()).version).toBe("0.4.2");
+    expect((await health.json()).version).toBe("0.4.3");
     try {
       console.info("NATIVE_JOURNEY_STAGE", "account:start");
       await createSession(page, "native_fictional");
@@ -332,7 +337,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       "artifacts/native-resource-acceptance.json",
       JSON.stringify({
         schema: 1,
-        version: "0.4.2",
+        version: "0.4.3",
         source: acceptedPackage.source,
         worker_sha256: acceptedPackage.worker_sha256,
         compiled_app: true,

@@ -6,4 +6,4 @@
 
 """Code Flow Studio orchestration package. Symbol locations: docs/code-index.md."""
 
-__version__ = "0.4.2"
+__version__ = "0.4.3"

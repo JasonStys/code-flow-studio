@@ -2,6 +2,10 @@
 
 By Jason Stys.
 
+Current source is 0.4.3, with the [exact C# target/collector exit correction](csharp-coverage.md)
+and [its own validation report](reports/csharp-coverage-2026-11-10.md). This source
+change does not replace published 0.4.2 packages or install anything on a user's PC.
+
 Version [0.4.2 is published](https://github.com/JasonStys/code-flow-studio/releases/tag/v0.4.2).
 Read its [release notes](releases/v0.4.2.md), the
 [observed draft-verification CI correction](reports/draft-release-visibility-2026-11-10.md)
