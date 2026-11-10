@@ -2897,17 +2897,18 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `directory` | 196 |
 | variable | `serviceLog` | 199 |
 | variable | `statuses` | 200 |
-| variable | `lifecycle` | 265 |
-| variable | `records` | 266 |
-| variable | `launcher` | 273 |
-| variable | `line` | 276 |
-| variable | `service` | 281 |
-| variable | `line` | 282 |
-| variable | `diagnostic` | 289 |
-| variable | `records` | 293 |
-| variable | `stage` | 294 |
-| variable | `record` | 306 |
-| variable | `pid` | 319 |
+| variable | `sourceInspector` | 223 |
+| variable | `lifecycle` | 273 |
+| variable | `records` | 274 |
+| variable | `launcher` | 281 |
+| variable | `line` | 284 |
+| variable | `service` | 289 |
+| variable | `line` | 290 |
+| variable | `diagnostic` | 297 |
+| variable | `records` | 301 |
+| variable | `stage` | 302 |
+| variable | `record` | 314 |
+| variable | `pid` | 327 |
 
 ## tests/electron-readiness.test.cjs
 

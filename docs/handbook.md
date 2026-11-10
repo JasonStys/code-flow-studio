@@ -21,6 +21,12 @@ Turns report findings into a reproducible developer triage workflow while preser
 
 ## Read the documentation
 
+For the current installed application, read the illustrated
+[Windows application guide](reports/windows-application-guide.docx) and its
+[observed native acceptance](reports/windows-application-2026-11-10.md).
+The guide includes actual synthetic workspace/source-inspector screenshots,
+immutable source excerpts and operating limits.
+
 | Edition                                                      | Audience and contents                                                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | [project-guide.docx](reports/project-guide.docx)             | User and developer guide: purpose, current usage, design, boundaries and source references.                        |
