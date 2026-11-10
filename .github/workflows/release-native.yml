@@ -107,7 +107,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      # GitHub exposes draft metadata only to push-capable credentials.
+      # https://docs.github.com/en/rest/releases/releases#list-releases
+      # The guarded verify command performs reads only and never promotes a draft.
+      contents: write
       actions: read
       security-events: read
     steps:

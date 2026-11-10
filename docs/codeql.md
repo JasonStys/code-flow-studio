@@ -50,7 +50,10 @@ that baseline. We add no internal override, exclusion or fabricated empty result
 
 The [full-main fix report](reports/codeql-main-fixes-2026-11-09.md) records the two
 actual pre-existing findings, descriptor-bound worker reads, independent negative
-regressions and the separate 0.4.1 delivery acceptance still required.
+regressions and separate delivery acceptance. The preserved 0.4.1 draft's final
+metadata visibility failure and fresh 0.4.2 candidate are recorded in the
+[CI visibility report](reports/draft-release-visibility-2026-11-10.md); they do not
+change the original finding/scan history.
 
 Open **Security → Code scanning** or the CodeQL check on the pull request. Confirm the
 workflow source, language/category, completed extraction and successful result processing.

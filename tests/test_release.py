@@ -23,10 +23,10 @@ from studio.execution import IMAGE
 @pytest.mark.parametrize(
     "name",
     [
-        "Code Flow Studio Setup 0.4.1.exe",
-        "Code Flow Studio-0.4.1-arm64.dmg",
-        "Code Flow Studio-0.4.1.AppImage",
-        "CodeFlowStudio-0.4.1-windows-x64.zip",
+        "Code Flow Studio Setup 0.4.2.exe",
+        "Code Flow Studio-0.4.2-arm64.dmg",
+        "Code Flow Studio-0.4.2.AppImage",
+        "CodeFlowStudio-0.4.2-windows-x64.zip",
     ],
 )
 def test_checksum_download_filename(tmp_path, name):
