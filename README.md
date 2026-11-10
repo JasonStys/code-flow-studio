@@ -38,10 +38,10 @@ The [source inspection workflow](docs/source-navigation.md) explains stale/legac
 
 ## Run and install
 
-The 0.4.1 source prepares a security hotfix. Its [release notes](docs/releases/v0.4.1.md)
+Version 0.4.1 includes bounded worker-report reads and verified source review. Its [release notes](docs/releases/v0.4.1.md)
 and [full-main finding/validation report](docs/reports/codeql-main-fixes-2026-11-09.md)
 describe the bounded worker reader and the fresh native/download checks required
-before publication. A source version change alone does not replace a published download.
+before release promotion. Check Releases for the currently published downloads; a source version alone does not replace one.
 
 For end users, use the checksummed OS-specific packages in Releases. The UI runtime is bundled. Open the app's **Code Flow → Open local website** menu for browser use; no login token appears in the URL. Compiler jobs require an isolated local Unix/named-pipe Docker engine and the trusted worker image. Missing isolation is blocked, never passed; there is no host-execution fallback. Save/edit/static review/history/help remain usable without Docker.
 
@@ -115,3 +115,9 @@ GitHub Actions `security-extended` analysis, review steps and unsupported scope.
 The [dated scan report](docs/reports/codeql-2026-11-09.md) distinguishes actual results
 from pending/missing evidence. Static scanning supplements the existing runtime,
 dependency, privacy and isolation checks; it does not certify every input or platform.
+
+## Documentation editions
+
+Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx) · [validation-review.docx](docs/reports/validation-review.docx) · [validation-evidence.xlsx](docs/reports/validation-evidence.xlsx).
+
+[Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.

@@ -2,6 +2,36 @@
 
 By Jason Stys.
 
+## Verified runtime-main acceptance — 2026-11-10
+
+Source `7d2158a57bb49e8f837fffbfe23b301902465412` passed all three exact-main push workflows: [CodeQL](https://github.com/JasonStys/code-flow-studio/actions/runs/42823802503), [Desktop packages](https://github.com/JasonStys/code-flow-studio/actions/runs/42823802633), [Validate](https://github.com/JasonStys/code-flow-studio/actions/runs/42823802584).
+Actual complete CodeQL logs and processed SARIF confirm all three supported
+categories were processed without errors/warnings and report zero raw results;
+the main open-alert inventory is empty. The separate CodeQL section preserves
+rule/file counts, original fixed main findings and PR-only fixed instances.
+
+All three operating-system jobs passed both SDK and actual compiled-application
+journeys. The [actual Windows job](https://github.com/JasonStys/code-flow-studio/actions/runs/42823802633/job/129855717692) recorded complete HTTP drain,
+workspace sealing, lifespan/server/main completion and absence of both owned
+service and bootloader PIDs. This is genuine packaged executable acceptance,
+not downloaded-installer or clean-machine proof. Existing journey/launcher
+deadlines and zero retries are unchanged.
+
+Local controller/training validation passed 265 tests and 28 subtests, measuring
+1,539/1,808 statements (85.12%, unchanged 80% floor). All 48 controller/source
+browser checks and 18 private-account checks passed across Chromium, Firefox and
+WebKit. Five readiness/receipt/diagnostic cases, seven actual worker JSON-reader
+cases, strict TypeScript/Vite build, Ruff and 86 checked source maps passed.
+Hosted actual isolated workers and synthetic CPU training remain separate
+acceptance lanes; no local Docker repair or live provider/model-quality claim is made.
+
+The earlier eeac acceptance and native failures retain historical scope. The new
+finite-drain and completed-local-operation controls address a reproduced actual
+mechanism; the exact historical held request remains unidentified. Current source
+acceptance does not publish or replace a downloadable release. Fresh draft,
+downloaded installer acceptance and owner promotion remain required; existing
+0.4.0 assets and installed user accounts/apps are unchanged.
+
 ## Observed defect and scope
 
 The [Windows native job](https://github.com/JasonStys/code-flow-studio/actions/runs/42796136482/job/129761676463)
@@ -67,13 +97,9 @@ full-main CodeQL and later fresh draft/download acceptance remain separate gates
 
 ## References and retained boundaries
 
-- [Pinned Uvicorn shutdown implementation](https://github.com/encode/uvicorn/blob/0.38.0/uvicorn/server.py)
-  drains connections/tasks before lifespan shutdown.
-- [Python cancellation and shielding](https://docs.python.org/3.14/library/asyncio-task.html#shielding-from-cancellation)
-  distinguishes a protected child from its still-cancelled caller and requires
-  retaining a strong task reference.
-- [Private account operation](../private-accounts.md) describes local trust,
-  recovery and the required container-only compiler boundary.
+- [Pinned Uvicorn shutdown implementation](https://github.com/encode/uvicorn/blob/0.38.0/uvicorn/server.py) drains connections/tasks before lifespan shutdown.
+- [Python cancellation and shielding](https://docs.python.org/3.14/library/asyncio-task.html#shielding-from-cancellation) distinguishes a protected child from its still-cancelled caller and requires retaining a strong task reference.
+- [Private account operation](../private-accounts.md) describes local trust, recovery and the required container-only compiler boundary.
 
 No user account, installed application, existing public release, Docker engine,
 source-consent rule or worker-isolation permission was changed by these tests.
