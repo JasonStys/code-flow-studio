@@ -16,11 +16,11 @@ Import flat source/data files or start from the clearly synthetic CSV draft. Cho
 
 Default roots:
 
-| OS | Dedicated private root |
-|---|---|
-| Windows | `%LOCALAPPDATA%/CodeFlowStudioAccounts` |
-| macOS | `~/Library/Application Support/CodeFlowStudioAccounts` |
-| Linux | `$XDG_DATA_HOME/CodeFlowStudioAccounts` or `~/.local/share/CodeFlowStudioAccounts` |
+| OS      | Dedicated private root                                                             |
+| ------- | ---------------------------------------------------------------------------------- |
+| Windows | `%LOCALAPPDATA%/CodeFlowStudioAccounts`                                            |
+| macOS   | `~/Library/Application Support/CodeFlowStudioAccounts`                             |
+| Linux   | `$XDG_DATA_HOME/CodeFlowStudioAccounts` or `~/.local/share/CodeFlowStudioAccounts` |
 
 The native launcher has a separate `CodeFlowStudioLauncher` directory for nonsecret startup logs. The new account root never opens or migrates older capstone/native/developer history. A trusted operator can explicitly override `CFS_ACCOUNT_DATA` to an empty dedicated directory; this is not a browser-selectable path. A held OS advisory lock prevents two services sharing it.
 
@@ -60,6 +60,14 @@ python -m studio.private_cli
 ```
 
 The printed URL is nonsecret. Ctrl+C requests sealing. Legacy `python -m studio.cli serve` intentionally remains a different bearer-token developer mode; do not expose either service to a network.
+
+Normal native shutdown stops accepting requests and gives existing HTTP work five
+seconds to drain. Remaining HTTP tasks are cancelled and their owned cleanup is
+joined before vault sealing. Already-started local disk/account transitions finish
+under the request mutex before cancellation is reported; arbitrary network calls
+and request-body reads remain cancellable. Slow or failed critical I/O can still
+delay completion: preserve recovery data and never force-delete an active account
+directory. See the [actual cancellation and native acceptance report](reports/native-http-drain-2026-11-10.md).
 
 Limits: 20 flat files/1 MiB project; 192 KiB browser file import; 64 cases; 4 MiB HTTP request; 500 revisions/128 MiB history; 512 MiB/2,000 archived workspace files; eight providers; one unlocked engine; bounded worker output/deadlines/resources. Unexpected/unsupported formats fail explicitly. Run hostile unknown code in a dedicated disposable VM with independent review; containers are not a certified hostile multi-tenant boundary.
 

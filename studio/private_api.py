@@ -2,9 +2,9 @@
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
 # classes: Boundary@L42; Closed@L142; Credentials@L148; Recovery@L155; Unlock@L161; Activity@L168; Delete@L174; Provider@L181; Settings@L194; Proxy@L228
-# functions: __init__(self, app, manager, port)@L45; __call__(self, scope, receive, send)@L51; guarded(message)@L58; deny(status, detail)@L79; replay()@L131; coherent(self)@L203; public_settings(manager)@L215; __init__(self, manager)@L231; __call__(self, scope, receive, send)@L235; create_private_app(root, port, ui, launcher_token, nonce)@L286; lifespan(app)@L294; idle()@L297; invalid(request, error)@L337; bad_value(request, error)@L342; bad_disk(request, error)@L347; identify(request)@L353; signed(owner, data)@L357; auth_limit(alias)@L370; health()@L378; shutdown(request)@L389; register(data)@L402; login(data)@L412; reset(data)@L421; account(request)@L438; unlock(request, data)@L448; activity(request, data)@L459; save(request)@L467; lock(request)@L474; logout(request)@L482; delete(request, data)@L494; backup(request)@L510; get_providers(request)@L521; providers(request, data)@L528
-# variables: CSP@L38; HISTORY_STOP_BYTES@L39; raw@L55; headers@L56; k@L56; v@L56; k@L63; v@L63; _@L85; k@L85; cookies@L103; token@L108; account@L109; chunks@L117; length@L117; message@L119; data@L122; length@L123; delivered@L129; delivered@L135; model_config@L145; alias@L151; password@L152; recovery@L158; key@L164; salt@L165; idle_seconds@L171; password@L177; confirm@L178; id@L184; kind@L185; url@L186; model@L187; key@L188; retain_key@L189; token_parameter@L190; temperature@L191; providers@L197; routes@L198; ids@L205; p@L205; value@L206; p@L209; keys@L217; settings@L217; data@L218; p@L220; manager@L239; app@L242; path@L247; db@L253; count@L254; headers@L266; forwarded@L275; k@L276; v@L276; manager@L290; task@L311; app@L325; response@L359; callback@L395; owner@L406; recovery@L406; owner@L415; db@L425; row@L426; fresh@L432; owner@L440; session@L440; owner@L450; session@L450; owner@L477; session@L477; owner@L485; session@L485; response@L489; _@L497; owner@L497; db@L498; row@L499; response@L505; _@L512; owner@L512; path@L513; keys@L532; old@L532; rows@L533; provider@L534; row@L535; p@L537; previous@L537; config@L542; router@L543; k@L545; p@L545; v@L545; p@L548
-# parameters: app@L45; manager@L45; port@L45; self@L45; receive@L51; scope@L51; self@L51; send@L51; message@L58; detail@L79; status@L79; self@L203; manager@L215; manager@L231; self@L231; receive@L235; scope@L235; self@L235; send@L235; launcher_token@L287; nonce@L287; port@L287; root@L287; ui@L287; app@L294; error@L337; request@L337; error@L342; request@L342; error@L347; request@L347; request@L353; data@L357; owner@L357; alias@L370; request@L389; data@L402; data@L412; data@L421; request@L438; data@L448; request@L448; data@L459; request@L459; request@L467; request@L474; request@L482; data@L494; request@L494; request@L510; request@L521; data@L528; request@L528
+# functions: __init__(self, app, manager, port)@L45; __call__(self, scope, receive, send)@L51; guarded(message)@L58; deny(status, detail)@L79; replay()@L131; coherent(self)@L203; public_settings(manager)@L215; __init__(self, manager)@L231; __call__(self, scope, receive, send)@L235; create_private_app(root, port, ui, launcher_token, nonce)@L286; lifespan(app)@L294; idle()@L297; invalid(request, error)@L337; bad_value(request, error)@L342; bad_disk(request, error)@L347; identify(request)@L353; signed(owner, data)@L357; auth_limit(alias)@L370; health()@L378; shutdown(request)@L389; register(data)@L402; login(data)@L412; reset(data)@L421; commit_reset()@L431; account(request)@L442; unlock(request, data)@L452; activity(request, data)@L463; save(request)@L471; lock(request)@L478; logout(request)@L486; commit_logout()@L490; delete(request, data)@L502; commit_delete()@L510; backup(request)@L522; get_providers(request)@L533; providers(request, data)@L540; commit_providers()@L562
+# variables: CSP@L38; HISTORY_STOP_BYTES@L39; raw@L55; headers@L56; k@L56; v@L56; k@L63; v@L63; _@L85; k@L85; cookies@L103; token@L108; account@L109; chunks@L117; length@L117; message@L119; data@L122; length@L123; delivered@L129; delivered@L135; model_config@L145; alias@L151; password@L152; recovery@L158; key@L164; salt@L165; idle_seconds@L171; password@L177; confirm@L178; id@L184; kind@L185; url@L186; model@L187; key@L188; retain_key@L189; token_parameter@L190; temperature@L191; providers@L197; routes@L198; ids@L205; p@L205; value@L206; p@L209; keys@L217; settings@L217; data@L218; p@L220; manager@L239; app@L242; path@L247; db@L253; count@L254; headers@L266; forwarded@L275; k@L276; v@L276; manager@L290; task@L311; app@L325; response@L359; callback@L395; owner@L406; recovery@L406; owner@L415; db@L425; row@L426; fresh@L436; owner@L444; session@L444; owner@L454; session@L454; owner@L481; session@L481; owner@L489; session@L489; response@L497; _@L505; owner@L505; db@L506; row@L507; response@L517; _@L524; owner@L524; path@L525; keys@L544; old@L544; rows@L545; provider@L546; row@L547; p@L549; previous@L549; config@L554; router@L555; k@L557; p@L557; v@L557; p@L560
+# parameters: app@L45; manager@L45; port@L45; self@L45; receive@L51; scope@L51; self@L51; send@L51; message@L58; detail@L79; status@L79; self@L203; manager@L215; manager@L231; self@L231; receive@L235; scope@L235; self@L235; send@L235; launcher_token@L287; nonce@L287; port@L287; root@L287; ui@L287; app@L294; error@L337; request@L337; error@L342; request@L342; error@L347; request@L347; request@L353; data@L357; owner@L357; alias@L370; request@L389; data@L402; data@L412; data@L421; request@L442; data@L452; request@L452; data@L463; request@L463; request@L471; request@L478; request@L486; data@L502; request@L502; request@L522; request@L533; data@L540; request@L540
 # </code-map>
 
 """Jason Stys: loopback-only real accounts, session-proven vaults, private AI settings and scoped controller.
@@ -27,10 +27,10 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, model_validator
-from starlette.concurrency import run_in_threadpool
 
 from studio import __version__
 from studio.accounts import digest, password_matches
+from studio.completed_offload import completed_offload, completed_operation
 from studio.native_lifecycle import native_stage
 from studio.private_workspace import Workspaces, atomic_json
 from studio.providers import Providers
@@ -91,7 +91,7 @@ class Boundary:
             or headers.get("sec-fetch-site") == "cross-site"
         ):
             return await deny(403, "Untrusted origin")
-        if not await run_in_threadpool(
+        if not await completed_offload(
             self.manager.accounts.throttle, "request:" + str(scope.get("client", ("local",))[0]), 1000
         ):
             return await deny(429, "Too many requests; wait before retrying")
@@ -106,7 +106,7 @@ class Boundary:
         except CookieError:
             return await deny(401, "Invalid session")
         token = cookies[self.cookie].value if self.cookie in cookies else ""
-        account = await run_in_threadpool(self.manager.accounts.owner, token) if token else None
+        account = await completed_offload(self.manager.accounts.owner, token) if token else None
         scope.setdefault("state", {}).update(account=account, token=token, session=digest(token))
         if (
             scope["path"].startswith("/private/")
@@ -278,7 +278,7 @@ class Proxy:
             ]
             await app(forwarded, receive, send)
             try:
-                await run_in_threadpool(manager.save)
+                await completed_offload(manager.save)
             except (OSError, ValueError):
                 manager.failed = True
 
@@ -304,7 +304,7 @@ def create_private_app(
                             if time.monotonic() - manager.last_human > manager.idle_seconds:
                                 await manager.lock(manager.owner)
                             else:
-                                await run_in_threadpool(manager.save)
+                                await completed_offload(manager.save)
                         except (OSError, ValueError, sqlite3.Error):
                             manager.failed = True
 
@@ -369,7 +369,7 @@ def create_private_app(
 
     async def auth_limit(alias):
         """Persist global/alias auth throttles without logging submitted secrets."""
-        if not await run_in_threadpool(manager.accounts.throttle, "auth", 40) or not await run_in_threadpool(
+        if not await completed_offload(manager.accounts.throttle, "auth", 40) or not await completed_offload(
             manager.accounts.throttle, "alias:" + alias, 10
         ):
             raise HTTPException(429, "Too many attempts; wait five minutes")
@@ -403,7 +403,7 @@ def create_private_app(
         """Create empty real accounts and show a random recovery code once, with no seeded/demo passwords."""
         await auth_limit(data.alias)
         try:
-            owner, recovery = await run_in_threadpool(manager.accounts.register, data.alias, data.password)
+            owner, recovery = await completed_offload(manager.accounts.register, data.alias, data.password)
         except sqlite3.IntegrityError:
             raise HTTPException(409, "Alias unavailable") from None
         return signed(owner, {"recovery": recovery})
@@ -412,7 +412,7 @@ def create_private_app(
     async def login(data: Credentials):
         """Authenticate a password without unlocking its independent source vault."""
         await auth_limit(data.alias)
-        owner = await run_in_threadpool(manager.accounts.login, data.alias, data.password)
+        owner = await completed_offload(manager.accounts.login, data.alias, data.password)
         if not owner:
             raise HTTPException(401, "Alias or password is incorrect")
         return signed(owner, {"signed_in": True})
@@ -428,8 +428,12 @@ def create_private_app(
                 ).fetchone()
             if not row or not secrets.compare_digest(row["recovery"], digest(data.recovery)):
                 raise HTTPException(401, "Recovery credentials invalid")
-            await manager.lock(row["id"])
-            fresh = await run_in_threadpool(manager.accounts.reset, data.alias, data.recovery, data.password)
+            async def commit_reset():
+                """Complete the authorized seal and recovery-code replacement as one local transition."""
+                await manager.lock(row["id"])
+                return await completed_offload(manager.accounts.reset, data.alias, data.recovery, data.password)
+
+            fresh = await completed_operation(commit_reset())
             if not fresh:
                 raise HTTPException(409, "Recovery credentials changed")
             return {"recovery": fresh}
@@ -448,7 +452,7 @@ def create_private_app(
     async def unlock(request: Request, data: Unlock):
         """Prove this session's key and intentionally reset the human-idle clock."""
         owner, session = identify(request)
-        if not await run_in_threadpool(manager.accounts.throttle, "unlock:" + owner, 10):
+        if not await completed_offload(manager.accounts.throttle, "unlock:" + owner, 10):
             raise HTTPException(429, "Too many unlock attempts; wait five minutes")
         async with manager.requests:
             await manager.unlock(owner, session, data.key, data.salt)
@@ -468,7 +472,7 @@ def create_private_app(
         """Explicit complete encrypted backup requires no active compiler jobs."""
         async with manager.requests:
             manager.require(*identify(request))
-            return await run_in_threadpool(manager.save, True)
+            return await completed_offload(manager.save, True)
 
     @app.post("/private/lock")
     async def lock(request: Request):
@@ -483,9 +487,13 @@ def create_private_app(
         """Seal a proven account or revoke an unproven login; never cancel another account's jobs."""
         async with manager.requests:
             owner, session = identify(request)
-            if manager.owner == owner and session in manager.sessions:
-                await manager.lock(owner)
-            await run_in_threadpool(manager.accounts.revoke, request.state.token)
+            async def commit_logout():
+                """Complete authorized local sealing and token revocation before acknowledging cancellation."""
+                if manager.owner == owner and session in manager.sessions:
+                    await manager.lock(owner)
+                await completed_offload(manager.accounts.revoke, request.state.token)
+
+            await completed_operation(commit_logout())
         response = JSONResponse({"signed_out": True})
         response.delete_cookie(manager.cookie, path="/private")
         return response
@@ -497,10 +505,14 @@ def create_private_app(
             owner, _ = identify(request)
             with manager.accounts.connection() as db:
                 row = db.execute("SELECT password FROM accounts WHERE id=?", (owner,)).fetchone()
-            if not row or not await run_in_threadpool(password_matches, data.password, row[0]):
+            if not row or not await completed_offload(password_matches, data.password, row[0]):
                 raise HTTPException(401, "Current password incorrect")
-            await manager.delete(owner)
-            if not await run_in_threadpool(manager.accounts.delete, owner, data.password):
+            async def commit_delete():
+                """Keep authorized data removal and account-row removal coherent under the same request mutex."""
+                await manager.delete(owner)
+                return await completed_offload(manager.accounts.delete, owner, data.password)
+
+            if not await completed_operation(commit_delete()):
                 raise HTTPException(409, "Account changed; sign in again")
         response = JSONResponse({"deleted": True})
         response.delete_cookie(manager.cookie, path="/private")
@@ -547,10 +559,14 @@ def create_private_app(
                 },
                 credentials={p["id"]: p["key"] for p in rows},
             )
-            await run_in_threadpool(atomic_json, manager.active / "providers.private.json", config)
-            manager.app.state.providers.config = router.config
-            manager.app.state.providers.credentials = router.credentials
-            await run_in_threadpool(manager.save)
+            async def commit_providers():
+                """Publish matching disk/in-memory destination/consent state and snapshot before cancellation."""
+                await completed_offload(atomic_json, manager.active / "providers.private.json", config)
+                manager.app.state.providers.config = router.config
+                manager.app.state.providers.credentials = router.credentials
+                await completed_offload(manager.save)
+
+            await completed_operation(commit_providers())
             return public_settings(manager)
 
     app.mount("/private/api", Proxy(manager))
