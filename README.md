@@ -94,3 +94,11 @@ problems remain visible as failures until the actual isolated acceptance checks 
 
 Historical 0.1 bearer-token CLI mode remains explicitly opt-in for existing automation; it is not account mode. No automatic import of legacy plaintext projects or global AI keys occurs.
 
+
+## CodeQL source security review
+
+The [CodeQL guide](docs/codeql.md) defines genuine Python, JavaScript/TypeScript and
+GitHub Actions `security-extended` analysis, review steps and unsupported scope.
+The [dated scan report](docs/reports/codeql-2026-11-09.md) distinguishes actual results
+from pending/missing evidence. Static scanning supplements the existing runtime,
+dependency, privacy and isolation checks; it does not certify every input or platform.

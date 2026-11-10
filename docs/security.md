@@ -26,3 +26,11 @@ AI providers receive only consented text, not binary fixtures, execution secrets
 
 Original private capstone code, project files and credentials were inspected only for understanding. None should be copied into this independent repository. Training data requires rights/provenance review, secret/PII scanning and project-disjoint evaluation. No automatic uploads, remote model-code execution or training on private source occurs.
 
+
+## CodeQL security analysis
+
+The [three-language scan guide](codeql.md) explains Python, JavaScript/TypeScript
+and GitHub Actions security-extended analysis. The [dated scan report](reports/codeql-2026-11-09.md)
+records actual scan/extraction state and exact-location alert triage separately from
+configuration checks. Existing runtime, privacy, performance and platform gates remain
+required; a passing static-analysis job alone is not a zero-alert or safety claim.
