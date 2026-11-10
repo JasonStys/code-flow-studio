@@ -1,7 +1,23 @@
 # C# coverage correction — 10 November 2026
 
-By Jason Stys. **Hosted validation is pending.** Local parser, protocol and inert
-process tests do not by themselves establish .NET/Coverlet behavior.
+By Jason Stys. **The first hosted run verified the core fix; final acceptance is pending.**
+Local parser, protocol and inert process tests do not by themselves establish
+.NET/Coverlet behavior.
+
+The [initial hosted current-source run](https://github.com/JasonStys/code-flow-studio/actions/runs/42881205975)
+passed all 70 ordinary compiler/private API scenarios, including measured C# invoice
+coverage. It also preserved the exact instrumented returns 0, 1, 2, 7, 255 and 2,
+with collector exit zero and measured coverage. Unexpected returns/exceptions
+remained partial. Its final fault-control assertion failed: the test incorrectly
+assumed an invalid Coverlet option would cause a nonzero process exit.
+
+The pinned Coverlet entry point invokes its argument parser but does not propagate
+the parser's return code. The corrected control records actual outcomes before
+assertion, verifies parser rejection independently, and requires blocked coverage
+without a valid target observation even when the wrapper exits zero. A separate
+post-target report-write failure checks nonzero collection after a valid successful
+target observation. No worker change or weakened target oracle was needed for
+this fault-test correction. Historical failed evidence remains retained.
 
 ## Defect and correction
 
@@ -24,8 +40,9 @@ See the [implementation and report-field contract](../csharp-coverage.md).
 - Real hosted .NET/Coverlet: expected exits 0, 1, 2, 7 and 255 plus malformed-input
   rejection; each exact target return retained with collector exit zero and measured coverage.
 - Real hosted unexpected return and exception: failed ordinary cases, never a false measured pass.
-- Real hosted invalid collector option and enforced collector timeout: healthy
-  ordinary target still passes, collector outcome observed and coverage blocked.
+- Real hosted invalid collector option, post-target unwritable report and enforced
+  collector timeout: healthy ordinary target still passes, actual collector and
+  observation outcomes are recorded and coverage is blocked.
 - Ordinary twelve-language suite, private C# execution, encrypted report replay,
   original worker/fuzz checks, browser, native package, training and CodeQL checks.
 - Local protocol tests: actual inert Python child returns, exact Unicode/binary stdin,

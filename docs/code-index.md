@@ -1028,40 +1028,45 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `mode` | 62 |
 | variable | `project` | 65 |
 | variable | `program` | 76 |
-| variable | `name` | 94 |
-| variable | `directory` | 95 |
-| variable | `root` | 96 |
-| variable | `argv` | 98 |
-| variable | `argv` | 100 |
-| variable | `output` | 102 |
-| variable | `status` | 102 |
-| variable | `results` | 104 |
-| variable | `line` | 106 |
-| variable | `observations` | 109 |
-| variable | `line` | 111 |
-| variable | `observed` | 115 |
-| variable | `result` | 115 |
-| function | `checks(record, output)` | 142 |
-| parameter | `output` | 142 |
-| parameter | `record` | 142 |
-| function | `save()` | 145 |
-| variable | `temporary` | 147 |
-| variable | `project` | 151 |
-| variable | `result` | 152 |
-| variable | `case` | 158 |
-| variable | `changed` | 162 |
-| variable | `unexpected` | 164 |
-| variable | `case` | 173 |
-| variable | `fault` | 192 |
-| variable | `mode` | 206 |
-| function | `main()` | 213 |
-| variable | `parser` | 215 |
-| variable | `args` | 218 |
-| variable | `root` | 219 |
-| variable | `identity` | 220 |
-| variable | `bridge` | 221 |
-| variable | `record` | 222 |
-| variable | `output` | 229 |
+| variable | `name` | 107 |
+| variable | `directory` | 108 |
+| variable | `root` | 109 |
+| variable | `argv` | 111 |
+| variable | `argv` | 113 |
+| variable | `output` | 115 |
+| variable | `status` | 115 |
+| variable | `results` | 117 |
+| variable | `line` | 119 |
+| variable | `observations` | 122 |
+| variable | `line` | 124 |
+| variable | `observed` | 128 |
+| variable | `result` | 128 |
+| function | `validate_collector_fault(record)` | 137 |
+| parameter | `record` | 137 |
+| variable | `mode` | 139 |
+| variable | `observed` | 139 |
+| variable | `result` | 139 |
+| function | `checks(record, output)` | 172 |
+| parameter | `output` | 172 |
+| parameter | `record` | 172 |
+| function | `save()` | 175 |
+| variable | `temporary` | 177 |
+| variable | `project` | 181 |
+| variable | `result` | 182 |
+| variable | `case` | 188 |
+| variable | `changed` | 192 |
+| variable | `unexpected` | 194 |
+| variable | `case` | 203 |
+| variable | `fault` | 222 |
+| variable | `mode` | 236 |
+| function | `main()` | 244 |
+| variable | `parser` | 246 |
+| variable | `args` | 249 |
+| variable | `root` | 250 |
+| variable | `identity` | 251 |
+| variable | `bridge` | 252 |
+| variable | `record` | 253 |
+| variable | `output` | 260 |
 
 ## scripts/draft_lookup.py
 
@@ -3236,6 +3241,21 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | parameter | `tmp_path` | 213 |
 | variable | `path` | 215 |
 | variable | `row` | 216 |
+
+## tests/test_csharp_collector_controls.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `record(mode)` | 18 |
+| parameter | `mode` | 18 |
+| variable | `observed` | 20 |
+| function | `test_observed_fault_is_required_and_must_be_blocked(mode)` | 39 |
+| parameter | `mode` | 39 |
+| variable | `actual` | 41 |
+| variable | `changed` | 43 |
+| variable | `changed` | 47 |
+| function | `test_write_failure_must_follow_valid_successful_target_observation()` | 58 |
+| variable | `actual` | 60 |
 
 ## tests/test_csharp_coverage_bridge.py
 

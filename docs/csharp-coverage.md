@@ -79,7 +79,7 @@ not by a source-version label or successful CI package build.
 |---|---|
 | `runner/csharp_coverage_bridge.py` | Fixed child-process launch, bounded case binding and exclusive observation publication |
 | `runner/language_checks.py` | Separate actual target/collector exits, strict record and real XML integration |
-| `scripts/csharp_coverage_checks.py` | Hosted real .NET exits 0/1/2/7/255, malformed input, wrong expected exit, exception and real collector error/timeout controls |
+| `scripts/csharp_coverage_checks.py` | Hosted real .NET exits 0/1/2/7/255, malformed input, wrong expected exit, exception, parser rejection, post-target report-write failure and real collector timeout |
 | `tests/test_csharp_coverage_bridge.py` | Real inert child-process and protocol/filesystem regressions; no local .NET or Docker |
 | `tests/test_csharp_measurement.py` | Actual adapter/request/record/XML integration with inert compiler/collector doubles |
 | `scripts/compiler_acceptance.py` | Strict current evidence; separately pinned historical 0.4.2 policy |

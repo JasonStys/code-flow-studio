@@ -1,9 +1,9 @@
 # <code-map>
 # Generated definition map; @L is the exact declaration line.
 # Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
-# functions: exit_project()@L39; collector_fault(mode)@L62; checks(record, output)@L142; save()@L145; main()@L213
-# variables: PROGRAM@L29; code@L48; expected@L48; name@L48; value@L48; project@L65; program@L76; name@L94; directory@L95; root@L96; argv@L98; argv@L100; output@L102; status@L102; results@L104; line@L106; observations@L109; line@L111; observed@L115; result@L115; temporary@L147; project@L151; result@L152; case@L158; changed@L162; unexpected@L164; case@L173; fault@L192; mode@L206; parser@L215; args@L218; root@L219; identity@L220; bridge@L221; record@L222; output@L229
-# parameters: mode@L62; output@L142; record@L142
+# functions: exit_project()@L39; collector_fault(mode)@L62; validate_collector_fault(record)@L137; checks(record, output)@L172; save()@L175; main()@L244
+# variables: PROGRAM@L29; code@L48; expected@L48; name@L48; value@L48; project@L65; program@L76; name@L107; directory@L108; root@L109; argv@L111; argv@L113; output@L115; status@L115; results@L117; line@L119; observations@L122; line@L124; observed@L128; result@L128; mode@L139; observed@L139; result@L139; temporary@L177; project@L181; result@L182; case@L188; changed@L192; unexpected@L194; case@L203; fault@L222; mode@L236; parser@L246; args@L249; root@L250; identity@L251; bridge@L252; record@L253; output@L260
+# parameters: mode@L62; record@L137; output@L172; record@L172
 # </code-map>
 
 """Jason Stys: hosted-only actual .NET/Coverlet exit and collector-failure acceptance.
@@ -61,7 +61,7 @@ def exit_project() -> Project:
 
 async def collector_fault(mode: str) -> dict:
     """Invoke the real worker/Coverlet with one trusted collector-only fault, preserving sandbox flags."""
-    require(mode in {"invalid-option", "timeout"}, "Unknown collector fault")
+    require(mode in {"invalid-option", "unwritable-output", "timeout"}, "Unknown collector fault")
     project = Project(
         title="Controlled collector failure",
         language="csharp",
@@ -74,18 +74,31 @@ async def collector_fault(mode: str) -> dict:
     # This fixed CI probe wraps only the existing trusted execute callback. It
     # does not add an application API or allow source files to select commands.
     program = """import sys,json
+from pathlib import Path
 sys.path.insert(0,"/opt")
 import worker
+from csharp_coverage_bridge import read_observation
 original=worker.execute
 MODE=MODE_VALUE
 def collect(argv,*args,**kwargs):
     if argv and argv[0]=="/opt/coverlet/coverlet":
         if MODE=="invalid-option":
             argv=[*argv,"--cfs-intentionally-invalid-collector-option"]
+        elif MODE=="unwritable-output":
+            argv=list(argv)
+            argv[argv.index("--output")+1]="/opt/cfs-intentionally-unwritable-coverage.xml"
         else:
             kwargs["timeout"]=0.001
         observed=original(argv,*args,**kwargs)
-        print("CFS_COLLECTOR_FAULT="+json.dumps({"exit_code":observed.get("exit_code"),"timeout":observed.get("timeout",False)}),flush=True)
+        text=observed.get("stdout","")+observed.get("stderr","")
+        evidence={"exit_code":observed.get("exit_code"),"timeout":observed.get("timeout",False),"option_rejected":"Unrecognized" in text and "--cfs-intentionally-invalid-collector-option" in text,"collector_tail":text[-1024:],"valid_target_observation":False}
+        for request in Path("/tmp/project/.analysis").glob("csharp-request-*.json"):
+            try:
+                record=read_observation(request,json.loads(request.read_text()))
+                evidence.update(valid_target_observation=True,target_exit_code=record["target_exit_code"])
+            except (OSError,ValueError):
+                continue
+        print("CFS_COLLECTOR_FAULT="+json.dumps(evidence),flush=True)
         return observed
     return original(argv,*args,**kwargs)
 worker.execute=collect
@@ -113,30 +126,47 @@ worker.main()
             ]
             require(len(results) == len(observations) == 1, "Collector fault evidence is missing/ambiguous")
             result, observed = json.loads(results[0]), json.loads(observations[0])
-            require(
-                result.get("tool_status") == "completed"
-                and result.get("checks", {}).get("passed") == 1
-                and result["checks"].get("failed") == 0,
-                "Fault injection also changed healthy target behavior",
-            )
-            require(
-                result.get("coverage", {}).get("status") == "blocked"
-                and "collector" in result["coverage"].get("reason", "").lower(),
-                "Collector failure was falsely accepted as measured coverage",
-            )
-            if mode == "timeout":
-                require(observed.get("timeout") is True, "Real collector timeout was not observed")
-            else:
-                require(
-                    observed.get("exit_code") not in (None, 0) and not observed.get("timeout"),
-                    "Invalid collector option did not produce a real nonzero error",
-                )
             return {"fault": mode, "actual_collector": observed, "worker_result": result}
         finally:
             with contextlib.suppress(OSError, TimeoutError, ValueError):
                 await execution.command(
                     [execution.DOCKER, "rm", "--force", name], timeout=10, output_limit=4096
                 )
+
+
+def validate_collector_fault(record: dict) -> None:
+    """Require a real observed fault before calling its correctly blocked coverage a pass."""
+    mode, observed, result = record["fault"], record["actual_collector"], record["worker_result"]
+    require(mode in {"invalid-option", "unwritable-output", "timeout"}, "Unknown collector fault")
+    if mode == "timeout":
+        require(observed.get("timeout") is True, "Real collector timeout was not observed")
+    elif mode == "invalid-option":
+        # Coverlet Main ignores the parser's return and may exit zero without
+        # ever invoking its target. Missing observation must still block it.
+        require(
+            observed.get("option_rejected") is True
+            and observed.get("valid_target_observation") is False
+            and not observed.get("timeout"),
+            "Collector argument failure was not observed",
+        )
+    else:
+        require(
+            observed.get("exit_code") not in (None, 0)
+            and not observed.get("timeout")
+            and observed.get("valid_target_observation") is True
+            and observed.get("target_exit_code") == 0,
+            "Post-target collector report-write failure was not observed",
+        )
+    require(
+        result.get("tool_status") == "completed"
+        and result.get("checks", {}).get("passed") == 1
+        and result["checks"].get("failed") == 0,
+        "Fault injection also changed healthy target behavior",
+    )
+    require(
+        result.get("coverage", {}).get("status") == "blocked",
+        "Collector failure was falsely accepted as measured coverage",
+    )
 
 
 async def checks(record: dict, output: Path) -> None:
@@ -203,9 +233,10 @@ async def checks(record: dict, output: Path) -> None:
         "Unexpected exception was falsely measured as a completed approved run",
     )
 
-    for mode in ("invalid-option", "timeout"):
+    for mode in ("invalid-option", "unwritable-output", "timeout"):
         record["collector_" + mode] = await collector_fault(mode)
         save()
+        validate_collector_fault(record["collector_" + mode])
     record["acceptance"] = "passed"
     save()
 
