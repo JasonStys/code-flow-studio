@@ -137,3 +137,18 @@ important source excerpts and explicit test limits. See the
 Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx) · [validation-review.docx](docs/reports/validation-review.docx) · [validation-evidence.xlsx](docs/reports/validation-evidence.xlsx).
 
 [Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
+
+## Current Windows application guide
+
+The [version 0.4.4 illustrated guide](docs/reports/windows-application-guide-0.4.4.docx) explains the actual
+installed application with two real screenshots, a worked user workflow, important
+source excerpts and observed validation. Read the [dated delivery report](docs/reports/installed-windows-2026-11-10.md)
+and [byte and page review](docs/reports/windows-application-guide-0.4.4.json) for exact scope. Historical Office
+editions remain available with their original baselines.
+
+New documentation files:
+
+- [docs/reports/windows-application-guide-0.4.4.docx](docs/reports/windows-application-guide-0.4.4.docx): Individually reviewed four-page installed application guide with actual screenshots, worked workflow, immutable source excerpts and limits.
+- [docs/reports/windows-application-guide-0.4.4.json](docs/reports/windows-application-guide-0.4.4.json): Exact Word, actual screenshot and reviewed page digests plus observed source-specific validation results.
+- [docs/screenshots/installed-0.4.4/desktop-workspace.png](docs/screenshots/installed-0.4.4/desktop-workspace.png): Actual installed application synthetic-profile screenshot: Installed developer workspace.
+- [docs/screenshots/installed-0.4.4/desktop-source-inspector.png](docs/screenshots/installed-0.4.4/desktop-source-inspector.png): Actual installed application synthetic-profile screenshot: Verified source inspection.
