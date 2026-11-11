@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim AS dotnet
 FROM node:24-bookworm-slim AS node
 FROM rust:1.99.1-slim-bookworm AS rust
 RUN rustup component add llvm-tools-preview
-FROM python:3.12.12-slim-bookworm
+FROM python:3.12.16-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df
 COPY --from=dotnet /usr/share/dotnet /usr/share/dotnet
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules

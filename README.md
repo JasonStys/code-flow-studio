@@ -2,7 +2,7 @@
 
 An independently written successor to a group AI-in-SDLC capstone: a local-first development workbench for isolated polyglot checks, configurable AI proposals, and replayable revision evidence.
 
-**Source version 0.4.3: exact instrumented C# exits.** The worker now separates the program's real exit status from the coverage collector, so approved nonzero returns can have fully measured coverage. Read the [fix and validation](docs/csharp-coverage.md). Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
+**Source version 0.4.4: reviewed desktop runtimes and exact instrumented C# exits.** The desktop service uses Python 3.14.10 and Electron 44.11.0; its frozen entry refuses an unreviewed interpreter before opening accounts. The separately isolated worker uses a digest-pinned Python 3.12.16 base. The 0.4.3 C# fix is retained: the worker separates the program's real exit status from the coverage collector, so approved nonzero returns can have fully measured coverage. Read the [release notes](docs/releases/v0.4.4.md) and [C# fix and validation](docs/csharp-coverage.md). Create an account, unlock your encrypted source/history workspace, and use the same interface in the desktop app or your browser. Filter diagnostics by file or unused-code category, select an exact line, inspect its read-only evidence snapshot, and open the editable draft only when its SHA-256 still matches. No public backend, shared login, analytics, ads or cloud AI calls are enabled by default. By [Jason Stys](https://github.com/JasonStys); [contact via LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
 Download OS-specific installers/portable packages from [Releases](https://github.com/JasonStys/code-flow-studio/releases). Read [private-account operation](docs/private-accounts.md), [current validation](docs/validation-polyglot.md), [historical Python-location validation](docs/validation-locations.md) and [security boundaries](docs/security.md). Packages are unsigned. This is a local development tool, not a public hostile-code SaaS sandbox or an autonomous correctness oracle.
 
@@ -16,7 +16,7 @@ Download OS-specific installers/portable packages from [Releases](https://github
 
 ## Hosted compiler acceptance
 
-The [realistic compiler suite](docs/compiler-execution.md) covers all twelve executable adapters with 72 independently authored input/output cases, deliberate compiler/runtime/wrong-answer controls, exact unused/uncovered anchors, and encrypted private-report replay. Its historical lane preserves the published 0.4.2 baseline, including its C# limitation; the current 0.4.3 lane requires the corrected target/collector protocol and fully measured approved C# cases. Read the [0.4.2 observations](docs/reports/hosted-compilers-2026-11-10.md) and [0.4.3 validation](docs/reports/csharp-coverage-2026-11-10.md). Published 0.4.2 packages are unchanged; this source fix neither installs an app nor alters Docker on an end user's PC.
+The [realistic compiler suite](docs/compiler-execution.md) covers all twelve executable adapters with 72 independently authored input/output cases, deliberate compiler/runtime/wrong-answer controls, exact unused/uncovered anchors, and encrypted private-report replay. Its historical lane preserves the published 0.4.2 baseline, including its C# limitation; the current 0.4.4 lane retains the corrected target/collector protocol and fully measured approved C# cases. Read the [0.4.2 observations](docs/reports/hosted-compilers-2026-11-10.md) and [0.4.3 C# validation](docs/reports/csharp-coverage-2026-11-10.md). Those are dated observations; a new release must pass its own exact-source compiler and native gates. Published historical packages are unchanged. Building or installing this desktop application does not install, start or repair Docker on an end user's PC.
 
 ## Features and limits
 
@@ -42,9 +42,10 @@ The [source inspection workflow](docs/source-navigation.md) explains stale/legac
 
 ## Run and install
 
-Version 0.4.2 retains bounded worker-report reads, verified source review and safe
+Version 0.4.4 retains bounded worker-report reads, verified source review and safe
 local shutdown, and corrects the final draft-verification job's required metadata
-visibility. Its [release notes](docs/releases/v0.4.2.md)
+visibility. The [current runtime validation](docs/reports/desktop-runtimes-2026-11-10.md),
+[historical 0.4.2 release notes](docs/releases/v0.4.2.md)
 and [full-main finding/validation report](docs/reports/codeql-main-fixes-2026-11-09.md)
 describe the bounded worker reader and the fresh native/download checks required
 before release promotion. The 0.4.1 draft passed native builds but its final

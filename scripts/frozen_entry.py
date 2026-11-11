@@ -7,10 +7,13 @@
 Symbol locations: docs/code-index.md. Calls the same audited CLI as source mode.
 """
 
+import sys
 from multiprocessing import freeze_support
-
-from studio.private_cli import main
 
 if __name__ == "__main__":
     freeze_support()
+    if getattr(sys, "frozen", False) and sys.version_info[:3] != (3, 14, 10):
+        raise SystemExit("This application requires its reviewed Python 3.14.10 runtime.")
+    from studio.private_cli import main
+
     main()

@@ -1,7 +1,7 @@
 /* <code-map>
  * Generated definition map; @L is the exact declaration line.
  * Function/class docs explain behavior; variables/parameters are scoped inputs, outputs or state.
- * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; file@L91; metadata@L103; page@L123; accountStartedAt@L126; accountRoutes@L127; route@L129; route@L141; browserErrors@L153; health@L157; state@L165; directory@L196; serviceLog@L199; statuses@L200; sourceInspector@L223; lifecycle@L273; records@L274; launcher@L281; line@L284; service@L289; line@L290; diagnostic@L297; records@L301; stage@L302; record@L314; pid@L327
+ * variables: { verifyElectron }@L24; { readDiagnosticLog }@L27; executable@L33; app@L36; launcherDirectory@L54; acceptedPackage@L57; resources@L64; file@L65; file@L91; metadata@L103; page@L123; accountStartedAt@L126; accountRoutes@L127; route@L129; route@L141; browserErrors@L153; health@L157; healthData@L158; state@L167; directory@L198; serviceLog@L201; statuses@L202; sourceInspector@L225; lifecycle@L275; records@L276; launcher@L283; line@L286; service@L291; line@L292; diagnostic@L299; records@L303; stage@L304; record@L316; pid@L329
  * </code-map> */
 
 /** Verify the actual Electron shell and bundled Python service, without faking readiness.
@@ -108,7 +108,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       );
       expect(metadata.schema).toBe(1);
       expect(metadata.product).toBe("code-flow-studio");
-      expect(metadata.version).toBe("0.4.3");
+      expect(metadata.version).toBe("0.4.4");
       expect(metadata.source).toMatch(/^[a-f0-9]{40}$/);
       expect(typeof metadata.source_dirty).toBe("boolean");
       expect(metadata.worker_sha256).toBe(
@@ -155,7 +155,9 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       if (browserErrors.length < 8) browserErrors.push(error.name);
     });
     const health = await page.request.get(new URL("/health", page.url()).href);
-    expect((await health.json()).version).toBe("0.4.3");
+    const healthData = await health.json();
+    expect(healthData.version).toBe("0.4.4");
+    expect(healthData.runtime_python).toBe("3.14.10");
     try {
       console.info("NATIVE_JOURNEY_STAGE", "account:start");
       await createSession(page, "native_fictional");
@@ -345,7 +347,7 @@ test("bundled desktop authenticates, seals history and provides a sandboxed edit
       "artifacts/native-resource-acceptance.json",
       JSON.stringify({
         schema: 1,
-        version: "0.4.3",
+        version: "0.4.4",
         source: acceptedPackage.source,
         worker_sha256: acceptedPackage.worker_sha256,
         compiled_app: true,

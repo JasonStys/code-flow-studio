@@ -439,7 +439,7 @@ export default function App({
       <main>
         <header>
           <div>
-            <span className="eyebrow">ENGINEERING WORKBENCH / v0.4.3</span>
+            <span className="eyebrow">ENGINEERING WORKBENCH / v0.4.4</span>
             <h2>
               {tab === "workspace"
                 ? "Make your next iteration count."
