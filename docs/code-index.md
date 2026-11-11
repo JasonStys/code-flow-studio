@@ -2224,203 +2224,203 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 
 | Kind | Declaration | Line |
 |---|---|---|
-| variable | `CSP` | 38 |
-| variable | `HISTORY_STOP_BYTES` | 39 |
-| class | `Boundary` | 42 |
-| function | `__init__(self, app, manager, port)` | 45 |
-| parameter | `app` | 45 |
-| parameter | `manager` | 45 |
-| parameter | `port` | 45 |
-| parameter | `self` | 45 |
-| function | `__call__(self, scope, receive, send)` | 51 |
-| parameter | `receive` | 51 |
-| parameter | `scope` | 51 |
-| parameter | `self` | 51 |
-| parameter | `send` | 51 |
-| variable | `raw` | 55 |
-| variable | `headers` | 56 |
-| variable | `k` | 56 |
-| variable | `v` | 56 |
-| function | `guarded(message)` | 58 |
-| parameter | `message` | 58 |
-| variable | `k` | 63 |
-| variable | `v` | 63 |
-| function | `deny(status, detail)` | 79 |
-| parameter | `detail` | 79 |
-| parameter | `status` | 79 |
-| variable | `_` | 85 |
-| variable | `k` | 85 |
-| variable | `cookies` | 103 |
-| variable | `token` | 108 |
-| variable | `account` | 109 |
-| variable | `chunks` | 117 |
-| variable | `length` | 117 |
-| variable | `message` | 119 |
-| variable | `data` | 122 |
-| variable | `length` | 123 |
-| variable | `delivered` | 129 |
-| function | `replay()` | 131 |
-| variable | `delivered` | 135 |
-| class | `Closed` | 142 |
-| variable | `model_config` | 145 |
-| class | `Credentials` | 148 |
-| variable | `alias` | 151 |
-| variable | `password` | 152 |
-| class | `Recovery` | 155 |
-| variable | `recovery` | 158 |
-| class | `Unlock` | 161 |
-| variable | `key` | 164 |
-| variable | `salt` | 165 |
-| class | `Activity` | 168 |
-| variable | `idle_seconds` | 171 |
-| class | `Delete` | 174 |
-| variable | `password` | 177 |
-| variable | `confirm` | 178 |
-| class | `Provider` | 181 |
-| variable | `id` | 184 |
-| variable | `kind` | 185 |
-| variable | `url` | 186 |
-| variable | `model` | 187 |
-| variable | `key` | 188 |
-| variable | `retain_key` | 189 |
-| variable | `token_parameter` | 190 |
-| variable | `temperature` | 191 |
-| class | `Settings` | 194 |
-| variable | `providers` | 197 |
-| variable | `routes` | 198 |
-| function | `coherent(self)` | 203 |
-| parameter | `self` | 203 |
-| variable | `ids` | 205 |
-| variable | `p` | 205 |
-| variable | `value` | 206 |
-| variable | `p` | 209 |
-| function | `public_settings(manager)` | 215 |
-| parameter | `manager` | 215 |
-| variable | `keys` | 217 |
-| variable | `settings` | 217 |
-| variable | `data` | 218 |
-| variable | `p` | 220 |
-| class | `Proxy` | 228 |
-| function | `__init__(self, manager)` | 231 |
-| parameter | `manager` | 231 |
-| parameter | `self` | 231 |
-| function | `__call__(self, scope, receive, send)` | 235 |
-| parameter | `receive` | 235 |
-| parameter | `scope` | 235 |
-| parameter | `self` | 235 |
-| parameter | `send` | 235 |
-| variable | `manager` | 239 |
-| variable | `app` | 242 |
-| variable | `path` | 247 |
-| variable | `db` | 253 |
-| variable | `count` | 254 |
-| variable | `headers` | 266 |
-| variable | `forwarded` | 275 |
-| variable | `k` | 276 |
-| variable | `v` | 276 |
-| function | `create_private_app(root, port, ui, launcher_token, nonce)` | 286 |
-| parameter | `launcher_token` | 287 |
-| parameter | `nonce` | 287 |
-| parameter | `port` | 287 |
-| parameter | `root` | 287 |
-| parameter | `ui` | 287 |
-| variable | `manager` | 290 |
-| function | `lifespan(app)` | 294 |
-| parameter | `app` | 294 |
-| function | `idle()` | 297 |
-| variable | `task` | 311 |
-| variable | `app` | 325 |
-| function | `invalid(request, error)` | 337 |
-| parameter | `error` | 337 |
-| parameter | `request` | 337 |
-| function | `bad_value(request, error)` | 342 |
-| parameter | `error` | 342 |
-| parameter | `request` | 342 |
-| function | `bad_disk(request, error)` | 347 |
-| parameter | `error` | 347 |
-| parameter | `request` | 347 |
-| function | `identify(request)` | 353 |
-| parameter | `request` | 353 |
-| function | `signed(owner, data)` | 357 |
-| parameter | `data` | 357 |
-| parameter | `owner` | 357 |
-| variable | `response` | 359 |
-| function | `auth_limit(alias)` | 370 |
-| parameter | `alias` | 370 |
-| function | `health()` | 378 |
-| function | `shutdown(request)` | 389 |
-| parameter | `request` | 389 |
-| variable | `callback` | 395 |
-| function | `register(data)` | 402 |
-| parameter | `data` | 402 |
-| variable | `owner` | 406 |
-| variable | `recovery` | 406 |
-| function | `login(data)` | 412 |
-| parameter | `data` | 412 |
-| variable | `owner` | 415 |
-| function | `reset(data)` | 421 |
-| parameter | `data` | 421 |
-| variable | `db` | 425 |
-| variable | `row` | 426 |
-| function | `commit_reset()` | 431 |
-| variable | `fresh` | 436 |
-| function | `account(request)` | 442 |
-| parameter | `request` | 442 |
-| variable | `owner` | 444 |
-| variable | `session` | 444 |
-| function | `unlock(request, data)` | 452 |
-| parameter | `data` | 452 |
-| parameter | `request` | 452 |
-| variable | `owner` | 454 |
-| variable | `session` | 454 |
-| function | `activity(request, data)` | 463 |
-| parameter | `data` | 463 |
-| parameter | `request` | 463 |
-| function | `save(request)` | 471 |
-| parameter | `request` | 471 |
-| function | `lock(request)` | 478 |
-| parameter | `request` | 478 |
-| variable | `owner` | 481 |
-| variable | `session` | 481 |
-| function | `logout(request)` | 486 |
-| parameter | `request` | 486 |
-| variable | `owner` | 489 |
-| variable | `session` | 489 |
-| function | `commit_logout()` | 490 |
-| variable | `response` | 497 |
-| function | `delete(request, data)` | 502 |
-| parameter | `data` | 502 |
-| parameter | `request` | 502 |
-| variable | `_` | 505 |
-| variable | `owner` | 505 |
-| variable | `db` | 506 |
-| variable | `row` | 507 |
-| function | `commit_delete()` | 510 |
-| variable | `response` | 517 |
-| function | `backup(request)` | 522 |
-| parameter | `request` | 522 |
-| variable | `_` | 524 |
-| variable | `owner` | 524 |
-| variable | `path` | 525 |
-| function | `get_providers(request)` | 533 |
-| parameter | `request` | 533 |
-| function | `providers(request, data)` | 540 |
-| parameter | `data` | 540 |
-| parameter | `request` | 540 |
-| variable | `keys` | 544 |
-| variable | `old` | 544 |
-| variable | `rows` | 545 |
-| variable | `provider` | 546 |
-| variable | `row` | 547 |
-| variable | `p` | 549 |
-| variable | `previous` | 549 |
-| variable | `config` | 554 |
-| variable | `router` | 555 |
-| variable | `k` | 557 |
-| variable | `p` | 557 |
-| variable | `v` | 557 |
-| variable | `p` | 560 |
-| function | `commit_providers()` | 562 |
+| variable | `CSP` | 39 |
+| variable | `HISTORY_STOP_BYTES` | 40 |
+| class | `Boundary` | 43 |
+| function | `__init__(self, app, manager, port)` | 46 |
+| parameter | `app` | 46 |
+| parameter | `manager` | 46 |
+| parameter | `port` | 46 |
+| parameter | `self` | 46 |
+| function | `__call__(self, scope, receive, send)` | 52 |
+| parameter | `receive` | 52 |
+| parameter | `scope` | 52 |
+| parameter | `self` | 52 |
+| parameter | `send` | 52 |
+| variable | `raw` | 56 |
+| variable | `headers` | 57 |
+| variable | `k` | 57 |
+| variable | `v` | 57 |
+| function | `guarded(message)` | 59 |
+| parameter | `message` | 59 |
+| variable | `k` | 64 |
+| variable | `v` | 64 |
+| function | `deny(status, detail)` | 80 |
+| parameter | `detail` | 80 |
+| parameter | `status` | 80 |
+| variable | `_` | 86 |
+| variable | `k` | 86 |
+| variable | `cookies` | 104 |
+| variable | `token` | 109 |
+| variable | `account` | 110 |
+| variable | `chunks` | 118 |
+| variable | `length` | 118 |
+| variable | `message` | 120 |
+| variable | `data` | 123 |
+| variable | `length` | 124 |
+| variable | `delivered` | 130 |
+| function | `replay()` | 132 |
+| variable | `delivered` | 136 |
+| class | `Closed` | 143 |
+| variable | `model_config` | 146 |
+| class | `Credentials` | 149 |
+| variable | `alias` | 152 |
+| variable | `password` | 153 |
+| class | `Recovery` | 156 |
+| variable | `recovery` | 159 |
+| class | `Unlock` | 162 |
+| variable | `key` | 165 |
+| variable | `salt` | 166 |
+| class | `Activity` | 169 |
+| variable | `idle_seconds` | 172 |
+| class | `Delete` | 175 |
+| variable | `password` | 178 |
+| variable | `confirm` | 179 |
+| class | `Provider` | 182 |
+| variable | `id` | 185 |
+| variable | `kind` | 186 |
+| variable | `url` | 187 |
+| variable | `model` | 188 |
+| variable | `key` | 189 |
+| variable | `retain_key` | 190 |
+| variable | `token_parameter` | 191 |
+| variable | `temperature` | 192 |
+| class | `Settings` | 195 |
+| variable | `providers` | 198 |
+| variable | `routes` | 199 |
+| function | `coherent(self)` | 204 |
+| parameter | `self` | 204 |
+| variable | `ids` | 206 |
+| variable | `p` | 206 |
+| variable | `value` | 207 |
+| variable | `p` | 210 |
+| function | `public_settings(manager)` | 216 |
+| parameter | `manager` | 216 |
+| variable | `keys` | 218 |
+| variable | `settings` | 218 |
+| variable | `data` | 219 |
+| variable | `p` | 221 |
+| class | `Proxy` | 229 |
+| function | `__init__(self, manager)` | 232 |
+| parameter | `manager` | 232 |
+| parameter | `self` | 232 |
+| function | `__call__(self, scope, receive, send)` | 236 |
+| parameter | `receive` | 236 |
+| parameter | `scope` | 236 |
+| parameter | `self` | 236 |
+| parameter | `send` | 236 |
+| variable | `manager` | 240 |
+| variable | `app` | 243 |
+| variable | `path` | 248 |
+| variable | `db` | 254 |
+| variable | `count` | 255 |
+| variable | `headers` | 267 |
+| variable | `forwarded` | 276 |
+| variable | `k` | 277 |
+| variable | `v` | 277 |
+| function | `create_private_app(root, port, ui, launcher_token, nonce)` | 287 |
+| parameter | `launcher_token` | 288 |
+| parameter | `nonce` | 288 |
+| parameter | `port` | 288 |
+| parameter | `root` | 288 |
+| parameter | `ui` | 288 |
+| variable | `manager` | 291 |
+| function | `lifespan(app)` | 295 |
+| parameter | `app` | 295 |
+| function | `idle()` | 298 |
+| variable | `task` | 312 |
+| variable | `app` | 326 |
+| function | `invalid(request, error)` | 338 |
+| parameter | `error` | 338 |
+| parameter | `request` | 338 |
+| function | `bad_value(request, error)` | 343 |
+| parameter | `error` | 343 |
+| parameter | `request` | 343 |
+| function | `bad_disk(request, error)` | 348 |
+| parameter | `error` | 348 |
+| parameter | `request` | 348 |
+| function | `identify(request)` | 354 |
+| parameter | `request` | 354 |
+| function | `signed(owner, data)` | 358 |
+| parameter | `data` | 358 |
+| parameter | `owner` | 358 |
+| variable | `response` | 360 |
+| function | `auth_limit(alias)` | 371 |
+| parameter | `alias` | 371 |
+| function | `health()` | 379 |
+| function | `shutdown(request)` | 391 |
+| parameter | `request` | 391 |
+| variable | `callback` | 397 |
+| function | `register(data)` | 404 |
+| parameter | `data` | 404 |
+| variable | `owner` | 408 |
+| variable | `recovery` | 408 |
+| function | `login(data)` | 414 |
+| parameter | `data` | 414 |
+| variable | `owner` | 417 |
+| function | `reset(data)` | 423 |
+| parameter | `data` | 423 |
+| variable | `db` | 427 |
+| variable | `row` | 428 |
+| function | `commit_reset()` | 433 |
+| variable | `fresh` | 438 |
+| function | `account(request)` | 444 |
+| parameter | `request` | 444 |
+| variable | `owner` | 446 |
+| variable | `session` | 446 |
+| function | `unlock(request, data)` | 454 |
+| parameter | `data` | 454 |
+| parameter | `request` | 454 |
+| variable | `owner` | 456 |
+| variable | `session` | 456 |
+| function | `activity(request, data)` | 465 |
+| parameter | `data` | 465 |
+| parameter | `request` | 465 |
+| function | `save(request)` | 473 |
+| parameter | `request` | 473 |
+| function | `lock(request)` | 480 |
+| parameter | `request` | 480 |
+| variable | `owner` | 483 |
+| variable | `session` | 483 |
+| function | `logout(request)` | 488 |
+| parameter | `request` | 488 |
+| variable | `owner` | 491 |
+| variable | `session` | 491 |
+| function | `commit_logout()` | 492 |
+| variable | `response` | 499 |
+| function | `delete(request, data)` | 504 |
+| parameter | `data` | 504 |
+| parameter | `request` | 504 |
+| variable | `_` | 507 |
+| variable | `owner` | 507 |
+| variable | `db` | 508 |
+| variable | `row` | 509 |
+| function | `commit_delete()` | 512 |
+| variable | `response` | 519 |
+| function | `backup(request)` | 524 |
+| parameter | `request` | 524 |
+| variable | `_` | 526 |
+| variable | `owner` | 526 |
+| variable | `path` | 527 |
+| function | `get_providers(request)` | 535 |
+| parameter | `request` | 535 |
+| function | `providers(request, data)` | 542 |
+| parameter | `data` | 542 |
+| parameter | `request` | 542 |
+| variable | `keys` | 546 |
+| variable | `old` | 546 |
+| variable | `rows` | 547 |
+| variable | `provider` | 548 |
+| variable | `row` | 549 |
+| variable | `p` | 551 |
+| variable | `previous` | 551 |
+| variable | `config` | 556 |
+| variable | `router` | 557 |
+| variable | `k` | 559 |
+| variable | `p` | 559 |
+| variable | `v` | 559 |
+| variable | `p` | 562 |
+| function | `commit_providers()` | 564 |
 
 ## studio/private_cli.py
 
@@ -2893,22 +2893,23 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | variable | `route` | 141 |
 | variable | `browserErrors` | 153 |
 | variable | `health` | 157 |
-| variable | `state` | 165 |
-| variable | `directory` | 196 |
-| variable | `serviceLog` | 199 |
-| variable | `statuses` | 200 |
-| variable | `sourceInspector` | 223 |
-| variable | `lifecycle` | 273 |
-| variable | `records` | 274 |
-| variable | `launcher` | 281 |
-| variable | `line` | 284 |
-| variable | `service` | 289 |
-| variable | `line` | 290 |
-| variable | `diagnostic` | 297 |
-| variable | `records` | 301 |
-| variable | `stage` | 302 |
-| variable | `record` | 314 |
-| variable | `pid` | 327 |
+| variable | `healthData` | 158 |
+| variable | `state` | 167 |
+| variable | `directory` | 198 |
+| variable | `serviceLog` | 201 |
+| variable | `statuses` | 202 |
+| variable | `sourceInspector` | 225 |
+| variable | `lifecycle` | 275 |
+| variable | `records` | 276 |
+| variable | `launcher` | 283 |
+| variable | `line` | 286 |
+| variable | `service` | 291 |
+| variable | `line` | 292 |
+| variable | `diagnostic` | 299 |
+| variable | `records` | 303 |
+| variable | `stage` | 304 |
+| variable | `record` | 316 |
+| variable | `pid` | 329 |
 
 ## tests/electron-readiness.test.cjs
 
@@ -3597,6 +3598,22 @@ Generated declaration locations. Python uses AST; JS/TS uses declaration-line ma
 | function | `context_only(argv)` | 98 |
 | parameter | `argv` | 98 |
 | parameter | `kwargs` | 98 |
+
+## tests/test_frozen_runtime.py
+
+| Kind | Declaration | Line |
+|---|---|---|
+| function | `test_unreviewed_frozen_runtime_refuses_before_service_import(monkeypatch, version)` | 24 |
+| parameter | `monkeypatch` | 24 |
+| parameter | `version` | 24 |
+| variable | `events` | 26 |
+| variable | `service` | 30 |
+| function | `test_reviewed_frozen_and_supported_source_dispatch(monkeypatch, frozen, version)` | 39 |
+| parameter | `frozen` | 39 |
+| parameter | `monkeypatch` | 39 |
+| parameter | `version` | 39 |
+| variable | `events` | 41 |
+| variable | `service` | 45 |
 
 ## tests/test_locations.py
 

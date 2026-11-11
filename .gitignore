@@ -22,3 +22,6 @@ test-results/
 *.sqlite-shm
 *.sqlite-wal
 *.cfsvault
+
+# Local acceptance/developer state remains private and outside release inputs.
+.runtime/

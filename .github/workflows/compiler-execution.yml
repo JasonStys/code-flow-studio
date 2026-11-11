@@ -21,7 +21,7 @@ jobs:
           - runtime: release-0.4.2
             worker-version: '0.4.2'
           - runtime: current
-            worker-version: '0.4.3'
+            worker-version: '0.4.4'
     steps:
       - name: Check out reviewed validation scenarios
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09

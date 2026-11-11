@@ -735,7 +735,7 @@ def test_dirty_source_and_publish_operation_are_refused_before_network(tmp_path,
 
 def test_actual_checked_in_product_version_and_worker_metadata():
     """Exercise the production data-only coherence reader independently of prepared-context fixtures."""
-    assert gate.product_version() == "0.4.3"
+    assert gate.product_version() == "0.4.4"
 
 
 def test_api_structured_body_and_fixed_namespace(monkeypatch):

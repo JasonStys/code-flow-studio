@@ -119,7 +119,7 @@ The [observed report snapshots](../tests/fixtures/compiler-reports-042.json) ret
 these actual first-run results, including their original failed-acceptance labels;
 replay unit tests are not a new compiler run.
 
-Current 0.4.3 workers use a [separate exact target-exit bridge](csharp-coverage.md)
+Current 0.4.4 workers retain the 0.4.3 [exact target-exit bridge](csharp-coverage.md)
 and must report measured completion for approved nonzero exits. The old partial
 allowance is available only to the independently pinned 0.4.2 baseline verifier;
 it cannot make a current worker pass acceptance.

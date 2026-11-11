@@ -593,7 +593,7 @@ def provenance(runtime: Path, expected_source: str, lane: str) -> dict:
     ).strip()
     require(not dirty, "Runtime tracked source is dirty")
     require(
-        studio.__version__ == ("0.4.2" if lane == "release-0.4.2" else "0.4.3")
+        studio.__version__ == ("0.4.2" if lane == "release-0.4.2" else "0.4.4")
         and execution.IMAGE == f"code-flow-worker:{studio.__version__}",
         "Wrong product/worker version",
     )
